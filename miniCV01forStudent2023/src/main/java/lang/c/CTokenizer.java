@@ -92,6 +92,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = 4;
+					} else if (ch == '-') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = 5;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -119,6 +123,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case 4: // +を読んだ
 					tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
+					accept = true;
+					break;
+				case 5: // -を読んだ
+					tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					accept = true;
 					break;
 			}
