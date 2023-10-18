@@ -23,8 +23,13 @@ public class Expression extends CParseRule {
 		term.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
-		while (ExpressionAdd.isFirst(tk)) {
-			list = new ExpressionAdd(pcx, term);
+		while (ExpressionAdd.isFirst(tk) || ExpressionSub.isFirst(tk)) {
+			if (ExpressionAdd.isFirst(tk)) {
+				list = new ExpressionAdd(pcx, term);
+			} else {
+				System.out.println("----------\n-------\njsdlfkjdsf");
+				list = new ExpressionSub(pcx, term);
+			}
 			list.parse(pcx);
 			term = list;
 			tk = ct.getCurrentToken(pcx);

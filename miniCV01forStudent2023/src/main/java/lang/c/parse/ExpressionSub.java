@@ -19,7 +19,7 @@ class ExpressionSub extends CParseRule {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return tk.getType() == CToken.TK_PLUS;
+		return tk.getType() == CToken.TK_MINUS;
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
