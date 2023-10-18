@@ -19,6 +19,22 @@
             "mainClass": "lang.c.TestCToken",
             "projectName": "minicv",
             "args": ["src\\main\\java\\lang\\c\\test.c"]
+        },
+        {
+            "type": "java",
+            "name": "MiniCompiler for Mac",
+            "request": "launch",
+            "mainClass": "lang.c.MiniCompiler",
+            "projectName": "minicv",
+            "args": ["src/main/java/lang/c/test.c"]
+        },
+        {
+            "type": "java",
+            "name": "TestCToken for Mac",
+            "request": "launch",
+            "mainClass": "lang.c.TestCToken",
+            "projectName": "minicv",
+            "args": ["src/main/java/lang/c/test.c"]
         }
     ]
 }
