@@ -96,6 +96,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = 5;
+					} else if (ch == '*') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = 6;
+					} else if (ch == '/') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = 7;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -128,6 +136,60 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 				case 5: // -を読んだ
 					tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					accept = true;
+					break;
+				case 6: // *を読んだ
+					tk = new CToken(CToken.TK_MULT, lineNo, startCol, "*");
+					accept = true;
+					break;
+				case 7: // /を読んだ
+					ch = readChar();
+					text.append(ch);
+					if (ch == '/') {
+						state = 8;
+					} else if (ch == '*') {
+						state = 9;
+					} else {
+						state = 2;
+					}
+					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
+					//accept = true;
+					break;
+				case 8: // //を読んでからコメントの途中
+					ch = readChar();
+					if (ch == '\n') { // 改行でコメントおわり
+						text = new StringBuffer();
+						state = 0;
+					} else if (ch == (char)-1) {
+						accept = true;
+						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
+					}
+					// 他のコメント文字は無視
+					break;
+				case 9: /* コメントの途中 */
+					ch = readChar();
+					if (ch == '*') { // 終わる体制に入るよん
+						state = 10;
+					} else if (ch == (char)-1) {
+						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
+						accept = true;
+						break;
+					}
+					// 他のコメント文字
+					break;
+				case 10: /* コメントのおわりがけ */
+					ch = readChar();
+					if (ch == '/') { // /でコメントおわり
+						text = new StringBuffer();
+						state = 0;
+					} else if (ch == '*') {
+						state = 10;
+					} else if (ch == (char)-1) {
+						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
+						accept = true;
+						break;
+					} else {
+						state = 9;
+					}
 					break;
 			}
 		}
