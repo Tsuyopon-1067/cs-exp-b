@@ -73,7 +73,7 @@ public class ParseExpressionTest {
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("+の後ろはtermです"));
             }
-        } 
+        }
     }
 
     // 実験3以降はこのメソッドを削除してください
@@ -102,7 +102,7 @@ public class ParseExpressionTest {
                 cp.parse(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString("-の後ろはtermです"));
             }
         }
     }
