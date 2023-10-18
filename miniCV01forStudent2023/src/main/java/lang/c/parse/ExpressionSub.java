@@ -32,7 +32,7 @@ class ExpressionSub extends CParseRule {
 			right = new Term(pcx);
 			right.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "+の後ろはtermです");
+			pcx.fatalError(tk.toExplainString() + "-の後ろはtermです");
 		}
 	}
 
