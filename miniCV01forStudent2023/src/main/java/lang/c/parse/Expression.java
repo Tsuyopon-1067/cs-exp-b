@@ -27,7 +27,6 @@ public class Expression extends CParseRule {
 			if (ExpressionAdd.isFirst(tk)) {
 				list = new ExpressionAdd(pcx, term);
 			} else {
-				System.out.println("----------\n-------\njsdlfkjdsf");
 				list = new ExpressionSub(pcx, term);
 			}
 			list.parse(pcx);
