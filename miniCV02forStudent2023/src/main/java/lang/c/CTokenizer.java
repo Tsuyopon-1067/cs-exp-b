@@ -84,10 +84,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == (char) -1) { // EOF
 						startCol = colNo - 1;
 						state = CTokenizerStateConst.ST_EOF;
-					} else if (ch >= '0' && ch <= '9') {
+					} else if (ch == '0') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 3;
+						state = CTokenizerStateConst.ST_ZERO_HEX_OCT;
+					} else if (ch >= '1' && ch <= '9') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_DEC;
 					} else if (ch == '+') {
 						startCol = colNo - 1;
 						text.append(ch);
@@ -122,9 +126,43 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 					accept = true;
 					break;
-				case 3: // 数（10進数）の開始
+				case CTokenizerStateConst.ST_DEC: // 数（10進数）の開始
 					ch = readChar();
 					if (Character.isDigit(ch)) {
+						text.append(ch);
+					} else {
+						// 数の終わり
+						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
+					}
+					break;
+				case CTokenizerStateConst.ST_ZERO_HEX_OCT: // 8進数か16進数の頭の0を読んだ
+					ch = readChar();
+					if (Character.isDigit(ch)) {
+						text.append(ch);
+						state = CTokenizerStateConst.ST_OCT;
+					} else if (ch == 'x') {
+						text.append(ch);
+						state = CTokenizerStateConst.ST_HEX;
+					} else {
+						state = CTokenizerStateConst.ST_ILL;
+					}
+					break;
+				case CTokenizerStateConst.ST_OCT: // 数（8進数）の開始
+					ch = readChar();
+					if (Character.isDigit(ch)) {
+						text.append(ch);
+					} else {
+						// 数の終わり
+						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
+					}
+					break;
+				case CTokenizerStateConst.ST_HEX: // 数（16進数）の開始
+					ch = readChar();
+					if (Character.isDigit(ch) || ('a' <= ch && ch <= 'f') || 'A' <= ch && ch <= 'F') {
 						text.append(ch);
 					} else {
 						// 数の終わり
