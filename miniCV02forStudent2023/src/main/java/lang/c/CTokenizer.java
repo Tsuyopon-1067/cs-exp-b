@@ -74,16 +74,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		int startCol = colNo;
 		StringBuffer text = new StringBuffer();
 
-		int state = 0;
+		int state = CTokenizerStateConst.ST_INIT;
 		boolean accept = false;
 		while (!accept) {
 			switch (state) {
-				case 0: // 初期状態
+				case CTokenizerStateConst.ST_INIT: // 初期状態
 					ch = readChar();
 					if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 					} else if (ch == (char) -1) { // EOF
 						startCol = colNo - 1;
-						state = 1;
+						state = CTokenizerStateConst.ST_EOF;
 					} else if (ch >= '0' && ch <= '9') {
 						startCol = colNo - 1;
 						text.append(ch);
@@ -91,30 +91,34 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == '+') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 4;
+						state = CTokenizerStateConst.ST_PLUS;
 					} else if (ch == '-') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 5;
+						state = CTokenizerStateConst.ST_MINUS;
 					} else if (ch == '*') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 6;
+						state = CTokenizerStateConst.ST_MUL;
 					} else if (ch == '/') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 7;
+						state = CTokenizerStateConst.ST_SLASH;
+					} else if (ch == '&') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_AMP;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
-						state = 2;
+						state = CTokenizerStateConst.ST_ILL;
 					}
 					break;
-				case 1: // EOFを読んだ
+				case CTokenizerStateConst.ST_EOF: // EOFを読んだ
 					tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 					accept = true;
 					break;
-				case 2: // ヘンな文字を読んだ
+				case CTokenizerStateConst.ST_ILL: // ヘンな文字を読んだ
 					tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 					accept = true;
 					break;
@@ -129,46 +133,46 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case 4: // +を読んだ
+				case CTokenizerStateConst.ST_PLUS: // +を読んだ
 					tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
 					accept = true;
 					break;
-				case 5: // -を読んだ
+				case CTokenizerStateConst.ST_MINUS: // -を読んだ
 					tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					accept = true;
 					break;
-				case 6: // *を読んだ
+				case CTokenizerStateConst.ST_MUL: // *を読んだ
 					tk = new CToken(CToken.TK_MULT, lineNo, startCol, "*");
 					accept = true;
 					break;
-				case 7: // /を読んだ
+				case CTokenizerStateConst.ST_SLASH: // /を読んだ
 					ch = readChar();
 					text.append(ch);
 					if (ch == '/') {
-						state = 8;
+						state = CTokenizerStateConst.ST_SLASH_COMMENT;
 					} else if (ch == '*') {
-						state = 9;
+						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					} else {
-						state = 2;
+						state = CTokenizerStateConst.ST_ILL;
 					}
 					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					//accept = true;
 					break;
-				case 8: // //を読んでからコメントの途中
+				case CTokenizerStateConst.ST_SLASH_COMMENT: // //を読んでからコメントの途中
 					ch = readChar();
 					if (ch == '\n') { // 改行でコメントおわり
 						text = new StringBuffer();
-						state = 0;
+						state = CTokenizerStateConst.ST_INIT;
 					} else if (ch == (char)-1) {
 						accept = true;
 						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 					}
 					// 他のコメント文字は無視
 					break;
-				case 9: /* コメントの途中 */
+				case CTokenizerStateConst.ST_SLASH_ASTAR: /* コメントの途中 */
 					ch = readChar();
 					if (ch == '*') { // 終わる体制に入るよん
-						state = 10;
+						state = CTokenizerStateConst.ST_SLASH_ASTAR_ASTER;
 					} else if (ch == (char)-1) {
 						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 						accept = true;
@@ -176,20 +180,24 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					// 他のコメント文字
 					break;
-				case 10: /* コメントのおわりがけ */
+				case CTokenizerStateConst.ST_SLASH_ASTAR_ASTER: /* コメントのおわりがけ */
 					ch = readChar();
 					if (ch == '/') { // /でコメントおわり
 						text = new StringBuffer();
-						state = 0;
+						state = CTokenizerStateConst.ST_INIT;
 					} else if (ch == '*') {
-						state = 10;
+						state = CTokenizerStateConst.ST_SLASH_ASTAR_ASTER;
 					} else if (ch == (char)-1) {
 						tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 						accept = true;
 						break;
 					} else {
-						state = 9;
+						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					}
+					break;
+				case 11: // *を読んだ
+					tk = new CToken(CToken.TK_AMP, lineNo, startCol, "&");
+					accept = true;
 					break;
 			}
 		}
