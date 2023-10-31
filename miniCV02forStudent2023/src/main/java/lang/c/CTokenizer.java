@@ -195,7 +195,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					}
 					break;
-				case 11: // *を読んだ
+				case CTokenizerStateConst.ST_AMP: // &を読んだ
 					tk = new CToken(CToken.TK_AMP, lineNo, startCol, "&");
 					accept = true;
 					break;
