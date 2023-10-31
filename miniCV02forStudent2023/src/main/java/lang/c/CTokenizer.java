@@ -144,7 +144,12 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_OCT;
 					} else if (ch == 'x') {
 						text.append(ch);
-						state = CTokenizerStateConst.ST_HEX;
+						state = CTokenizerStateConst.ST_HEX_INIT;
+					} else if (ch == (char) -1) { // EOF
+						// このときは0として受理
+						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
+						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						accept = true;
 					} else {
 						state = CTokenizerStateConst.ST_ILL;
 					}
@@ -160,7 +165,16 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case CTokenizerStateConst.ST_HEX: // 数（16進数）の開始
+				case CTokenizerStateConst.ST_HEX_INIT: // 数（16進数）の開始
+					ch = readChar();
+					if (Character.isDigit(ch) || ('a' <= ch && ch <= 'f') || 'A' <= ch && ch <= 'F') {
+						state = CTokenizerStateConst.ST_HEX;
+						text.append(ch);
+					} else {
+						state = CTokenizerStateConst.ST_ILL;
+					}
+					break;
+				case CTokenizerStateConst.ST_HEX: // 数（16進数）
 					ch = readChar();
 					if (Character.isDigit(ch) || ('a' <= ch && ch <= 'f') || 'A' <= ch && ch <= 'F') {
 						text.append(ch);
