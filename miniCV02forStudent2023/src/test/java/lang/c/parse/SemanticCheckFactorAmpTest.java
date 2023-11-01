@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.fail;
 
-import java.beans.Expression;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +74,7 @@ public class SemanticCheckFactorAmpTest {
             cp.parse(cpContext);
             cp.semanticCheck(cpContext);
             String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));    
+            assertThat(errorOutput, is(""));
 
         }
     }
@@ -97,7 +95,7 @@ public class SemanticCheckFactorAmpTest {
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
-            }    
+            }
         }
     }
 
