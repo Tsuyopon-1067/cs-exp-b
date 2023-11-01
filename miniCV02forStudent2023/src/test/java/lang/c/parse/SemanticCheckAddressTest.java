@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.fail;
 
-import java.beans.Expression;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +24,7 @@ import lang.c.CTokenizer;
  */
 public class SemanticCheckAddressTest {
     // Test that Condition node's semanticCheck is valid.
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -78,7 +76,7 @@ public class SemanticCheckAddressTest {
             } catch ( FatalErrorException e ) {
                 fail("Failed with " + testData + ". Please modify this Testcase to pass.");
             }
-        } 
+        }
     }
 
     // 意味解析 不当
@@ -99,7 +97,7 @@ public class SemanticCheckAddressTest {
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
             }
-        } 
+        }
     }
 
     // 意味解析 正当
@@ -119,7 +117,7 @@ public class SemanticCheckAddressTest {
             } catch ( FatalErrorException e ) {
                 fail("Failed with " + testData + ". Please modify this Testcase to pass.");
             }
-        } 
+        }
     }
 
     // 意味解析 不当
@@ -140,8 +138,8 @@ public class SemanticCheckAddressTest {
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
             }
-        } 
+        }
     }
-    
+
 
 }
