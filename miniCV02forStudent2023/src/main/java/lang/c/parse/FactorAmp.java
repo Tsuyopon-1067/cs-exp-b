@@ -27,7 +27,7 @@ public class FactorAmp extends CParseRule {
 			number = new Number(pcx);
 			number.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "");
+			pcx.fatalError(tk.toExplainString() + "&の後は数字です");
 		}
 	}
 
