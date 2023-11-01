@@ -5,26 +5,26 @@ import java.io.PrintStream;
 import lang.*;
 import lang.c.*;
 
-public class Factor extends CParseRule {
-	// factor ::= number | factorAmp
-	CParseRule number;
+public class FactorAmp extends CParseRule {
+    // factorAmp ::= '&' number
+    CToken op;
+    CParseRule number;
 
-	public Factor(CParseContext pcx) {
+	public FactorAmp(CParseContext pcx) {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return Number.isFirst(tk) || FactorAmp.isFirst(tk);
+        return tk.getType() == CToken.TK_AMP;
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+        CTokenizer ct = pcx.getTokenizer();
+        op = ct.getCurrentToken(pcx);
+		// &の次の字句を読む
+		CToken tk = ct.getNextToken(pcx);
 		if (Number.isFirst(tk)) {
 			number = new Number(pcx);
-			number.parse(pcx);
-		} else if (FactorAmp.isFirst(tk)) {
-			number = new FactorAmp(pcx);
 			number.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "");
@@ -41,10 +41,10 @@ public class Factor extends CParseRule {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println(";;; factor starts");
+		o.println(";;; factorAMP starts");
 		if (number != null) {
 			number.codeGen(pcx);
 		}
-		o.println(";;; factor completes");
+		o.println(";;; factorAMP completes");
 	}
 }
