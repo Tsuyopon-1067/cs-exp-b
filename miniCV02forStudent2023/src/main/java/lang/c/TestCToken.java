@@ -11,11 +11,7 @@ public class TestCToken {
 		public void parse(CParseContext ctx) {
 			CToken tk = ctx.getTokenizer().getCurrentToken(ctx);
 			while (tk.getType() != CToken.TK_EOF) {
-				if (tk.getType() == CToken.TK_NUM) {
-					ctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getType() + " valule=" + tk.getIntValue());
-				} else {
-					ctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString() + "type=" + tk.getType());
-				}
+				ctx.getIOContext().getOutStream().println("Token=" + tk.toDetailExplainString());
 				tk = ctx.getTokenizer().getNextToken(ctx);
 			}
 		}
