@@ -177,10 +177,10 @@ public class CTokenizerNumberTest_cv02 {
 
     @Test
     public void decTooLargeNumber() {
-        String testString = "32768";
+        String testString = "32769";
         inputStream.setInputString(testString);
         CToken token1 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 1", token1, CToken.TK_ILL, "32768", 1, 1);
+        helper.checkToken("token 1", token1, CToken.TK_ILL, "32769", 1, 1);
         CToken token2 = tokenizer.getNextToken(cpContext);
         helper.checkToken("token 2", token2, CToken.TK_EOF, "end_of_file", 1, 6);
     }
