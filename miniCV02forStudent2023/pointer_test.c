@@ -13,7 +13,7 @@ int main() {
     // err ptrdiff_t t3 = pa + pb;
     ptrdiff_t t4 = pa - pb;
 
-    int *t5 = a + pa;
+    int *t5 = a + pa; // 通ったけどだめなものとする
     // err int *t6 = a - pa;
 
     int t7 = a + b;
