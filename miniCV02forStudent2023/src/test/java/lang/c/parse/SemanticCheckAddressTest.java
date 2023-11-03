@@ -136,7 +136,7 @@ public class SemanticCheckAddressTest {
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testDataArr[i] + ". FatalErro" + testDataArr[i] + ".rException should be invoked");
+                fail("Failed with " + testDataArr[i] + ". FatalError" + testDataArr[i] + ".Exception should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString(errMessageArr[i]));
             }
