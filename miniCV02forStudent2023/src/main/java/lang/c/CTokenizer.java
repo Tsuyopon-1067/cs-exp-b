@@ -134,6 +134,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						// 数の終わり
 						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
 						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						if (tk.getIntValue() > 32768) {
+							tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
+						}
 						accept = true;
 					}
 					break;
@@ -156,12 +159,15 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case CTokenizerStateConst.ST_OCT: // 数（8進数）の開始
 					ch = readChar();
-					if (Character.isDigit(ch)) {
+					if ('0' <= ch && ch <= '7') {
 						text.append(ch);
 					} else {
 						// 数の終わり
 						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
 						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						if (tk.getIntValue() > 65535) {
+							tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
+						}
 						accept = true;
 					}
 					break;
@@ -182,6 +188,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						// 数の終わり
 						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
 						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
+						if (tk.getIntValue() > 65535) {
+							tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
+						}
 						accept = true;
 					}
 					break;
