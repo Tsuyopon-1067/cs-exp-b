@@ -63,7 +63,7 @@ public class SemanticCheckFactorAmpTest {
     // 正当のテストコード例
     @Test
     public void semanticCheckTrueExample() throws FatalErrorException {
-        String[] testDataArr = {""};
+        String[] testDataArr = {"2+1", "&2+1", "2-1", "&2-1", "&2-&1", "&3-1-&1" };
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
@@ -82,19 +82,26 @@ public class SemanticCheckFactorAmpTest {
     // 不当のテストコード例
     @Test
     public void semanticCheckFalseExample() throws FatalErrorException {
-        String[] testDataArr = {""};
-        for ( String testData: testDataArr ) {
+        String[] testDataArr = {"2+&1", "&2+&1", "2-&1", "&3-&1-&1", "1+&" };
+        String[] errMessageArr = {
+            "左辺の型[int]と右辺の型[int*]は足せません",
+            "左辺の型[int*]と右辺の型[int*]は足せません",
+            "左辺の型[int]と右辺の型[int*]は引けません",
+            "左辺の型[int]と右辺の型[int*]は引けません",
+            "&の後は数字です",
+    };
+        for (int i = 0; i < testDataArr.length; i++) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testDataArr[i]);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testDataArr[i], Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData);
+                fail("Failed with " + testDataArr[i] + ". FatalError" + testDataArr[i] + ".Exception should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString(errMessageArr[i]));
             }
         }
     }
