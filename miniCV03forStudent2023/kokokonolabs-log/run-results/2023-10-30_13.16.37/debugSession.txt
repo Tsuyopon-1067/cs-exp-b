@@ -1,0 +1,6 @@
+Id: 708a4e4c-04ee-465d-be17-d9c52b675cd1
+Name: Launch Java Tests - $(symbol-class) IsFirstProgramTest
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) IsFirstProgramTest
+Configuration Request: launch
