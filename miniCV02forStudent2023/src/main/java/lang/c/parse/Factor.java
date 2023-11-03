@@ -27,7 +27,7 @@ public class Factor extends CParseRule {
 			number = new FactorAmp(pcx);
 			number.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "");
+			pcx.fatalError(tk.toExplainString() + "オーバーフローする数です");
 		}
 	}
 
