@@ -1,0 +1,199 @@
+%NAME,Launch Java Tests - $(symbol-class) IsFirstTest
+%TAG,in socket.on
+%COUNT,0
+%TESTC  46 v2
+%TSTTREE1,lang.c.parse.IsFirstTest,true,4,false,-1,lang.c.parse.IsFirstTest,,
+%TSTTREE2,UndefinedToken(lang.c.parse.IsFirstTest),false,1,false,-1,UndefinedToken(lang.c.parse.IsFirstTest),,
+%TSTTREE3,testExpressionAdd(lang.c.parse.IsFirstTest),false,1,false,-1,testExpressionAdd(lang.c.parse.IsFirstTest),,
+%TSTTREE4,testDecimalNumber(lang.c.parse.IsFirstTest),false,1,false,-1,testDecimalNumber(lang.c.parse.IsFirstTest),,
+%TSTTREE5,testExpression(lang.c.parse.IsFirstTest),false,1,false,-1,testExpression(lang.c.parse.IsFirstTest),,
+%TSTTREE6,lang.c.parse.SemanticCheckProgramTest_cv01,true,1,false,-1,lang.c.parse.SemanticCheckProgramTest_cv01,,
+%TSTTREE7,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01),false,1,false,-1,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01),,
+%TSTTREE8,lang.c.parse.CodeGenFactorTest,true,1,false,-1,lang.c.parse.CodeGenFactorTest,,
+%TSTTREE9,codeGenFactor(lang.c.parse.CodeGenFactorTest),false,1,false,-1,codeGenFactor(lang.c.parse.CodeGenFactorTest),,
+%TSTTREE10,lang.c.parse.SemanticCheckProgramTest,true,2,false,-1,lang.c.parse.SemanticCheckProgramTest,,
+%TSTTREE11,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest),false,1,false,-1,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest),,
+%TSTTREE12,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest),false,1,false,-1,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest),,
+%TSTTREE13,lang.c.parse.IsFirstProgramTest,true,2,false,-1,lang.c.parse.IsFirstProgramTest,,
+%TSTTREE14,testProgram01(lang.c.parse.IsFirstProgramTest),false,1,false,-1,testProgram01(lang.c.parse.IsFirstProgramTest),,
+%TSTTREE15,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest),false,1,false,-1,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest),,
+%TSTTREE16,lang.c.parse.ParseExpressionTest,true,4,false,-1,lang.c.parse.ParseExpressionTest,,
+%TSTTREE17,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest),,
+%TSTTREE18,parseErrorOnlyPlus(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorOnlyPlus(lang.c.parse.ParseExpressionTest),,
+%TSTTREE19,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest),,
+%TSTTREE20,parseErrorNoneSubNum(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorNoneSubNum(lang.c.parse.ParseExpressionTest),,
+%TSTTREE21,lang.c.parse.IsFirstTest_cv01,true,1,false,-1,lang.c.parse.IsFirstTest_cv01,,
+%TSTTREE22,testExpressionSub(lang.c.parse.IsFirstTest_cv01),false,1,false,-1,testExpressionSub(lang.c.parse.IsFirstTest_cv01),,
+%TSTTREE23,lang.c.parse.ParseProgramTest,true,1,false,-1,lang.c.parse.ParseProgramTest,,
+%TSTTREE24,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest),false,1,false,-1,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest),,
+%TSTTREE25,lang.c.parse.CodeGenExpressionTest_cv01,true,6,false,-1,lang.c.parse.CodeGenExpressionTest_cv01,,
+%TSTTREE26,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE27,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE28,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE29,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE30,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE31,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE32,lang.c.parse.CodeGenNumberTest,true,1,false,-1,lang.c.parse.CodeGenNumberTest,,
+%TSTTREE33,codeGenNumber(lang.c.parse.CodeGenNumberTest),false,1,false,-1,codeGenNumber(lang.c.parse.CodeGenNumberTest),,
+%TSTTREE34,lang.c.parse.CodeGenExpressionTest,true,2,false,-1,lang.c.parse.CodeGenExpressionTest,,
+%TSTTREE35,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest),false,1,false,-1,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest),,
+%TSTTREE36,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest),false,1,false,-1,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest),,
+%TSTTREE37,lang.c.parse.CodeGenProgramTest,true,3,false,-1,lang.c.parse.CodeGenProgramTest,,
+%TSTTREE38,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE39,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE40,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE41,lang.c.parse.ParseNumberTest,true,1,false,-1,lang.c.parse.ParseNumberTest,,
+%TSTTREE42,parseNumber(lang.c.parse.ParseNumberTest),false,1,false,-1,parseNumber(lang.c.parse.ParseNumberTest),,
+%TSTTREE43,lang.c.parse.CodeGenTermTest,true,1,false,-1,lang.c.parse.CodeGenTermTest,,
+%TSTTREE44,codeGenTerm(lang.c.parse.CodeGenTermTest),false,1,false,-1,codeGenTerm(lang.c.parse.CodeGenTermTest),,
+%TSTTREE45,lang.c.CTokenizerCommentTest,true,6,false,-1,lang.c.CTokenizerCommentTest,,
+%TSTTREE46,inlineCommentWithFactor(lang.c.CTokenizerCommentTest),false,1,false,-1,inlineCommentWithFactor(lang.c.CTokenizerCommentTest),,
+%TSTTREE47,inlineCommentWithNumber(lang.c.CTokenizerCommentTest),false,1,false,-1,inlineCommentWithNumber(lang.c.CTokenizerCommentTest),,
+%TSTTREE48,blockCommentNotClose(lang.c.CTokenizerCommentTest),false,1,false,-1,blockCommentNotClose(lang.c.CTokenizerCommentTest),,
+%TSTTREE49,blockCommentWithFactor(lang.c.CTokenizerCommentTest),false,1,false,-1,blockCommentWithFactor(lang.c.CTokenizerCommentTest),,
+%TSTTREE50,blockComment(lang.c.CTokenizerCommentTest),false,1,false,-1,blockComment(lang.c.CTokenizerCommentTest),,
+%TSTTREE51,lineComment(lang.c.CTokenizerCommentTest),false,1,false,-1,lineComment(lang.c.CTokenizerCommentTest),,
+%TSTTREE52,lang.c.CTokenizerExpressionAddTest,true,3,false,-1,lang.c.CTokenizerExpressionAddTest,,
+%TSTTREE53,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE54,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE55,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE56,lang.c.TestHelperTest,true,2,false,-1,lang.c.TestHelperTest,,
+%TSTTREE57,convertToValidateActual(lang.c.TestHelperTest),false,1,false,-1,convertToValidateActual(lang.c.TestHelperTest),,
+%TSTTREE58,convertToValidateSimple(lang.c.TestHelperTest),false,1,false,-1,convertToValidateSimple(lang.c.TestHelperTest),,
+%TSTTREE59,lang.c.CTokenizerExpressionSubTest,true,2,false,-1,lang.c.CTokenizerExpressionSubTest,,
+%TSTTREE60,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest),false,1,false,-1,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest),,
+%TSTTREE61,minusNumber(lang.c.CTokenizerExpressionSubTest),false,1,false,-1,minusNumber(lang.c.CTokenizerExpressionSubTest),,
+%TSTTREE62,lang.c.CTokenizerNumberTest,true,2,false,-1,lang.c.CTokenizerNumberTest,,
+%TSTTREE63,plusNumber(lang.c.CTokenizerNumberTest),false,1,false,-1,plusNumber(lang.c.CTokenizerNumberTest),,
+%TSTTREE64,decimalNumber(lang.c.CTokenizerNumberTest),false,1,false,-1,decimalNumber(lang.c.CTokenizerNumberTest),,
+%TSTTREE65,lang.MustBeFailedTest,true,1,false,-1,lang.MustBeFailedTest,,
+%TSTTREE66,te%NAME,Launch Java Tests - $(symbol-class) IsFirstTest
+%TAG,in socket.on
+%COUNT,1
+%TSTTREE66,testMustBeFailed(lang.MustBeFailedTest),false,1,false,-1,testMustBeFailed(lang.MustBeFailedTest),,
+%TESTS  2,UndefinedToken(lang.c.parse.IsFirstTest)
+%TESTE  2,UndefinedToken(lang.c.parse.IsFirstTest)
+%TESTS  3,testExpressionAdd(lang.c.parse.IsFirstTest)
+%TESTE  3,testExpressionAdd(lang.c.parse.IsFirstTest)
+%TESTS  4,testDecimalNumber(lang.c.parse.IsFirstTest)
+%TESTE  4,testDecimalNumber(lang.c.parse.IsFirstTest)
+%TESTS  5,testExpression(lang.c.parse.IsFirstTest)
+%TESTE  5,testExpression(lang.c.parse.IsFirstTest)
+%TESTS  7,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01)
+%TESTE  7,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01)
+%TESTS  9,codeGenFactor(lang.c.parse.CodeGenFactorTest)
+%TESTE  9,codeGenFactor(lang.c.parse.CodeGenFactorTest)
+%TESTS  11,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest)
+%TESTE  11,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest)
+%TESTS  12,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest)
+%TESTE  12,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest)
+%TESTS  14,testProgram01(lang.c.parse.IsFirstProgramTest)
+%TESTE  14,testProgram01(lang.c.parse.IsFirstProgramTest)
+%TESTS  15,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest)
+%TESTE  15,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest)
+%TESTS  17,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest)
+%TESTE  17,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest)
+%TESTS  18,parseErrorOnlyPlus(lang.c.parse.ParseExpressionTest)
+%TESTE  18,parseErrorOnlyPlus(lang.c.parse.ParseExpressionTest)
+%TESTS  19,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest)
+%TESTE  19,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest)
+%TESTS  20,parseErrorNoneSubNum(lang.c.parse.ParseExpressionTest)
+%TESTE  20,parseErrorNoneSubNum(lang.c.parse.ParseExpressionTest)
+%TESTS  22,testExpressionSub(lang.c.parse.IsFirstTest_cv01)
+%TESTE  22,testExpressionSub(lang.c.parse.IsFirstTest_cv01)
+%TESTS  24,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest)
+%TESTE  24,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest)
+%TESTS  26,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  26,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  27,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  27,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  28,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  28,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  29,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  29,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  30,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  30,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  31,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  31,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  33,codeGenNumber(lang.c.parse.CodeGenNumberTest)
+%TESTE  33,codeGenNumber(lang.c.parse.CodeGenNumberTest)
+%TESTS  35,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest)
+%TESTE  35,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest)
+%TESTS  36,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest)
+%TESTE  36,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest)
+%TESTS  38,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  38,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  39,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  39,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  40,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  40,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  42,parseNumber(lang.c.parse.ParseNumberTest)
+%TESTE  42,parseNumber(lang.c.parse.ParseNumberTest)
+%TESTS  44,codeGenTerm(lang.c.parse.CodeGenTermTest)
+%TESTE  44,codeGenTerm(lang.c.parse.CodeGenTermTest)
+%TESTS  46,inlineCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTE  46,inlineCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTS  47,inlineCommentWithNumber(lang.c.CTokenizerCommentTest)
+%TESTE  47,inlineCommentWithNumber(lang.c.CTokenizerCommentTest)
+%TESTS  48,blockCommentNotClose(lang.c.CTokenizerCommentTest)
+%TESTE  48,blockCommentNotClose(lang.c.CTokenizerCommentTest)
+%TESTS  49,blockCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTE  49,blockCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTS  50,blockComment(lang.c.CTokenizerCommentTest)
+%TESTE  50,blockComment(lang.c.CTokenizerCommentTest)
+%TESTS  51,lineComment(lang.c.CTokenizerCommentTest)
+%TESTE  51,lineComment(lang.c.CTokenizerCommentTest)
+%TESTS  53,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTE  53,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTS  54,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest)
+%TESTE  54,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest)
+%TESTS  55,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTE  55,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTS  57,convertToValidateActual(lang.c.TestHelperTest)
+%TESTE  57,convertToValidateActual(lang.c.TestHelperTest)
+%TESTS  58,convertToValidateSimple(lang.c.TestHelperTest)
+%TESTE  58,convertToValidateSimple(lang.c.TestHelperTest)
+%TESTS  60,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest)
+%TESTE  60,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest)
+%TESTS  61,minusNumber(lang.c.CTokenizerExpressionSubTest)
+%TESTE  61,minusNumber(lang.c.CTokenizerExpressionSubTest)
+%TESTS  63,plusNumber(lang.c.CTokenizerNumberTest)
+%TESTE  63,plusNumber(lang.c.CTokenizerNumberTest)
+%TESTS  64,decimalNumber(lang.c.CTokenizerNumberTest)
+%TESTE  64,decimalNumber(lang.c.CTokenizerNumberTest)
+%TESTS  66,testMustBeFailed(lang.MustBeFailedTest)
+%FAILED 66,testMustBeFailed(lang.MustBeFailedTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: is "MUST BE FAILED THIS TEST."
+     but: was "Failed test."
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.MustBeFailedTest.testMustBeFailed(MustBeFailedTest.java:14)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  66,testMustBeFailed(lang.MustBeFailedTest)
+%RUNTIME58

@@ -1,0 +1,41 @@
+2023-11-03_20.01.55.92,setEditLogger,Edit Logger Started.
+2023-11-03_20.02.00.01,onDidCloseTextDocument,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/src/test/java/lang/c/parse/CodeGenExpressionTest.java
+2023-11-03_20.02.00.03,onDidChangeActiveTextEditor,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.gitignore
+2023-11-03_20.02.00.03,onDidCloseTextDocument,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/src/test/java/lang/c/parse/CodeGenExpressionTest.java.git?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5Csrc%5C%5Ctest%5C%5Cjava%5C%5Clang%5C%5Cc%5C%5Cparse%5C%5CCodeGenExpressionTest.java%22%2C%22ref%22%3A%22%22%7D
+2023-11-03_20.02.03.30,onDidCloseTextDocument,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.gitignore
+2023-11-03_20.02.03.35,onDidCloseTextDocument,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.gitignore.git?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.gitignore%22%2C%22ref%22%3A%22%22%7D
+2023-11-03_20.02.09.94,onDidChangeActiveTextEditor,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json
+2023-11-03_20.02.09.94,onDidChangeTextEditorVisibleRanges,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D,0,7
+2023-11-03_20.02.09.94,onDidChangeTextEditorSelection,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json,8,8
+2023-11-03_20.02.09.94,onDidChangeTextEditorVisibleRanges,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D,6,9
+2023-11-03_20.02.09.94,onDidChangeTextEditorVisibleRanges,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json,6,18
+2023-11-03_20.02.26.44,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:0,0:0,":wrench:"
+2023-11-03_20.02.26.70,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:8,0:8," "
+2023-11-03_20.02.27.42,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:9,0:9,"s"
+2023-11-03_20.02.27.49,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:10,0:10,"e"
+2023-11-03_20.02.27.65,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:11,0:11,"t"
+2023-11-03_20.02.27.79,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:12,0:12,"t"
+2023-11-03_20.02.27.83,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:13,0:13,"i"
+2023-11-03_20.02.27.87,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:14,0:14,"n"
+2023-11-03_20.02.27.96,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:15,0:15,"g"
+2023-11-03_20.02.28.05,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:16,0:16,"s"
+2023-11-03_20.02.28.33,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:17,0:17,"."
+2023-11-03_20.02.28.43,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:18,0:18,"j"
+2023-11-03_20.02.28.51,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:19,0:19,"s"
+2023-11-03_20.02.28.59,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:20,0:20,"o"
+2023-11-03_20.02.28.65,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:21,0:21,"n"
+2023-11-03_20.02.33.06,onDidChangeTextDocument,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D,8:0,8:0,"    },<BR>    ""files.exclude"": {<BR>        ""**/.git"": true,<BR>        ""**/.svn"": true,<BR>        ""**/.hg"": true,<BR>        ""**/CVS"": true,<BR>        ""**/.DS_Store"": true,<BR>        ""**/Thumbs.db"": true,<BR>        ""kokokonolabs-log/"": true<BR>"
+2023-11-03_20.02.33.06,onDidChangeTextEditorVisibleRanges,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D,6,10
+2023-11-03_20.02.33.26,onDidChangeTextEditorVisibleRanges,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D,6,18
+2023-11-03_20.02.33.79,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:9,0:9,"c"
+2023-11-03_20.02.34.44,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:10,0:10,"h"
+2023-11-03_20.02.34.51,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:11,0:11,"a"
+2023-11-03_20.02.34.62,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:12,0:12,"n"
+2023-11-03_20.02.34.67,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:13,0:13,"g"
+2023-11-03_20.02.34.72,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:14,0:14,"e"
+2023-11-03_20.02.34.78,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:15,0:15," "
+2023-11-03_20.02.36.21,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:15,0:15,":"
+2023-11-03_20.02.38.33,onDidChangeTextDocument,vscode-scm:git/scm0/input?rootUri%3Dfile%253A%252F%252F%252Fc%25253A%252FUsers%252FTsuyopon%252FgitFiles%252Fcs-exp-b,0:0,0:30,"<BS>"
+2023-11-03_20.02.55.86,onDidCloseTextDocument,git:/c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json?%7B%22path%22%3A%22c%3A%5C%5CUsers%5C%5CTsuyopon%5C%5CgitFiles%5C%5Ccs-exp-b%5C%5CminiCV02forStudent2023%5C%5C.vscode%5C%5Csettings.json%22%2C%22ref%22%3A%22~%22%7D
+2023-11-03_20.02.55.86,onDidCloseTextDocument,file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023/.vscode/settings.json
+2023-11-03_20.04.25.74,onDidChangeActiveTerminal,kokokonolabs
