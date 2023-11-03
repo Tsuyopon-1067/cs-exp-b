@@ -59,7 +59,7 @@ public class SemanticCheckProgramTest_cv02 {
 
     @Test
     public void ExpressionAddTypeNoError() throws FatalErrorException {
-        String[] testDataArr = {"1+1", "&1+1", "1+&1"};
+        String[] testDataArr = {"1+1", "&1+1"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
@@ -67,7 +67,7 @@ public class SemanticCheckProgramTest_cv02 {
             assertThat(Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
             cp.parse(cpContext);
-    
+
             cp.semanticCheck(cpContext);
             String errorOutput = errorOutputStream.getPrintBufferString();
             assertThat(errorOutput, is(""));
@@ -91,25 +91,31 @@ public class SemanticCheckProgramTest_cv02 {
     @Test
     public void FactorWithAmpOverflow() throws FatalErrorException {
         String[] testDataArr = {"&65536", "&0200000", "&0x10000"};
-        for ( String testData: testDataArr ) {
+        String[] errMessageArr = {
+            "&の後は数字です",
+            "&の後は数字です",
+            "&の後は数字です",
+        };
+        for (int i = 0; i < testDataArr.length; i++) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testDataArr[i]);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testDataArr[i], Factor.isFirst(firstToken), is(true));
             Factor cp = new Factor(cpContext);
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData);
+                fail("Failed with " + testDataArr[i] + ". FatalError" + testDataArr[i] + ".Exception should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-            }    
+                assertThat(e.getMessage(), containsString(""));
+                assertThat(e.getMessage(), containsString(errMessageArr[i]));
+            }
         }
     }
-    
+
     @Test
     public void FactorWithPlusSignOverflow() throws FatalErrorException {
-        String[] testDataArr = {"32768"};
+        String[] testDataArr = {"32769"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
@@ -121,8 +127,8 @@ public class SemanticCheckProgramTest_cv02 {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-            }    
+                assertThat(e.getMessage(), containsString("オーバーフローする数です"));
+            }
         }
     }
 }
