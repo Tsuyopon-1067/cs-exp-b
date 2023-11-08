@@ -5,11 +5,11 @@ import java.io.PrintStream;
 import lang.*;
 import lang.c.*;
 
-public class Term extends CParseRule {
-	// term ::= factor {termMult | termDiv}
+public class TermDiv extends CParseRule {
+	// termDiv ::= DIV factor
 	CParseRule factor;
 
-	public Term(CParseContext pcx) {
+	public TermDiv(CParseContext pcx) {
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -20,21 +20,6 @@ public class Term extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		factor = new Factor(pcx);
 		factor.parse(pcx);
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
-		while (TermMult.isFirst(tk) || TermDiv.isFirst(tk)) {
-			switch(tk.getType()) {
-				case CToken.TK_MULT:
-					factor = new TermMult(pcx);
-				case CToken.TK_DIV:
-					factor = new TermDiv(pcx);
-				default:
-					pcx.fatalError(tk.toExplainString() + "*または/が必要です");
-			}
-			ct = pcx.getTokenizer();
-			tk = ct.getCurrentToken(pcx);
-			factor.parse(pcx);
-		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -47,10 +32,13 @@ public class Term extends CParseRule {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println(";;; term starts");
+		o.println(";;; termDiv starts");
 		if (factor != null) {
 			factor.codeGen(pcx);
+            o.println("\tJSR\tDIV\t; DIVサブルーチンを呼ぶ");
+            o.println("\tSUB\t#2, R6\t; スタックから計算した値を消す");
+            o.println("\tMOV\tR0, (R6)+\t; 結果をスタックにPushする");
 		}
-		o.println(";;; term completes");
+		o.println(";;; termDiv completes");
 	}
 }
