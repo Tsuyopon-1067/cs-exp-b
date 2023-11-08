@@ -20,11 +20,14 @@ public class Factor extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
-		if (Number.isFirst(tk)) {
-			number = new Number(pcx);
+		if (PlusFactor.isFirst(tk)) {
+			number = new PlusFactor(pcx);
 			number.parse(pcx);
-		} else if (FactorAmp.isFirst(tk)) {
-			number = new FactorAmp(pcx);
+		} else if (MinusFactor.isFirst(tk)) {
+			number = new MinusFactor(pcx);
+			number.parse(pcx);
+		} else if (UnsignedFactor.isFirst(tk)) {
+			number = new UnsignedFactor(pcx);
 			number.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "オーバーフローする数です");
