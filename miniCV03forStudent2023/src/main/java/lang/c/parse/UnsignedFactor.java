@@ -43,9 +43,10 @@ public class UnsignedFactor extends CParseRule {
 			case CToken.TK_AMP:
 				factor = new FactorAmp(pcx);
 				factor.parse(pcx);
+				break;
 			default:
-			factor = new Number(pcx);
-			factor.parse(pcx);
+				factor = new Number(pcx);
+				factor.parse(pcx);
 				break;
 		}
 	}
