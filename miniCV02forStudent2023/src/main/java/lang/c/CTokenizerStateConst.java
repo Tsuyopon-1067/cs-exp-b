@@ -18,4 +18,6 @@ public class CTokenizerStateConst {
 	public static final int ST_SLASH_ASTAR       = 9;  // /*を読んだ
 	public static final int ST_SLASH_ASTAR_ASTER = 10;  // /* --- *を読んだ
 	public static final int ST_AMP               = 11; // &演算子
+	public static final int ST_LPAR              = 16; // (を読んだ
+	public static final int ST_RPAR              = 17; // )を読んだ
 }
