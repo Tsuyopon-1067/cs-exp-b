@@ -13,7 +13,7 @@ public class Factor extends CParseRule {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return Number.isFirst(tk) || FactorAmp.isFirst(tk);
+		return PlusFactor.isFirst(tk) || MinusFactor.isFirst(tk) || UnsignedFactor.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
