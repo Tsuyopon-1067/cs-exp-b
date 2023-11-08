@@ -7,7 +7,7 @@ import lang.c.*;
 
 public class Factor extends CParseRule {
 	// factor ::= plusFactor | minusFactor | unsignedFactor
-	CParseRule number;
+	CParseRule factor;
 
 	public Factor(CParseContext pcx) {
 	}
@@ -21,32 +21,31 @@ public class Factor extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		if (PlusFactor.isFirst(tk)) {
-			number = new PlusFactor(pcx);
-			number.parse(pcx);
+			factor = new PlusFactor(pcx);
+			factor.parse(pcx);
 		} else if (MinusFactor.isFirst(tk)) {
-			number = new MinusFactor(pcx);
-			number.parse(pcx);
+			factor = new MinusFactor(pcx);
+			factor.parse(pcx);
 		} else if (UnsignedFactor.isFirst(tk)) {
-			number = new UnsignedFactor(pcx);
-			number.parse(pcx);
+			factor = new UnsignedFactor(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "オーバーフローする数です");
 		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (number != null) {
-			number.semanticCheck(pcx);
-			setCType(number.getCType()); // number の型をそのままコピー
-			setConstant(number.isConstant()); // number は常に定数
+		if (factor != null) {
+			factor.semanticCheck(pcx);
+			setCType(factor.getCType()); // factor の型をそのままコピー
+			setConstant(factor.isConstant()); // factor は常に定数
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; factor starts");
-		if (number != null) {
-			number.codeGen(pcx);
+		if (factor != null) {
+			factor.codeGen(pcx);
 		}
 		o.println(";;; factor completes");
 	}
