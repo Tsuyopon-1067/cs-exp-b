@@ -28,6 +28,7 @@ public class Factor extends CParseRule {
 			factor.parse(pcx);
 		} else if (UnsignedFactor.isFirst(tk)) {
 			factor = new UnsignedFactor(pcx);
+			factor.parse(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "オーバーフローする数です");
 		}
