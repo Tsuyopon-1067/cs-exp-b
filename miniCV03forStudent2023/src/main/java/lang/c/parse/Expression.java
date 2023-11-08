@@ -6,7 +6,7 @@ import lang.*;
 import lang.c.*;
 
 public class Expression extends CParseRule {
-	// expression ::= term { expressionAdd }
+	// expression ::= term { expressionAdd | expressionSub }
 	CParseRule expression;
 
 	public Expression(CParseContext pcx) {
