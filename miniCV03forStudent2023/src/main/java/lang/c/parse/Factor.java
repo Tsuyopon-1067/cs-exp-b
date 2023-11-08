@@ -6,7 +6,7 @@ import lang.*;
 import lang.c.*;
 
 public class Factor extends CParseRule {
-	// factor ::= number | factorAmp
+	// factor ::= plusFactor | minusFactor | unsignedFactor
 	CParseRule number;
 
 	public Factor(CParseContext pcx) {
