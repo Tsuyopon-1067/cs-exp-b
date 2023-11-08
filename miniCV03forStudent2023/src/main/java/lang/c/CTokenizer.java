@@ -221,12 +221,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_SLASH_COMMENT;
 					} else if (ch == '*') {
 						state = CTokenizerStateConst.ST_SLASH_ASTAR;
-					} else if (Character.isDigit(ch) || ch == '(') {
-						backChar(ch); // 数次またはかっこは戻す（読まなかったことにする）
+					} else {
+						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
 						tk = new CToken(CToken.TK_DIV, lineNo, startCol, "/");
 						accept = true;
-					} else {
-						state = CTokenizerStateConst.ST_ILL;
 					}
 					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					//accept = true;
