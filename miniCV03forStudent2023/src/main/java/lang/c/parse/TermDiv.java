@@ -13,7 +13,7 @@ public class TermDiv extends CParseRule {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return Factor.isFirst(tk);
+		return tk.getType() == CToken.TK_DIV;
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {

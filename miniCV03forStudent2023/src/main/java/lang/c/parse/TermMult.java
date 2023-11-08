@@ -13,7 +13,7 @@ public class TermMult extends CParseRule {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return Factor.isFirst(tk);
+		return tk.getType() == CToken.TK_MULT;
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
