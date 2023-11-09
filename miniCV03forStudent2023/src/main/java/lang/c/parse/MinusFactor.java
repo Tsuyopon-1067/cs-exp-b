@@ -20,8 +20,12 @@ public class MinusFactor extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // -を読み飛ばす
-		factor = new UnsignedFactor(pcx);
-		factor.parse(pcx);
+		if (UnsignedFactor.isFirst(tk)) {
+			factor = new UnsignedFactor(pcx);
+			factor.parse(pcx);
+		} else {
+			pcx.fatalError(tk.toExplainString() + "-の後は数値が来る必要があります");
+		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -29,6 +33,9 @@ public class MinusFactor extends CParseRule {
 			factor.semanticCheck(pcx);
 			setCType(factor.getCType()); // factor の型をそのままコピー
 			setConstant(factor.isConstant()); // factor は常に定数
+            if(factor.getCType().getType() == CType.T_pint){
+                pcx.fatalError("ポインタに符号(-)はつけられません");
+            }
 		}
 	}
 
