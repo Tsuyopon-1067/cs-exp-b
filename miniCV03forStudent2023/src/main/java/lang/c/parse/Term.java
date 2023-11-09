@@ -36,6 +36,7 @@ public class Term extends CParseRule {
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
 			factor.parse(pcx);
+			tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
 		}
 	}
 
