@@ -26,8 +26,10 @@ public class Term extends CParseRule {
 			switch(tk.getType()) {
 				case CToken.TK_MULT:
 					factor = new TermMult(pcx);
+					break;
 				case CToken.TK_DIV:
 					factor = new TermDiv(pcx);
+					break;
 				default:
 					pcx.fatalError(tk.toExplainString() + "*または/が必要です");
 			}
