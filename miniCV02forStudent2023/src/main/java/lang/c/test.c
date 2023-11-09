@@ -4,7 +4,7 @@
     2    //  readSimpleTokenSub()
     100  // 数字
     + -  // plus minus 記号
-      // LINE_COMMENT
+         // LINE_COMMENT
       13 +
     7 +
     2
