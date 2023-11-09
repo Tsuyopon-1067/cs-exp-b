@@ -25,10 +25,10 @@ public class Term extends CParseRule {
 		while (TermMult.isFirst(tk) || TermDiv.isFirst(tk)) {
 			switch(tk.getType()) {
 				case CToken.TK_MULT:
-					factor = new TermMult(pcx);
+					factor = new TermMult(pcx, factor);
 					break;
 				case CToken.TK_DIV:
-					factor = new TermDiv(pcx);
+					factor = new TermDiv(pcx, factor);
 					break;
 				default:
 					pcx.fatalError(tk.toExplainString() + "*または/が必要です");
