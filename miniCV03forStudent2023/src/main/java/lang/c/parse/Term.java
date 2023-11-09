@@ -7,7 +7,7 @@ import lang.c.*;
 
 public class Term extends CParseRule {
 	// term ::= factor {termMult | termDiv}
-	CParseRule factor;
+	CParseRule factor, termMulDiv;
 
 	public Term(CParseContext pcx) {
 	}
@@ -25,18 +25,20 @@ public class Term extends CParseRule {
 		while (TermMult.isFirst(tk) || TermDiv.isFirst(tk)) {
 			switch(tk.getType()) {
 				case CToken.TK_MULT:
-					factor = new TermMult(pcx, factor);
+					termMulDiv = new TermMult(pcx, factor);
 					break;
 				case CToken.TK_DIV:
-					factor = new TermDiv(pcx, factor);
+					termMulDiv = new TermDiv(pcx, factor);
 					break;
 				default:
 					pcx.fatalError(tk.toExplainString() + "*または/が必要です");
 			}
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
-			factor.parse(pcx);
-			tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
+			if (termMulDiv != null) {
+				termMulDiv.parse(pcx);
+				tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
+			}
 		}
 	}
 
@@ -46,6 +48,11 @@ public class Term extends CParseRule {
 			this.setCType(factor.getCType()); // factor の型をそのままコピー
 			this.setConstant(factor.isConstant());
 		}
+		if (termMulDiv != null) {
+			termMulDiv.semanticCheck(pcx);
+			this.setCType(termMulDiv.getCType()); // factor の型をそのままコピー
+			this.setConstant(termMulDiv.isConstant());
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
@@ -53,6 +60,9 @@ public class Term extends CParseRule {
 		o.println(";;; term starts");
 		if (factor != null) {
 			factor.codeGen(pcx);
+		}
+		if (termMulDiv != null) {
+			termMulDiv.codeGen(pcx);
 		}
 		o.println(";;; term completes");
 	}
