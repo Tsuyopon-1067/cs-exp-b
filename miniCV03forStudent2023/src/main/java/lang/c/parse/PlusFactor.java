@@ -19,7 +19,7 @@ public class PlusFactor extends CParseRule {
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		CToken tk = ct.getNextToken(pcx); // +を読み飛ばす
 		factor = new UnsignedFactor(pcx);
 		factor.parse(pcx);
 	}
