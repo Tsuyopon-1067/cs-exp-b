@@ -23,8 +23,6 @@ public class TermDiv extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		op = ct.getCurrentToken(pcx);
 		// /の次の字句を読む
-		ct.getNextToken(pcx);
-
 		CToken tk = ct.getNextToken(pcx);
 		if (Term.isFirst(tk)) {
 			right = new Term(pcx);

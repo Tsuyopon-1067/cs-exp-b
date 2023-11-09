@@ -22,6 +22,7 @@ public class UnsignedFactor extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
+		System.out.println(tk.getText());
 		switch (tk.getType()) {
 			case CToken.TK_LPAR:
 				tk = ct.getNextToken(pcx);// (は読み飛ばす
