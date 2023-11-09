@@ -18,6 +18,10 @@ public class TermMult extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
+		CTokenizer ct = pcx.getTokenizer();
+		// *の次の字句を読む
+		ct.getNextToken(pcx);
+
 		factor = new Factor(pcx);
 		factor.parse(pcx);
 	}
