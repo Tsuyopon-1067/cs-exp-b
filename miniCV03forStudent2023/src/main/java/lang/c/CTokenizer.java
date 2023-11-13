@@ -220,7 +220,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == '*') {
 						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					} else {
-						state = CTokenizerStateConst.ST_ILL;
+						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
+						tk = new CToken(CToken.TK_DIV, lineNo, startCol, "/");
+						accept = true;
 					}
 					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					//accept = true;
