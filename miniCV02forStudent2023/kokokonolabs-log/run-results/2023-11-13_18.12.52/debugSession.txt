@@ -1,0 +1,6 @@
+Id: cbd8e744-a877-4858-96d7-2082777035af
+Name: Launch Java Tests - $(symbol-method) testFactorAmp()
+Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) testFactorAmp()
+Configuration Request: launch

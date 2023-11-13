@@ -1,0 +1,6 @@
+Id: ae5f850b-1391-495e-a698-18e7cc4d8fce
+Name: Launch Java Tests - $(symbol-method) semanticCheckAddressSubAccept()
+Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) semanticCheckAddressSubAccept()
+Configuration Request: launch

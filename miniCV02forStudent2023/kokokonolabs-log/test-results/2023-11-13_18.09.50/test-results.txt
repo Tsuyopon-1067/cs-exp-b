@@ -1,0 +1,21 @@
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckProgramTest_cv02
+%TAG,in socket.on
+%COUNT,34
+%TESTC  4 v2
+%TSTTREE1,lang.c.parse.SemanticCheckProgramTest_cv02,true,4,false,-1,lang.c.parse.SemanticCheckProgramTest_cv02,,
+%TSTTREE2,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE3,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE4,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE5,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TESTS  2,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckProgramTest_cv02
+%TAG,in socket.on
+%COUNT,35
+%TESTE  2,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  3,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  3,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  4,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  4,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  5,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  5,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%RUNTIME44

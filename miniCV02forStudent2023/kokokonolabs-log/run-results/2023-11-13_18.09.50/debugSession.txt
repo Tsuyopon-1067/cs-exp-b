@@ -1,0 +1,6 @@
+Id: 6c7ad0a0-bde3-4dcc-a953-27548f3e11ce
+Name: Launch Java Tests - $(symbol-class) SemanticCheckProgramTest_cv02
+Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) SemanticCheckProgramTest_cv02
+Configuration Request: launch

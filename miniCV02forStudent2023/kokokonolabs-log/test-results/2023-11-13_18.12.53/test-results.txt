@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) testFactorAmp()
+%TAG,in socket.on
+%COUNT,36
+%TESTC  1 v2
+%TSTTREE1,testFactorAmp(lang.c.parse.IsFirstTest_cv02),false,1,false,-1,testFactorAmp(lang.c.parse.IsFirstTest_cv02),,
+%TESTS  1,testFactorAmp(lang.c.parse.IsFirstTest_cv02)
+%NAME,Launch Java Tests - $(symbol-method) testFactorAmp()
+%TAG,in socket.on
+%COUNT,37
+%TESTE  1,testFactorAmp(lang.c.parse.IsFirstTest_cv02)
+%RUNTIME22
