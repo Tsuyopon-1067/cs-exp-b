@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) octalZero()
+%TAG,in socket.on
+%COUNT,17
+%TESTC  1 v2
+%TSTTREE1,octalZero(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octalZero(lang.c.CTokenizerNumberTest_cv02),,
+%TESTS  1,octalZero(lang.c.CTokenizerNumberTest_cv02)
+%NAME,Launch Java Tests - $(symbol-method) octalZero()
+%TAG,in socket.on
+%COUNT,18
+%TESTE  1,octalZero(lang.c.CTokenizerNumberTest_cv02)
+%RUNTIME10
