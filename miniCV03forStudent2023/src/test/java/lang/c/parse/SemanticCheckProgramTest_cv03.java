@@ -23,7 +23,7 @@ import lang.c.CType;
  * Before Testing Semantic Check by using this testing class, All ParseTest must be passed.
  * Bacause this testing class uses parse method to create testing data.
  */
-public class SemanticCheckProgramTest_cv02 {
+public class SemanticCheckProgramTest_cv03 {
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -72,7 +72,7 @@ public class SemanticCheckProgramTest_cv02 {
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-            }    
+            }
         }
     }
 
@@ -89,7 +89,7 @@ public class SemanticCheckProgramTest_cv02 {
             cp.parse(cpContext);
             cp.semanticCheck(cpContext);
             String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));    
+            assertThat(errorOutput, is(""));
 
         }
     }
@@ -107,7 +107,7 @@ public class SemanticCheckProgramTest_cv02 {
             cp.parse(cpContext);
             cp.semanticCheck(cpContext);
             String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));    
+            assertThat(errorOutput, is(""));
         }
     }
 }
