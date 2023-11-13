@@ -19,7 +19,7 @@ import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 
 public class SemanticCheckUnsignedFactorTest {
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -67,7 +67,7 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("ポインタに符号(-)はつけられません"));
             }
         }
     }
@@ -87,7 +87,7 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int]は掛けられません"));
             }
         }
     }
@@ -107,7 +107,8 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int]は割れません"));
+
             }
         }
     }
@@ -127,7 +128,8 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int]と右辺の型[int*]は掛けられません"));
+
             }
         }
     }
@@ -147,7 +149,8 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int]と右辺の型[int*]は割れません"));
+
             }
         }
     }
@@ -167,7 +170,8 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int*]は掛けられません"));
+
             }
         }
     }
@@ -187,7 +191,7 @@ public class SemanticCheckUnsignedFactorTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int*]は割れません"));
             }
         }
     }
