@@ -1,0 +1,63 @@
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,128
+%TESTC  7 v2
+%TSTTREE1,lang.c.parse.SemanticCheckUnsignedFactorTest,true,7,false,-1,lang.c.parse.SemanticCheckUnsignedFactorTest,,
+%TSTTREE2,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE3,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE4,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE5,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE6,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE7,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE8,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TESTS  2,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,129
+%TESTE  2,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,130
+%TESTS  3,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,131
+%TESTE  3,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  4,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,132
+%TESTE  4,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,133
+%TESTS  5,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,134
+%TESTE  5,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,135
+%TESTS  6,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,136
+%TESTE  6,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  7,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,137
+%TESTE  7,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,138
+%TESTS  8,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,139
+%TESTE  8,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
+%TAG,in socket.on
+%COUNT,140
+%RUNTIME35

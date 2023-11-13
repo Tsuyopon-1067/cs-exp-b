@@ -1,0 +1,14 @@
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermMultPriority()
+%TAG,in socket.on
+%COUNT,101
+%TESTC  1 v2
+%TSTTREE1,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TESTS  1,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03)
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermMultPriority()
+%TAG,in socket.on
+%COUNT,102
+%TESTE  1,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03)
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermMultPriority()
+%TAG,in socket.on
+%COUNT,103
+%RUNTIME32
