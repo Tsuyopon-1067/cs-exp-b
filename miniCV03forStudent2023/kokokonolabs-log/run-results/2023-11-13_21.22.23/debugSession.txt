@@ -1,0 +1,6 @@
+Id: edec492c-0c17-4e29-a854-6431933fe186
+Name: Launch Java Tests - $(symbol-class) ParseFactorTest
+Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) ParseFactorTest
+Configuration Request: launch

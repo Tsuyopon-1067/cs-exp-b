@@ -1,0 +1,14 @@
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermDivWithParenthesis()
+%TAG,in socket.on
+%COUNT,107
+%TESTC  1 v2
+%TSTTREE1,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TESTS  1,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03)
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermDivWithParenthesis()
+%TAG,in socket.on
+%COUNT,108
+%TESTE  1,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03)
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermDivWithParenthesis()
+%TAG,in socket.on
+%COUNT,109
+%RUNTIME30

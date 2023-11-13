@@ -1,0 +1,6 @@
+Id: a4b31fc4-d12c-4f9b-8eba-77c6796a269f
+Name: MiniCompiler
+Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: MiniCompiler
+Configuration Request: launch
