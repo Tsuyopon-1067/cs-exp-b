@@ -112,21 +112,16 @@ public class SemanticCheckAddressTest {
             new TestStrType("2 + &1", CType.T_pint),
             new TestStrType("&2 - 1", CType.T_pint),
             new TestStrType("&2 - &1", CType.T_int),
-        }
+        };
         for ( TestStrType testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
+            cp.parse(cpContext);
+            cp.semanticCheck(cpContext);
             assertThat(cp.getCType().getType(), is(testData.getType()));
-
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-            } catch ( FatalErrorException e ) {
-                fail("Failed with " + testData + ". Please modify this Testcase to pass.");
-            }
         }
     }
 
