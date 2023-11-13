@@ -156,13 +156,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == 'x') {
 						text.append(ch);
 						state = CTokenizerStateConst.ST_HEX_INIT;
-					} else if (ch == (char) -1) { // EOF
+					} else {
 						// このときは0として受理
 						backChar(ch); // 数を表さない文字は戻す（読まなかったことにする）
 						tk = new CToken(CToken.TK_NUM, lineNo, startCol, text.toString());
 						accept = true;
-					} else {
-						state = CTokenizerStateConst.ST_ILL;
 					}
 					break;
 				case CTokenizerStateConst.ST_OCT: // 数（8進数）の開始
@@ -222,9 +220,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == '*') {
 						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					} else {
-						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
-						tk = new CToken(CToken.TK_DIV, lineNo, startCol, "/");
-						accept = true;
+						state = CTokenizerStateConst.ST_ILL;
 					}
 					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					//accept = true;

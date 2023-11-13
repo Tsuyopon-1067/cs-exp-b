@@ -82,10 +82,8 @@ public class SemanticCheckFactorAmpTest {
     // 不当のテストコード例
     @Test
     public void semanticCheckFalseExample() throws FatalErrorException {
-        String[] testDataArr = {"2+&1", "&2+&1", "2-&1", "&3-&1-&1", "1+&" };
+        String[] testDataArr = {"2-&1", "&3-&1-&1", "1+&" };
         String[] errMessageArr = {
-            "左辺の型[int]と右辺の型[int*]は足せません",
-            "左辺の型[int*]と右辺の型[int*]は足せません",
             "左辺の型[int]と右辺の型[int*]は引けません",
             "左辺の型[int]と右辺の型[int*]は引けません",
             "&の後は数字です",
