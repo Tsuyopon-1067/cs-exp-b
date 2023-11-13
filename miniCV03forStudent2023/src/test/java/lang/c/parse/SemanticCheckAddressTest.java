@@ -17,6 +17,7 @@ import lang.c.CParseContext;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
+import lang.c.CType;
 
 /**
  * Before Testing Semantic Check by using this testing class, All ParseTest must be passed.
@@ -104,28 +105,32 @@ public class SemanticCheckAddressTest {
     // 意味解析 正当
     @Test
     public void semanticCheckAddressSubAccept() throws FatalErrorException {
-        String[] testDataArr = { "2 + 1", "2 - 1", "&2 + 1", "&2 - 1", "&2 - &1" };
-        for ( String testData: testDataArr ) {
+        TestStrType[] testDataArr = {
+            new TestStrType("2 + 1", CType.T_int),
+            new TestStrType("2 - 1", CType.T_int),
+            new TestStrType("&2 + 1", CType.T_pint),
+            new TestStrType("2 + &1", CType.T_pint),
+            new TestStrType("&2 - 1", CType.T_pint),
+            new TestStrType("&2 - &1", CType.T_int),
+        };
+        for ( TestStrType testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
-
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-            } catch ( FatalErrorException e ) {
-                fail("Failed with " + testData + ". Please modify this Testcase to pass.");
-            }
+            cp.parse(cpContext);
+            cp.semanticCheck(cpContext);
+            assertThat(cp.getCType().getType(), is(testData.getType()));
         }
     }
 
     // 意味解析 不当
     @Test
     public void semanticCheckAddressSubError()  {
-        String[] testDataArr = { "2 + &1" };
-        String[] errMessageArr = {"左辺の型[int]と右辺の型[int*]は足せません",};
+        String[] testDataArr = { "2 - &1" };
+        String[] errMessageArr = {"左辺の型[int]と右辺の型[int*]は引けません",};
+
         for (int i = 0; i < testDataArr.length; i++) {
             resetEnvironment();
             inputStream.setInputString(testDataArr[i]);
@@ -143,5 +148,21 @@ public class SemanticCheckAddressTest {
         }
     }
 
+
+}
+
+class TestStrType {
+    private String str;
+    private int type;
+    public TestStrType(String str, int type) {
+        this.str = str;
+        this.type = type;
+    }
+    public String getStr() {
+        return str;
+    }
+    public int getType() {
+        return type;
+    }
 
 }
