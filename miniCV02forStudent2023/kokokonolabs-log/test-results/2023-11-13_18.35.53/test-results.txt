@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) semanticCheckAddressSubAccept()
+%TAG,in socket.on
+%COUNT,82
+%TESTC  1 v2
+%TSTTREE1,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest),false,1,false,-1,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest),,
+%TESTS  1,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest)
+%NAME,Launch Java Tests - $(symbol-method) semanticCheckAddressSubAccept()
+%TAG,in socket.on
+%COUNT,83
+%TESTE  1,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest)
+%RUNTIME14

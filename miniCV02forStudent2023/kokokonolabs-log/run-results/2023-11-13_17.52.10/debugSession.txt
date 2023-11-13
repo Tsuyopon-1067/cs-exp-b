@@ -1,0 +1,6 @@
+Id: 6bff629e-fc80-4154-89b7-65d8541c0e2f
+Name: TestCToken for Mac
+Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: TestCToken for Mac
+Configuration Request: launch

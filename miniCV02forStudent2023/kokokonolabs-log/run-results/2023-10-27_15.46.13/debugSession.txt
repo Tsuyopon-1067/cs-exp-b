@@ -1,0 +1,6 @@
+Id: a2a5c6ec-0902-4eee-96d5-a677a5feabee
+Name: Launch Java Tests - $(symbol-class) CodeGenExpressionTest_cv01
+Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV02forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) CodeGenExpressionTest_cv01
+Configuration Request: launch
