@@ -76,18 +76,6 @@ public class ParseExpressionTest {
         }
     }
 
-    // 実験3以降はこのメソッドを削除してください
-    @Test
-    public void parseErrorNoneSubNum()  {
-        String[] testDataArr = {"-3"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(false));
-        }
-    }
-
     @Test
     public void parseErrorNumMinusNone()  {
         String[] testDataArr = {"3-"};
@@ -104,18 +92,6 @@ public class ParseExpressionTest {
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("-の後ろはtermです"));
             }
-        }
-    }
-
-    // 実験3以降はこのメソッドを削除してください
-    @Test
-    public void parseErrorOnlyPlus()  {
-        String[] testDataArr = {"+"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(false));
         }
     }
 }
