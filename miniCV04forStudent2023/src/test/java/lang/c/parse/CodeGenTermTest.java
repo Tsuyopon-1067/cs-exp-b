@@ -62,5 +62,36 @@ public class CodeGenTermTest {
         CParseRule rule = new Term(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
-}
 
+    @Test
+    public void codeGenTermMul() throws FatalErrorException {
+        inputStream.setInputString("2 * 3");
+        String expected[] = {
+            "MOV #2, (R6)+",
+            "MOV #3, (R6)+",
+            "JSR MUL",
+            "SUB #2, R6",
+            "MOV R0, (R6)+",
+        };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Term(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenTermDiv() throws FatalErrorException {
+        inputStream.setInputString("2 / 3");
+        String expected[] = {
+            "MOV #2, (R6)+",
+            "MOV #3, (R6)+",
+            "JSR DIV",
+            "SUB #2, R6",
+            "MOV R0, (R6)+",
+        };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Term(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+}

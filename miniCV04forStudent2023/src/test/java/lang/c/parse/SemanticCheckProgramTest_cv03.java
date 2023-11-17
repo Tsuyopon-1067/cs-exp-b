@@ -71,7 +71,7 @@ public class SemanticCheckProgramTest_cv03 {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString("-の後は数値が来る必要があります")); // オーバーフローで32769は数値だと認識しない
             }
         }
     }
