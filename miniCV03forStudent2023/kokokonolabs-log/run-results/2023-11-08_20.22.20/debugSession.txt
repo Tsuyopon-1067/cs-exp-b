@@ -1,0 +1,6 @@
+Id: f89d10f5-5cd6-4ec4-aa76-d8dfeb8b2d46
+Name: TestCToken for Mac
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: TestCToken for Mac
+Configuration Request: launch
