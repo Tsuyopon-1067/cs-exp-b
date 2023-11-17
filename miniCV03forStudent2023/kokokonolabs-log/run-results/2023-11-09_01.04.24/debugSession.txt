@@ -1,0 +1,6 @@
+Id: 1a4bcc3c-6253-43a2-8e5d-2ab59743256f
+Name: Launch Java Tests - $(symbol-method) semanticMinusAmpError()
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) semanticMinusAmpError()
+Configuration Request: launch

@@ -1,0 +1,6 @@
+Id: 13de4457-b62b-4b2a-b7f5-2210225af3f0
+Name: Launch Java Tests - $(symbol-method) parseOnlyLPAR()
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) parseOnlyLPAR()
+Configuration Request: launch
