@@ -24,11 +24,11 @@ public class TermMult extends CParseRule {
 		op = ct.getCurrentToken(pcx);
 		// *の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
-		if (Term.isFirst(tk)) {
-			right = new Term(pcx);
+		if (Factor.isFirst(tk)) {
+			right = new Factor(pcx);
 			right.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "*の後ろはtermです");
+			pcx.fatalError(tk.toExplainString() + "*の後ろはfactorです");
 		}
 	}
 
@@ -58,11 +58,16 @@ public class TermMult extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; termMult starts");
-		if (right != null) {
-			right.codeGen(pcx);
-            o.println("\tJSR\tMUL\t; MULサブルーチンを呼ぶ");
-            o.println("\tSUB\t#2, R6\t; スタックから計算した値を消す");
-            o.println("\tMOV\tR0, (R6)+\t; 結果をスタックにPushする");
+		if (left != null && right != null) {
+			o.println(";;; termMult left starts");
+			left.codeGen(pcx); // 左部分木のコード生成を頼む
+			o.println(";;; termMult left complete");
+			o.println(";;; termMult right starts");
+			right.codeGen(pcx); // 右部分木のコード生成を頼む
+			o.println(";;; termMult right complete");
+			o.println("\tJSR\tMUL\t; MULサブルーチンを呼ぶ");
+			o.println("\tSUB\t#2, R6\t; スタックから計算した値を消す");
+			o.println("\tMOV\tR0, (R6)+\t; 結果をスタックにPushする");
 		}
 		o.println(";;; termMult completes");
 	}
