@@ -20,4 +20,7 @@ public class CTokenizerStateConst {
 	public static final int ST_AMP               = 11; // &演算子
 	public static final int ST_LPAR              = 16; // (
 	public static final int ST_RPAR              = 17; // )
+	public static final int ST_LBRA              = 18; // [
+	public static final int ST_RBRA              = 19; // ]
+	public static final int ST_IDENT             = 20; // ident
 }

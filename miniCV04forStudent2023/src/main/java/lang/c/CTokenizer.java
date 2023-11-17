@@ -120,6 +120,18 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = CTokenizerStateConst.ST_RPAR;
+					} else if (ch == '[') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_LBRA;
+					} else if (ch == ']') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_RBRA;
+					} else if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z')) {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_IDENT;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -274,6 +286,28 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					break;
 				case CTokenizerStateConst.ST_RPAR:
 					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, ")");
+					accept = true;
+					break;
+				case CTokenizerStateConst.ST_LBRA:
+					tk = new CToken(CToken.TK_LBRA, lineNo, startCol, "[");
+					accept = true;
+					break;
+				case CTokenizerStateConst.ST_RBRA:
+					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
+					accept = true;
+					break;
+				case CTokenizerStateConst.ST_IDENT: // 識別子を読んだ
+					startCol = colNo - 1;
+					while (true) {
+						ch = readChar();
+						if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || ('0' <= ch && ch <= '9') || ch == '_') {
+							text.append(ch);
+						} else {
+							backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
+							break;
+						}
+					}
+					tk = new CToken(CToken.TK_IDENT, lineNo, startCol, text.toString());
 					accept = true;
 					break;
 			}
