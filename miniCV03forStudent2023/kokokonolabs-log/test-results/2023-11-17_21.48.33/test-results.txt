@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermSignTest()
+%TAG,in socket.on
+%COUNT,9
+%TESTC  1 v2
+%TSTTREE1,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TESTS  1,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%NAME,Launch Java Tests - $(symbol-method) codeGenTermSignTest()
+%TAG,in socket.on
+%COUNT,10
+%TESTE  1,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%RUNTIME64

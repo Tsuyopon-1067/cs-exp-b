@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) semanticMinusAmpError()
+%TAG,in socket.on
+%COUNT,22
+%TESTC  1 v2
+%TSTTREE1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TESTS  1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%NAME,Launch Java Tests - $(symbol-method) semanticMinusAmpError()
+%TAG,in socket.on
+%COUNT,23
+%TESTE  1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%RUNTIME17
