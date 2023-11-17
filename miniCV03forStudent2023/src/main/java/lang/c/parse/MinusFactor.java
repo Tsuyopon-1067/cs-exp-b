@@ -45,6 +45,9 @@ public class MinusFactor extends CParseRule {
 		if (factor != null) {
 			factor.codeGen(pcx);
 		}
+        o.println("\tMOV\t#0, R0\t; MinusFactor:減算するための0をレジスタにいれておく");
+        o.println("\tSUB\t-(R6), R0\t; MinusFactor:負値にするために0との減算をする");
+        o.println("\tMOV\tR0, (R6)+\t; MinusFactor:スタックに積み直す");
 		o.println(";;; minusFactor completes");
 	}
 }
