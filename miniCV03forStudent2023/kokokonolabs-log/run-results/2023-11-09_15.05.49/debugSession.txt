@@ -1,0 +1,6 @@
+Id: 1ce20223-984b-415d-8be8-679300a4137e
+Name: Launch Java Tests - $(symbol-method) codeGenTermMultWithParentheses()
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) codeGenTermMultWithParentheses()
+Configuration Request: launch

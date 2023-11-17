@@ -1,0 +1,15 @@
+%NAME,Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+%TAG,in socket.on
+%COUNT,12
+%TESTC  2 v2
+%TSTTREE1,lang.c.parse.CodeGenFactorAmpTest,true,2,false,-1,lang.c.parse.CodeGenFactorAmpTest,,
+%TSTTREE2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest),false,1,false,-1,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest),,
+%TSTTREE3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest),false,1,false,-1,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest),,
+%TESTS  2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest)
+%NAME,Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+%TAG,in socket.on
+%COUNT,13
+%TESTE  2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TESTS  3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TESTE  3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest)
+%RUNTIME33

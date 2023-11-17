@@ -1,0 +1,6 @@
+Id: 06b8b17c-6058-40e9-a48e-dc83d1a54eb0
+Name: Launch Java Tests - $(symbol-class) TestHelperTest
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) TestHelperTest
+Configuration Request: launch
