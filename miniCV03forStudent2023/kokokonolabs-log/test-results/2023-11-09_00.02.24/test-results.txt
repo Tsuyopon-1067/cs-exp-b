@@ -1,0 +1,1088 @@
+%NAME,Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+%TAG,in socket.on
+%COUNT,2
+%TESTC  104 v2
+%TSTTREE1,lang.c.parse.CodeGenFactorAmpTest,true,2,false,-1,lang.c.parse.CodeGenFactorAmpTest,,
+%TSTTREE2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest),false,1,false,-1,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest),,
+%TSTTREE3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest),false,1,false,-1,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest),,
+%TSTTREE4,lang.c.parse.CodeGenNumberTest,true,1,false,-1,lang.c.parse.CodeGenNumberTest,,
+%TSTTREE5,codeGenNumber(lang.c.parse.CodeGenNumberTest),false,1,false,-1,codeGenNumber(lang.c.parse.CodeGenNumberTest),,
+%TSTTREE6,lang.c.parse.IsFirstTest_cv03,true,5,false,-1,lang.c.parse.IsFirstTest_cv03,,
+%TSTTREE7,testTermDiv(lang.c.parse.IsFirstTest_cv03),false,1,false,-1,testTermDiv(lang.c.parse.IsFirstTest_cv03),,
+%TSTTREE8,testMinusFactor(lang.c.parse.IsFirstTest_cv03),false,1,false,-1,testMinusFactor(lang.c.parse.IsFirstTest_cv03),,
+%TSTTREE9,testTermCV03(lang.c.parse.IsFirstTest_cv03),false,1,false,-1,testTermCV03(lang.c.parse.IsFirstTest_cv03),,
+%TSTTREE10,testTermMult(lang.c.parse.IsFirstTest_cv03),false,1,false,-1,testTermMult(lang.c.parse.IsFirstTest_cv03),,
+%TSTTREE11,testPlusFactor(lang.c.parse.IsFirstTest_cv03),false,1,false,-1,testPlusFactor(lang.c.parse.IsFirstTest_cv03),,
+%TSTTREE12,lang.c.parse.ParseExpressionTest,true,2,false,-1,lang.c.parse.ParseExpressionTest,,
+%TSTTREE13,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest),,
+%TSTTREE14,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest),false,1,false,-1,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest),,
+%TSTTREE15,lang.c.parse.IsFirstProgramTest,true,2,false,-1,lang.c.parse.IsFirstProgramTest,,
+%TSTTREE16,testProgram01(lang.c.parse.IsFirstProgramTest),false,1,false,-1,testProgram01(lang.c.parse.IsFirstProgramTest),,
+%TSTTREE17,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest),false,1,false,-1,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest),,
+%TSTTREE18,lang.c.parse.SemanticCheckProgramTest_cv01,true,1,false,-1,lang.c.parse.SemanticCheckProgramTest_cv01,,
+%TSTTREE19,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01),false,1,false,-1,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01),,
+%TSTTREE20,lang.c.parse.SemanticCheckProgramTest,true,2,false,-1,lang.c.parse.SemanticCheckProgramTest,,
+%TSTTREE21,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest),false,1,false,-1,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest),,
+%TSTTREE22,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest),false,1,false,-1,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest),,
+%TSTTREE23,lang.c.parse.SemanticCheckUnsignedFactorTest,true,7,false,-1,lang.c.parse.SemanticCheckUnsignedFactorTest,,
+%TSTTREE24,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE25,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE26,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE27,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE28,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE29,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE30,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),false,1,false,-1,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest),,
+%TSTTREE31,lang.c.parse.CodeGenExpressionTest_cv01,true,6,false,-1,lang.c.parse.CodeGenExpressionTest_cv01,,
+%TSTTREE32,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE33,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE34,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE35,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE36,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE37,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01),false,1,false,-1,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01),,
+%TSTTREE38,lang.c.parse.IsFirstTest_cv01,true,1,false,-1,lang.c.parse.IsFirstTest_cv01,,
+%TSTTREE39,testExpressionSub(lang.c.parse.IsFirstTest_cv01),false,1,false,-1,testExpressionSub(lang.c.parse.IsFirstTest_cv01),,
+%TSTTREE40,lang.c.parse.ParseProgramTest,true,1,false,-1,lang.c.parse.ParseProgramTest,,
+%TSTTREE41,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest),false,1,false,-1,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest),,
+%TSTTREE42,lang.c.parse.SemanticCheckFactorAmpTest,true,2,false,-1,lang.c.parse.SemanticCheckFactorAmpTest,,
+%TSTTREE43,semanticCheckFalseExample(lang.c.parse.SemanticCheckFactorAmpTest),false,1,false,-1,semanticCheckFalseExample(lang.c.parse.SemanticCheckFactorAmpTest),,
+%TSTTREE44,semanticCheckTrueExample(lang.c.parse.SemanticCheckFactorAmpTest),false,1,false,-1,semanticCheckTrueExample(lang.c.parse.SemanticCheckFactorAmpTest),,
+%TSTTREE45,lang.c.parse.ParseFactorTest,true,4,false,-1,lang.c.parse.ParseFactorTest,,
+%TSTTREE46,parseRCURWithoutLCUR(lang.c.parse.ParseFactorTest),false,1,false,-1,parseRCURWithoutLCUR(lang.c.parse.ParseFactorTest),,
+%TSTTREE47,parseNotCloseRPAR(lang.c.parse.ParseFactorTest),false,1,false,-1,parseNotCloseRPAR(lang.c.parse.ParseFactorTest),,
+%TSTTREE48,parseOnlyLPAR(lang.c.parse.ParseFactorTest),false,1,false,-1,parseOnlyLPAR(lang.c.parse.ParseFactorTest),,
+%TSTTREE49,parseOnlyMinusFactor(lang.c.parse.ParseFactorTest),false,1,false,-1,parseOnlyMinusFactor(lang.c.parse.ParseFactorTest),,
+%TSTTREE50,lang.c.parse.CodeGenExpressionTest,true,2,false,-1,lang.c.parse.CodeGenExpressionTest,,
+%TSTTREE51,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest),false,1,false,-1,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest),,
+%TSTTREE52,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest),false,1,false,-1,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest),,
+%TSTTREE53,lang.c.parse.CodeGenProgramTest,true,3,false,-1,lang.c.parse.CodeGenProgramTest,,
+%TSTTREE54,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE55,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE56,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest),false,1,false,-1,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest),,
+%TSTTREE57,lang.c.parse.CodeGenExpressionTest_cv03,true,6,false,-1,lang.c.parse.CodeGenExpressionTest_cv03,,
+%TSTTREE58,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE59,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE60,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermSignTest(lang.c.parse.CodeGenExpressio%NAME,Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+%TAG,in socket.on
+%COUNT,3
+%TSTTREE60,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE61,codeGenTermDivMinus(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermDivMinus(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE62,codeGenTermAllTest(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermAllTest(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE63,codeGenTermMultWithParentheses(lang.c.parse.CodeGenExpressionTest_cv03),false,1,false,-1,codeGenTermMultWithParentheses(lang.c.parse.CodeGenExpressionTest_cv03),,
+%TSTTREE64,lang.c.parse.SemanticCheckProgramTest_cv02,true,4,false,-1,lang.c.parse.SemanticCheckProgramTest_cv02,,
+%TSTTREE65,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE66,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE67,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE68,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),false,1,false,-1,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02),,
+%TSTTREE69,lang.c.parse.ParseAddressTest,true,1,false,-1,lang.c.parse.ParseAddressTest,,
+%TSTTREE70,parseAddressOnlyAMP(lang.c.parse.ParseAddressTest),false,1,false,-1,parseAddressOnlyAMP(lang.c.parse.ParseAddressTest),,
+%TSTTREE71,lang.c.parse.IsFirstTest_cv02,true,1,false,-1,lang.c.parse.IsFirstTest_cv02,,
+%TSTTREE72,testFactorAmp(lang.c.parse.IsFirstTest_cv02),false,1,false,-1,testFactorAmp(lang.c.parse.IsFirstTest_cv02),,
+%TSTTREE73,lang.c.parse.IsFirstTest,true,4,false,-1,lang.c.parse.IsFirstTest,,
+%TSTTREE74,UndefinedToken(lang.c.parse.IsFirstTest),false,1,false,-1,UndefinedToken(lang.c.parse.IsFirstTest),,
+%TSTTREE75,testExpressionAdd(lang.c.parse.IsFirstTest),false,1,false,-1,testExpressionAdd(lang.c.parse.IsFirstTest),,
+%TSTTREE76,testDecimalNumber(lang.c.parse.IsFirstTest),false,1,false,-1,testDecimalNumber(lang.c.parse.IsFirstTest),,
+%TSTTREE77,testExpression(lang.c.parse.IsFirstTest),false,1,false,-1,testExpression(lang.c.parse.IsFirstTest),,
+%TSTTREE78,lang.c.parse.CodeGenFactorTest,true,1,false,-1,lang.c.parse.CodeGenFactorTest,,
+%TSTTREE79,codeGenFactor(lang.c.parse.CodeGenFactorTest),false,1,false,-1,codeGenFactor(lang.c.parse.CodeGenFactorTest),,
+%TSTTREE80,lang.c.parse.SemanticCheckAddressTest,true,4,false,-1,lang.c.parse.SemanticCheckAddressTest,,
+%TSTTREE81,semanticCheckAddressSubError(lang.c.parse.SemanticCheckAddressTest),false,1,false,-1,semanticCheckAddressSubError(lang.c.parse.SemanticCheckAddressTest),,
+%TSTTREE82,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest),false,1,false,-1,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest),,
+%TSTTREE83,semanticCheckAddressAddAccept(lang.c.parse.SemanticCheckAddressTest),false,1,false,-1,semanticCheckAddressAddAccept(lang.c.parse.SemanticCheckAddressTest),,
+%TSTTREE84,semanticCheckAddressAddError(lang.c.parse.SemanticCheckAddressTest),false,1,false,-1,semanticCheckAddressAddError(lang.c.parse.SemanticCheckAddressTest),,
+%TSTTREE85,lang.c.parse.CodeGenTermTest,true,1,false,-1,lang.c.parse.CodeGenTermTest,,
+%TSTTREE86,codeGenTerm(lang.c.parse.CodeGenTermTest),false,1,false,-1,codeGenTerm(lang.c.parse.CodeGenTermTest),,
+%TSTTREE87,lang.c.parse.ParseNumberTest,true,1,false,-1,lang.c.parse.ParseNumberTest,,
+%TSTTREE88,parseNumber(lang.c.parse.ParseNumberTest),false,1,false,-1,parseNumber(lang.c.parse.ParseNumberTest),,
+%TSTTREE89,lang.c.CTokenizerExpressionAddTest,true,3,false,-1,lang.c.CTokenizerExpressionAddTest,,
+%TSTTREE90,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE91,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE92,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest),false,1,false,-1,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest),,
+%TSTTREE93,lang.c.TestHelperTest,true,2,false,-1,lang.c.TestHelperTest,,
+%TSTTREE94,convertToValidateActual(lang.c.TestHelperTest),false,1,false,-1,convertToValidateActual(lang.c.TestHelperTest),,
+%TSTTREE95,convertToValidateSimple(lang.c.TestHelperTest),false,1,false,-1,convertToValidateSimple(lang.c.TestHelperTest),,
+%TSTTREE96,lang.c.CTokenizerCommentTest,true,6,false,-1,lang.c.CTokenizerCommentTest,,
+%TSTTREE97,inlineCommentWithFactor(lang.c.CTokenizerCommentTest),false,1,false,-1,inlineCommentWithFactor(lang.c.CTokenizerCommentTest),,
+%TSTTREE98,inlineCommentWithNumber(lang.c.CTokenizerCommentTest),false,1,false,-1,inlineCommentWithNumber(lang.c.CTokenizerCommentTest),,
+%TSTTREE99,blockCommentNotClose(lang.c.CTokenizerCommentTest),false,1,false,-1,blockCommentNotClose(lang.c.CTokenizerCommentTest),,
+%TSTTREE100,blockCommentWithFactor(lang.c.CTokenizerCommentTest),false,1,false,-1,blockCommentWithFactor(lang.c.CTokenizerCommentTest),,
+%TSTTREE101,blockComment(lang.c.CTokenizerCommentTest),false,1,false,-1,blockComment(lang.c.CTokenizerCommentTest),,
+%TSTTREE102,lineComment(lang.c.CTokenizerCommentTest),false,1,false,-1,lineComment(lang.c.CTokenizerCommentTest),,
+%TSTTREE103,lang.c.CTokenizerExpressionSubTest,true,2,false,-1,lang.c.CTokenizerExpressionSubTest,,
+%TSTTREE104,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest),false,1,false,-1,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest),,
+%TSTTREE105,minusNumber(lang.c.CTokenizerExpressionSubTest),false,1,false,-1,minusNumber(lang.c.CTokenizerExpressionSubTest),,
+%TSTTREE106,lang.c.CTokenizerTermTest,true,6,false,-1,lang.c.CTokenizerTermTest,,
+%TSTTREE107,termTokenWithPARTest(lang.c.CTokenizerTermTest),false,1,false,-1,termTokenWithPARTest(lang.c.CTokenizerTermTest),,
+%TSTTREE108,multNumber(lang.c.CTokenizerTermTest),false,1,false,-1,multNumber(lang.c.CTokenizerTermTest),,
+%TSTTREE109,termNotCloseBlockCommentTwoTimes(lang.c.CTokenizerTermTest),false,1,false,-1,termNotCloseBlockCommentTwoTimes(lang.c.CTokenizerTermTest),,
+%TSTTREE110,termTokenExpressionTest(lang.c.CTokenizerTermTest),false,1,false,-1,termTokenExpressionTest(lang.c.CTokenizerTermTest),,
+%TSTTREE111,termNotCloseBlockComment(lang.c.CTokenizerTermTest),false,1,false,-1,termNotCloseBlockComment(lang.c.CTokenizerTermTest),,
+%TSTTREE112,divNumber(lang.c.CTokenizerTermTest),false,1,false,-1,divNumber(lang.c.CTokenizerTermTest),,
+%TSTTREE113,lang.c.CTokenizerAddressTest,true,4,false,-1,lang.c.CTokenizerAddressTest,,
+%TSTTREE114,hexNumber(lang.c.CTokenizerAddressTest),false,1,false,-1,hexNumber(lang.c.CTokenizerAddressTest),,
+%TSTTREE115,AMP(lang.c.CTokenizerAddressTest),false,1,false,-1,AMP(lang.c.CTokenizerAddressTest),,
+%TSTTREE116,decimalNumber(lang.c.CTokenizerAddressTest),false,1,false,-1,decimalNumber(lang.c.CTokenizerAddressTest),,
+%TSTTREE117,octalNumber(lang.c.CTokenizerAddressTest),false,1,false,-1,octalNumber(lang.c.CTokenizerAddressTest),,
+%TSTTREE118,lang.c.CTokenizerNumberTest,true,2,false,-1,lang.c.CTokenizerNumberTest,,
+%TSTTREE119,plusNumber(lang.c.CTokenizerNumberTest),false,1,false,-1,plusNumber(lang.c.CTokenizerNumberTest),,
+%TSTTREE120,decimalNumber(lang.c.CTokenizerNumberTest),false,1,false,-1,decimalNumber(lang.c.CTokenizerNumberTest),,
+%TSTTREE121,lang.c.CTokenizerNumberTest_cv02,true,14,false,-1,lang.c.CTokenizerNumberTest_cv02,,
+%TSTTREE122,hexNumberError0x(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hexNumberError0x(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE123,octalTooLargeNumber(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octalTooLargeNumber(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE124,hex(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hex(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE125,octal(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octal(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE126,hexTooLargeBit1(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hexTooLargeBit1(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE127,hexTooLargeBit2(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hexTooLargeBit2(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE128,decNumberMax(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,decNumberMax(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE129,octalIllNumber(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octalIllNumber(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE130,octalZero(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octalZero(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE131,decTooLargeNumber(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,decTooLargeNumber(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE132,decIllNumber(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,decIllNumber(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE133,hexNumber0x0(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hexNumber0x0(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE134,hexNumberMax(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,hexNumberMax(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE135,octalNumber(lang.c.CTokenizerNumberTest_cv02),false,1,false,-1,octalNumber(lang.c.CTokenizerNumberTest_cv02),,
+%TSTTREE136,lang.MustBeFailedTest,true,1,false,-1,lang.MustBeFailedTest,,
+%TSTTREE137,testMustBeFailed(lang.MustBeFailedTest),false,1,false,-1,testMustBeFailed(lang.MustBeFailedTest),,
+%TESTS  2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TESTE  2,codeGenFactorAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TESTS  3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest)
+%FAILED 3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TRACES 
+java.lang.AssertionError: Line: 0
+Expected: is "MOV#2,(R6)+"
+     but: was "MOV#end_of_file,(R6)+"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at lang.c.TestHelper.checkCodePortion(TestHelper.java:50)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:71)
+	at lang.c.parse.CodeGenFactorAmpTest.codeGenFactorWithAmp(CodeGenFactorAmpTest.java:70)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  3,codeGenFactorWithAmp(lang.c.parse.CodeGenFactorAmpTest)
+%TESTS  5,codeGenNumber(lang.c.parse.CodeGenNumberTest)
+%TESTE  5,codeGenNumber(lang.c.parse.CodeGenNumberTest)
+%TESTS  7,testTermDiv(lang.c.parse.IsFirstTest_cv03)
+%TESTE  7,testTermDiv(lang.c.parse.IsFirstTest_cv03)
+%TESTS  8,testMinusFactor(lang.c.parse.IsFirstTest_cv03)
+%TESTE  8,testMinusFactor(lang.c.parse.IsFirstTest_cv03)
+%TESTS  9,testTermCV03(lang.c.parse.IsFirstTest_cv03)
+%TESTE  9,testTermCV03(lang.c.parse.IsFirstTest_cv03)
+%TESTS  10,testTermMult(lang.c.parse.IsFirstTest_cv03)
+%TESTE  10,testTermMult(lang.c.parse.IsFirstTest_cv03)
+%TESTS  11,testPlusFactor(lang.c.parse.IsFirstTest_cv03)
+%TESTE  11,testPlusFactor(lang.c.parse.IsFirstTest_cv03)
+%TESTS  13,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest)
+%TESTE  13,parseErrorNumPlusNone(lang.c.parse.ParseExpressionTest)
+%TESTS  14,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest)
+%TESTE  14,parseErrorNumMinusNone(lang.c.parse.ParseExpressionTest)
+%TESTS  16,testProgram01(lang.c.parse.IsFirstProgramTest)
+%TESTE  16,testProgram01(lang.c.parse.IsFirstProgramTest)
+%TESTS  17,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest)
+%TESTE  17,testWithUndefinedToken(lang.c.parse.IsFirstProgramTest)
+%TESTS  19,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01)
+%TESTE  19,ExpressionSubNoError(lang.c.parse.SemanticCheckProgramTest_cv01)
+%TESTS  21,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest)
+%TESTE  21,ExpressionAddNoError(lang.c.parse.SemanticCheckProgramTest)
+%TESTS  22,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest)
+%TESTE  22,noResponseDoBeforeParse(lang.c.parse.SemanticCheckProgramTest)
+%TESTS  24,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 24,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,2文字目の'*']*または/が必要です"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorIntMultPint(SemanticCheckUnsignedFactorTest.java:130)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  24,semanticTypeErrorIntMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  25,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 25,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: Failed with -&10. FatalErrorException should be invoked
+	at org.junit.Assert.fail(Assert.java:88)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticMinusAmpError(SemanticCheckUnsignedFactorTest.java:68)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  25,semanticMinusAmpError(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  26,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 26,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,5文字目の'2']括弧が閉じられていません"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorPintMultInt(SemanticCheckUnsignedFactorTest.java:90)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  26,semanticTypeErrorPintMultInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  27,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 27,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,5文字目の'3']括弧が閉じられていません"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorPintDivPint(SemanticCheckUnsignedFactorTest.java:190)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  27,semanticTypeErrorPintDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  28,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 28,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,2文字目の'/']*または/が必要です"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorIntDivPint(SemanticCheckUnsignedFactorTest.java:150)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  28,semanticTypeErrorIntDivPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  29,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 29,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,5文字目の'2']括弧が閉じられていません"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorPintDivInt(SemanticCheckUnsignedFactorTest.java:110)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%NAME,Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+%TAG,in socket.on
+%COUNT,4
+%TESTE  29,semanticTypeErrorPintDivInt(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  30,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%FAILED 30,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,5文字目の'3']括弧が閉じられていません"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.SemanticCheckUnsignedFactorTest.semanticTypeErrorPintMultPint(SemanticCheckUnsignedFactorTest.java:170)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  30,semanticTypeErrorPintMultPint(lang.c.parse.SemanticCheckUnsignedFactorTest)
+%TESTS  32,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  32,codeGenExpressionADDADDSubTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  33,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  33,codeGenExpressionADDSub5CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  34,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  34,codeGenExpressionSub2Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  35,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  35,codeGenExpressionSub3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  36,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  36,codeGenExpressionADD3CommentTerm(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  37,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTE  37,codeGenExpressionADD3Term(lang.c.parse.CodeGenExpressionTest_cv01)
+%TESTS  39,testExpressionSub(lang.c.parse.IsFirstTest_cv01)
+%TESTE  39,testExpressionSub(lang.c.parse.IsFirstTest_cv01)
+%TESTS  41,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest)
+%TESTE  41,parseErrorEndOfProgram(lang.c.parse.ParseProgramTest)
+%TESTS  43,semanticCheckFalseExample(lang.c.parse.SemanticCheckFactorAmpTest)
+%FAILED 43,semanticCheckFalseExample(lang.c.parse.SemanticCheckFactorAmpTest)
+%TRACES 
+java.lang.AssertionError: Failed with 2+&1. FatalError2+&1.Exception should be invoked
+	at org.junit.Assert.fail(Assert.java:88)
+	at lang.c.parse.SemanticCheckFactorAmpTest.semanticCheckFalseExample(SemanticCheckFactorAmpTest.java:102)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  43,semanticCheckFalseExample(lang.c.parse.SemanticCheckFactorAmpTest)
+%TESTS  44,semanticCheckTrueExample(lang.c.parse.SemanticCheckFactorAmpTest)
+%TESTE  44,semanticCheckTrueExample(lang.c.parse.SemanticCheckFactorAmpTest)
+%TESTS  46,parseRCURWithoutLCUR(lang.c.parse.ParseFactorTest)
+%TESTE  46,parseRCURWithoutLCUR(lang.c.parse.ParseFactorTest)
+%TESTS  47,parseNotCloseRPAR(lang.c.parse.ParseFactorTest)
+%FAILED 47,parseNotCloseRPAR(lang.c.parse.ParseFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,7文字目の'end_of_file']括弧が閉じられていません"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.ParseFactorTest.parseNotCloseRPAR(ParseFactorTest.java:90)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  47,parseNotCloseRPAR(lang.c.parse.ParseFactorTest)
+%TESTS  48,parseOnlyLPAR(lang.c.parse.ParseFactorTest)
+%FAILED 48,parseOnlyLPAR(lang.c.parse.ParseFactorTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: a string containing "Write down a part of error sentence you have decided on here"
+     but: was "[1行目,2文字目の'end_of_file']左括弧の後ろが不正です"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.c.parse.ParseFactorTest.parseOnlyLPAR(ParseFactorTest.java:109)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  48,parseOnlyLPAR(lang.c.parse.ParseFactorTest)
+%TESTS  49,parseOnlyMinusFactor(lang.c.parse.ParseFactorTest)
+%FAILED 49,parseOnlyMinusFactor(lang.c.parse.ParseFactorTest)
+%TRACES 
+java.lang.AssertionError: Error should be invoked
+	at org.junit.Assert.fail(Assert.java:88)
+	at lang.c.parse.ParseFactorTest.parseOnlyMinusFactor(ParseFactorTest.java:126)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  49,parseOnlyMinusFactor(lang.c.parse.ParseFactorTest)
+%TESTS  51,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest)
+%TESTE  51,codeGenExpressionAdd2Term(lang.c.parse.CodeGenExpressionTest)
+%TESTS  52,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest)
+%TESTE  52,codeGenExpressionAdd3Term(lang.c.parse.CodeGenExpressionTest)
+%TESTS  54,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  54,codeGenLeftTermAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  55,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  55,codeGenProgramAdd2Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  56,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest)
+%TESTE  56,codeGenProgramAdd3Terms(lang.c.parse.CodeGenProgramTest)
+%TESTS  58,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03)
+%ERROR  58,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+lang.FatalErrorException: [1行目,4文字目の'*']*または/が必要です
+	at lang.ParseContext.fatalError(ParseContext.java:65)
+	at lang.c.parse.Term.parse(Term.java:32)
+	at lang.c.parse.Term.parse(Term.java:1)
+	at lang.c.parse.ExpressionAdd.parse(ExpressionAdd.java:33)
+	at lang.c.parse.ExpressionAdd.parse(ExpressionAdd.java:1)
+	at lang.c.parse.Expression.parse(Expression.java:32)
+	at lang.c.parse.Expression.parse(Expression.java:1)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:59)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermMultPriority(CodeGenExpressionTest_cv03.java:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  58,codeGenTermMultPriority(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  59,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03)
+%ERROR  59,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+lang.FatalErrorException: [1行目,2文字目の'/']*または/が必要です
+	at lang.ParseContext.fatalError(ParseContext.java:65)
+	at lang.c.parse.Term.parse(Term.java:32)
+	at lang.c.parse.Term.parse(Term.java:1)
+	at lang.c.parse.Expression.parse(Expression.java:23)
+	at lang.c.parse.Expression.parse(Expression.java:1)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:59)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermDivWithParenthesis(CodeGenExpressionTest_cv03.java:107)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  59,codeGenTermDivWithParenthesis(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  60,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%FAILED 60,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+java.lang.AssertionError: Actual [MOV#+,(R6)+]  Line Size: 
+Expected: is <9>
+     but: was <1>
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at lang.c.TestHelper.checkCodePortion(TestHelper.java:39)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:71)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermSignTest(CodeGenExpressionTest_cv03.java:167)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  60,codeGenTermSignTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  61,codeGenTermDivMinus(lang.c.parse.CodeGenExpressionTest_cv03)
+%ERROR  61,codeGenTermDivMinus(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+lang.FatalErrorException: [1行目,2文字目の'/']*または/が必要です
+	at lang.ParseContext.fatalError(ParseContext.java:65)
+	at lang.c.parse.Term.parse(Term.java:32)
+	at lang.c.parse.Term.parse(Term.java:1)
+	at lang.c.parse.Expression.parse(Expression.java:23)
+	at lang.c.parse.Expression.parse(Expression.java:1)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:59)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermDivMinus(CodeGenExpressionTest_cv03.java:127)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  61,codeGenTermDivMinus(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  62,codeGenTermAllTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%ERROR  62,codeGenTermAllTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+lang.FatalErrorException: [1行目,6文字目の'*']*または/が必要です
+	at lang.ParseContext.fatalError(ParseContext.java:65)
+	at lang.c.parse.Term.parse(Term.java:32)
+	at lang.c.parse.Term.parse(Term.java:1)
+	at lang.c.parse.Expression.parse(Expression.java:23)
+	at lang.c.parse.Expression.parse(Expression.java:1)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:59)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermAllTest(CodeGenExpressionTest_cv03.java:147)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  62,codeGenTermAllTest(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  63,codeGenTermMultWithParentheses(lang.c.parse.CodeGenExpressionTest_cv03)
+%ERROR  63,codeGenTermMultWithParentheses(lang.c.parse.CodeGenExpressionTest_cv03)
+%TRACES 
+lang.FatalErrorException: [1行目,6文字目の'*']*または/が必要です
+	at lang.ParseContext.fatalError(ParseContext.java:65)
+	at lang.c.parse.Term.parse(Term.java:32)
+	at lang.c.parse.Term.parse(Term.java:1)
+	at lang.c.parse.Expression.parse(Expression.java:23)
+	at lang.c.parse.Expression.parse(Expression.java:1)
+	at lang.c.TestHelper.checkCodeGen(TestHelper.java:59)
+	at lang.c.parse.CodeGenExpressionTest_cv03.codeGenTermMultWithParentheses(CodeGenExpressionTest_cv03.java:67)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  63,codeGenTermMultWithParentheses(lang.c.parse.CodeGenExpressionTest_cv03)
+%TESTS  65,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  65,FactorWithPlusSignOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  66,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  66,FactorAmpNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  67,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  67,ExpressionAddTypeNoError(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  68,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTE  68,FactorWithAmpOverflow(lang.c.parse.SemanticCheckProgramTest_cv02)
+%TESTS  70,parseAddressOnlyAMP(lang.c.parse.ParseAddressTest)
+%TESTE  70,parseAddressOnlyAMP(lang.c.parse.ParseAddressTest)
+%TESTS  72,testFactorAmp(lang.c.parse.IsFirstTest_cv02)
+%TESTE  72,testFactorAmp(lang.c.parse.IsFirstTest_cv02)
+%TESTS  74,UndefinedToken(lang.c.parse.IsFirstTest)
+%TESTE  74,UndefinedToken(lang.c.parse.IsFirstTest)
+%TESTS  75,testExpressionAdd(lang.c.parse.IsFirstTest)
+%TESTE  75,testExpressionAdd(lang.c.parse.IsFirstTest)
+%TESTS  76,testDecimalNumber(lang.c.parse.IsFirstTest)
+%TESTE  76,testDecimalNumber(lang.c.parse.IsFirstTest)
+%TESTS  77,testExpression(lang.c.parse.IsFirstTest)
+%TESTE  77,testExpression(lang.c.parse.IsFirstTest)
+%TESTS  79,codeGenFactor(lang.c.parse.CodeGenFactorTest)
+%TESTE  79,codeGenFactor(lang.c.parse.CodeGenFactorTest)
+%TESTS  81,semanticCheckAddressSubError(lang.c.parse.SemanticCheckAddressTest)
+%FAILED 81,semanticCheckAddressSubError(lang.c.parse.SemanticCheckAddressTest)
+%TRACES 
+java.lang.AssertionError: Failed with 2 + &1. FatalError2 + &1.Exception should be invoked
+	at org.junit.Assert.fail(Assert.java:88)
+	at lang.c.parse.SemanticCheckAddressTest.semanticCheckAddressSubError(SemanticCheckAddressTest.java:139)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  81,semanticCheckAddressSubError(lang.c.parse.SemanticCheckAddressTest)
+%TESTS  82,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest)
+%TESTE  82,semanticCheckAddressSubAccept(lang.c.parse.SemanticCheckAddressTest)
+%TESTS  83,semanticCheckAddressAddAccept(lang.c.parse.SemanticCheckAddressTest)
+%TESTE  83,semanticCheckAddressAddAccept(lang.c.parse.SemanticCheckAddressTest)
+%TESTS  84,semanticCheckAddressAddError(lang.c.parse.SemanticCheckAddressTest)
+%FAILED 84,semanticCheckAddressAddError(lang.c.parse.SemanticCheckAddressTest)
+%TRACES 
+java.lang.AssertionError: Failed with &2 + &1. FatalErrorException should be invoked
+	at org.junit.Assert.fail(Assert.java:88)
+	at lang.c.parse.SemanticCheckAddressTest.semanticCheckAddressAddError(SemanticCheckAddressTest.java:97)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  84,semanticCheckAddressAddError(lang.c.parse.SemanticCheckAddressTest)
+%TESTS  86,codeGenTerm(lang.c.parse.CodeGenTermTest)
+%TESTE  86,codeGenTerm(lang.c.parse.CodeGenTermTest)
+%TESTS  88,parseNumber(lang.c.parse.ParseNumberTest)
+%TESTE  88,parseNumber(lang.c.parse.ParseNumberTest)
+%TESTS  90,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTE  90,readSimpleTokensByUsingGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTS  91,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest)
+%TESTE  91,getCurrentTokenFirstTime(lang.c.CTokenizerExpressionAddTest)
+%TESTS  92,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTE  92,getCurrentTokenAfterGetNextToken(lang.c.CTokenizerExpressionAddTest)
+%TESTS  94,convertToValidateActual(lang.c.TestHelperTest)
+%TESTE  94,convertToValidateActual(lang.c.TestHelperTest)
+%TESTS  95,convertToValidateSimple(lang.c.TestHelperTest)
+%TESTE  95,convertToValidateSimple(lang.c.TestHelperTest)
+%TESTS  97,inlineCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTE  97,inlineCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTS  98,inlineCommentWithNumber(lang.c.CTokenizerCommentTest)
+%TESTE  98,inlineCommentWithNumber(lang.c.CTokenizerCommentTest)
+%TESTS  99,blockCommentNotClose(lang.c.CTokenizerCommentTest)
+%TESTE  99,blockCommentNotClose(lang.c.CTokenizerCommentTest)
+%TESTS  100,blockCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTE  100,blockCommentWithFactor(lang.c.CTokenizerCommentTest)
+%TESTS  101,blockComment(lang.c.CTokenizerCommentTest)
+%TESTE  101,blockComment(lang.c.CTokenizerCommentTest)
+%TESTS  102,lineComment(lang.c.CTokenizerCommentTest)
+%TESTE  102,lineComment(lang.c.CTokenizerCommentTest)
+%TESTS  104,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest)
+%TESTE  104,readSimpleTokenSub(lang.c.CTokenizerExpressionSubTest)
+%TESTS  105,minusNumber(lang.c.CTokenizerExpressionSubTest)
+%TESTE  105,minusNumber(lang.c.CTokenizerExpressionSubTest)
+%TESTS  107,termTokenWithPARTest(lang.c.CTokenizerTermTest)
+%TESTE  107,termTokenWithPARTest(lang.c.CTokenizerTermTest)
+%TESTS  108,multNumber(lang.c.CTokenizerTermTest)
+%TESTE  108,multNumber(lang.c.CTokenizerTermTest)
+%TESTS  109,termNotCloseBlockCommentTwoTimes(lang.c.CTokenizerTermTest)
+%TESTE  109,termNotCloseBlockCommentTwoTimes(lang.c.CTokenizerTermTest)
+%TESTS  110,termTokenExpressionTest(lang.c.CTokenizerTermTest)
+%TESTE  110,termTokenExpressionTest(lang.c.CTokenizerTermTest)
+%TESTS  111,termNotCloseBlockComment(lang.c.CTokenizerTermTest)
+%TESTE  111,termNotCloseBlockComment(lang.c.CTokenizerTermTest)
+%TESTS  112,divNumber(lang.c.CTokenizerTermTest)
+%TESTE  112,divNumber(lang.c.CTokenizerTermTest)
+%TESTS  114,hexNumber(lang.c.CTokenizerAddressTest)
+%TESTE  114,hexNumber(lang.c.CTokenizerAddressTest)
+%TESTS  115,AMP(lang.c.CTokenizerAddressTest)
+%TESTE  115,AMP(lang.c.CTokenizerAddressTest)
+%TESTS  116,decimalNumber(lang.c.CTokenizerAddressTest)
+%TESTE  116,decimalNumber(lang.c.CTokenizerAddressTest)
+%TESTS  117,octalNumber(lang.c.CTokenizerAddressTest)
+%TESTE  117,octalNumber(lang.c.CTokenizerAddressTest)
+%TESTS  119,plusNumber(lang.c.CTokenizerNumberTest)
+%TESTE  119,plusNumber(lang.c.CTokenizerNumberTest)
+%TESTS  120,decimalNumber(lang.c.CTokenizerNumberTest)
+%TESTE  120,decimalNumber(lang.c.CTokenizerNumberTest)
+%TESTS  122,hexNumberError0x(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  122,hexNumberError0x(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  123,octalTooLargeNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  123,octalTooLargeNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  124,hex(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  124,hex(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  125,octal(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  125,octal(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  126,hexTooLargeBit1(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  126,hexTooLargeBit1(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  127,hexTooLargeBit2(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  127,hexTooLargeBit2(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  128,decNumberMax(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  128,decNumberMax(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  129,octalIllNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  129,octalIllNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  130,octalZero(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  130,octalZero(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  131,decTooLargeNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  131,decTooLargeNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  132,decIllNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  132,decIllNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  133,hexNumber0x0(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  133,hexNumber0x0(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  134,hexNumberMax(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  134,hexNumberMax(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  135,octalNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTE  135,octalNumber(lang.c.CTokenizerNumberTest_cv02)
+%TESTS  137,testMustBeFailed(lang.MustBeFailedTest)
+%FAILED 137,testMustBeFailed(lang.MustBeFailedTest)
+%TRACES 
+java.lang.AssertionError: 
+Expected: is "MUST BE FAILED THIS TEST."
+     but: was "Failed test."
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:8)
+	at lang.MustBeFailedTest.testMustBeFailed(MustBeFailedTest.java:14)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+%TRACEE 
+%TESTE  137,testMustBeFailed(lang.MustBeFailedTest)
+%RUNTIME201

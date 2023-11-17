@@ -1,0 +1,11 @@
+%NAME,Launch Java Tests - $(symbol-method) parseNotCloseRPAR()
+%TAG,in socket.on
+%COUNT,10
+%TESTC  1 v2
+%TSTTREE1,parseNotCloseRPAR(lang.c.parse.ParseFactorTest),false,1,false,-1,parseNotCloseRPAR(lang.c.parse.ParseFactorTest),,
+%TESTS  1,parseNotCloseRPAR(lang.c.parse.ParseFactorTest)
+%NAME,Launch Java Tests - $(symbol-method) parseNotCloseRPAR()
+%TAG,in socket.on
+%COUNT,11
+%TESTE  1,parseNotCloseRPAR(lang.c.parse.ParseFactorTest)
+%RUNTIME25
