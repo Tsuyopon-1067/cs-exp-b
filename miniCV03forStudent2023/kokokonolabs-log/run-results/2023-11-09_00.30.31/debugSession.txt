@@ -1,0 +1,6 @@
+Id: 5187cecc-0703-438b-bdad-d29675156584
+Name: Launch Java Tests - $(symbol-method) parseNotCloseRPAR()
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-method) parseNotCloseRPAR()
+Configuration Request: launch
