@@ -1,0 +1,6 @@
+Id: b6e3c604-e619-4b00-a7ae-76fb5d566da6
+Name: Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
+Configuration Type: java
+Configuration Name: Launch Java Tests - $(symbol-class) CodeGenFactorAmpTest
+Configuration Request: launch
