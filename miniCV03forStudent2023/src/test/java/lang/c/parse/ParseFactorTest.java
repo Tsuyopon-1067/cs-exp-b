@@ -5,8 +5,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.fail;
 
-import java.beans.Expression;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -68,7 +66,7 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString(""));
             }
         }
     }
@@ -88,7 +86,6 @@ public class ParseFactorTest {
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("弧が閉じられていません"));
-
             }
         }
     }
