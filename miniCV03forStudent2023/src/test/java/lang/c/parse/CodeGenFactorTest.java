@@ -60,4 +60,48 @@ public class CodeGenFactorTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Test
+    public void codeGenFactorP2() throws FatalErrorException {
+        inputStream.setInputString("+2");
+        String expected[] = {
+            "MOV #2, (R6)+",
+        };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Factor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenFactorM2() throws FatalErrorException {
+        inputStream.setInputString("-2");
+        String expected[] = {
+            "MOV #2, (R6)+",
+            "MOV #0, R0",
+            "SUB -(R6), R0",
+            "MOV R0, (R6)+",
+        };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Factor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenFactorParen() throws FatalErrorException {
+        inputStream.setInputString("(2+3)");
+        String expected[] = {
+            "MOV #2, (R6)+",
+            "MOV #3, (R6)+",
+            "MOV -(R6), R0",
+            "MOV -(R6), R1",
+            "ADD R1, R0",
+            "MOV R0, (R6)+",
+        };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Factor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
 }
