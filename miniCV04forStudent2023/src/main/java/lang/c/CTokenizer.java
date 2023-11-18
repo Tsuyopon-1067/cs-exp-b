@@ -128,7 +128,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = CTokenizerStateConst.ST_RBRA;
-					} else if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z')) {
+					} else if (('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || ch == '_') {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = CTokenizerStateConst.ST_IDENT;
