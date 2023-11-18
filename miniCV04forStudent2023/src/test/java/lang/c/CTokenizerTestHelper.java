@@ -10,4 +10,11 @@ public class CTokenizerTestHelper {
         assertThat(message + ":" + "LineNo: ", token.getLineNo(), is(lineNo));
         assertThat(message + ":" + "ColumnNo: ", token.getColumnNo(), is(columnNo));
     }
+
+    public void checkToken(String message, CToken actualToken, CToken expectedToken) {
+        assertThat(message + ":" + "Type: ", actualToken.getType(), is(expectedToken.getType()));
+        assertThat(message + ":" + "Text: ", actualToken.getText(), is(expectedToken.getText()));
+        assertThat(message + ":" + "LineNo: ", actualToken.getLineNo(), is(expectedToken.getLineNo()));
+        assertThat(message + ":" + "ColumnNo: ", actualToken.getColumnNo(), is(expectedToken.getColumnNo()));
+    }
 }

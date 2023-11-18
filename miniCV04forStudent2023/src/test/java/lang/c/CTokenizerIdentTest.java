@@ -138,4 +138,22 @@ public class CTokenizerIdentTest {
         CToken token5 = tokenizer.getNextToken(cpContext);
         helper.checkToken("token 5", token5, CToken.TK_EOF, "end_of_file", 1, 20);
     }
+
+    @Test
+    public void unsignedFactorIdentType2() {
+        String testString = "i_a ip_a ia_a ipa_a";
+        CToken[] expectedTokens = {
+            new CToken(CToken.TK_IDENT, 1, 1, "i_a"),
+            new CToken(CToken.TK_IDENT, 1, 5, "ip_a"),
+            new CToken(CToken.TK_IDENT, 1, 10, "ia_a"),
+            new CToken(CToken.TK_IDENT, 1, 15, "ipa_a"),
+            new CToken(CToken.TK_EOF, 1, 20, "end_of_file")
+        };
+
+        inputStream.setInputString(testString);
+        for (int i=0; i<expectedTokens.length; i++) {
+            CToken token = tokenizer.getNextToken(cpContext);
+            helper.checkToken("token "+(i+1) , token, expectedTokens[i]);
+        }
+    }
 }
