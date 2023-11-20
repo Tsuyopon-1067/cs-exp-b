@@ -68,4 +68,33 @@ public class CodeGenFactorAmpTest {
         CParseRule rule = new Factor(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
+
+    @Test
+    public void codeGenFactorWithAmpSub() throws FatalErrorException {
+        inputStream.setInputString("&3-1-&1");  // Test for "&3-1-&1"
+        String expected[] = {
+            "	. = 0x100",
+            "	JMP	__START",
+            "__START:",
+            "	MOV	#0x1000, R6",
+            "	MOV	#3, (R6)+",
+            "	MOV	#1, (R6)+",
+            "	MOV	-(R6), R0",
+            "	MOV	-(R6), R1",
+            "	SUB	R0, R1",
+            "	MOV	R1, (R6)+",
+            "	MOV	#1, (R6)+",
+            "	MOV	-(R6), R0",
+            "	MOV	-(R6), R1",
+            "	SUB	R0, R1",
+            "	MOV	R1, (R6)+",
+            "	MOV	-(R6), R0",
+            "	HLT",
+            "	.END"
+            };
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 }
