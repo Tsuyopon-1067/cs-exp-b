@@ -20,8 +20,14 @@ public class Array extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // [を読み飛ばす
-		expression = new Expression(pcx);
-		expression.parse(pcx);
+
+		if (Expression.isFirst(tk)) {
+			expression = new Expression(pcx);
+			expression.parse(pcx);
+		} else {
+			pcx.fatalError(tk.toExplainString() + "[の後ろはexpressionです");
+		}
+
 		tk = ct.getNextToken(pcx); // ]が来るはず
 		if (tk.getType() != CToken.TK_RBRA) {
             pcx.fatalError("[]が閉じていません");
