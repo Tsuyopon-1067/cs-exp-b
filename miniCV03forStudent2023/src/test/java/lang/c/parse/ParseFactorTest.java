@@ -124,4 +124,7 @@ public class ParseFactorTest {
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです"));
+            }
+        }
+    }
 }
