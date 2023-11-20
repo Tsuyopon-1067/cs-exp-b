@@ -104,7 +104,7 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("左括弧の後ろが不正です"));
+                assertThat(e.getMessage(), containsString("左括弧の後ろはExpressionです"));
             }
         }
     }
@@ -123,9 +123,5 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("-の後は数値が来る必要があります"));
-            }
-        }
-    }
-
+                assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです"));
 }
