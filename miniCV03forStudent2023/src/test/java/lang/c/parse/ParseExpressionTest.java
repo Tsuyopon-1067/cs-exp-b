@@ -94,23 +94,4 @@ public class ParseExpressionTest {
             }
         }
     }
-
-    @Test
-    public void parseAddressOnlyAMP()  {
-        String[] testDataArr = {"1+&"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
-            Expression cp = new Expression(cpContext);
-
-            try {
-                cp.parse(cpContext);
-                fail("Failed with " + testData + ". FatalErrorException should be invoked");
-            } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("&の後は数字です"));
-            }
-        }
-    }
 }

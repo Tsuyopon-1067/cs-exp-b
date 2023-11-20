@@ -37,7 +37,7 @@ public class UnsignedFactor extends CParseRule {
 					ct = pcx.getTokenizer();
 					tk =  ct.getNextToken(pcx);
 				} else {
-					pcx.fatalError(tk.toExplainString() + "左括弧の後ろが不正です");
+					pcx.fatalError(tk.toExplainString() + "左括弧の後ろはExpressionです");
 				}
 				break;
 			case CToken.TK_AMP:

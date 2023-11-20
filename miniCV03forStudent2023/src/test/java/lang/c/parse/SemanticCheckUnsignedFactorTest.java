@@ -108,10 +108,6 @@ public class SemanticCheckUnsignedFactorTest {
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int]は割れません"));
-<<<<<<< HEAD
-
-=======
->>>>>>> dd9ee4b (✅ add: code test)
             }
         }
     }
