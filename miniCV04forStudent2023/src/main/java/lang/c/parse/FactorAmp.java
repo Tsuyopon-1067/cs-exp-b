@@ -25,7 +25,7 @@ public class FactorAmp extends CParseRule {
 		CToken tk = ct.getNextToken(pcx);
 		if (Number.isFirst(tk)) {
 			numberPrim = new Number(pcx);
-		else if (Ident.isFirst(tk)) {
+		} else if (Ident.isFirst(tk)) {
 			numberPrim = new Primary(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "&の後はNumberかPrimaryです");
@@ -39,7 +39,6 @@ public class FactorAmp extends CParseRule {
 				if (((Primary)numberPrim).isPrimaryMult()) {
 					pcx.fatalError("&の後ろに*は付けられません");
 				}
-
 			}
 			numberPrim.semanticCheck(pcx);
 
