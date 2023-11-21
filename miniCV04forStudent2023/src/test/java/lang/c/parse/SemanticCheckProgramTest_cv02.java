@@ -92,9 +92,9 @@ public class SemanticCheckProgramTest_cv02 {
     public void FactorWithAmpOverflow() throws FatalErrorException {
         String[] testDataArr = {"&65536", "&0200000", "&0x10000"};
         String[] errMessageArr = {
-            "&の後は数字です",
-            "&の後は数字です",
-            "&の後は数字です",
+            "&の後はNumberかPrimaryです",
+            "&の後はNumberかPrimaryです",
+            "&の後はNumberかPrimaryです",
         };
         for (int i = 0; i < testDataArr.length; i++) {
             resetEnvironment();

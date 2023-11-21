@@ -86,7 +86,7 @@ public class SemanticCheckFactorAmpTest {
         String[] errMessageArr = {
             "左辺の型[int]と右辺の型[int*]は引けません",
             "左辺の型[int]と右辺の型[int*]は引けません",
-            "&の後は数字です",
+            "&の後はNumberかPrimaryです",
     };
         for (int i = 0; i < testDataArr.length; i++) {
             resetEnvironment();

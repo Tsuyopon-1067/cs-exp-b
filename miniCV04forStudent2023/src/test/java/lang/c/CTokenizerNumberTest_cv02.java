@@ -93,11 +93,9 @@ public class CTokenizerNumberTest_cv02 {
         CToken token1 = tokenizer.getNextToken(cpContext);
         helper.checkToken("token 1", token1, CToken.TK_NUM, "0xff", 1, 1);
         CToken token2 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 2", token2, CToken.TK_ILL, "g", 1, 5);
-        CToken token3 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 3", token3, CToken.TK_ILL, "f", 1, 6);
+        helper.checkToken("token 2", token2, CToken.TK_IDENT, "gf", 1, 5);
         CToken token4 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 4", token4, CToken.TK_EOF, "end_of_file", 1, 7);
+        helper.checkToken("token 3", token4, CToken.TK_EOF, "end_of_file", 1, 7);
     }
 
     @Test
@@ -192,10 +190,8 @@ public class CTokenizerNumberTest_cv02 {
         CToken token1 = tokenizer.getNextToken(cpContext);
         helper.checkToken("token 1", token1, CToken.TK_NUM, "123", 1, 1);
         CToken token2 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 2", token2, CToken.TK_ILL, "a", 1, 4);
-        CToken token3 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 3", token3, CToken.TK_NUM, "4", 1, 5);
+        helper.checkToken("token 2", token2, CToken.TK_IDENT, "a4", 1, 4);
         CToken token4 = tokenizer.getNextToken(cpContext);
-        helper.checkToken("token 4", token4, CToken.TK_EOF, "end_of_file", 1, 6);
+        helper.checkToken("token 3", token4, CToken.TK_EOF, "end_of_file", 1, 6);
     }
 }
