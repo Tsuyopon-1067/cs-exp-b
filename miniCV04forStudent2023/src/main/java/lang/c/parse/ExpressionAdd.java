@@ -39,10 +39,12 @@ class ExpressionAdd extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 足し算の型計算規則
 		final int s[][] = {
-				// T_err       T_int         T_pint
-				{ CType.T_err, CType.T_err,  CType.T_err }, // T_err
-				{ CType.T_err, CType.T_int,  CType.T_pint }, // T_int
-				{ CType.T_err, CType.T_pint, CType.T_err },  // T_pint
+				// T_err       T_int         T_pint        T_int_array  T_pint_array
+				{ CType.T_err, CType.T_err,  CType.T_err , CType.T_err, CType.T_err }, // T_err
+				{ CType.T_err, CType.T_int,  CType.T_pint, CType.T_err, CType.T_err }, // T_int
+				{ CType.T_err, CType.T_pint, CType.T_err,  CType.T_err, CType.T_err }, // T_pint
+				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_int_array
+				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint_array
 		};
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
@@ -50,6 +52,8 @@ class ExpressionAdd extends CParseRule {
 			int lt = left.getCType().getType(); // +の左辺の型
 			int rt = right.getCType().getType(); // +の右辺の型
 			int nt = s[lt][rt]; // 規則による型計算
+			System.err.println("hogehoge");
+			System.err.printf("%d = [%d][%d]\n", nt, lt, rt);
 			if (nt == CType.T_err) {
 				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
 						+ right.getCType().toString() + "]は足せません");
