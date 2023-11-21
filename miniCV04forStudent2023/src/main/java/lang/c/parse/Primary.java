@@ -25,7 +25,7 @@ public class Primary extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 
-		if (ct.getCurrentToken(pcx).getType() == CToken.TK_AMP) {
+		if (ct.getCurrentToken(pcx).getType() == CToken.TK_MULT) {
 			isPrimaryMult = true;
 			nextParseRule = new PrimaryMult(pcx);
 		} else {

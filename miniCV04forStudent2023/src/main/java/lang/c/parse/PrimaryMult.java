@@ -22,7 +22,10 @@ public class PrimaryMult extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		op = ct.getCurrentToken(pcx);
 		// *の次の字句を読む
-		ct.getNextToken(pcx);
+		CToken tk = ct.getNextToken(pcx);
+		if (!Variable.isFirst(tk)) {
+			pcx.fatalError("*の後ろはidentです");
+		}
 		variable = new Variable(pcx);
 		variable.parse(pcx);
 	}
