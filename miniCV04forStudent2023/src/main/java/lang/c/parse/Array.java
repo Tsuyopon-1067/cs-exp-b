@@ -42,7 +42,7 @@ public class Array extends CParseRule {
 				pcx.fatalError("配列のインデックスはintである必要があります");
 			}
 			setCType(expression.getCType()); // expression の型をそのままコピー
-			setConstant(expression.isConstant()); // expression は常に定数
+			setConstant(false);
 		}
 	}
 

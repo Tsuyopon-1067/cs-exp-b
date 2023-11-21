@@ -25,8 +25,24 @@ public class Ident extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (ident != null) {
-			this.setCType(CType.getCType(CType.T_int));
-			this.setConstant(false);
+			String identText = ident.getText();
+			int setType = CType.T_int;
+			boolean isConstant = false;
+			if (identText.startsWith("i_")) {
+				setType = CType.T_int;
+			} else if (identText.startsWith("ip_")) {
+				setType = CType.T_pint;
+			} else if (identText.startsWith("ia_")) {
+				setType = CType.T_int_array;
+			} else if (identText.startsWith("ipa_")) {
+				setType = CType.T_pint_array;
+			} else if (identText.startsWith("c_")) {
+				setType = CType.T_int;
+				isConstant = true;
+			}
+
+			this.setCType(CType.getCType(setType));
+			this.setConstant(isConstant);
 		}
 	}
 

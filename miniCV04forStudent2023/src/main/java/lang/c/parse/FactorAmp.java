@@ -8,7 +8,7 @@ import lang.c.*;
 public class FactorAmp extends CParseRule {
     // factorAmp      ::= AMP ( number | primary )
     CToken op;
-    CParseRule numberPrime;
+    CParseRule numberPrim;
 
 	public FactorAmp(CParseContext pcx) {
 	}
@@ -24,28 +24,39 @@ public class FactorAmp extends CParseRule {
 		// &の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (Number.isFirst(tk)) {
-			numberPrime = new Number(pcx);
+			numberPrim = new Number(pcx);
 		else if (Ident.isFirst(tk)) {
-			numberPrime = new Primary(pcx);
+			numberPrim = new Primary(pcx);
 		} else {
 			pcx.fatalError(tk.toExplainString() + "&の後はNumberかPrimaryです");
 		}
-		numberPrime.parse(pcx);
+		numberPrim.parse(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (numberPrime != null) {
-			numberPrime.semanticCheck(pcx);
+		if (numberPrim != null) {
+			if (numberPrim instanceof Primary) {
+				if (((Primary)numberPrim).isPrimaryMult()) {
+					pcx.fatalError("&の後ろに*は付けられません");
+				}
+
+			}
+			numberPrim.semanticCheck(pcx);
+
+			// &の後ろがポインタならエラー
+			if(numberPrim.getCType() == CType.getCType(CType.T_pint) || numberPrim.getCType() == CType.getCType(CType.T_pint_array)) {
+				pcx.fatalError("ポインタに&はつけられません");
+			}
 			this.setCType(CType.getCType(CType.T_pint));
-			setConstant(numberPrime.isConstant()); // numberPrime は常に定数
+			setConstant(numberPrim.isConstant()); // numberPrim は常に定数
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; factorAMP starts");
-		if (numberPrime != null) {
-			numberPrime.codeGen(pcx);
+		if (numberPrim != null) {
+			numberPrim.codeGen(pcx);
 		}
 		o.println(";;; factorAMP completes");
 	}

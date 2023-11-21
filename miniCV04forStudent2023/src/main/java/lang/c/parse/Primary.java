@@ -7,10 +7,14 @@ import lang.c.*;
 
 public class Primary extends CParseRule {
 	// primary        ::= primaryMult | variable
-	CParseRule nextParseRule;
-	boolean isPrimaryMult;
+	private CParseRule nextParseRule;
+	private boolean isPrimaryMult; // FactorAmp = AMP primary, primary = primaryMult の場合の検出に使う
 
 	public Primary(CParseContext pcx) {
+	}
+
+	public boolean isPrimaryMult() {
+		return isPrimaryMult;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -33,7 +37,9 @@ public class Primary extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (nextParseRule != null) {
-
+			nextParseRule.semanticCheck(pcx);
+			setCType(nextParseRule.getCType());
+			setConstant(false);
 		}
 	}
 

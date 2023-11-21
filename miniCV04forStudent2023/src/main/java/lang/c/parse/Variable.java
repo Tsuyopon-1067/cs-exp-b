@@ -30,6 +30,28 @@ public class Variable extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		if (ident != null) {
+			ident.semanticCheck(pcx);
+			boolean isIntArray = ident.getCType().isCType(CType.T_int_array);
+			boolean isPintArray = ident.getCType().isCType(CType.T_pint_array);
+			if (array != null) { // ident arrayの場合
+				if (!isIntArray && !isPintArray) {
+					pcx.fatalError("identの型が配列型ではありません");
+				}
+				array.semanticCheck(pcx);
+
+				if (isIntArray) {
+					setCType(CType.getCType(CType.T_int));
+				} else if (isPintArray) {
+					setCType(CType.getCType(CType.T_pint));
+				}
+			} else { // identのみの場合
+				if (isIntArray || isPintArray) {
+					pcx.fatalError("配列のインデックスが指定されていません");
+				}
+				setCType(ident.getCType());
+			}
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
