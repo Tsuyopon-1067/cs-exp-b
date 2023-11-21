@@ -28,7 +28,7 @@ public class Array extends CParseRule {
 			pcx.fatalError(tk.toExplainString() + "[の後ろはexpressionです");
 		}
 
-		tk = ct.getNextToken(pcx); // ]が来るはず
+		tk = ct.getCurrentToken(pcx); // ]が来るはず
 		if (tk.getType() != CToken.TK_RBRA) {
             pcx.fatalError("[]が閉じていません");
 		}
