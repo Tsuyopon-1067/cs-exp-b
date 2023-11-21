@@ -24,7 +24,7 @@ import lang.c.CTokenizer;
  */
 public class SemanticCheckIdentifierTypeTest {
     // Test for Ident Type and type conversion
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -62,12 +62,17 @@ public class SemanticCheckIdentifierTypeTest {
     // (1) 整数型の扱い
     @Test
     public void semanticErrorForIntegerType()  {
-        String[] testDataArr = { "*i_a", "i_a[3]", "&10 + ip_a", "10 - &i_a" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("*i_a", "ポインタではない数値でアドレスを参照することはできません"),
+            new HelperTestStrMsg("i_a[3]", "identの型が配列型ではありません"),
+            new HelperTestStrMsg("&10 + ip_a", "左辺の型[int*]と右辺の型[int*]は足せません"),
+            new HelperTestStrMsg("10 - &i_a", "左辺の型[int]と右辺の型[int*]は引けません"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
@@ -75,31 +80,36 @@ public class SemanticCheckIdentifierTypeTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (2) ポインタ型の扱い
     // ip_a[3] はCでは正当だが，この実験では不当にすること
     @Test
     public void semanticErrorForPointerType()  {
-        String[] testDataArr = { "ip_a[3]", "&ip_a", "10 - ip_a", "*ip_a - &10" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ip_a[3]", "identの型が配列型ではありません"),
+            new HelperTestStrMsg("&ip_a", "ポインタに&はつけられません"),
+            new HelperTestStrMsg("10 - ip_a", "左辺の型[int]と右辺の型[int*]は引けません"),
+            new HelperTestStrMsg("*ip_a - &10", "左辺の型[int]と右辺の型[int*]は引けません"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData + ". FatalErrorException should be invoked");
+                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     @Test
@@ -117,52 +127,65 @@ public class SemanticCheckIdentifierTypeTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString("ポインタに符号(-)はつけられません"));
             }
-        } 
+        }
 
     }
     // (3) 配列型の扱い
     // *ia_a はCでは正当だが，この実験では不当にすること
     @Test
     public void semanticErrorForIdentArrayType()  {
-        String[] testDataArr = { "ia_a", "*ia_a", "ia_a[3] - &1", "1 - &ia_a[3]" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ip_a[3]", "identの型が配列型ではありません"),
+            new HelperTestStrMsg("*ia_a", "配列のインデックスが指定されていません"),
+            new HelperTestStrMsg("ia_a[3] - &1", "左辺の型[int]と右辺の型[int*]は引けません"),
+            new HelperTestStrMsg("1 - &ia_a[3]", "左辺の型[int]と右辺の型[int*]は引けません"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData + ". FatalErrorException should be invoked");
+                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (4) ポインタ配列型の扱い
     // *ipa_a はCでは正当だが，この実験では不当にすること
     @Test
     public void semanticErrorForPointerArrayType()  {
-        String[] testDataArr = { "ipa_a", "*ipa_a", "ipa_a[3] + ipa_a[3]", "*ipa_a[3] - &100"};
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ipa_a", "配列のインデックスが指定されていません"),
+            new HelperTestStrMsg("*ipa_a", "配列のインデックスが指定されていませ"),
+            new HelperTestStrMsg("ipa_a[3] + ipa_a[3]", "左辺の型[int*]と右辺の型[int*]は足せません"),
+            new HelperTestStrMsg("*ipa_a[3] - &100", "左辺の型[int]と右辺の型[int*]は引けません"),
+
+
+        };
+        for (HelperTestStrMsg testData : testDataArr) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData + ". FatalErrorException should be invoked");
-            } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
+            } catch (FatalErrorException e) {
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 }
+

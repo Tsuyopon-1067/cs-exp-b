@@ -105,15 +105,15 @@ public class SemanticCheckAddressTest {
     // 意味解析 正当
     @Test
     public void semanticCheckAddressSubAccept() throws FatalErrorException {
-        TestStrType[] testDataArr = {
-            new TestStrType("2 + 1", CType.T_int),
-            new TestStrType("2 - 1", CType.T_int),
-            new TestStrType("&2 + 1", CType.T_pint),
-            new TestStrType("2 + &1", CType.T_pint),
-            new TestStrType("&2 - 1", CType.T_pint),
-            new TestStrType("&2 - &1", CType.T_int),
+        HelperTestStrType[] testDataArr = {
+            new HelperTestStrType("2 + 1", CType.T_int),
+            new HelperTestStrType("2 - 1", CType.T_int),
+            new HelperTestStrType("&2 + 1", CType.T_pint),
+            new HelperTestStrType("2 + &1", CType.T_pint),
+            new HelperTestStrType("&2 - 1", CType.T_pint),
+            new HelperTestStrType("&2 - &1", CType.T_int),
         };
-        for ( TestStrType testData: testDataArr ) {
+        for ( HelperTestStrType testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
@@ -148,21 +148,5 @@ public class SemanticCheckAddressTest {
         }
     }
 
-
-}
-
-class TestStrType {
-    private String str;
-    private int type;
-    public TestStrType(String str, int type) {
-        this.str = str;
-        this.type = type;
-    }
-    public String getStr() {
-        return str;
-    }
-    public int getType() {
-        return type;
-    }
 
 }

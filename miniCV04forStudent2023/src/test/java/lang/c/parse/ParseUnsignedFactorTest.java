@@ -21,7 +21,7 @@ import lang.c.CTokenizer;
 
 public class ParseUnsignedFactorTest {
     // Test for UnsignedFactor node, added in "cv04"
-      
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -65,7 +65,7 @@ public class ParseUnsignedFactorTest {
             rule.parse(cpContext);
             fail("FatalErrorException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+            assertThat(e.getMessage(), containsString("*の後ろはidentです"));
         }
     }
 
@@ -80,7 +80,7 @@ public class ParseUnsignedFactorTest {
             rule.parse(cpContext);
             fail("FatalErrorException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+            assertThat(e.getMessage(), containsString("[]が閉じていません"));
         }
     }
 
@@ -95,7 +95,7 @@ public class ParseUnsignedFactorTest {
             rule.parse(cpContext);
             fail("FatalErrorException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+            assertThat(e.getMessage(), containsString("括弧が閉じられていません"));
         }
     }
 
@@ -111,7 +111,7 @@ public class ParseUnsignedFactorTest {
             rule.parse(cpContext);
             fail("FatalErrorException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+            assertThat(e.getMessage(), containsString("プログラムの最後にゴミがあります"));
         }
     }
 
@@ -127,7 +127,7 @@ public class ParseUnsignedFactorTest {
             rule.semanticCheck(cpContext);  // Error here.
             fail("FatalErrorException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+            assertThat(e.getMessage(), containsString("変数はi_，ip_，ia_，ipa_，c_のどれかから始まる必要があります"));
         }
     }
 }

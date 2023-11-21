@@ -71,8 +71,8 @@ public class SemanticCheckPrimaryTest {
             cp.parse(cpContext);
             cp.semanticCheck(cpContext);
             String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));    
-        } 
+            assertThat(errorOutput, is(""));
+        }
     }
 
     @Test
@@ -89,8 +89,8 @@ public class SemanticCheckPrimaryTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("pint"));
-            }    
+                assertThat(e.getMessage(), containsString("ポインタではない数値でアドレスを参照することはできません"));
+            }
         }
     }
 }
