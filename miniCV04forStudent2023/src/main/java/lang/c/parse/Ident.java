@@ -39,6 +39,8 @@ public class Ident extends CParseRule {
 			} else if (identText.startsWith("c_")) {
 				setType = CType.T_int;
 				isConstant = true;
+			} else {
+				pcx.fatalError("変数はi_，ip_，ia_，ipa_，c_のどれかから始まる必要があります");
 			}
 
 			this.setCType(CType.getCType(setType));
