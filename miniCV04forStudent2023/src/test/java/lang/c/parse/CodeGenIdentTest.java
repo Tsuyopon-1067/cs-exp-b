@@ -17,7 +17,7 @@ import lang.c.TestHelper;
 public class CodeGenIdentTest {
     // Test for UnsignedFactor node of "cv04".
     // i_a &i_a ip_a *ip_a ia_a[3] &ia_a[3] ipa_a[3] *ipa_a[3]
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -50,15 +50,9 @@ public class CodeGenIdentTest {
     public void codeGenInt() throws FatalErrorException {
         inputStream.setInputString("i_a");
         String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
+            "	MOV #i_a, (R6)+",
+            "	MOV\t-(R6), R0",
+            "	MOV\t(R0), (R6)+",
         };
 
         // Check only code portion, not validate comments
@@ -70,7 +64,7 @@ public class CodeGenIdentTest {
     public void codeGenAMPInt() throws FatalErrorException {
         inputStream.setInputString("&i_a");
         String expected[] = {
-            "Write down the output you have decided on here",
+            "	MOV #i_a, (R6)+",
         };
 
         // Check only code portion, not validate comments
@@ -82,15 +76,9 @@ public class CodeGenIdentTest {
     public void codeGenPint() throws FatalErrorException {
         inputStream.setInputString("ip_a");
         String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
+            "	MOV #ip_a, (R6)+",
+            "	MOV -(R6), R0",
+            "	MOV (R0), (R6)+",
         };
 
         // Check only code portion, not validate comments
@@ -102,15 +90,11 @@ public class CodeGenIdentTest {
     public void codeGenMultPint() throws FatalErrorException {
         inputStream.setInputString("*ip_a");
         String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
+            "	MOV #ip_a, (R6)+",
+            "	MOV -(R6), R0",
+            "	MOV (R0), (R6)+",
+            "	MOV -(R6), R0",
+            "	MOV (R0), (R6)+",
         };
 
         // Check only code portion, not validate comments
@@ -122,15 +106,13 @@ public class CodeGenIdentTest {
     public void codeGenArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]");
         String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
+            "	MOV #ia_a, (R6)+",
+            "	MOV #3, (R6)+",
+            "	MOV -(R6), R0",
+            "	ADD -(R6), R0",
+            "	MOV R0, (R6)+",
+            "	MOV -(R6), R0",
+            "	MOV (R0), (R6)+",
         };
 
         // Check only code portion, not validate comments
