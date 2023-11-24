@@ -70,4 +70,10 @@ public class TestHelper {
         List<String> outputBuffer = outputStream.getPrintBuffer();
         checkCodePortion(outputBuffer, expected);
     }
+
+    public void checkCodeGen(String expected, CParseRule parseRule, CParseContext cpContext)
+            throws FatalErrorException {
+        String[] expectedList = expected.split("[\n\r]");
+        checkCodeGen(expectedList, parseRule, cpContext);
+    }
 }
