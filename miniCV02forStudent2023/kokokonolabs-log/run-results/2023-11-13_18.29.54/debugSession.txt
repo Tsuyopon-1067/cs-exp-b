@@ -1,6 +1,0 @@
-Id: 10d784b0-be53-4079-94bf-f9415eaa7845
-Name: Launch Java Tests - $(symbol-class) CTokenizerCommentTest
-Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-class) CTokenizerCommentTest
-Configuration Request: launch
