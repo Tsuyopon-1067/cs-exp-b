@@ -1,6 +1,0 @@
-Id: 4312210b-d0e0-48e7-a0ee-9c71bf1544c5
-Name: Launch Java Tests - $(symbol-method) octalZero()
-Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) octalZero()
-Configuration Request: launch

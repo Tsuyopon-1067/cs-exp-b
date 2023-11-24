@@ -1,6 +1,0 @@
-Id: e58648e1-b498-4b78-beca-9f70777f6423
-Name: Launch Java Tests - $(symbol-method) semanticCheckFalseExample()
-Workspace: file:///Users/tsuyopon/Desktop/cs-exp-b/miniCV02forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) semanticCheckFalseExample()
-Configuration Request: launch
