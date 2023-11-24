@@ -58,9 +58,10 @@ public class CTokenizerAssignTest {
         helper.checkToken("token 2", token2, CToken.TK_EOF, "end_of_file", 1, 2);
     }
 
+    // テストケースのミスとみなして;を追加
     @Test
     public void assignWithBlockComment() {
-        String testString = "i_a/*comment*/=4";
+        String testString = "i_a/*comment*/=4;";
         inputStream.setInputString(testString);
         CToken token1 = tokenizer.getNextToken(cpContext);
         helper.checkToken("token 1", token1, 11, "i_a", 1, 1);
