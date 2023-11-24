@@ -47,6 +47,7 @@ public class Primary extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; primary starts");
 		if (nextParseRule != null) {
+			nextParseRule.codeGen(pcx);
 		}
 		o.println(";;; primary completes");
 	}

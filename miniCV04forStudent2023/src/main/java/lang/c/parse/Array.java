@@ -52,8 +52,8 @@ public class Array extends CParseRule {
 		if (expression != null) {
 			expression.codeGen(pcx);
 		}
-		o.println("\tMOV\t-(R6), R0\t; Array:");
-        o.println("\tADD\t-(R6), R0\t; Array:配列が表す番地を計算");
+		o.println("\tMOV\t-(R6), R0\t; Array:インデックスを取得");
+        o.println("\tADD\t-(R6), R0\t; Array:R0に基準アドレスを足して配列が表す番地を計算");
         o.println("\tMOV\tR0, (R6)+\t; Array:積む");
 		o.println(";;; Array completes");
 	}
