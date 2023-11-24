@@ -66,7 +66,7 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString(""));
+                assertThat(e.getMessage(), containsString("プログラムの最後にゴミがあります"));
             }
         }
     }
