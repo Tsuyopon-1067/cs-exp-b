@@ -1,6 +1,0 @@
-Id: b663736c-b0d7-4f10-97f7-4bc186ee292c
-Name: Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
-Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-class) SemanticCheckUnsignedFactorTest
-Configuration Request: launch

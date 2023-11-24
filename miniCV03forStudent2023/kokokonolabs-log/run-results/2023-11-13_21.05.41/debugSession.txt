@@ -1,6 +1,0 @@
-Id: 79cbb2fe-51f6-480d-9364-33967034898d
-Name: TestCToken
-Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: TestCToken
-Configuration Request: launch

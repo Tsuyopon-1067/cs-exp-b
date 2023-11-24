@@ -1,6 +1,0 @@
-Id: 22eac97b-d16c-4279-a0b3-065d18c071c5
-Name: Launch Java Tests - $(symbol-method) parseRCURWithoutLCUR()
-Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) parseRCURWithoutLCUR()
-Configuration Request: launch
