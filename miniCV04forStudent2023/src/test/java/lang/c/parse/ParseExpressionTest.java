@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 <<<<<<<< HEAD:miniCV03forStudent2023/src/test/java/lang/c/parse/ParseFactorTest.java
-=======
->>>>>>> origin/cv04
 package lang.c.parse;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -70,11 +67,7 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
                 assertThat(e.getMessage(), containsString(""));
-=======
-                assertThat(e.getMessage(), containsString("プログラムの最後にゴミがあります"));
->>>>>>> origin/cv04
             }
         }
     }
@@ -112,11 +105,7 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
                 assertThat(e.getMessage(), containsString("左括弧の後ろが不正です"));
-=======
-                assertThat(e.getMessage(), containsString("左括弧の後ろが不正です")); //expression
->>>>>>> origin/cv04
             }
         }
     }
@@ -135,17 +124,12 @@ public class ParseFactorTest {
                 cp.parse(cpContext);
                 fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
                 assertThat(e.getMessage(), containsString("-の後は数値が来る必要があります"));
-=======
-                assertThat(e.getMessage(), containsString("-の後は数値が来る必要があります"));//unsigned
->>>>>>> origin/cv04
             }
         }
     }
 
 }
-<<<<<<< HEAD
 ========
 package lang.c.parse;
 
@@ -245,5 +229,3 @@ public class ParseExpressionTest {
     }
 }
 >>>>>>>> origin/cv04:miniCV04forStudent2023/src/test/java/lang/c/parse/ParseExpressionTest.java
-=======
->>>>>>> origin/cv04

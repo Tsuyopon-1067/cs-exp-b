@@ -6,7 +6,8 @@ import lang.*;
 import lang.c.*;
 
 public class UnsignedFactor extends CParseRule {
-    //unsignedFactor ::= factorAmp | number | LPAR expression RPAR
+    // unsignedFactor ::= factorAmp | number | LPAR expression RPAR | addressToValue
+
     private CParseRule factor;
 
 	public UnsignedFactor(CParseContext pcx) {
@@ -15,7 +16,8 @@ public class UnsignedFactor extends CParseRule {
 	public static boolean isFirst(CToken tk) {
         return FactorAmp.isFirst(tk)
                 || Number.isFirst(tk)
-                || tk.getType() == CToken.TK_LPAR;
+                || tk.getType() == CToken.TK_LPAR
+				|| AddressToValue.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -37,19 +39,19 @@ public class UnsignedFactor extends CParseRule {
 					ct = pcx.getTokenizer();
 					tk =  ct.getNextToken(pcx);
 				} else {
-<<<<<<< HEAD
-					pcx.fatalError(tk.toExplainString() + "左括弧の後ろが不正です");
-=======
 					pcx.fatalError(tk.toExplainString() + "左括弧の後ろはExpressionです");
->>>>>>> origin/cv04
 				}
 				break;
 			case CToken.TK_AMP:
 				factor = new FactorAmp(pcx);
 				factor.parse(pcx);
 				break;
-			default:
+			case CToken.TK_NUM:
 				factor = new Number(pcx);
+				factor.parse(pcx);
+				break;
+			default:
+				factor = new AddressToValue(pcx);
 				factor.parse(pcx);
 				break;
 		}

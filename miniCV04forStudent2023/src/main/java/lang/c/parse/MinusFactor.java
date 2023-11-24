@@ -24,11 +24,7 @@ public class MinusFactor extends CParseRule {
 			factor = new UnsignedFactor(pcx);
 			factor.parse(pcx);
 		} else {
-<<<<<<< HEAD
-			pcx.fatalError(tk.toExplainString() + "-の後は数値が来る必要があります");
-=======
 			pcx.fatalError(tk.toExplainString() + "-の後はUnsignedFactorです");
->>>>>>> origin/cv04
 		}
 	}
 

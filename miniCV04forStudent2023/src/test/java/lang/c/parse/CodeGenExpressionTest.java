@@ -14,8 +14,8 @@ import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.TestHelper;
 
-public class CodeGenFactorAmpTest {
-    // Test for "AMP" by FactorAMP node of "cv02".
+public class CodeGenExpressionTest {
+    // Test for Expression Node of "cv00".
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -45,56 +45,43 @@ public class CodeGenFactorAmpTest {
         cpContext = null;
     }
 
+    // Test for "cv00"
     @Test
-    public void codeGenFactorAmp() throws FatalErrorException {
-        inputStream.setInputString("&2");  // Test for "2"
+    public void codeGenExpressionAdd2Term() throws FatalErrorException {
+        inputStream.setInputString("7 + 2");
         String expected[] = {
-            "MOV	#2, (R6)+"
-            };
+            "	MOV	#7, (R6)+",
+            "	MOV	#2, (R6)+",
+            "	MOV	-(R6), R0",
+            "	MOV	-(R6), R1",
+            "	ADD	R1, R0",
+            "	MOV	R0, (R6)+"
+        };
 
         // Check only code portion, not validate comments
-        FactorAmp rule = new FactorAmp(cpContext);
+        CParseRule rule = new Expression(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
     @Test
-    public void codeGenFactorWithAmp() throws FatalErrorException {
-        inputStream.setInputString("&2");  // Test for "2"
+    public void codeGenExpressionAdd3Term() throws FatalErrorException {
+        inputStream.setInputString("13 + 7 + 2");
         String expected[] = {
-            "MOV	#2, (R6)+"
-            };
-
-        // Check only code portion, not validate comments
-        CParseRule rule = new Factor(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
-
-    @Test
-    public void codeGenFactorWithAmpSub() throws FatalErrorException {
-        inputStream.setInputString("&3-1-&1");  // Test for "&3-1-&1"
-        String expected[] = {
-            "	. = 0x100",
-            "	JMP	__START",
-            "__START:",
-            "	MOV	#0x1000, R6",
-            "	MOV	#3, (R6)+",
-            "	MOV	#1, (R6)+",
+            "	MOV	#13, (R6)+",
+            "	MOV	#7, (R6)+",
             "	MOV	-(R6), R0",
             "	MOV	-(R6), R1",
-            "	SUB	R0, R1",
-            "	MOV	R1, (R6)+",
-            "	MOV	#1, (R6)+",
+            "	ADD	R1, R0",
+            "	MOV	R0, (R6)+",
+            "	MOV	#2, (R6)+",
             "	MOV	-(R6), R0",
             "	MOV	-(R6), R1",
-            "	SUB	R0, R1",
-            "	MOV	R1, (R6)+",
-            "	MOV	-(R6), R0",
-            "	HLT",
-            "	.END"
-            };
+            "	ADD	R1, R0",
+            "	MOV	R0, (R6)+",
+        };
 
         // Check only code portion, not validate comments
-        CParseRule rule = new Program(cpContext);
+        CParseRule rule = new Expression(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
 }

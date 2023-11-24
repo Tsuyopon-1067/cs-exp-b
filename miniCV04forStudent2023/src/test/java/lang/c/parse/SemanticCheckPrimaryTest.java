@@ -14,6 +14,7 @@ import lang.IOContext;
 import lang.InputStreamForTest;
 import lang.PrintStreamForTest;
 import lang.c.CParseContext;
+import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
@@ -23,7 +24,7 @@ import lang.c.CType;
  * Before Testing Semantic Check by using this testing class, All ParseTest must be passed.
  * Bacause this testing class uses parse method to create testing data.
  */
-public class SemanticCheckProgramTest_cv03 {
+public class SemanticCheckPrimaryTest {
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -58,60 +59,38 @@ public class SemanticCheckProgramTest_cv03 {
     }
 
     @Test
-    public void FactorWithMinusSignOverflow() throws FatalErrorException {
-        String[] testDataArr = {"-36769"};
+    public void PrimaryNoError() throws FatalErrorException {
+        String[] testDataArr = {"*ip_ABC", "*ipa_ABC[128]", "ipa_ABC[128]"};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, Primary.isFirst(firstToken), is(true));
+            Primary cp = new Primary(cpContext);
+
+            cp.parse(cpContext);
+            cp.semanticCheck(cpContext);
+            String errorOutput = errorOutputStream.getPrintBufferString();
+            assertThat(errorOutput, is(""));
+        }
+    }
+
+    @Test
+    public void PrimaryWithError() throws FatalErrorException {
+        String[] testDataArr = {"*i_ABC", "*ia_ABC[128]"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
-            Factor cp = new Factor(cpContext);
+            Primary cp = new Primary(cpContext);
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-=======
-                assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです")); // オーバーフローで32769は数値だと認識しない
->>>>>>> origin/cv04
+                assertThat(e.getMessage(), containsString("ポインタではない数値でアドレスを参照することはできません"));
             }
-        }
-    }
-
-    @Test
-    public void FactorWithSignNotOverflow() throws FatalErrorException {
-        String[] testDataArr = {"32767", "-32768"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
-            Factor cp = new Factor(cpContext);
-
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
-
-        }
-    }
-
-    @Test
-    public void TermTypeOperationNoError() throws FatalErrorException {
-        String[] testDataArr = {"1*1", "1/1"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(Expression.isFirst(firstToken), is(true));
-            Expression cp = new Expression(cpContext);
-
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
         }
     }
 }

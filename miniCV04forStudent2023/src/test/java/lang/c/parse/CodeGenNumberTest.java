@@ -14,8 +14,8 @@ import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.TestHelper;
 
-public class CodeGenTermTest {
-    // Test for Term node of "cv00".
+public class CodeGenNumberTest {
+    // Test for Number node of "cv00".
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -46,52 +46,16 @@ public class CodeGenTermTest {
     }
 
     @Test
-    public void codeGenTerm() throws FatalErrorException {
+    public void codeGenNumber() throws FatalErrorException {
         inputStream.setInputString("2");  // Test for "2"
         String expected[] = {
-            ";;; term starts",
-            ";;; factor starts",
             ";;; number starts",
             "	MOV	#2, (R6)+	; Number: 数を積む[[1行目,1文字目の'2']]",
-            ";;; number completes",
-            ";;; factor completes",
-            ";;; term completes"
+            ";;; number completes"
         };
 
         // Check only code portion, not validate comments
-        CParseRule rule = new Term(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
-
-    @Test
-    public void codeGenTermMul() throws FatalErrorException {
-        inputStream.setInputString("2 * 3");
-        String expected[] = {
-            "MOV #2, (R6)+",
-            "MOV #3, (R6)+",
-            "JSR MUL",
-            "SUB #2, R6",
-            "MOV R0, (R6)+",
-        };
-
-        // Check only code portion, not validate comments
-        CParseRule rule = new Term(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
-
-    @Test
-    public void codeGenTermDiv() throws FatalErrorException {
-        inputStream.setInputString("2 / 3");
-        String expected[] = {
-            "MOV #2, (R6)+",
-            "MOV #3, (R6)+",
-            "JSR DIV",
-            "SUB #2, R6",
-            "MOV R0, (R6)+",
-        };
-
-        // Check only code portion, not validate comments
-        CParseRule rule = new Term(cpContext);
+        CParseRule rule = new Number(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
 }

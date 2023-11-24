@@ -17,14 +17,8 @@ import lang.c.CParseContext;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
-import lang.c.CType;
 
-/**
- * Before Testing Semantic Check by using this testing class, All ParseTest must be passed.
- * Bacause this testing class uses parse method to create testing data.
- */
-public class SemanticCheckProgramTest_cv03 {
-
+public class ParseFactorTest {
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -57,32 +51,67 @@ public class SemanticCheckProgramTest_cv03 {
         setUp();
     }
 
+    // 実験5以降は Program が true ではなくなるのでこのメソッドに @Ignore をつけてください
     @Test
-    public void FactorWithMinusSignOverflow() throws FatalErrorException {
-        String[] testDataArr = {"-36769"};
+    public void parseRCURWithoutLCUR()  {
+        String[] testDataArr = {"(1+3))"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
-            Factor cp = new Factor(cpContext);
+            assertThat("Failed with " + testData, Program.isFirst(firstToken), is(true));
+            Program cp = new Program(cpContext);
+
             try {
                 cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-                fail("Failed with " + testData);
+                fail("Error should be invoked");
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-=======
-                assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです")); // オーバーフローで32769は数値だと認識しない
->>>>>>> origin/cv04
+                assertThat(e.getMessage(), containsString(""));
             }
         }
     }
 
     @Test
-    public void FactorWithSignNotOverflow() throws FatalErrorException {
-        String[] testDataArr = {"32767", "-32768"};
+    public void parseNotCloseRPAR() {
+        String[] testDataArr = {"((1+3)"};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, UnsignedFactor.isFirst(firstToken), is(true));
+            UnsignedFactor cp = new UnsignedFactor(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                fail("Error should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("弧が閉じられていません"));
+            }
+        }
+    }
+
+    @Test
+    public void parseOnlyLPAR() {
+        String[] testDataArr = {"("};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, UnsignedFactor.isFirst(firstToken), is(true));
+            UnsignedFactor cp = new UnsignedFactor(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                fail("Error should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("左括弧の後ろはExpressionです"));
+            }
+        }
+    }
+
+    @Test
+    public void parseOnlyMinusFactor() {
+        String[] testDataArr = {"-"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
@@ -90,28 +119,12 @@ public class SemanticCheckProgramTest_cv03 {
             assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
             Factor cp = new Factor(cpContext);
 
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
-
-        }
-    }
-
-    @Test
-    public void TermTypeOperationNoError() throws FatalErrorException {
-        String[] testDataArr = {"1*1", "1/1"};
-        for ( String testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData);
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(Expression.isFirst(firstToken), is(true));
-            Expression cp = new Expression(cpContext);
-
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
+            try {
+                cp.parse(cpContext);
+                fail("Error should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです"));
+            }
         }
     }
 }

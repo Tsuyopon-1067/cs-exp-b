@@ -71,11 +71,7 @@ public class SemanticCheckProgramTest_cv03 {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData);
             } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-=======
                 assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです")); // オーバーフローで32769は数値だと認識しない
->>>>>>> origin/cv04
             }
         }
     }

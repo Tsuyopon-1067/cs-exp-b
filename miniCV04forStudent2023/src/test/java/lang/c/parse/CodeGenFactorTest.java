@@ -60,8 +60,6 @@ public class CodeGenFactorTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
-<<<<<<< HEAD
-=======
     @Test
     public void codeGenFactorP2() throws FatalErrorException {
         inputStream.setInputString("+2");
@@ -106,5 +104,4 @@ public class CodeGenFactorTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
->>>>>>> origin/cv04
 }

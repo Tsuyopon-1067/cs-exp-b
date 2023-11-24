@@ -14,7 +14,8 @@ import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.TestHelper;
 
-public class CodeGenFactorTest {
+public class CodeGenFactorAmpTest {
+    // Test for "AMP" by FactorAMP node of "cv02".
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -45,66 +46,26 @@ public class CodeGenFactorTest {
     }
 
     @Test
-    public void codeGenFactor() throws FatalErrorException {
-        inputStream.setInputString("2");  // Test for "2"
+    public void codeGenFactorAmp() throws FatalErrorException {
+        inputStream.setInputString("&2");  // Test for "2"
         String expected[] = {
-            ";;; factor starts",
-            ";;; number starts",
-            "	MOV	#2, (R6)+	; Number: 数を積む[[1行目,1文字目の'2']]",
-            ";;; number completes",
-            ";;; factor completes"
-        };
+            "MOV	#2, (R6)+"
+            };
 
         // Check only code portion, not validate comments
-        CParseRule rule = new Factor(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
-
-<<<<<<< HEAD
-=======
-    @Test
-    public void codeGenFactorP2() throws FatalErrorException {
-        inputStream.setInputString("+2");
-        String expected[] = {
-            "MOV #2, (R6)+",
-        };
-
-        // Check only code portion, not validate comments
-        CParseRule rule = new Factor(cpContext);
+        FactorAmp rule = new FactorAmp(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
     @Test
-    public void codeGenFactorM2() throws FatalErrorException {
-        inputStream.setInputString("-2");
+    public void codeGenFactorWithAmp() throws FatalErrorException {
+        inputStream.setInputString("&2");  // Test for "2"
         String expected[] = {
-            "MOV #2, (R6)+",
-            "MOV #0, R0",
-            "SUB -(R6), R0",
-            "MOV R0, (R6)+",
-        };
+            "MOV	#2, (R6)+"
+            };
 
         // Check only code portion, not validate comments
         CParseRule rule = new Factor(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
-
-    @Test
-    public void codeGenFactorParen() throws FatalErrorException {
-        inputStream.setInputString("(2+3)");
-        String expected[] = {
-            "MOV #2, (R6)+",
-            "MOV #3, (R6)+",
-            "MOV -(R6), R0",
-            "MOV -(R6), R1",
-            "ADD R1, R0",
-            "MOV R0, (R6)+",
-        };
-
-        // Check only code portion, not validate comments
-        CParseRule rule = new Factor(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
-
->>>>>>> origin/cv04
 }

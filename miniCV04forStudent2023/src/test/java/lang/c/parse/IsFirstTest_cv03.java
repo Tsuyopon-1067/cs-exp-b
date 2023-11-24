@@ -2,8 +2,6 @@ package lang.c.parse;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,13 +15,9 @@ import lang.c.CParseContext;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
-import lang.c.CType;
 
-/**
- * Before Testing Semantic Check by using this testing class, All ParseTest must be passed.
- * Bacause this testing class uses parse method to create testing data.
- */
-public class SemanticCheckProgramTest_cv03 {
+public class IsFirstTest_cv03 {
+    // Test that each class's isFirst() is valid
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -58,60 +52,60 @@ public class SemanticCheckProgramTest_cv03 {
     }
 
     @Test
-    public void FactorWithMinusSignOverflow() throws FatalErrorException {
-        String[] testDataArr = {"-36769"};
+    public void testPlusFactor() throws FatalErrorException {
+        String[] testDataArr = { "+13" };
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
-            Factor cp = new Factor(cpContext);
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-                fail("Failed with " + testData);
-            } catch ( FatalErrorException e ) {
-<<<<<<< HEAD
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
-=======
-                assertThat(e.getMessage(), containsString("-の後はUnsignedFactorです")); // オーバーフローで32769は数値だと認識しない
->>>>>>> origin/cv04
-            }
+            assertThat(testData, PlusFactor.isFirst(firstToken), is(true));    
         }
     }
 
     @Test
-    public void FactorWithSignNotOverflow() throws FatalErrorException {
-        String[] testDataArr = {"32767", "-32768"};
+    public void testMinusFactor() throws FatalErrorException {
+        String[] testDataArr = { "-13" };
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
-            Factor cp = new Factor(cpContext);
-
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
-
+            assertThat(testData, MinusFactor.isFirst(firstToken), is(true));    
+        }
+    }
+    
+    // 2回 getNextToken をして，焦点が 記号 に合うようにしてある
+    @Test
+    public void testTermMult() throws FatalErrorException {
+        String[] testDataArr = { "2*3" };
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            firstToken = tokenizer.getNextToken(cpContext);
+            assertThat(testData, TermMult.isFirst(firstToken), is(true));    
         }
     }
 
     @Test
-    public void TermTypeOperationNoError() throws FatalErrorException {
-        String[] testDataArr = {"1*1", "1/1"};
+    public void testTermDiv() throws FatalErrorException {
+        String[] testDataArr = { "2/3" };
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(Expression.isFirst(firstToken), is(true));
-            Expression cp = new Expression(cpContext);
+            firstToken = tokenizer.getNextToken(cpContext);
+            assertThat(testData, TermDiv.isFirst(firstToken), is(true));    
+        }
+    }
 
-            cp.parse(cpContext);
-            cp.semanticCheck(cpContext);
-            String errorOutput = errorOutputStream.getPrintBufferString();
-            assertThat(errorOutput, is(""));
+    @Test
+    public void testTermCV03() throws FatalErrorException {
+        String[] testDataArr = { "1", "+1", "-1", "(1)", "&" };
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat(testData, Term.isFirst(firstToken), is(true));    
         }
     }
 }
