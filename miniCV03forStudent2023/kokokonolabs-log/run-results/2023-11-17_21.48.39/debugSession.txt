@@ -1,6 +1,0 @@
-Id: 3953dd37-5d3d-480c-9f75-2510d4ea6fd2
-Name: Launch Java Tests - $(symbol-class) CTokenizerExpressionSubTest
-Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-class) CTokenizerExpressionSubTest
-Configuration Request: launch
