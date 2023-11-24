@@ -66,7 +66,7 @@ public class SemanticCheckIdentCTypeTest {
         testDataSetArr.add(new TestDataSet("ia_ABC", CType.T_int_array, false));
         testDataSetArr.add(new TestDataSet("ipa_ABC", CType.T_pint_array, false));
         testDataSetArr.add(new TestDataSet("c_ABC", CType.T_int, true));
-        
+
         for ( TestDataSet testDataSet: testDataSetArr ) {
             resetEnvironment();
             inputStream.setInputString(testDataSet.testData);
@@ -78,7 +78,49 @@ public class SemanticCheckIdentCTypeTest {
             cp.semanticCheck(cpContext);
             assertThat(testDataSet.testData, cp.getCType().getType(), is(testDataSet.type));
             assertThat(testDataSet.testData, cp.isConstant(), is(testDataSet.isConstant));
-        } 
+        }
+    }
+
+    // IdentではなくVariableにすべき？
+    @Test
+    public void variableType() throws FatalErrorException {
+        ArrayList<TestDataSet> testDataSetArr = new ArrayList<TestDataSet>();
+        testDataSetArr.add(new TestDataSet("ia_ABC[123]", CType.T_int, false));
+        testDataSetArr.add(new TestDataSet("ipa_ABC[123]", CType.T_pint, false));
+
+        for ( TestDataSet testDataSet: testDataSetArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testDataSet.testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testDataSet.testData, Variable.isFirst(firstToken), is(true));
+            Variable cp = new Variable(cpContext);
+
+            cp.parse(cpContext);
+            cp.semanticCheck(cpContext);
+            assertThat(testDataSet.testData, cp.getCType().getType(), is(testDataSet.type));
+            assertThat(testDataSet.testData, cp.isConstant(), is(testDataSet.isConstant));
+        }
+    }
+
+    // IdentではなくPrimaryにすべき？
+    @Test
+    public void primaryType() throws FatalErrorException {
+        ArrayList<TestDataSet> testDataSetArr = new ArrayList<TestDataSet>();
+        testDataSetArr.add(new TestDataSet("*ip_ABC", CType.T_int, false));
+        testDataSetArr.add(new TestDataSet("*ipa_ABC[123]", CType.T_int, false));
+
+        for ( TestDataSet testDataSet: testDataSetArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testDataSet.testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testDataSet.testData, Primary.isFirst(firstToken), is(true));
+            Primary cp = new Primary(cpContext);
+
+            cp.parse(cpContext);
+            cp.semanticCheck(cpContext);
+            assertThat(testDataSet.testData, cp.getCType().getType(), is(testDataSet.type));
+            assertThat(testDataSet.testData, cp.isConstant(), is(testDataSet.isConstant));
+        }
     }
 }
 

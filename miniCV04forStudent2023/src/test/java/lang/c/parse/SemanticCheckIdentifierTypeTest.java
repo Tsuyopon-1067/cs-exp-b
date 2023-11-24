@@ -137,7 +137,7 @@ public class SemanticCheckIdentifierTypeTest {
     @Test
     public void semanticErrorForIdentArrayType()  {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("ip_a[3]", "identの型が配列型ではありません"),
+            new HelperTestStrMsg("ia_a", "配列のインデックスが指定されていません"),
             new HelperTestStrMsg("*ia_a", "配列のインデックスが指定されていません"),
             new HelperTestStrMsg("ia_a[3] - &1", "左辺の型[int]と右辺の型[int*]は引けません"),
             new HelperTestStrMsg("1 - &ia_a[3]", "左辺の型[int]と右辺の型[int*]は引けません"),

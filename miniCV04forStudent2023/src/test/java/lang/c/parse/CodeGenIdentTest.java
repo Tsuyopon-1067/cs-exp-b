@@ -75,11 +75,12 @@ public class CodeGenIdentTest {
     @Test
     public void codeGenPint() throws FatalErrorException {
         inputStream.setInputString("ip_a");
-        String expected[] = {
-            "	MOV #ip_a, (R6)+",
-            "	MOV -(R6), R0",
-            "	MOV (R0), (R6)+",
-        };
+        String expected =
+        """
+        MOV #ip_a, (R6)+
+        MOV -(R6), R0
+        MOV (R0), (R6)+
+        """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new UnsignedFactor(cpContext);
@@ -89,13 +90,14 @@ public class CodeGenIdentTest {
     @Test
     public void codeGenMultPint() throws FatalErrorException {
         inputStream.setInputString("*ip_a");
-        String expected[] = {
-            "	MOV #ip_a, (R6)+",
-            "	MOV -(R6), R0",
-            "	MOV (R0), (R6)+",
-            "	MOV -(R6), R0",
-            "	MOV (R0), (R6)+",
-        };
+        String expected =
+            """
+            MOV #ip_a, (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new UnsignedFactor(cpContext);
@@ -105,15 +107,16 @@ public class CodeGenIdentTest {
     @Test
     public void codeGenArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]");
-        String expected[] = {
-            "	MOV #ia_a, (R6)+",
-            "	MOV #3, (R6)+",
-            "	MOV -(R6), R0",
-            "	ADD -(R6), R0",
-            "	MOV R0, (R6)+",
-            "	MOV -(R6), R0",
-            "	MOV (R0), (R6)+",
-        };
+        String expected =
+            """
+            MOV #ia_a, (R6)+
+            MOV #3, (R6)+
+            MOV -(R6), R0
+            ADD -(R6), R0
+            MOV R0, (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new UnsignedFactor(cpContext);
@@ -121,5 +124,61 @@ public class CodeGenIdentTest {
     }
 
     // Please copy and paste the above code and add the specified test case to the following
+    @Test
+    public void codeGenArrayAmp() throws FatalErrorException {
+        inputStream.setInputString("&ia_a[3]");
+        String expected =
+            """
+            MOV #ia_a, (R6)+
+            MOV #3, (R6)+
+            MOV -(R6), R0
+            ADD -(R6), R0
+            MOV R0, (R6)+
+            """;
 
+        // Check only code portion, not validate comments
+        CParseRule rule = new UnsignedFactor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenArrayPoint() throws FatalErrorException {
+        inputStream.setInputString("ipa_a[3]");
+        String expected =
+            """
+            MOV #ipa_a, (R6)+
+            MOV #3, (R6)+
+            MOV -(R6), R0
+            ADD -(R6), R0
+            MOV R0, (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new UnsignedFactor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    // Please copy and paste the above code and add the specified test case to the following
+    @Test
+    public void codeGenArrayPointAmp() throws FatalErrorException {
+        inputStream.setInputString("*ipa_a[3]");
+        String expected =
+            """
+            MOV #ipa_a, (R6)+
+            MOV #3, (R6)+
+            MOV -(R6), R0
+            ADD -(R6), R0
+            MOV R0, (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            MOV -(R6), R0
+            MOV (R0), (R6)+
+            """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new UnsignedFactor(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 }
