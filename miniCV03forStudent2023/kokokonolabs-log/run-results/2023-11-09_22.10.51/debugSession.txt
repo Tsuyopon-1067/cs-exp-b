@@ -1,6 +1,0 @@
-Id: df00d0d6-db61-46b5-b9cc-0b6ddb8d9ab9
-Name: Launch Java Tests - $(symbol-method) codeGenTermAllTest()
-Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) codeGenTermAllTest()
-Configuration Request: launch

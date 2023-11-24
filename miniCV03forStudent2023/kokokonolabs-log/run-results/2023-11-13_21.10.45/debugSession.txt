@@ -1,6 +1,0 @@
-Id: 2abd6775-f452-457c-848f-49306a7ed1f0
-Name: Launch Java Tests - $(symbol-method) codeGenTermMultPriority()
-Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) codeGenTermMultPriority()
-Configuration Request: launch

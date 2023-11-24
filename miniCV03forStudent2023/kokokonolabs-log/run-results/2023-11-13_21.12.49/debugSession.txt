@@ -1,6 +1,0 @@
-Id: 7cc2b09a-2a7a-4e73-bdd5-b034301214e4
-Name: Launch Java Tests - $(symbol-method) codeGenTermDivMinus()
-Workspace: file:///c%3A/Users/Tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) codeGenTermDivMinus()
-Configuration Request: launch

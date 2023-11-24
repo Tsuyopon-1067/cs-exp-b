@@ -1,6 +1,0 @@
-Id: a5221a79-c5b9-4c33-b89d-36007a70ea78
-Name: MiniCompiler for Mac
-Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: MiniCompiler for Mac
-Configuration Request: launch
