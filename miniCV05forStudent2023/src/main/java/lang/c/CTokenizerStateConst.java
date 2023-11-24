@@ -23,4 +23,6 @@ public class CTokenizerStateConst {
 	public static final int ST_LBRA              = 18; // [
 	public static final int ST_RBRA              = 19; // ]
 	public static final int ST_IDENT             = 20; // ident
+	public static final int ST_ASSIGN            = 21; // =
+	public static final int ST_SEMI              = 22; // ;
 }
