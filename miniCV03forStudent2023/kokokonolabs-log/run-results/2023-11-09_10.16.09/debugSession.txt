@@ -1,6 +1,0 @@
-Id: 282c55f3-e7be-4d0f-9dd3-31637f817e1c
-Name: Launch Java Tests - $(symbol-method) semanticTypeErrorPintMultInt()
-Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) semanticTypeErrorPintMultInt()
-Configuration Request: launch
