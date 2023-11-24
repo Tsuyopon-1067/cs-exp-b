@@ -1,6 +1,0 @@
-Id: 054376d1-e696-4127-affd-3c250d85418f
-Name: Launch Java Tests - $(symbol-method) parseOnlyMinusFactor()
-Workspace: file:///Users/tsuyopon/gitFiles/cs-exp-b/miniCV03forStudent2023
-Configuration Type: java
-Configuration Name: Launch Java Tests - $(symbol-method) parseOnlyMinusFactor()
-Configuration Request: launch

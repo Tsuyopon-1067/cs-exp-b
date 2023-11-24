@@ -4,7 +4,7 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Kokokonolabs Log files
-kokokonolabs-log/
+#kokokonolabs-log/
 
 # Compiled Java class files
 *.class
