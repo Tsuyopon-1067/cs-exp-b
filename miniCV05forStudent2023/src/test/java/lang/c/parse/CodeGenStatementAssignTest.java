@@ -100,6 +100,25 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Test
+    public void assignPointRef() throws FatalErrorException {
+        inputStream.setInputString("*ip_a=1;");
+        String expected =
+        """
+        MOV     #ip_a, (R6)+
+        MOV     -(R6), R0
+        MOV     (R0), (R6)+
+        MOV     #1, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new StatementAssign(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
     // (3) 配列型の扱い
     @Test
     public void assignArray() throws FatalErrorException {
