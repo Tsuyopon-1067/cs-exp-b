@@ -59,7 +59,7 @@ public class ParseFactorAmpTest {
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, Program.isFirst(firstToken), is(true));
-            Program cp = new Program(cpContext);
+            Factor cp = new Factor(cpContext);
 
             try {
                 cp.parse(cpContext);
