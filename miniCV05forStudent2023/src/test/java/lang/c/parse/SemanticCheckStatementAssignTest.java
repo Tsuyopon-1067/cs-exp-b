@@ -77,7 +77,7 @@ public class SemanticCheckStatementAssignTest {
 
     @Test
     public void SemanticCheckAssignPointerTypeOK() throws FatalErrorException {
-        String[] testDataArr = {"ip_A=ip_B;", "*ip_A=i_A;", "ip_A=&i_A;", "ip_a=1;"};
+        String[] testDataArr = {"ip_A=ip_B;", "*ip_A=i_A;", "ip_A=&i_A;", "ip_a=&1;"};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
