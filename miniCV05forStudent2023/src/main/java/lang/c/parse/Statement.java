@@ -25,11 +25,15 @@ public class Statement extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		if (statmentAssign != null) {
+			statmentAssign.semanticCheck(pcx);
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Statement starts");
+		statmentAssign.codeGen(pcx);
 		o.println(";;; Statement completes");
 	}
 }
