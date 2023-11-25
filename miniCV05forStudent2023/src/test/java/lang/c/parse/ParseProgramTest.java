@@ -49,13 +49,13 @@ public class ParseProgramTest {
         cpContext = null;
     }
 
-    @Test
+    @Ignore
     public void parseErrorEndOfProgram() throws FatalErrorException {
         inputStream.setInputString("13 + 7@");
         CToken firstToken = tokenizer.getNextToken(cpContext);
         assertThat(Program.isFirst(firstToken), is(true));
         CParseRule cpProgram = new Program(cpContext);
-        
+
         try {
             // call test target
             cpProgram.parse(cpContext);

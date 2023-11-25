@@ -52,7 +52,7 @@ public class ParseFactorTest {
     }
 
     // 実験5以降は Program が true ではなくなるのでこのメソッドに @Ignore をつけてください
-    @Test
+    @Ignore
     public void parseRCURWithoutLCUR()  {
         String[] testDataArr = {"(1+3))"};
         for ( String testData: testDataArr ) {

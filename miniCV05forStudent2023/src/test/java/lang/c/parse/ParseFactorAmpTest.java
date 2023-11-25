@@ -58,7 +58,7 @@ public class ParseFactorAmpTest {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Program.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData, Factor.isFirst(firstToken), is(true));
             Factor cp = new Factor(cpContext);
 
             try {

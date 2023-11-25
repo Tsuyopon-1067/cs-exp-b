@@ -100,7 +100,7 @@ public class ParseUnsignedFactorTest {
     }
 
     // このテストは実験5で Program が isFirst ではなくなることに注意
-    @Test
+    @Ignore
     public void parseArrayOnlyIdent() throws FatalErrorException {
         inputStream.setInputString("12[4]");
         CToken firstToken = tokenizer.getNextToken(cpContext);
