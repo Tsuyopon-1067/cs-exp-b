@@ -72,7 +72,7 @@ public class SemanticCheckStatementAssignTest {
             } catch ( FatalErrorException e ) {
                 fail("Failed with " + testData + ". Please modify this Testcase to pass.");
             }
-        } 
+        }
     }
 
     @Test
@@ -91,17 +91,21 @@ public class SemanticCheckStatementAssignTest {
             } catch ( FatalErrorException e ) {
                 fail("Failed with " + testData + ". Please modify this Testcase to pass.");
             }
-        } 
+        }
     }
 
     // (1) 整数型の扱い
     // If it is difficult to understand, separate the test cases and create a new test.
     @Test
     public void SemanticCheckAssignIntegerTypeError() throws FatalErrorException {
-        String[] testDataArr = { "*i_a=1;", "i_a[3]=1;", "i_a=&1;" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("*i_a=1;", "ポインタではない数値でアドレスを参照することはできません"),
+            new HelperTestStrMsg("i_a[3]=1;", "identの型が配列型ではありません"),
+            new HelperTestStrMsg("i_a=&1;", "左辺の型[int]と右辺の型[int*]が異なります"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
             StatementAssign cp = new StatementAssign(cpContext);
@@ -111,18 +115,20 @@ public class SemanticCheckStatementAssignTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (2) ポインタ型の扱い
     @Test
     public void SemanticCheckAssignPinterTypeError() throws FatalErrorException {
-        String[] testDataArr = { "ip_a=1;" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ip_a=1;", "左辺の型[int*]と右辺の型[int]が異なります"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
             StatementAssign cp = new StatementAssign(cpContext);
@@ -132,18 +138,21 @@ public class SemanticCheckStatementAssignTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (3) 配列型の扱い
     @Test
     public void SemanticCheckAssignArrayTypeError() throws FatalErrorException {
-        String[] testDataArr = { "ia_a=1;", "ia_a=ia_a;" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ia_a=1;", "配列のインデックスが指定されていません"),
+            new HelperTestStrMsg("ia_a=ia_a;", "配列のインデックスが指定されていません"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
             StatementAssign cp = new StatementAssign(cpContext);
@@ -153,18 +162,22 @@ public class SemanticCheckStatementAssignTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (3) ポインタ配列型の扱い
     @Test
     public void SemanticCheckAssignPointArrayTypeError() throws FatalErrorException {
-        String[] testDataArr = { "ipa_a=&1;", "ipa_a=ipa_a;", "*ipa_a[3]=&3;" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("ipa_a=&1;", "配列のインデックスが指定されていません"),
+            new HelperTestStrMsg("ipa_a=ipa_a;", "配列のインデックスが指定されていません"),
+            new HelperTestStrMsg("*ipa_a[3]=&3;", "左辺の型[int]と右辺の型[int*]が異なります"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
             StatementAssign cp = new StatementAssign(cpContext);
@@ -174,18 +187,18 @@ public class SemanticCheckStatementAssignTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (5) 定数には代入できないことの確認
     @Test
     public void SemanticCheckAssignConstantTypeError() throws FatalErrorException {
-        String[] testDataArr = { "c_a=1;" };
-        for ( String testData: testDataArr ) {
+        HelperTestStrMsg[] testDataArr = { new HelperTestStrMsg("c_a=1;", "左辺が定数ではありません") };
+        for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData);
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
             assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
             StatementAssign cp = new StatementAssign(cpContext);
@@ -195,9 +208,9 @@ public class SemanticCheckStatementAssignTest {
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down the output you have decided on here"));
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
-        } 
+        }
     }
 
     // (extra) code should be written as follows

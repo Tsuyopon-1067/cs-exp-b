@@ -47,17 +47,16 @@ public class CodeGenStatementAssignTest {
     @Test
     public void assign() throws FatalErrorException {
         inputStream.setInputString("i_A = i_B;");
-        String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
-        };
+        String expected =
+        """
+        MOV     #i_A, (R6)+
+        MOV     #i_B, (R6)+
+        MOV     -(R6), R0
+        MOV     (R0), (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new StatementAssign(cpContext);
@@ -68,17 +67,14 @@ public class CodeGenStatementAssignTest {
     @Test
     public void assignInt() throws FatalErrorException {
         inputStream.setInputString("i_a=0;");
-        String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
-        };
+        String expected =
+        """
+        MOV     #i_a, (R6)+
+        MOV     #0, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new StatementAssign(cpContext);
@@ -87,22 +83,39 @@ public class CodeGenStatementAssignTest {
 
     // (2) ポインタ型の扱い
     // Please copy and paste the above and add the specified test case to the following
+    @Test
+    public void assignPoint() throws FatalErrorException {
+        inputStream.setInputString("ip_a=&0;");
+        String expected =
+        """
+        MOV     #ip_a, (R6)+
+        MOV     #0, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new StatementAssign(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 
     // (3) 配列型の扱い
     @Test
     public void assignArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]=1;");
-        String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
-        };
+        String expected =
+        """
+        MOV     #ia_a, (R6)+
+        MOV     #3, (R6)+
+        MOV     -(R6), R0
+        ADD     -(R6), R0
+        MOV     R0, (R6)+
+        MOV     #1, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
 
         // Check only code portion, not validate comments
         CParseRule rule = new StatementAssign(cpContext);
@@ -111,5 +124,25 @@ public class CodeGenStatementAssignTest {
 
     // (4) ポインタ配列型の扱い
     // Please copy and paste the above code and add the specified test case to the following
+    @Test
+    public void assignPointArray() throws FatalErrorException {
+        inputStream.setInputString("ipa_a[3]=&1;");
+        String expected =
+        """
+        MOV     #ipa_a, (R6)+
+        MOV     #3, (R6)+
+        MOV     -(R6), R0
+        ADD     -(R6), R0
+        MOV     R0, (R6)+
+        MOV     #1, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new StatementAssign(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 
 }
