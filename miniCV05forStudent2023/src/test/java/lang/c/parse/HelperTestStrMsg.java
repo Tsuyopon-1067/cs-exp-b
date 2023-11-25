@@ -1,14 +1,14 @@
 package lang.c.parse;
 
 public class HelperTestStrMsg {
-    private String str;
+    private String testStr;
     private String msg;
     public HelperTestStrMsg(String str, String msg) {
-        this.str = str;
+        this.testStr = str;
         this.msg = msg;
     }
-    public String getStr() {
-        return str;
+    public String getTestStr() {
+        return testStr;
     }
     public String getMsg() {
         return msg;

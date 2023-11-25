@@ -70,9 +70,9 @@ public class SemanticCheckIdentifierTypeTest {
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData.getStr());
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getTestStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
@@ -97,15 +97,15 @@ public class SemanticCheckIdentifierTypeTest {
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData.getStr());
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getTestStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
+                fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
@@ -144,15 +144,15 @@ public class SemanticCheckIdentifierTypeTest {
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
-            inputStream.setInputString(testData.getStr());
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getTestStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
+                fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
@@ -173,15 +173,15 @@ public class SemanticCheckIdentifierTypeTest {
         };
         for (HelperTestStrMsg testData : testDataArr) {
             resetEnvironment();
-            inputStream.setInputString(testData.getStr());
+            inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData.getStr(), Expression.isFirst(firstToken), is(true));
+            assertThat("Failed with " + testData.getTestStr(), Expression.isFirst(firstToken), is(true));
             Expression cp = new Expression(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
-                fail("Failed with " + testData.getStr() + ". FatalErrorException should be invoked");
+                fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
             } catch (FatalErrorException e) {
                 assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
