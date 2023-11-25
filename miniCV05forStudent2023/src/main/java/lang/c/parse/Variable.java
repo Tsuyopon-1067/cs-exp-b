@@ -51,6 +51,7 @@ public class Variable extends CParseRule {
 				}
 				setCType(ident.getCType());
 			}
+			setConstant(ident.isConstant());
 		}
 	}
 

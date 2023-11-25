@@ -39,7 +39,7 @@ public class Primary extends CParseRule {
 		if (nextParseRule != null) {
 			nextParseRule.semanticCheck(pcx);
 			setCType(nextParseRule.getCType());
-			setConstant(false);
+			setConstant(nextParseRule.isConstant());
 		}
 	}
 
