@@ -85,11 +85,11 @@ public class CodeGenStatementAssignTest {
     // Please copy and paste the above and add the specified test case to the following
     @Test
     public void assignPoint() throws FatalErrorException {
-        inputStream.setInputString("ip_a=&0;");
+        inputStream.setInputString("ip_a=&1;");
         String expected =
         """
         MOV     #ip_a, (R6)+
-        MOV     #0, (R6)+
+        MOV     #1, (R6)+
         MOV     -(R6), R1
         MOV     -(R6), R0
         MOV     R1, (R0)
@@ -119,6 +119,36 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Test
+    public void assignDoubleStatement() throws FatalErrorException {
+        inputStream.setInputString("ip_a=&1;*ip_a=1;");
+        String expected =
+        """
+        . = 0x100
+        JMP	__START
+        __START:
+        MOV	#0x1000, R6
+        MOV     #ip_a, (R6)+
+        MOV     #1, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        MOV     #ip_a, (R6)+
+        MOV     -(R6), R0
+        MOV     (R0), (R6)+
+        MOV     #1, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        HLT
+        .END
+        """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
     // (3) 配列型の扱い
     @Test
     public void assignArray() throws FatalErrorException {
@@ -145,7 +175,7 @@ public class CodeGenStatementAssignTest {
     // Please copy and paste the above code and add the specified test case to the following
     @Test
     public void assignPointArray() throws FatalErrorException {
-        inputStream.setInputString("ipa_a[3]=&1;");
+        inputStream.setInputString("ipa_a[3]=&3;");
         String expected =
         """
         MOV     #ipa_a, (R6)+
@@ -153,7 +183,7 @@ public class CodeGenStatementAssignTest {
         MOV     -(R6), R0
         ADD     -(R6), R0
         MOV     R0, (R6)+
-        MOV     #1, (R6)+
+        MOV     #3, (R6)+
         MOV     -(R6), R1
         MOV     -(R6), R0
         MOV     R1, (R0)
@@ -164,4 +194,26 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Test
+    public void assignPointArrayMult() throws FatalErrorException {
+        inputStream.setInputString("*ipa_a[3]=3;");
+        String expected =
+        """
+        MOV     #ipa_a, (R6)+
+        MOV     #3, (R6)+
+        MOV     -(R6), R0
+        ADD     -(R6), R0
+        MOV     R0, (R6)+
+        MOV     -(R6), R0
+        MOV     (R0), (R6)+
+        MOV     #3, (R6)+
+        MOV     -(R6), R1
+        MOV     -(R6), R0
+        MOV     R1, (R0)
+        """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new StatementAssign(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 }
