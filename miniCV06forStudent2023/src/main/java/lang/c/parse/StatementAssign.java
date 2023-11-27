@@ -54,7 +54,7 @@ public class StatementAssign extends CParseRule {
 					+ "]と右辺の型[" + expression.getCType().toString() + "]が異なります");
 			}
 			if (primary.isConstant()) {
-				pcx.fatalError(primaryToken.toExplainString() + "左辺が定数ではありません");
+				pcx.fatalError(primaryToken.toExplainString() + "左辺が定数です");
 			}
 		}
 	}

@@ -195,7 +195,7 @@ public class SemanticCheckStatementAssignTest {
     // (5) 定数には代入できないことの確認
     @Test
     public void SemanticCheckAssignConstantTypeError() throws FatalErrorException {
-        HelperTestStrMsg[] testDataArr = { new HelperTestStrMsg("c_a=1;", "左辺が定数ではありません") };
+        HelperTestStrMsg[] testDataArr = { new HelperTestStrMsg("c_a=1;", "左辺が定数です") };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getTestStr());
@@ -214,4 +214,28 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (extra) code should be written as follows
+    @Test
+    public void SemanticCheckAssignExtra() throws FatalErrorException {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("i_A=ip_B;", "左辺の型[int]と右辺の型[int*]が異なります"),
+            new HelperTestStrMsg("ip_A=i_B;", "左辺の型[int*]と右辺の型[int]が異なります"),
+            new HelperTestStrMsg("*ip_A=ip_A;", "左辺の型[int]と右辺の型[int*]が異なります"),
+            new HelperTestStrMsg("i_A=&i_B;", "左辺の型[int]と右辺の型[int*]が異なります"),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData.getTestStr());
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, StatementAssign.isFirst(firstToken), is(true));
+            StatementAssign cp = new StatementAssign(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                cp.semanticCheck(cpContext);
+                fail("Failed with " + testData + ". FatalErrorException should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString(testData.getMsg()));
+            }
+        }
+    }
 }
