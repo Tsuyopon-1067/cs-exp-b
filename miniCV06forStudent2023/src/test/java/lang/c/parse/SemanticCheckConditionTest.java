@@ -24,7 +24,7 @@ import lang.c.CTokenizer;
  */
 public class SemanticCheckConditionTest {
     // Test that Condition node's semanticCheck is valid.
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -73,9 +73,9 @@ public class SemanticCheckConditionTest {
                 cp.semanticCheck(cpContext);
                 fail("FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int]と右辺の型[int*]は比較できません"));
             }
-        } 
+        }
     }
 
     // 意味解析エラー（両辺の型が異なる）
@@ -94,8 +94,68 @@ public class SemanticCheckConditionTest {
                 cp.semanticCheck(cpContext);
                 fail("FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Write down a part of error sentence you have decided on here"));
+                assertThat(e.getMessage(), containsString("左辺の型[int]と右辺の型[int*]は比較できません"));
             }
-        } 
+        }
+    }
+
+    @Test
+    public void semanticConditionNETypeError()  {
+        String[] testDataArr = {"*ip_a != &100"};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, Condition.isFirst(firstToken), is(true));
+            Condition cp = new Condition(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                cp.semanticCheck(cpContext);
+                fail("FatalErrorException should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("左辺の型[int]と右辺の型[int*]は比較できません"));
+            }
+        }
+    }
+
+    @Test
+    public void semanticConditionLTTypeError()  {
+        String[] testDataArr = {"&2 > 1"};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, Condition.isFirst(firstToken), is(true));
+            Condition cp = new Condition(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                cp.semanticCheck(cpContext);
+                fail("FatalErrorException should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int]は比較できません"));
+            }
+        }
+    }
+
+    @Test
+    public void semanticConditionEQTypeError2()  {
+        String[] testDataArr = {"&i_a == 100"};
+        for ( String testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData);
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat("Failed with " + testData, Condition.isFirst(firstToken), is(true));
+            Condition cp = new Condition(cpContext);
+
+            try {
+                cp.parse(cpContext);
+                cp.semanticCheck(cpContext);
+                fail("FatalErrorException should be invoked");
+            } catch ( FatalErrorException e ) {
+                assertThat(e.getMessage(), containsString("左辺の型[int*]と右辺の型[int]は比較できません"));
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ package lang.c.parse;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.Assert.fail;
 
 
 import org.junit.After;
@@ -20,7 +21,7 @@ import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 
 public class ParseConditionTest {
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -53,7 +54,7 @@ public class ParseConditionTest {
         setUp();
     }
 
-    // == の打ち間違い	
+    // == の打ち間違い
     @Test
     public void parseConditionComparisonOpTest() throws FatalErrorException {
         inputStream.setInputString("1 = 2");
@@ -65,10 +66,10 @@ public class ParseConditionTest {
             rule.parse(cpContext);
             fail("NullPointerException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the Error you have decided on here"));
+            assertThat(e.getMessage(), containsString("expressionの後ろは条件演算子です"));
         }
     }
-    
+
     // 条件になってない
     @Test
     public void notHaveComparisonOperater() throws FatalErrorException {
@@ -81,7 +82,7 @@ public class ParseConditionTest {
             rule.parse(cpContext);
             fail("NullPointerException should be invoked");
         } catch ( FatalErrorException e ) {
-            assertThat(e.getMessage(), containsString("Write down the Error you have decided on here"));
+            assertThat(e.getMessage(), containsString("expressionの後ろは条件演算子です"));
         }
     }
 }
