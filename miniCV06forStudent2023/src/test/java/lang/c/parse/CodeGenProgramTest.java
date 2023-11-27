@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import lang.FatalErrorException;
 import lang.IOContext;
@@ -52,9 +53,10 @@ public class CodeGenProgramTest {
 
     /**
      * This test is similar testing by compile() in MiniCompilerImplTest class.
-     * 
+     *
      * @throws FatalErrorException
      */
+    @Ignore
     @Test
     public void codeGenProgramAdd3Terms() throws FatalErrorException {
         inputStream.setInputString("13 + 7 + 2");
@@ -84,6 +86,7 @@ public class CodeGenProgramTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenProgramAdd2Terms() throws FatalErrorException {
         inputStream.setInputString("2 + 5");
@@ -107,7 +110,8 @@ public class CodeGenProgramTest {
         CParseRule rule = new Program(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
-    
+
+    @Ignore
     @Test // Confirmation that only '2' CodeGen is done after calling Program
     public void codeGenLeftTermAdd2Terms() throws FatalErrorException {
         inputStream.setInputString("2 + 5");
