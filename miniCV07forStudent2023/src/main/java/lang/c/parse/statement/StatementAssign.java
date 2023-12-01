@@ -40,11 +40,11 @@ public class StatementAssign extends CParseRule {
 		expression = new Expression(pcx);
 		expression.parse(pcx);
 
-		tk = ct.getCurrentToken(pcx);
+		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 		if (tk.getType() != CToken.TK_SEMI) {
 			pcx.fatalError(tk.toExplainString() + ";がありません");
 		}
-		ct.getNextToken(pcx);
+		tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

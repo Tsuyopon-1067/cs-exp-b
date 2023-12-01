@@ -22,7 +22,7 @@ public class Expression extends CParseRule {
 		term = new Term(pcx);
 		term.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		CToken tk = ct.getCurrentToken(pcx); // termでは次の字句まで読んでしまう
 		while (ExpressionAdd.isFirst(tk) || ExpressionSub.isFirst(tk)) {
 			if (ExpressionAdd.isFirst(tk)) {
 				list = new ExpressionAdd(pcx, term);
@@ -33,7 +33,9 @@ public class Expression extends CParseRule {
 			term = list;
 			tk = ct.getCurrentToken(pcx);
 		}
+		// この時点でexpressionはexperssionAddかexpressionSubの次の字句まで読んでいる
 		expression = term;
+		tk = ct.getCurrentToken(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

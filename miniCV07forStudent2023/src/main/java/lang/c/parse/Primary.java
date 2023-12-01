@@ -24,6 +24,7 @@ public class Primary extends CParseRule {
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
+		CToken tk = ct.getCurrentToken(pcx);
 
 		if (ct.getCurrentToken(pcx).getType() == CToken.TK_MULT) {
 			isPrimaryMult = true;

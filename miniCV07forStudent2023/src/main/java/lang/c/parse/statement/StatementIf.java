@@ -36,23 +36,18 @@ public class StatementIf extends CParseRule {
 		} else {
 			pcx.fatalError(tk.toExplainString() + "ifブロックの中はstatementです");
 		}
-		tk = ct.getNextToken(pcx);
+		tk = ct.getCurrentToken(pcx); // statementは次の字句まで読んでしまう
 
 		if (tk.getType() == CToken.TK_ELSE) {
 			tk = ct.getNextToken(pcx);
 			if (Statement.isFirst(tk)) {
 				statement2 = new Statement(pcx);
 				statement2.parse(pcx);
+				tk = ct.getCurrentToken(pcx); // statementは次の字句まで読んでしまう
 			} else {
 				pcx.fatalError(tk.toExplainString() + "elseブロックの中はstatementです");
 			}
-			ct.getNextToken(pcx);
 		}
-
-		if (tk.getType() == CToken.TK_ELSE) {
-			pcx.fatalError(tk.toExplainString() + "elseは連続して使えません");
-		}
-		ct.getNextToken(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

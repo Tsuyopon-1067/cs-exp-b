@@ -1,3 +1,10 @@
+次の字句まで読んでしまう構文規則
+term
+expression -> condition系 -> condition
+if -> statement系 -> statement
+
+-------------
+
 expression    ::= term { expressionAdd | expressionSub }
 expressionAdd ::= PLUS term
 expressionSub ::= MINUS term

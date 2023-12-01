@@ -22,10 +22,11 @@ public class Variable extends CParseRule {
 		ident = new Ident(pcx);
 		ident.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx);
+		CToken tk = ct.getNextToken(pcx);
 		if (tk.getType() == CToken.TK_LBRA) {
 			array = new Array(pcx);
 			array.parse(pcx);
+			ct.getNextToken(pcx); // ]を読み飛ばす
 		}
 	}
 

@@ -33,7 +33,7 @@ public class StatementInput extends CParseRule {
 		if (tk.getType() != CToken.TK_SEMI) {
 			pcx.fatalError(tk.toExplainString() + "文末は;です");
 		}
-		ct.getNextToken(pcx);
+		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

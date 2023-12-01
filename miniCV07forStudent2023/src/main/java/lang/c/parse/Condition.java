@@ -29,7 +29,7 @@ public class Condition extends CParseRule {
 			Expression expression = new Expression(pcx);
 			expression.parse(pcx);
 
-			tk = ct.getCurrentToken(pcx);
+			tk = ct.getCurrentToken(pcx); // expressionは次の字句まで読んでしまうのでcurrentは]
 			nextParseRule = switch(tk.getType()) {
 				case CToken.TK_LT -> new ConditionLT(pcx, expression, tk);
 				case CToken.TK_LE -> new ConditionLE(pcx, expression, tk);
@@ -49,7 +49,7 @@ public class Condition extends CParseRule {
 			} else {
 				condition = false;
 			}
-			ct.getNextToken(pcx);
+			ct.getNextToken(pcx); // 条件演算子は次の字句まで読んでしまうのでそれに合わせる
 		}
 	}
 

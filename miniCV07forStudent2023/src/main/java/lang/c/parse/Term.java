@@ -37,6 +37,7 @@ public class Term extends CParseRule {
 				tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
 			}
 		}
+		// この時点でtermの次の字句まで読んでいる
 		term = factor;
 	}
 

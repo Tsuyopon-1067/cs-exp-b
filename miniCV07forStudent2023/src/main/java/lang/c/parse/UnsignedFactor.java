@@ -31,7 +31,7 @@ public class UnsignedFactor extends CParseRule {
 					factor = new Expression(pcx);
 					factor.parse(pcx);
 					ct = pcx.getTokenizer();
-					tk = ct.getCurrentToken(pcx);
+					tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 					if (tk.getType() != CToken.TK_RPAR) {
 						// 閉じカッコじゃない
 						pcx.fatalError(tk.toExplainString() + "括弧が閉じられていません");

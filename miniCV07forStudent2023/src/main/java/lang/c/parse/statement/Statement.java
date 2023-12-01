@@ -39,6 +39,7 @@ public class Statement extends CParseRule {
 			nextCParseRule = new StatementBlock(pcx);
 		}
 		nextCParseRule.parse(pcx);
+		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -50,7 +51,9 @@ public class Statement extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Statement starts");
-		nextCParseRule.codeGen(pcx);
+		if (nextCParseRule != null) {
+			nextCParseRule.codeGen(pcx);
+		}
 		o.println(";;; Statement completes");
 	}
 }

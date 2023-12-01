@@ -22,10 +22,6 @@ public class StatementBlock extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		if (!Statement.isFirst(tk)) {
-			pcx.fatalError(tk.toExplainString() + "{の後ろはstatementです");
-		}
-
 		while (Statement.isFirst(tk)) {
 			Statement statement = new Statement(pcx);
 			statmentList.add(statement);
@@ -37,6 +33,7 @@ public class StatementBlock extends CParseRule {
 		if (tk.getType() != CToken.TK_RCUR) {
 			pcx.fatalError(tk.toExplainString() + "statmentの後ろは}です");
 		}
+		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

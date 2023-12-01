@@ -27,7 +27,7 @@ public class Program extends CParseRule {
 			statment.add(new Statement(pcx));
 			statment.get(statment.size() - 1).parse(pcx);
 			ct = pcx.getTokenizer();
-			tk = ct.getCurrentToken(pcx);
+			tk = ct.getCurrentToken(pcx); // statementが次の字句を読んでしまうので次の字句は読まない
 		}
 		if (tk.getType() != CToken.TK_EOF) {
 			pcx.fatalError(tk.toExplainString() + "プログラムの最後にゴミがあります");

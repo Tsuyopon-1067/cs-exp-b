@@ -28,11 +28,11 @@ public class Array extends CParseRule {
 			pcx.fatalError(tk.toExplainString() + "[の後ろはexpressionです");
 		}
 
+		// Expressionは次の字句まで読んでしまう
 		tk = ct.getCurrentToken(pcx); // ]が来るはず
 		if (tk.getType() != CToken.TK_RBRA) {
             pcx.fatalError("[]が閉じていません");
 		}
-		ct.getNextToken(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

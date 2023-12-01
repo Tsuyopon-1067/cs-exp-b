@@ -32,11 +32,10 @@ public class StatementWhile extends CParseRule {
 
 		if (Statement.isFirst(tk)) {
 			statement = new Statement(pcx);
-			statement.parse(pcx);
+			statement.parse(pcx); // statememtは次の字句まで読んでしまう
 		} else {
 			pcx.fatalError(tk.toExplainString() + "whileブロックの中はstatementです");
 		}
-		ct.getNextToken(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
