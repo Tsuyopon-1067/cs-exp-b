@@ -28,6 +28,6 @@ public class CTokenizerStateConst {
 	public static final int ST_GT                = 24; // >
 	public static final int ST_EQ                = 25; // =
 	public static final int ST_NE                = 26; // !
-	public static final int ST_LBRACE            = 27; // {
-	public static final int ST_RBRACE            = 28; // }
+	public static final int ST_LCUR              = 27; // {
+	public static final int ST_RCUR              = 28; // }
 }
