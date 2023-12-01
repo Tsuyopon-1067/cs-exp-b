@@ -28,7 +28,7 @@ public class StatementIf extends CParseRule {
 		} else {
 			pcx.fatalError(tk.toExplainString() + "ifの後ろはconditionBlockです");
 		}
-		ct.getNextToken(pcx);
+		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
 			statement1 = new StatementBlock(pcx);
@@ -36,10 +36,10 @@ public class StatementIf extends CParseRule {
 		} else {
 			pcx.fatalError(tk.toExplainString() + "ifブロックの中はstatementBlockです");
 		}
-		ct.getNextToken(pcx);
+		tk = ct.getNextToken(pcx);
 
 		if (tk.getType() == CToken.TK_ELSE) {
-			ct.getNextToken(pcx);
+			tk = ct.getNextToken(pcx);
 			if (Statement.isFirst(tk)) {
 				statement2 = new StatementBlock(pcx);
 				statement2.parse(pcx);
@@ -51,8 +51,6 @@ public class StatementIf extends CParseRule {
 
 		if (tk.getType() == CToken.TK_ELSE) {
 			pcx.fatalError(tk.toExplainString() + "elseは連続して使えません");
-		} else if (tk.getType() != CToken.TK_ENDIF) {
-			pcx.fatalError(tk.toExplainString() + "ifStatementの終わりはendifです");
 		}
 		ct.getNextToken(pcx);
 	}
@@ -70,11 +68,33 @@ public class StatementIf extends CParseRule {
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+		int seq = pcx.getSeqId();
+		String endIfLabel = "ENDIF" + seq;
+		String elseLabel = "ELSE" + seq;
+
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementIf starts");
 		if (condition != null) {
 			condition.codeGen(pcx);
 		}
+		o.println("\tMOV\t-(R6), R0\t;StatementIF: スタックからconditionの結果を持ってくる");
+		if (statement2 == null) {
+			// "elseがない場合"
+			o.println(String.format("\tBRZ\t%s\t\t;StatementIF: false(Zフラグが立つ)ならENDIFに飛ぶ", endIfLabel));
+		} else {
+			// "elseがある場合"
+			o.println(String.format("\tBRZ\t%s\t\t;StatementIF: false(Zフラグが立つ)ならELSEに飛ぶ", elseLabel));
+		}
+		if (statement1 != null) {
+			statement1.codeGen(pcx);
+		}
+		if (statement2 != null) {
+			// "elseがある場合
+			o.println(String.format("\tJMP\t%s\t\t;StatementIF: ENDIFに飛ぶ", endIfLabel));
+			o.println(String.format("%s:", elseLabel));
+			statement2.codeGen(pcx);
+		}
+		o.println(String.format("%s:", endIfLabel));
 		o.println(";;; StatementIf completes");
 	}
 }

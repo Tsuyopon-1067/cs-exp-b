@@ -22,6 +22,7 @@ public class StatementBlock extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
+		System.out.printf("%s, %s\n", tk.toDetailExplainString(), tk.getText());
 		if (!Statement.isFirst(tk)) {
 			pcx.fatalError(tk.toExplainString() + "{の後ろはstatementです");
 		}
@@ -31,7 +32,7 @@ public class StatementBlock extends CParseRule {
 			statmentList.add(statement);
 			statement.parse(pcx);
 			ct = pcx.getTokenizer();
-			tk = ct.getNextToken(pcx);
+			tk = ct.getCurrentToken(pcx);
 		}
 
 		if (tk.getType() != CToken.TK_RCUR) {

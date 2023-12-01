@@ -28,7 +28,7 @@ public class StatementWhile extends CParseRule {
 		} else {
 			pcx.fatalError(tk.toExplainString() + "whileの後ろはconditionBlockです");
 		}
-		ct.getNextToken(pcx);
+		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
 			statement = new StatementBlock(pcx);

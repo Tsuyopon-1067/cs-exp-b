@@ -7,7 +7,7 @@ import lang.c.*;
 
 public class Statement extends CParseRule {
     // statement ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock
-    CParseRule statmentAssign;
+    CParseRule nextCParseRule;
 
 	public Statement(CParseContext pcx) {
 	}
@@ -25,20 +25,32 @@ public class Statement extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
         CTokenizer ct = pcx.getTokenizer();
 		ct.getCurrentToken(pcx);
-		statmentAssign = new StatementAssign(pcx);
-		statmentAssign.parse(pcx);
+		if (StatementAssign.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementAssign(pcx);
+		} else if (StatementInput.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementInput(pcx);
+		} else if (StatementOutput.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementOutput(pcx);
+		} else if (StatementIf.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementIf(pcx);
+		} else if (StatementWhile.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementWhile(pcx);
+		} else if (StatementBlock.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementBlock(pcx);
+		}
+		nextCParseRule.parse(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (statmentAssign != null) {
-			statmentAssign.semanticCheck(pcx);
+		if (nextCParseRule != null) {
+			nextCParseRule.semanticCheck(pcx);
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Statement starts");
-		statmentAssign.codeGen(pcx);
+		nextCParseRule.codeGen(pcx);
 		o.println(";;; Statement completes");
 	}
 }
