@@ -34,7 +34,6 @@ public class CToken extends SimpleToken {
 	// add chapter7
 	public static final int TK_IF       = 22;	// if (ident 経由で識別する)
 	public static final int TK_ELSE     = 23;	// else (ident 経由で識別する)
-	public static final int TK_ENDIF    = 29;	// endif (ident 経由で識別する)
 	public static final int TK_WHILE    = 24;	// while (ident 経由で識別する)
 	public static final int TK_INPUT    = 25;	// input (ident 経由で識別する)
 	public static final int TK_OUTPUT   = 26;	// output (ident 経由で識別する)
@@ -85,7 +84,6 @@ public class CToken extends SimpleToken {
 
 				put(TK_IF,"TK_IF");
 				put(TK_ELSE,"TK_ELSE");
-				put(TK_ENDIF,"TK_ENDIF");
 				put(TK_WHILE,"TK_WHILE");
 				put(TK_INPUT,"TK_INPUT");
 				put(TK_OUTPUT,"TK_OUTPUT");
