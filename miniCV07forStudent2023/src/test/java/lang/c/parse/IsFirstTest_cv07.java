@@ -15,6 +15,10 @@ import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.parse.statement.StatementBlock;
+import lang.c.parse.statement.StatementIf;
+import lang.c.parse.statement.StatementInput;
+import lang.c.parse.statement.StatementOutput;
+import lang.c.parse.statement.StatementWhile;
 import lang.c.parse.statement.Statement;
 
 public class IsFirstTest_cv07 {
@@ -60,8 +64,44 @@ public class IsFirstTest_cv07 {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(testData, Statement.isFirst(firstToken), is(true));    
+            assertThat(testData, Statement.isFirst(firstToken), is(true));
         }
+    }
+
+    @Test
+    public void testStatementIf() {
+        String testData = "if";
+        resetEnvironment();
+        inputStream.setInputString(testData);
+        CToken firstToken = tokenizer.getNextToken(cpContext);
+        assertThat(testData, StatementIf.isFirst(firstToken), is(true));
+    }
+
+    @Test
+    public void testStatementWhile() {
+        String testData = "while";
+        resetEnvironment();
+        inputStream.setInputString(testData);
+        CToken firstToken = tokenizer.getNextToken(cpContext);
+        assertThat(testData, StatementWhile.isFirst(firstToken), is(true));
+    }
+
+    @Test
+    public void testStatementInput() {
+        String testData = "input";
+        resetEnvironment();
+        inputStream.setInputString(testData);
+        CToken firstToken = tokenizer.getNextToken(cpContext);
+        assertThat(testData, StatementInput.isFirst(firstToken), is(true));
+    }
+
+    @Test
+    public void testStatementOutput() {
+        String testData = "output";
+        resetEnvironment();
+        inputStream.setInputString(testData);
+        CToken firstToken = tokenizer.getNextToken(cpContext);
+        assertThat(testData, StatementOutput.isFirst(firstToken), is(true));
     }
 
     @Test
@@ -71,7 +111,17 @@ public class IsFirstTest_cv07 {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(testData, StatementBlock.isFirst(firstToken), is(true));    
+            assertThat(testData, StatementBlock.isFirst(firstToken), is(true));
         }
     }
+
+    @Test
+    public void testConditionBlock() {
+        String testData = "( i_a==1 )";
+        resetEnvironment();
+        inputStream.setInputString(testData);
+        CToken firstToken = tokenizer.getNextToken(cpContext);
+        assertThat(testData, ConditionBlock.isFirst(firstToken), is(true));
+    }
+
 }

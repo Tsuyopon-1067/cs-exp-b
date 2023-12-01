@@ -15,7 +15,7 @@ import lang.c.CTokenizer;
 import lang.c.TestHelper;
 
 public class CodeGenIfTest {
-    
+
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
     PrintStreamForTest errorOutputStream;
@@ -49,18 +49,24 @@ public class CodeGenIfTest {
         inputStream.setInputString( "if (false) {\n" +
                                         "i_a=3;\n" +
                                     "}");
-        String expected[] = {
-            "Write",
-            "down",
-            "the",
-            "output",
-            "you",
-            "have",
-            "decided",
-            "on",
-            "here"
-        };
-
+        String expected = """
+            ; program starts
+                    . = 0x100
+                    JMP     __START ; ProgramNode: 最初の実行文へ
+            __START:
+                    MOV     #0x1000, R6
+                    MOV     #0x0000, (R6)+
+                    MOV     -(R6), R0
+                    BRZ     ENDIF1
+                    MOV     #i_a, (R6)+
+                    MOV     #3, (R6)+
+                    MOV     -(R6), R1
+                    MOV     -(R6), R0
+                    MOV     R1, (R0)
+            ENDIF1:
+                    HLT
+                    .END
+                """;
         // Check only code portion, not validate comments
         CParseRule rule = new Program(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
