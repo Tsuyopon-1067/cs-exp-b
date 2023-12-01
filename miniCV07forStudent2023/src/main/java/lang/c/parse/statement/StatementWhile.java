@@ -49,11 +49,22 @@ public class StatementWhile extends CParseRule {
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+		int seq = pcx.getSeqId();
+		String whileStartLabel = "WHILE" + seq;
+		String whileEndLabel = "WHILEEND" + seq;
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementWhile starts");
 		if (condition != null) {
+			o.println(String.format("%s:", whileStartLabel));
 			condition.codeGen(pcx);
+			o.println("\tMOV\t-(R6), R0\t;StatementWhile: スタックからconditionの結果を持ってくる");
+			o.println(String.format("\tBRZ\t%s\t\t;StatementWhile: false(Zフラグが立つ)ならWHILEENDに飛ぶ", whileEndLabel));
 		}
+		if (statement != null) {
+			statement.codeGen(pcx);
+		}
+		o.println(String.format("\tJMP\t%s\t\t;StatementWhile: WHILEに飛ぶ", whileStartLabel));
+		o.println(String.format("%s:", whileEndLabel));
 		o.println(";;; StatementWhile completes");
 	}
 }
