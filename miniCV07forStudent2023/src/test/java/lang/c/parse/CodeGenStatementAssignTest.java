@@ -13,6 +13,7 @@ import lang.c.CParseRule;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.TestHelper;
+import lang.c.parse.statement.StatementAssign;
 
 public class CodeGenStatementAssignTest {
 

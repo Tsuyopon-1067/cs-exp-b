@@ -1,9 +1,11 @@
-package lang.c.parse;
+package lang.c.parse.statement;
 
 import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.Expression;
+import lang.c.parse.Primary;
 
 public class StatementAssign extends CParseRule {
     // statementAssign ::= primary ASSIGN expression SEMI（注）ASSIGN=’=’, SEMI=’;’
