@@ -152,6 +152,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = CTokenizerStateConst.ST_NE;
+					} else if (ch == '{') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_LBRACE;
+					} else if (ch == '}') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_RBRACE;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -327,9 +335,9 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 							break;
 						}
 					}
-					// ここからtrueとfalseの判定をする
+					// ここから予約後 or Identの判定をする
 					Integer i = (Integer) rule.get(text.toString());
-					if (i != null) { // trueまたはfalse
+					if (i != null) { // 予約後
 						tk = new CToken(i.intValue(), lineNo, startCol, text.toString());
 					} else { // 変数名
 						tk = new CToken(CToken.TK_IDENT, lineNo, startCol, text.toString());
