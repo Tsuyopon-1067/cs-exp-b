@@ -19,9 +19,9 @@ import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
-import lang.c.parse.statement.StatementIf;
+import lang.c.parse.statement.StatementWhile;
 
-public class ParseIfTest {
+public class ParseWhileTest {
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -56,31 +56,21 @@ public class ParseIfTest {
     }
 
     @Test
-    public void parseIfTestCrrect() throws FatalErrorException {
+    public void parseWhileTestCrrect() throws FatalErrorException {
         String[] testDataArr = {
-            "if (true) { i_a=1; i_b=2; }",
-            "if (true) { i_a=1; i_b=2; } else { i_a=2; i_b=3;}",
-            "if (true) { i_a=1; i_b=2; } else if ( true ) { i_a=2; } else { i_a=3; }",
-            "if (true) { if (true) { if (true) { i_a=1; i_b=2; }}}",
-            "if (true) i_a=1;",
-            "if (true) i_a=1; else i_a=2;",
-            "if (true) if (true) if (true) i_a=3;",
+            "while (true) { i_a=1; }",
+            "while (true) { while (true) { i_a=1; i_b=2;} }",
 
-            "if (true) { i_a=1; i_b=2; }",
-            "if (true) { i_a=1; i_b=2; } else { i_a=2; i_b=3;}",
-            "if (true) { i_a=1; i_b=2; } else if ( true ) { i_a=2; } else { i_a=3; }",
-            "if (true) { if (true) { if (true) { i_a=1; i_b=2; }}}",
-
-            "if (true) i_a=1;",
-            "if (true) i_a=1; else i_a=1;"
+            "while (true) i_a=1;",
+            "while (true) while (true) while (true) i_a=1;"
         };
 
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, StatementIf.isFirst(firstToken), is(true));
-            CParseRule cp = new StatementIf(cpContext);
+            assertThat("Failed with " + testData, StatementWhile.isFirst(firstToken), is(true));
+            CParseRule cp = new StatementWhile(cpContext);
 
             try {
                 cp.parse(cpContext);
@@ -92,25 +82,22 @@ public class ParseIfTest {
     }
 
     @Test
-    public void parseIfTestError() throws FatalErrorException {
+    public void parseWhileTestError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("if i_a==1", "ifの後ろはconditionBlockです"),
-            new HelperTestStrMsg("if (true)", "ifブロックの中はstatementです"),
-            new HelperTestStrMsg("if (true) i_a=1; else", "elseブロックの中はstatementです"),
+            new HelperTestStrMsg("while i_a==1", "whileの後ろはconditionBlockです"),
+            new HelperTestStrMsg("while (true)", "whileブロックの中はstatementです"),
 
-            new HelperTestStrMsg("if i_a==1", "ifの後ろはconditionBlockです"),
-            new HelperTestStrMsg("if ( }", "(の後ろはconditionです"),
-            new HelperTestStrMsg("if (i_a==3", "conditionの後ろは)です"),
-            new HelperTestStrMsg("if (true) { i_a=1; aaa", "Primaryの後ろは=です"),
-            new HelperTestStrMsg("if (true) { i_a=1; i_b=2;} else bbb;", "Primaryの後ろは=です"),
-            new HelperTestStrMsg("if (true) { i_a=1;} else { i_c=3;", "statmentの後ろは}です"),
+            new HelperTestStrMsg("while i_a==1", "whileの後ろはconditionBlockです"),
+            new HelperTestStrMsg("while ( }", "(の後ろはconditionです"),
+            new HelperTestStrMsg("while (i_a==3", "conditionの後ろは)です"),
+            new HelperTestStrMsg("while (true) { i_a=1; aaa", "Primaryの後ろは=です"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, StatementIf.isFirst(firstToken), is(true));
-            CParseRule cp = new StatementIf(cpContext);
+            assertThat("Failed with " + testData, StatementWhile.isFirst(firstToken), is(true));
+            CParseRule cp = new StatementWhile(cpContext);
 
             try {
                 cp.parse(cpContext);
