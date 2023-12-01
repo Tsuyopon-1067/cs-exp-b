@@ -49,7 +49,7 @@ public class Condition extends CParseRule {
 			} else {
 				condition = false;
 			}
-			ct.getCurrentToken(pcx);
+			ct.getNextToken(pcx);
 		}
 	}
 

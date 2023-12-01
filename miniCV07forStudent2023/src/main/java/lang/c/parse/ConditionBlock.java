@@ -27,7 +27,7 @@ public class ConditionBlock extends CParseRule {
 		} else {
 			pcx.fatalError(tk.toExplainString() + "(の後ろはconditionです");
 		}
-		tk = ct.getNextToken(pcx);
+		tk = ct.getCurrentToken(pcx);
 
 		if (tk.getType() != CToken.TK_RPAR) {
 			pcx.fatalError(tk.toExplainString() + "conditionの後ろは)です");
