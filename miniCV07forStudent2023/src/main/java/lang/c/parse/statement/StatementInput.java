@@ -9,6 +9,7 @@ import lang.c.parse.Primary;
 public class StatementInput extends CParseRule {
     // statementInput ::= INPUT primary SEMI
 	CParseRule primary;
+	CToken primaryToken;
 
 	public StatementInput(CParseContext pcx) {
 	}
@@ -23,6 +24,7 @@ public class StatementInput extends CParseRule {
 		CToken tk = ct.getNextToken(pcx);
 
 		if (Primary.isFirst(tk)) {
+			primaryToken = tk;
 			primary = new Primary(pcx);
 			primary.parse(pcx);
 		} else {
@@ -39,6 +41,9 @@ public class StatementInput extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (primary != null) {
 			primary.semanticCheck(pcx);
+		}
+		if (primary.isConstant()) {
+			pcx.fatalError(primaryToken.toExplainString() + "左辺が定数です");
 		}
 	}
 
