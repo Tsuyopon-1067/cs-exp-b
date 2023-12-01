@@ -91,7 +91,7 @@ public class ParseStatementAssignTest {
                 cp.parse(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Statementの後ろは=です"));
+                assertThat(e.getMessage(), containsString("Primaryの後ろは=です"));
             }
         }
     }
@@ -150,7 +150,7 @@ public class ParseStatementAssignTest {
                 cp.parse(cpContext);
                 fail("Failed with " + testData + ". FatalErrorException should be invoked");
             } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString("Statementの後ろは=です"));
+                assertThat(e.getMessage(), containsString("Primaryの後ろは=です"));
             }
         }
     }

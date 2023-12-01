@@ -30,7 +30,7 @@ public class StatementAssign extends CParseRule {
 		tk = ct.getCurrentToken(pcx);
 		op = tk;
 		if (tk.getType() != CToken.TK_ASSIGN) {
-			pcx.fatalError(tk.toExplainString() + "Statementの後ろは=です");
+			pcx.fatalError(tk.toExplainString() + "Primaryの後ろは=です");
 		}
 
 		tk = ct.getNextToken(pcx);
