@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.statement.Statement;
 
 public class Program extends CParseRule {
 	// program         ::= { statement } EOFprogram ::= expression EOF
