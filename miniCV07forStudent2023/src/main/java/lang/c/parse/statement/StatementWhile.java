@@ -31,10 +31,10 @@ public class StatementWhile extends CParseRule {
 		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
-			statement = new StatementBlock(pcx);
+			statement = new Statement(pcx);
 			statement.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "whileブロックの中はstatementBlockです");
+			pcx.fatalError(tk.toExplainString() + "whileブロックの中はstatementです");
 		}
 		ct.getNextToken(pcx);
 	}

@@ -31,20 +31,20 @@ public class StatementIf extends CParseRule {
 		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
-			statement1 = new StatementBlock(pcx);
+			statement1 = new Statement(pcx);
 			statement1.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "ifブロックの中はstatementBlockです");
+			pcx.fatalError(tk.toExplainString() + "ifブロックの中はstatementです");
 		}
 		tk = ct.getNextToken(pcx);
 
 		if (tk.getType() == CToken.TK_ELSE) {
 			tk = ct.getNextToken(pcx);
 			if (Statement.isFirst(tk)) {
-				statement2 = new StatementBlock(pcx);
+				statement2 = new Statement(pcx);
 				statement2.parse(pcx);
 			} else {
-				pcx.fatalError(tk.toExplainString() + "elseブロックの中はstatementBlockです");
+				pcx.fatalError(tk.toExplainString() + "elseブロックの中はstatementです");
 			}
 			ct.getNextToken(pcx);
 		}
