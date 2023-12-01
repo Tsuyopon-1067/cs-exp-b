@@ -51,11 +51,11 @@ public class CodeGenInputTest {
                     . = 0x100
                     JMP     __START ; ProgramNode: 最初の実行文へ
             __START:
-                    MOV     #0x1000, R6     ; ProgramNode: 計算用スタック初期化
-                    MOV     #ip_a, (R6)+
-                    MOV     -(R6), R0
-                    MOV     #0xFFE0, R1
-                    MOV     (R1), (R0)
+                    MOV    #0x1000, R6     ; ProgramNode: 計算用スタック初期化
+                    MOV    #ip_a, (R6)+
+                    MOV    -(R6), R0
+                    MOV    #0xFFE0, R1
+                    MOV    (R1), (R0)
                     HLT
                     .END
                 """;
@@ -66,5 +66,87 @@ public class CodeGenInputTest {
     }
 
     // Please copy and paste the above code and add the specified test case to the following
+    @Test
+    public void codeGenInputArrayTest() throws FatalErrorException {
+        inputStream.setInputString("input ia_a[2];");
+        String expected = """
+                    . = 0x100
+                    JMP     __START ; ProgramNode: 最初の実行文へ
+            __START:
+                    MOV     #0x1000, R6     ; ProgramNode: 計算用スタック初期化
 
+                    MOV    #ia_a, (R6)+
+                    MOV    #2, (R6)+
+                    MOV    -(R6), R0
+                    ADD    -(R6), R0
+                    MOV    R0, (R6)+
+
+                    MOV    -(R6), R0
+                    MOV    #0xFFE0, R1
+                    MOV    (R1), (R0)
+
+                    HLT
+                    .END
+                """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenInputMultTest() throws FatalErrorException {
+        inputStream.setInputString("input *ip_a;");
+        String expected = """
+                    . = 0x100
+                    JMP     __START ; ProgramNode: 最初の実行文へ
+            __START:
+                    MOV     #0x1000, R6     ; ProgramNode: 計算用スタック初期化
+
+                    MOV    #ip_a, (R6)+
+                    MOV    -(R6), R0
+                    MOV    (R0), (R6)+
+
+                    MOV    -(R6), R0
+                    MOV    #0xFFE0, R1
+                    MOV    (R1), (R0)
+
+                    HLT
+                    .END
+                """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
+
+    @Test
+    public void codeGenInputPointMultTest() throws FatalErrorException {
+        inputStream.setInputString("input *ipa_a[2];");
+        String expected = """
+                    . = 0x100
+                    JMP     __START ; ProgramNode: 最初の実行文へ
+            __START:
+                    MOV     #0x1000, R6     ; ProgramNode: 計算用スタック初期化
+
+                    MOV    #ipa_a, (R6)+
+                    MOV    #2, (R6)+
+                    MOV    -(R6), R0
+                    ADD    -(R6), R0
+                    MOV    R0, (R6)+
+                    MOV    -(R6), R0
+                    MOV    (R0), (R6)+
+                    MOV    -(R6), R0
+
+                    MOV    #0xFFE0, R1
+                    MOV    (R1), (R0)
+
+                    HLT
+                    .END
+                """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 }

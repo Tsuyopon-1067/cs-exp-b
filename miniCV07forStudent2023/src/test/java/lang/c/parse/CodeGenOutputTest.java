@@ -51,10 +51,10 @@ public class CodeGenOutputTest {
                     . = 0x100
                     JMP     __START ; ProgramNode: 最初の実行文へ
             __START:
-                    MOV     #0x1000, R6     ; ProgramNode: 計算用スタック初期化
-                    MOV     #i_a, (R6)+
-                    MOV     #0xFFE0, R0
-                    MOV     -(R6), (R0)
+                    MOV    #0x1000, R6     ; ProgramNode: 計算用スタック初期化
+                    MOV    #i_a, (R6)+
+                    MOV    #0xFFE0, R0
+                    MOV    -(R6), (R0)
                     HLT
                     .END
                 """;
@@ -66,4 +66,30 @@ public class CodeGenOutputTest {
 
     // Please copy and paste the above code and add the specified test case to the following
 
+    @Test
+    public void codeGenOutput3Test() throws FatalErrorException {
+        inputStream.setInputString("output i_a+3;");
+        String expected = """
+                    . = 0x100
+                    JMP     __START ; ProgramNode: 最初の実行文へ
+            __START:
+                    MOV    #0x1000, R6     ; ProgramNode: 計算用スタック初期化
+                    MOV    #i_a, (R6)+
+                    MOV    -(R6), R0
+                    MOV    (R0), (R6)+
+                    MOV    #3, (R6)+
+                    MOV    -(R6), R0
+                    MOV    -(R6), R1
+                    ADD     R1, R0
+                    MOV    R0, (R6)+
+                    MOV     #0xFFE0, R0
+                    MOV     -(R6), (R0)
+                    HLT
+                    .END
+                """;
+
+        // Check only code portion, not validate comments
+        CParseRule rule = new Program(cpContext);
+        helper.checkCodeGen(expected, rule, cpContext);
+    }
 }
