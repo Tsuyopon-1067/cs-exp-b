@@ -1,0 +1,38 @@
+expression    ::= term { expressionAdd | expressionSub }
+expressionAdd ::= PLUS term
+expressionSub ::= MINUS term
+
+term        ::= factor { termMult | termDiv }
+termMult    ::= MULT factor
+termDiv     ::= DIV factor
+factor      ::= plusFactor | minusFactor | unsignedFactor
+plusFactor  ::= PLUS unsignedFactor
+minusFactor ::= MINUS unsignedFactor
+
+unsignedFactor  ::= factorAmp | number | LPAR expression RPAR | addressToValue
+factorAmp       ::= AMP ( number | primary )
+primary         ::= primaryMult | variable
+primaryMult     ::= MULT variable
+variable        ::= ident [ array ]
+array           ::= LBRA expression RBRA
+ident           ::= IDENT
+addressToValue  ::= primary
+
+program ::= { statement } EOF
+
+condition   ::= TRUE | FALSE | expression ( conditionLT | conditionLE | conditionGT | conditionGE | conditionEQ | conditionNE )
+conditionLT ::= LT expression
+conditionLE ::= LE expression
+conditionGT ::= GT expression
+conditionGE ::= GE expression
+conditionEQ ::= EQ expression
+conditionNE ::= NE expression
+
+statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock
+statementAssign ::= primary ASSIGN expression SEMI
+statementIf     ::= IF conditionBlock statement [ ELSE statement ]
+statementWhile  ::= WHILE conditionBlock statement
+statementInput  ::= INPUT primary SEMI
+statementOutput ::= OUTPUT expression SEMI
+conditionBlock  ::= LPAR condition RPAR
+statementBlock  ::= LCUR { statement } RCUR
