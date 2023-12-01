@@ -131,7 +131,8 @@ public class CodeGenProgramTest {
         CParseRule cpProgram = new Program(cpContext);
         cpProgram.parse(cpContext);
         cpProgram.semanticCheck(cpContext);
-        CParseRule ruleInProgram = ((Expression)((Program)cpProgram).program).expression;
+        //CParseRule ruleInProgram = ((Expression)((Program)cpProgram).program).expression;
+        CParseRule ruleInProgram = ((Expression)((Program)cpProgram).statment.get(0)).expression;
         CParseRule leftRuleInExpressionAdd = ((ExpressionAdd)ruleInProgram).left;
 
         // call test target
