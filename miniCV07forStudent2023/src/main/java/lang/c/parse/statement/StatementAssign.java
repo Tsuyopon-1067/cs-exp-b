@@ -70,7 +70,7 @@ public class StatementAssign extends CParseRule {
 		if (expression != null) {
 			expression.codeGen(pcx);
 		}
-		o.println("\tMOV\t-(R6), R1\t; StatementAssig");
+		o.println("\tMOV\t-(R6), R1\t; StatementAssign");
 		o.println("\tMOV\t-(R6), R0\t; StatementAssign: 左辺のアドレスを取り出す");
 		o.println("\tMOV\tR1, (R0)\t; StatementAssign: 変数に値を代入する");
 		o.println(";;; StatementAssign completes");
