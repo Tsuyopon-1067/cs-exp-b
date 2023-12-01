@@ -5,10 +5,9 @@ import java.io.PrintStream;
 import lang.*;
 import lang.c.*;
 import lang.c.parse.Primary;
-import lang.c.parse.PrimaryBlock;
 
 public class StatementInput extends CParseRule {
-    // statementInput ::= INPUT LAPR primary RAPR SEMI
+    // statementInput ::= INPUT primary SEMI
 	CParseRule primary;
 
 	public StatementInput(CParseContext pcx) {
@@ -24,12 +23,13 @@ public class StatementInput extends CParseRule {
 		CToken tk = ct.getNextToken(pcx);
 
 		if (Primary.isFirst(tk)) {
-			primary = new PrimaryBlock(pcx);
+			primary = new Primary(pcx);
 			primary.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "inputの後ろはprimaryBlockです");
+			pcx.fatalError(tk.toExplainString() + "inputの後ろはprimaryです");
 		}
 
+		tk = ct.getCurrentToken(pcx);
 		if (tk.getType() != CToken.TK_SEMI) {
 			pcx.fatalError(tk.toExplainString() + "文末は;です");
 		}
@@ -47,6 +47,9 @@ public class StatementInput extends CParseRule {
 		o.println(";;; StatementInput starts");
 		if (primary != null) {
 			primary.codeGen(pcx);
+			o.println("\tMOV\t-(R6), R0\t; StatementInput: 変数のアドレスを取り出す");
+			o.println("\tMOV\t#0xFFE0, R1\t; StatementInput: IOアドレスをR1に確保");
+			o.println("\tMOV\t(R1), (R0)\t; StatementInput: 変数に値を代入する");
 		}
 		o.println(";;; StatementInput completes");
 	}

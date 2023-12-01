@@ -4,12 +4,11 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
-import lang.c.parse.Primary;
-import lang.c.parse.PrimaryBlock;
+import lang.c.parse.Expression;
 
 public class StatementOutput extends CParseRule {
-    // statementOutput ::= OUTPUT LAPR primary RAPR SEMI
-	CParseRule primary;
+    // statementOutput ::= OUTPUT expression SEMI
+	CParseRule expression;
 
 	public StatementOutput(CParseContext pcx) {
 	}
@@ -23,13 +22,14 @@ public class StatementOutput extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		if (Primary.isFirst(tk)) {
-			primary = new PrimaryBlock(pcx);
-			primary.parse(pcx);
+		if (Expression.isFirst(tk)) {
+			expression = new Expression(pcx);
+			expression.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "outputの後ろはprimaryBlockです");
+			pcx.fatalError(tk.toExplainString() + "outputの後ろはexpressionです");
 		}
 
+		tk = ct.getCurrentToken(pcx);
 		if (tk.getType() != CToken.TK_SEMI) {
 			pcx.fatalError(tk.toExplainString() + "文末は;です");
 		}
@@ -37,16 +37,18 @@ public class StatementOutput extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (primary != null) {
-			primary.semanticCheck(pcx);
+		if (expression != null) {
+			expression.semanticCheck(pcx);
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementOutput starts");
-		if (primary != null) {
-			primary.codeGen(pcx);
+		if (expression != null) {
+			expression.codeGen(pcx);
+			o.println("\tMOV\t#0xFFE0, R0\t; StatementOutput: IOアドレスをR0に確保");
+			o.println("\tMOV\t-(R6), (R0)\t; StatementOutput: expressionの値をIOアドレスに代入する");
 		}
 		o.println(";;; StatementOutput completes");
 	}
