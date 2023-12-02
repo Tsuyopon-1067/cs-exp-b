@@ -6,37 +6,26 @@ import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
-import lang.c.CTokenizer;
 import lang.c.CType;
 
-class ExpressionAdd extends CParseRule {
+class ExpressionAdd extends AbstractExpressionAddSub {
 	// expressionAdd ::= '+' term
-	CToken op;
-	CParseRule left, right;
 
 	public ExpressionAdd(CParseContext pcx, CParseRule left) {
-		this.left = left;
+		super(pcx, left);
 	}
 
 	public static boolean isFirst(CToken tk) {
 		return tk.getType() == CToken.TK_PLUS;
 	}
 
-	public void parse(CParseContext pcx) throws FatalErrorException {
-		// ここにやってくるときは、必ずisFirst()が満たされている
-		CTokenizer ct = pcx.getTokenizer();
-		op = ct.getCurrentToken(pcx);
-		// +の次の字句を読む
-		CToken tk = ct.getNextToken(pcx);
-		if (Term.isFirst(tk)) {
-			right = new Term(pcx);
-			right.parse(pcx);
-		} else {
-			pcx.fatalError(tk.toExplainString() + "+の後ろはtermです");
-		}
+	@Override
+	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws FatalErrorException {
+		pcx.fatalError(tk.toExplainString() + "+の後ろはtermです");
 	}
 
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+	@Override
+	protected int[][] getOperationRule() {
 		// 足し算の型計算規則
 		final int s[][] = {
 				// T_err       T_int         T_pint        T_int_array  T_pint_array
@@ -46,21 +35,13 @@ class ExpressionAdd extends CParseRule {
 				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_int_array
 				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint_array
 		};
-		if (left != null && right != null) {
-			left.semanticCheck(pcx);
-			right.semanticCheck(pcx);
-			int lt = left.getCType().getType(); // +の左辺の型
-			int rt = right.getCType().getType(); // +の右辺の型
-			int nt = s[lt][rt]; // 規則による型計算
-			System.err.println("hogehoge");
-			System.err.printf("%d = [%d][%d]\n", nt, lt, rt);
-			if (nt == CType.T_err) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
-						+ right.getCType().toString() + "]は足せません");
-			}
-			this.setCType(CType.getCType(nt));
-			this.setConstant(left.isConstant() && right.isConstant()); // +の左右両方が定数のときだけ定数
-		}
+		return s;
+	}
+
+	@Override
+	protected void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException {
+		pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+				+ right.getCType().toString() + "]は足せません");
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
