@@ -1,9 +1,10 @@
-package lang.c.parse;
+package lang.c.parse.condition;
 
 import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.Expression;
 
 public class Condition extends CParseRule {
 	//condition    ::= TRUE | FALSE | expression ( conditionLT | conditionLE | conditionGT

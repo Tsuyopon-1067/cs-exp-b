@@ -19,6 +19,7 @@ import lang.c.parse.statement.StatementIf;
 import lang.c.parse.statement.StatementInput;
 import lang.c.parse.statement.StatementOutput;
 import lang.c.parse.statement.StatementWhile;
+import lang.c.parse.condition.ConditionBlock;
 import lang.c.parse.statement.Statement;
 
 public class IsFirstTest_cv07 {

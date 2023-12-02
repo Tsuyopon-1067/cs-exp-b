@@ -19,6 +19,7 @@ import lang.c.CParseRule;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
+import lang.c.parse.condition.Condition;
 
 public class ParseConditionTest {
 

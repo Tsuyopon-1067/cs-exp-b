@@ -14,6 +14,7 @@ import lang.c.CParseContext;
 import lang.c.CToken;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
+import lang.c.parse.condition.Condition;
 
 public class IsFirstTest_cv06 {
     // Test that each class's isFirst() is valid
@@ -59,7 +60,7 @@ public class IsFirstTest_cv06 {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(testData, Condition.isFirst(firstToken), is(true));    
+            assertThat(testData, Condition.isFirst(firstToken), is(true));
         }
     }
 }

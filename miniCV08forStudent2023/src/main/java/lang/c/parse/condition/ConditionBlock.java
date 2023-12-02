@@ -1,4 +1,4 @@
-package lang.c.parse;
+package lang.c.parse.condition;
 
 import java.io.PrintStream;
 

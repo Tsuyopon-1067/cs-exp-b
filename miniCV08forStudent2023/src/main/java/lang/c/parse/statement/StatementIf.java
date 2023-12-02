@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
-import lang.c.parse.ConditionBlock;
+import lang.c.parse.condition.ConditionBlock;
 
 public class StatementIf extends CParseRule {
     // statementIf ::= IF conditionBlock statement [ ELSE statement ]

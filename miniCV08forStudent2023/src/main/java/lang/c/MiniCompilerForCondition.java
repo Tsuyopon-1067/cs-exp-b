@@ -1,7 +1,7 @@
 package lang.c;
 
 import lang.*;
-import lang.c.parse.Condition;
+import lang.c.parse.condition.Condition;
 
 public class MiniCompilerForCondition {
 	public static void main(String[] args) {

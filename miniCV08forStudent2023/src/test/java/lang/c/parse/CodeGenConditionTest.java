@@ -14,6 +14,7 @@ import lang.c.CParseRule;
 import lang.c.CTokenRule;
 import lang.c.CTokenizer;
 import lang.c.TestHelper;
+import lang.c.parse.condition.Condition;
 
 public class CodeGenConditionTest {
     // Test for Conditions of "true, false, LT, LE, GT, GE, EQ, NE".
