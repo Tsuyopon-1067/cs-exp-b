@@ -74,11 +74,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		int startCol = colNo;
 		StringBuffer text = new StringBuffer();
 
-		int state = CTokenizerStateConst.ST_INIT;
+		CTokenizerStateConst state = CTokenizerStateConst.ST_INIT;
 		boolean accept = false;
 		while (!accept) {
 			switch (state) {
-				case CTokenizerStateConst.ST_INIT: // 初期状態
+				case ST_INIT: // 初期状態
 					ch = readChar();
 					if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
 					} else if (ch == (char) -1) { // EOF
@@ -170,15 +170,15 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_ILL;
 					}
 					break;
-				case CTokenizerStateConst.ST_EOF: // EOFを読んだ
+				case ST_EOF: // EOFを読んだ
 					tk = new CToken(CToken.TK_EOF, lineNo, startCol, "end_of_file");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_ILL: // ヘンな文字を読んだ
+				case ST_ILL: // ヘンな文字を読んだ
 					tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_DEC: // 数（10進数）の開始
+				case ST_DEC: // 数（10進数）の開始
 					ch = readChar();
 					if (Character.isDigit(ch)) {
 						text.append(ch);
@@ -192,7 +192,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case CTokenizerStateConst.ST_ZERO_HEX_OCT: // 8進数か16進数の頭の0を読んだ
+				case ST_ZERO_HEX_OCT: // 8進数か16進数の頭の0を読んだ
 					ch = readChar();
 					if (Character.isDigit(ch)) {
 						text.append(ch);
@@ -207,7 +207,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case CTokenizerStateConst.ST_OCT: // 数（8進数）の開始
+				case ST_OCT: // 数（8進数）の開始
 					ch = readChar();
 					if ('0' <= ch && ch <= '7') {
 						text.append(ch);
@@ -221,7 +221,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case CTokenizerStateConst.ST_HEX_INIT: // 数（16進数）の開始
+				case ST_HEX_INIT: // 数（16進数）の開始
 					ch = readChar();
 					if (Character.isDigit(ch) || ('a' <= ch && ch <= 'f') || 'A' <= ch && ch <= 'F') {
 						state = CTokenizerStateConst.ST_HEX;
@@ -230,7 +230,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_ILL;
 					}
 					break;
-				case CTokenizerStateConst.ST_HEX: // 数（16進数）
+				case ST_HEX: // 数（16進数）
 					ch = readChar();
 					if (Character.isDigit(ch) || ('a' <= ch && ch <= 'f') || 'A' <= ch && ch <= 'F') {
 						text.append(ch);
@@ -244,19 +244,19 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						accept = true;
 					}
 					break;
-				case CTokenizerStateConst.ST_PLUS: // +を読んだ
+				case ST_PLUS: // +を読んだ
 					tk = new CToken(CToken.TK_PLUS, lineNo, startCol, "+");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_MINUS: // -を読んだ
+				case ST_MINUS: // -を読んだ
 					tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_MUL: // *を読んだ
+				case ST_MUL: // *を読んだ
 					tk = new CToken(CToken.TK_MULT, lineNo, startCol, "*");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_SLASH: // /を読んだ
+				case ST_SLASH: // /を読んだ
 					ch = readChar();
 					text.append(ch);
 					if (ch == '/') {
@@ -271,7 +271,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					//tk = new CToken(CToken.TK_MINUS, lineNo, startCol, "-");
 					//accept = true;
 					break;
-				case CTokenizerStateConst.ST_SLASH_COMMENT: // //を読んでからコメントの途中
+				case ST_SLASH_COMMENT: // //を読んでからコメントの途中
 					ch = readChar();
 					if (ch == '\n') { // 改行でコメントおわり
 						text = new StringBuffer();
@@ -282,7 +282,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					// 他のコメント文字は無視
 					break;
-				case CTokenizerStateConst.ST_SLASH_ASTAR: /* コメントの途中 */
+				case ST_SLASH_ASTAR: /* コメントの途中 */
 					ch = readChar();
 					if (ch == '*') { // 終わる体制に入るよん
 						state = CTokenizerStateConst.ST_SLASH_ASTAR_ASTER;
@@ -293,7 +293,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					// 他のコメント文字
 					break;
-				case CTokenizerStateConst.ST_SLASH_ASTAR_ASTER: /* コメントのおわりがけ */
+				case ST_SLASH_ASTAR_ASTER: /* コメントのおわりがけ */
 					ch = readChar();
 					if (ch == '/') { // /でコメントおわり
 						text = new StringBuffer();
@@ -308,7 +308,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						state = CTokenizerStateConst.ST_SLASH_ASTAR;
 					}
 					break;
-				case CTokenizerStateConst.ST_AMP: // &を読んだ
+				case ST_AMP: // &を読んだ
 					ch = readChar();
 					if (ch == '&') {
 						text.append(ch);
@@ -319,23 +319,23 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_LPAR:
+				case ST_LPAR:
 					tk = new CToken(CToken.TK_LPAR, lineNo, startCol, "(");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_RPAR:
+				case ST_RPAR:
 					tk = new CToken(CToken.TK_RPAR, lineNo, startCol, ")");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_LBRA:
+				case ST_LBRA:
 					tk = new CToken(CToken.TK_LBRA, lineNo, startCol, "[");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_RBRA:
+				case ST_RBRA:
 					tk = new CToken(CToken.TK_RBRA, lineNo, startCol, "]");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_IDENT: // 識別子を読んだ
+				case ST_IDENT: // 識別子を読んだ
 					startCol = colNo - 1;
 					while (true) {
 						ch = readChar();
@@ -355,11 +355,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_SEMI:
+				case ST_SEMI:
 					tk = new CToken(CToken.TK_SEMI, lineNo, startCol, ";");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_LT:
+				case ST_LT:
 					ch = readChar();
 					if (ch == '=') {
 						text.append(ch);
@@ -370,7 +370,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_GT:
+				case ST_GT:
 					ch = readChar();
 					if (ch == '=') {
 						text.append(ch);
@@ -381,7 +381,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_EQ:
+				case ST_EQ:
 					ch = readChar();
 					if (ch == '=') {
 						text.append(ch);
@@ -392,7 +392,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_NOT:
+				case ST_NOT:
 					ch = readChar();
 					if (ch == '=') {
 						text.append(ch);
@@ -403,7 +403,7 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_PIPE:
+				case ST_PIPE:
 					ch = readChar();
 					if (ch == '|') {
 						text.append(ch);
@@ -414,11 +414,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_LCUR:
+				case ST_LCUR:
 					tk = new CToken(CToken.TK_LCUR, lineNo, startCol, "{");
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_RCUR:
+				case ST_RCUR:
 					tk = new CToken(CToken.TK_RCUR, lineNo, startCol, "}");
 					accept = true;
 					break;
@@ -426,4 +426,37 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		}
 		return tk;
 	}
+}
+
+
+enum CTokenizerStateConst {
+	ST_INIT,                // 初期状態
+	ST_EOF,                 // EOF
+	ST_ILL,                 // 変なやつ読んだ
+	ST_ZERO_HEX_OCT,        // 8進数か16進数の頭の0を読んだ
+	ST_OCT,                 // 8進数
+	ST_HEX_INIT,            // 16進数の開始
+	ST_HEX,                 // 16進数
+	ST_DEC,                 // 10進数読んだ
+	ST_PLUS,                // +演算子
+	ST_MINUS,               // -演算子
+	ST_MUL,                 // *演算子
+	ST_SLASH,               // /単体
+	ST_SLASH_COMMENT,       // //を読んだ
+	ST_SLASH_ASTAR,         // /*を読んだ
+	ST_SLASH_ASTAR_ASTER,   // /* --- *を読んだ
+	ST_AMP,                 // &演算子
+	ST_LPAR,                // (を読んだ
+	ST_RPAR,                // )を読んだ
+	ST_LBRA,                // [を読んだ
+	ST_RBRA,                // ]を読んだ
+	ST_IDENT,               // identを読んだ
+	ST_SEMI,                // ;を読んだ
+	ST_LT,                  // <を読んだ
+	ST_GT,                  // >を読んだ
+	ST_EQ,                  // =を読んだ
+	ST_NOT,                 // !を読んだ
+	ST_LCUR,                // {を読んだ
+	ST_RCUR,                // }を読んだ
+	ST_PIPE                 // |を読んだ
 }
