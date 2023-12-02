@@ -97,7 +97,7 @@ public class CodeGenIfTest {
                     MOV    -(R6), R1
                     MOV    -(R6), R0
                     MOV    R1, (R0)
-                    BRZ    ENDIF1
+                    JMP    ENDIF1
             ELSE1:
                     MOV    #i_a, (R6)+
                     MOV    #2, (R6)+
