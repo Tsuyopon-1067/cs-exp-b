@@ -40,6 +40,11 @@ public class CToken extends SimpleToken {
 
 	public static final int TK_LCUR		= 27;	// {
 	public static final int TK_RCUR		= 28;	// }
+	// add chapter8
+	public static final int TK_NOT      = 29;	// !
+	public static final int TK_AND     = 30;	// &&
+	public static final int TK_OR       = 31;	// ||
+
 
 
 
@@ -90,6 +95,10 @@ public class CToken extends SimpleToken {
 
 				put(TK_LCUR,"TK_LCUR");
 				put(TK_RCUR,"TK_RCUR");
+
+				put(TK_NOT,"TK_NOT");
+				put(TK_OR,"TK_OR");
+				put(TK_AND,"TK_AND");
 			}
 		};
 

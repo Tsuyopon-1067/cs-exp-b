@@ -151,7 +151,11 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					} else if (ch == '!') {
 						startCol = colNo - 1;
 						text.append(ch);
-						state = CTokenizerStateConst.ST_NE;
+						state = CTokenizerStateConst.ST_NOT;
+					} else if (ch == '|') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_PIPE;
 					} else if (ch == '{') {
 						startCol = colNo - 1;
 						text.append(ch);
@@ -305,7 +309,14 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					break;
 				case CTokenizerStateConst.ST_AMP: // &を読んだ
-					tk = new CToken(CToken.TK_AMP, lineNo, startCol, "&");
+					ch = readChar();
+					if (ch == '&') {
+						text.append(ch);
+						tk = new CToken(CToken.TK_AND, lineNo, startCol, text.toString());
+					} else {
+						tk = new CToken(CToken.TK_AMP, lineNo, startCol, text.toString());
+						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
+					}
 					accept = true;
 					break;
 				case CTokenizerStateConst.ST_LPAR:
@@ -381,14 +392,25 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					}
 					accept = true;
 					break;
-				case CTokenizerStateConst.ST_NE:
+				case CTokenizerStateConst.ST_NOT:
 					ch = readChar();
 					if (ch == '=') {
 						text.append(ch);
 						tk = new CToken(CToken.TK_NE, lineNo, startCol, text.toString());
 					} else {
-						backChar(ch);
+						tk = new CToken(CToken.TK_NOT, lineNo, startCol, text.toString());
+						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
+					}
+					accept = true;
+					break;
+				case CTokenizerStateConst.ST_PIPE:
+					ch = readChar();
+					if (ch == '|') {
+						text.append(ch);
+						tk = new CToken(CToken.TK_OR, lineNo, startCol, text.toString());
+					} else {
 						tk = new CToken(CToken.TK_ILL, lineNo, startCol, text.toString());
+						backChar(ch); // 読んだ文字を戻す（読まなかったことにする）
 					}
 					accept = true;
 					break;

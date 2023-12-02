@@ -27,7 +27,8 @@ public class CTokenizerStateConst {
 	public static final int ST_LT                = 23; // <
 	public static final int ST_GT                = 24; // >
 	public static final int ST_EQ                = 25; // =
-	public static final int ST_NE                = 26; // !
+	public static final int ST_NOT               = 26; // !
 	public static final int ST_LCUR              = 27; // {
 	public static final int ST_RCUR              = 28; // }
+	public static final int ST_PIPE              = 29; // |
 }
