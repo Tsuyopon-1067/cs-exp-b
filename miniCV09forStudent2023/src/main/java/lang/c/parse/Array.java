@@ -21,11 +21,17 @@ public class Array extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // [を読み飛ばす
 
-		if (Expression.isFirst(tk)) {
-			expression = new Expression(pcx);
-			expression.parse(pcx);
-		} else {
-			pcx.fatalError(tk.toExplainString() + "[の後ろはexpressionです");
+		try {
+			if (Expression.isFirst(tk)) {
+				expression = new Expression(pcx);
+				expression.parse(pcx);
+			} else {
+				pcx.recoverableError(tk.toExplainString() + "[の後ろはexpressionです");
+			}
+		} catch (RecoverableErrorException e) {
+			if (tk.getType() != CToken.TK_RBRA) {
+				ct.getNextToken(pcx);
+			}
 		}
 
 		// Expressionは次の字句まで読んでしまう

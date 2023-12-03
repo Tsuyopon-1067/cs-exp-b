@@ -34,11 +34,15 @@ public class StatementAssign extends CParseRule {
 		}
 
 		tk = ct.getNextToken(pcx);
-		if (!Expression.isFirst(tk)) {
-			pcx.fatalError(tk.toExplainString() + "=の後ろはExpressionです");
+		try {
+			if (!Expression.isFirst(tk)) {
+				pcx.recoverableError(tk.toExplainString() + "=の後ろはExpressionです");
+			}
+			expression = new Expression(pcx);
+			expression.parse(pcx);
+		} catch (RecoverableErrorException e) {
+			ct.skipTo(pcx, CToken.TK_SEMI);
 		}
-		expression = new Expression(pcx);
-		expression.parse(pcx);
 
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 		try {
