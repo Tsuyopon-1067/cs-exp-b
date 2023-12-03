@@ -99,8 +99,8 @@ public class ParseIfTest {
             new HelperTestStrMsg("if (true) i_a=1; else", "elseブロックの中はstatementです"),
 
             new HelperTestStrMsg("if i_a==1", "ifの後ろはconditionBlockです"),
-            new HelperTestStrMsg("if ( }", "(の後ろはconditionです"),
-            new HelperTestStrMsg("if (i_a==3", "conditionの後ろは)です"),
+            new HelperTestStrMsg("if ( }", "(の後ろはbitExpressionです"),
+            new HelperTestStrMsg("if (i_a==3", ")が閉じていません"),
             new HelperTestStrMsg("if (true) { i_a=1; aaa", "Primaryの後ろは=です"),
             new HelperTestStrMsg("if (true) { i_a=1; i_b=2;} else bbb;", "Primaryの後ろは=です"),
             new HelperTestStrMsg("if (true) { i_a=1;} else { i_c=3;", "statmentの後ろは}です"),

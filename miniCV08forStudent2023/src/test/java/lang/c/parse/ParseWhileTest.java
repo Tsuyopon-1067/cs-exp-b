@@ -88,8 +88,8 @@ public class ParseWhileTest {
             new HelperTestStrMsg("while (true)", "whileブロックの中はstatementです"),
 
             new HelperTestStrMsg("while i_a==1", "whileの後ろはconditionBlockです"),
-            new HelperTestStrMsg("while ( }", "(の後ろはconditionです"),
-            new HelperTestStrMsg("while (i_a==3", "conditionの後ろは)です"),
+            new HelperTestStrMsg("while ( }", "(の後ろはbitExpressionです"),
+            new HelperTestStrMsg("while (i_a==3", ")が閉じていません"),
             new HelperTestStrMsg("while (true) { i_a=1; aaa", "Primaryの後ろは=です"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {

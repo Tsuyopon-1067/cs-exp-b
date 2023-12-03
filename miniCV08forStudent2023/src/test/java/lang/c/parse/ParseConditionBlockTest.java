@@ -78,8 +78,8 @@ public class ParseConditionBlockTest {
     @Test
     public void parseConditionBlockError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("( ", "(の後ろはconditionです"),
-            new HelperTestStrMsg("( true", "conditionの後ろは)です"),
+            new HelperTestStrMsg("( ", "(の後ろはbitExpressionです"),
+            new HelperTestStrMsg("( true", ")が閉じていません"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();

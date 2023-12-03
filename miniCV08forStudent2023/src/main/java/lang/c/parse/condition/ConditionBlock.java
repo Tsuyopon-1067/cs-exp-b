@@ -4,10 +4,11 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.BitExpression;
 
 public class ConditionBlock extends CParseRule {
-    // conditionBlock ::= LPAR condition RPAR
-	CParseRule condition;
+    // conditionBlock  ::= LPAR bitExpression RPAR
+	CParseRule expression;
 
 	public ConditionBlock(CParseContext pcx) {
 	}
@@ -21,30 +22,30 @@ public class ConditionBlock extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // (を読み飛ばす
 
-		if (Condition.isFirst(tk)) {
-			condition = new Condition(pcx);
-			condition.parse(pcx);
+		if (BitExpression.isFirst(tk)) {
+			expression = new BitExpression(pcx);
+			expression.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "(の後ろはconditionです");
+			pcx.fatalError(tk.toExplainString() + "(の後ろはbitExpressionです");
 		}
 		tk = ct.getCurrentToken(pcx); // conditionは次の字句まで読んでしまう
 
 		if (tk.getType() != CToken.TK_RPAR) {
-			pcx.fatalError(tk.toExplainString() + "conditionの後ろは)です");
+			pcx.fatalError(tk.toExplainString() + ")が閉じていません");
 		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (condition != null) {
-			condition.semanticCheck(pcx);
+		if (expression != null) {
+			expression.semanticCheck(pcx);
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementBlock starts");
-		if (condition != null) {
-			condition.codeGen(pcx);
+		if (expression != null) {
+			expression.codeGen(pcx);
 		}
 		o.println(";;; StatementBlock completes");
 	}
