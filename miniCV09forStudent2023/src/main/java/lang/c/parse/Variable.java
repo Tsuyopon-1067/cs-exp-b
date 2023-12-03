@@ -37,7 +37,7 @@ public class Variable extends CParseRule {
 			boolean isPintArray = ident.getCType().isCType(CType.T_pint_array);
 			if (array != null) { // ident arrayの場合
 				if (!isIntArray && !isPintArray) {
-					pcx.fatalError("identの型が配列型ではありません");
+					pcx.warning("identの型が配列型ではありません");
 				}
 				array.semanticCheck(pcx);
 
@@ -48,7 +48,7 @@ public class Variable extends CParseRule {
 				}
 			} else { // identのみの場合
 				if (isIntArray || isPintArray) {
-					pcx.fatalError("配列のインデックスが指定されていません");
+					pcx.warning("配列のインデックスが指定されていません");
 				}
 				setCType(ident.getCType());
 			}

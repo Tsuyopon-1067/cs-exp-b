@@ -34,7 +34,7 @@ public class MinusFactor extends CParseRule {
 			setCType(factor.getCType()); // factor の型をそのままコピー
 			setConstant(factor.isConstant()); // factor は常に定数
             if(factor.getCType().getType() == CType.T_pint){
-                pcx.fatalError("ポインタに符号(-)はつけられません");
+                pcx.warning("ポインタに符号(-)はつけられません");
             }
 		}
 	}

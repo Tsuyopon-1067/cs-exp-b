@@ -43,7 +43,7 @@ public class StatementInput extends CParseRule {
 			primary.semanticCheck(pcx);
 		}
 		if (primary.isConstant()) {
-			pcx.fatalError(primaryToken.toExplainString() + "左辺が定数です");
+			pcx.warning(primaryToken.toExplainString() + "左辺が定数です");
 		}
 	}
 

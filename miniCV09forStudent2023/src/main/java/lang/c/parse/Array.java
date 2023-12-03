@@ -39,7 +39,7 @@ public class Array extends CParseRule {
 		if (expression != null) {
 			expression.semanticCheck(pcx);
 			if (expression.getCType().getType() != CType.T_int) {
-				pcx.fatalError("配列のインデックスはintである必要があります");
+				pcx.warning("配列のインデックスはintである必要があります");
 			}
 			setCType(expression.getCType()); // expression の型をそのままコピー
 			setConstant(false);

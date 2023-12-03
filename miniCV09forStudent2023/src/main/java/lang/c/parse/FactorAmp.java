@@ -44,7 +44,7 @@ public class FactorAmp extends CParseRule {
 
 			// &の後ろがポインタならエラー
 			if(numberPrim.getCType() == CType.getCType(CType.T_pint) || numberPrim.getCType() == CType.getCType(CType.T_pint_array)) {
-				pcx.fatalError("ポインタに&はつけられません");
+				pcx.warning("ポインタに&はつけられません");
 			}
 			this.setCType(CType.getCType(CType.T_pint));
 			setConstant(numberPrim.isConstant()); // numberPrim は常に定数

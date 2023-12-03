@@ -52,11 +52,11 @@ public class StatementAssign extends CParseRule {
 			primary.semanticCheck(pcx);
 			expression.semanticCheck(pcx);
 			if (primary.getCType() != expression.getCType()) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + primary.getCType().toString()
+				pcx.warning(op.toExplainString() + "左辺の型[" + primary.getCType().toString()
 					+ "]と右辺の型[" + expression.getCType().toString() + "]が異なります");
 			}
 			if (primary.isConstant()) {
-				pcx.fatalError(primaryToken.toExplainString() + "左辺が定数です");
+				pcx.warning(primaryToken.toExplainString() + "左辺が定数です");
 			}
 		}
 	}

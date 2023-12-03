@@ -42,7 +42,7 @@ class BitExpressionOr extends CParseRule {
 			left.semanticCheck(pcx);
 			right.semanticCheck(pcx);
 			if ( !(left.getCType().getType() == CType.T_bool && right.getCType().getType() == CType.T_bool) ) {
-				pcx.fatalError(op.toExplainString() + "||の左辺と右辺はT_boolである必要があります");
+				pcx.warning(op.toExplainString() + "||の左辺と右辺はT_boolである必要があります");
 			}
 			this.setCType(CType.getCType(CType.T_bool));
 			this.setConstant(left.isConstant() && right.isConstant()); // 演算子の左右両方が定数のときだけ定数

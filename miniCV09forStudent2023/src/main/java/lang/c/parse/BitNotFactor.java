@@ -36,7 +36,7 @@ public class BitNotFactor extends CParseRule {
 		if (nextParseRule != null) {
 			nextParseRule.semanticCheck(pcx);
 			if (nextParseRule.getCType().getType() != CType.T_bool) {
-				pcx.fatalError(op.toExplainString() + "!の右はT_boolです");
+				pcx.warning(op.toExplainString() + "!の右はT_boolです");
 			}
 			setCType(nextParseRule.getCType()); // 型をそのままコピー
 			setConstant(nextParseRule.isConstant());

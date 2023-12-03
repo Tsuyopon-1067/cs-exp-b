@@ -49,7 +49,7 @@ public class TermMult extends CParseRule {
 			int rt = right.getCType().getType(); // -の右辺の型
 			int nt = s[lt][rt]; // 規則による型計算
 			if (nt == CType.T_err) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+				pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
 						+ right.getCType().toString() + "]は掛けられません");
 			}
 			this.setCType(CType.getCType(nt));

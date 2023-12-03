@@ -36,7 +36,7 @@ public class PrimaryMult extends CParseRule {
 			if (variable.getCType().getType() == CType.T_pint) {
 				setCType(CType.getCType(CType.T_int));
 			} else if (variable.getCType().getType() == CType.T_int) {
-				pcx.fatalError("ポインタではない数値でアドレスを参照することはできません");
+				pcx.warning("ポインタではない数値でアドレスを参照することはできません");
 			}
 		}
 	}

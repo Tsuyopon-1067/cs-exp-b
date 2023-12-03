@@ -31,7 +31,7 @@ public abstract class AbstractConditionOperator extends CParseRule {
 			CType leftType = left.getCType();
 			CType rightType = right.getCType();
 			if (leftType.getType() != rightType.getType()) {
-				pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+				pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
 						+ right.getCType().toString() + "]は比較できません");
 			}
 		}

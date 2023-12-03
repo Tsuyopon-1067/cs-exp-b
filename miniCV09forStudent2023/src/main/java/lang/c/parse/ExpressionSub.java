@@ -40,7 +40,7 @@ class ExpressionSub extends AbstractExpressionAddSub {
 
 	@Override
 	protected void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException {
-		pcx.fatalError(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+		pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
 				+ right.getCType().toString() + "]は引けません");
 	}
 
