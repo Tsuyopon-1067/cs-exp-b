@@ -38,7 +38,11 @@ public class Statement extends CParseRule {
 		} else if (StatementBlock.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementBlock(pcx);
 		}
-		nextCParseRule.parse(pcx);
+		try {
+			nextCParseRule.parse(pcx);
+		} catch (Exception e) {
+			pcx.warning("statementのエラーをスキップしました");
+		}
 		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}
 

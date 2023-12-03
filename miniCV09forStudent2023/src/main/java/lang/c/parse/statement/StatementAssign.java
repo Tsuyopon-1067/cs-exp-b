@@ -41,10 +41,14 @@ public class StatementAssign extends CParseRule {
 		expression.parse(pcx);
 
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
-		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.fatalError(tk.toExplainString() + ";がありません");
+		try {
+			if (tk.getType() != CToken.TK_SEMI) {
+				pcx.recoverableError(tk.toExplainString() + ";がありません");
+			}
+			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
+		} catch (RecoverableErrorException e) {
+			//pcx.warning(";をスキップしました");
 		}
-		tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

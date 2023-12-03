@@ -68,6 +68,26 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		return currentTk;
 	}
 
+	public void skipTo(CParseContext pcxt, int ... tokens) {
+		CToken currentToken = getCurrentToken(pcxt);
+		while (true) {
+			if (currentToken.getType() == CToken.TK_EOF) {
+				break;
+			}
+
+			boolean isBreak = false;
+			for (int token : tokens) {
+				if (token == currentToken.getType()) {
+					isBreak = true;
+				}
+			}
+			if (isBreak) {
+				break;
+			}
+			currentToken = getNextToken(pcxt);
+		}
+	}
+
 	private CToken readToken() {
 		CToken tk = null;
 		char ch;

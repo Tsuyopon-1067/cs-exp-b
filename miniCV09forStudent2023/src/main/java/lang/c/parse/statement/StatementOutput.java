@@ -29,11 +29,15 @@ public class StatementOutput extends CParseRule {
 			pcx.fatalError(tk.toExplainString() + "outputの後ろはexpressionです");
 		}
 
-		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
-		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.fatalError(tk.toExplainString() + "文末は;です");
+		try {
+			tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
+			if (tk.getType() != CToken.TK_SEMI) {
+				pcx.recoverableError(tk.toExplainString() + "文末は;です");
+			}
+			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
+		} catch (RecoverableErrorException e) {
+			pcx.warning(";をスキップしました");
 		}
-		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

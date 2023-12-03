@@ -22,11 +22,15 @@ public class StatementWhile extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		if (ConditionBlock.isFirst(tk)) {
-			condition = new ConditionBlock(pcx);
-			condition.parse(pcx);
-		} else {
-			pcx.fatalError(tk.toExplainString() + "whileの後ろはconditionBlockです");
+		try {
+			if (ConditionBlock.isFirst(tk)) {
+				condition = new ConditionBlock(pcx);
+				condition.parse(pcx);
+			} else {
+				pcx.recoverableError(tk.toExplainString() + "whileの後ろはconditionBlockです");
+			}
+		} catch (RecoverableErrorException e) {
+			ct.skipTo(pcx, CToken.TK_RPAR); // ConditionBlockの終わりまで飛ばす
 		}
 		tk = ct.getNextToken(pcx);
 

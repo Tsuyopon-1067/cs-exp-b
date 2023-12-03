@@ -30,10 +30,13 @@ public class StatementBlock extends CParseRule {
 			tk = ct.getCurrentToken(pcx);
 		}
 
-		if (tk.getType() != CToken.TK_RCUR) {
-			pcx.fatalError(tk.toExplainString() + "statmentの後ろは}です");
+		try {
+			if (tk.getType() != CToken.TK_RCUR) {
+				pcx.recoverableError(tk.toExplainString() + "statmentの後ろは}です");
+			}
+			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
+		} catch (RecoverableErrorException e) {
 		}
-		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
