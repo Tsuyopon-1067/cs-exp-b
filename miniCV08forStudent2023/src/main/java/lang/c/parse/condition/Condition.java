@@ -8,9 +8,10 @@ import lang.c.parse.Expression;
 
 public class Condition extends CParseRule {
 	//condition    ::= TRUE | FALSE | expression ( conditionLT | conditionLE | conditionGT
-	//                                           | conditionGE | conditionEQ | conditionNE )
+	//                                           | conditionGE | conditionEQ | conditionNE ) | bitExpression
 	CParseRule nextParseRule;
 	boolean condition;
+	boolean isExpression;
 
 	public Condition(CParseContext pcx) {
 	}
@@ -27,6 +28,7 @@ public class Condition extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 		if (Expression.isFirst(tk)) {
+			isExpression = true;
 			Expression expression = new Expression(pcx);
 			expression.parse(pcx);
 
@@ -45,6 +47,7 @@ public class Condition extends CParseRule {
 			};
 			nextParseRule.parse(pcx);
 		} else {
+			isExpression = false;
 			if (tk.getType() == CToken.TK_TRUE) {
 				condition = true;
 			} else {
@@ -55,10 +58,13 @@ public class Condition extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (nextParseRule != null) {
+		if (nextParseRule != null && isExpression) {
 			nextParseRule.semanticCheck(pcx);
-			setCType(nextParseRule.getCType());
+			setCType(CType.getCType(CType.T_bool));
 			setConstant(nextParseRule.isConstant());
+		} else if (nextParseRule == null && !isExpression) {
+			setCType(CType.getCType(CType.T_bool));
+			setConstant(true);
 		}
 	}
 

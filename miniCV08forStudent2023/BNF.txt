@@ -2,6 +2,7 @@
 term
 expression -> condition系 -> condition
 if -> statement系 -> statement
+bit系
 
 -------------
 
@@ -41,5 +42,13 @@ statementIf     ::= IF conditionBlock statement [ ELSE statement ]
 statementWhile  ::= WHILE conditionBlock statement
 statementInput  ::= INPUT primary SEMI
 statementOutput ::= OUTPUT expression SEMI
-conditionBlock  ::= LPAR condition RPAR
+conditionBlock  ::= LPAR bitExpression RPAR
 statementBlock  ::= LCUR { statement } RCUR
+
+
+bitExpression   ::= bitTerm { bitOr }
+bitExpressionOr ::= OR bitTerm
+bitTerm         ::= bitFactor { bitAnd }
+bitTermAnd      ::= AND bitFactor
+bitFactor       ::= condition | LT bitExpression GT | bitNotFactor // 不等号で囲む (LPAR expression RPAR と区別したい)
+bitNotFactor    ::= NOT bitFactor

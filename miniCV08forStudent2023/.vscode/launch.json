@@ -43,6 +43,14 @@
             "mainClass": "lang.c.MiniCompilerForCondition",
             "projectName": "minicv",
             "args": ["src/main/java/lang/c/test.c"]
+        },
+        {
+            "type": "java",
+            "name": "MiniCompilerForBitExpression for Mac",
+            "request": "launch",
+            "mainClass": "lang.c.MiniCompilerForBitExpression",
+            "projectName": "minicv",
+            "args": ["src/main/java/lang/c/test.c"]
         }
     ]
 }
