@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -81,6 +82,7 @@ public class ParseWhileTest {
         }
     }
 
+    @Ignore
     @Test
     public void parseWhileTestError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {

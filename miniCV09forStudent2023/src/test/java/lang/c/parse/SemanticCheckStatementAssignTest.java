@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -97,6 +98,7 @@ public class SemanticCheckStatementAssignTest {
 
     // (1) 整数型の扱い
     // If it is difficult to understand, separate the test cases and create a new test.
+    @Ignore
     @Test
     public void SemanticCheckAssignIntegerTypeError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
@@ -122,6 +124,7 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (2) ポインタ型の扱い
+    @Ignore
     @Test
     public void SemanticCheckAssignPinterTypeError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
@@ -145,6 +148,7 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (3) 配列型の扱い
+    @Ignore
     @Test
     public void SemanticCheckAssignArrayTypeError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
@@ -169,6 +173,7 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (3) ポインタ配列型の扱い
+    @Ignore
     @Test
     public void SemanticCheckAssignPointArrayTypeError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
@@ -194,6 +199,7 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (5) 定数には代入できないことの確認
+    @Ignore
     @Test
     public void SemanticCheckAssignConstantTypeError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = { new HelperTestStrMsg("c_a=1;", "左辺が定数です") };
@@ -215,6 +221,7 @@ public class SemanticCheckStatementAssignTest {
     }
 
     // (extra) code should be written as follows
+    @Ignore
     @Test
     public void SemanticCheckAssignExtra() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {

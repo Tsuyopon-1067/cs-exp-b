@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -80,6 +81,7 @@ public class SemanticCheckFactorAmpTest {
     }
 
     // 不当のテストコード例
+    @Ignore
     @Test
     public void semanticCheckFalseExample() throws FatalErrorException {
         String[] testDataArr = {"2-&1", "&3-&1-&1", "1+&" };

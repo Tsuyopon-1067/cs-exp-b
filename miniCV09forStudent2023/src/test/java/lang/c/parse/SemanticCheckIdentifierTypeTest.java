@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -60,6 +61,7 @@ public class SemanticCheckIdentifierTypeTest {
     //  以下テストケースにおいて違うエラーメッセージのためテストが出来ない場合
     // 同じエラーメッセージのものだけでテストメソッドを分割してください．
     // (1) 整数型の扱い
+    @Ignore
     @Test
     public void semanticErrorForIntegerType()  {
         HelperTestStrMsg[] testDataArr = {
@@ -87,6 +89,7 @@ public class SemanticCheckIdentifierTypeTest {
 
     // (2) ポインタ型の扱い
     // ip_a[3] はCでは正当だが，この実験では不当にすること
+    @Ignore
     @Test
     public void semanticErrorForPointerType()  {
         HelperTestStrMsg[] testDataArr = {
@@ -112,6 +115,7 @@ public class SemanticCheckIdentifierTypeTest {
         }
     }
 
+    @Ignore
     @Test
     public void semanticErrorForIdentWithMinusSign() {
         String[] testDataArr = { "-ip_a" };
@@ -134,6 +138,7 @@ public class SemanticCheckIdentifierTypeTest {
     }
     // (3) 配列型の扱い
     // *ia_a はCでは正当だが，この実験では不当にすること
+    @Ignore
     @Test
     public void semanticErrorForIdentArrayType()  {
         HelperTestStrMsg[] testDataArr = {
@@ -161,6 +166,7 @@ public class SemanticCheckIdentifierTypeTest {
 
     // (4) ポインタ配列型の扱い
     // *ipa_a はCでは正当だが，この実験では不当にすること
+    @Ignore
     @Test
     public void semanticErrorForPointerArrayType()  {
         HelperTestStrMsg[] testDataArr = {

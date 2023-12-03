@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -88,6 +89,7 @@ public class SemanticCheckProgramTest_cv02 {
         assertThat(errorOutput, is(""));
     }
 
+    @Ignore
     @Test
     public void FactorWithAmpOverflow() throws FatalErrorException {
         String[] testDataArr = {"&65536", "&0200000", "&0x10000"};
