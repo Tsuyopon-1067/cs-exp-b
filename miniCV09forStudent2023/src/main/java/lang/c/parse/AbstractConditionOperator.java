@@ -17,11 +17,16 @@ public abstract class AbstractConditionOperator extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // 比較演算子を読み飛ばす
-		if (!Expression.isFirst(tk)) {
-			pcx.fatalError(op.toExplainString() + "比較演算子の後ろはexpressionです");
+		try {
+			if (Expression.isFirst(tk)) {
+				right = new Expression(pcx);
+				right.parse(pcx);
+			} else {
+				pcx.recoverableError(op.toExplainString() + "比較演算子の後ろはexpressionです");
+			}
+		} catch (RecoverableErrorException e) {
+			ct.getNextToken(pcx);
 		}
-		right = new Expression(pcx);
-		right.parse(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

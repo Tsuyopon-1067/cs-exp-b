@@ -23,14 +23,18 @@ public class FactorAmp extends CParseRule {
         op = ct.getCurrentToken(pcx);
 		// &の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
-		if (Number.isFirst(tk)) {
-			numberPrim = new Number(pcx);
-		} else if (Ident.isFirst(tk)) {
-			numberPrim = new Primary(pcx);
-		} else {
-			pcx.fatalError(tk.toExplainString() + "&の後はNumberかPrimaryです");
+		try {
+			if (Number.isFirst(tk)) {
+				numberPrim = new Number(pcx);
+			} else if (Ident.isFirst(tk)) {
+				numberPrim = new Primary(pcx);
+			} else {
+				pcx.recoverableError(tk.toExplainString() + "&の後はNumberかPrimaryです");
+			}
+			numberPrim.parse(pcx);
+		} catch (RecoverableErrorException e) {
+			ct.getNextToken(pcx);
 		}
-		numberPrim.parse(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -43,8 +47,10 @@ public class FactorAmp extends CParseRule {
 			numberPrim.semanticCheck(pcx);
 
 			// &の後ろがポインタならエラー
-			if(numberPrim.getCType() == CType.getCType(CType.T_pint) || numberPrim.getCType() == CType.getCType(CType.T_pint_array)) {
-				pcx.warning("ポインタに&はつけられません");
+			if (numberPrim.getCType() != null) {
+				if(numberPrim.getCType() == CType.getCType(CType.T_pint) || numberPrim.getCType() == CType.getCType(CType.T_pint_array)) {
+					pcx.warning("ポインタに&はつけられません");
+				}
 			}
 			this.setCType(CType.getCType(CType.T_pint));
 			setConstant(numberPrim.isConstant()); // numberPrim は常に定数
