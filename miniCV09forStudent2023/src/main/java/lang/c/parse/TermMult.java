@@ -45,12 +45,20 @@ public class TermMult extends CParseRule {
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
 			right.semanticCheck(pcx);
-			int lt = left.getCType().getType(); // -の左辺の型
-			int rt = right.getCType().getType(); // -の右辺の型
+			int lt = 0;
+			int rt = 0;
+			if (left.getCType() != null) {
+				lt = left.getCType().getType(); // 左辺の型
+			}
+			if (right.getCType() != null) {
+				rt = right.getCType().getType(); // 右辺の型
+			}
 			int nt = s[lt][rt]; // 規則による型計算
 			if (nt == CType.T_err) {
-				pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
-						+ right.getCType().toString() + "]は掛けられません");
+				if (left.getCType() != null && right.getCType() != null) {
+					pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+							+ right.getCType().toString() + "]は掛けられません");
+				}
 			}
 			this.setCType(CType.getCType(nt));
 			this.setConstant(left.isConstant() && right.isConstant()); // *の左右両方が定数のときだけ定数
