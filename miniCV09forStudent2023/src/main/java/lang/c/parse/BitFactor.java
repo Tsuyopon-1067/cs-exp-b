@@ -45,7 +45,6 @@ public class BitFactor extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (nexParseRule != null) {
 			nexParseRule.semanticCheck(pcx);
-			System.out.println(nexParseRule.getClass().getSimpleName());
 			setCType(nexParseRule.getCType()); // 型をそのままコピー
 			setConstant(nexParseRule.isConstant());
 		}
