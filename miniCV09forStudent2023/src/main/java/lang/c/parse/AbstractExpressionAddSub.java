@@ -1,7 +1,5 @@
 package lang.c.parse;
 
-import java.io.PrintStream;
-
 import lang.FatalErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
@@ -41,8 +39,14 @@ abstract class AbstractExpressionAddSub extends CParseRule {
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
 			right.semanticCheck(pcx);
-			int lt = left.getCType().getType(); // 左辺の型
-			int rt = right.getCType().getType(); // 右辺の型
+			int lt = 0;
+			int rt = 0;
+			if (left.getCType() != null) {
+				lt = left.getCType().getType(); // 左辺の型
+			}
+			if (right.getCType() != null) {
+				rt = right.getCType().getType(); // 右辺の型
+			}
 			int nt = s[lt][rt]; // 規則による型計算
 			if (nt == CType.T_err) {
 				semanticCheckTypeError(pcx);
