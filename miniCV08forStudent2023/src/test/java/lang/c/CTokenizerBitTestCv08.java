@@ -8,7 +8,7 @@ import lang.IOContext;
 import lang.InputStreamForTest;
 import lang.PrintStreamForTest;
 
-public class CTokenizerBitTest {
+public class CTokenizerBitTestCv08 {
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
