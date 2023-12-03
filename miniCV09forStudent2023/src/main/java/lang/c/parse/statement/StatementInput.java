@@ -23,18 +23,25 @@ public class StatementInput extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		if (Primary.isFirst(tk)) {
-			primaryToken = tk;
-			primary = new Primary(pcx);
-			primary.parse(pcx);
-		} else {
-			pcx.fatalError(tk.toExplainString() + "inputの後ろはprimaryです");
+		try {
+			if (Primary.isFirst(tk)) {
+				primaryToken = tk;
+				primary = new Primary(pcx);
+				primary.parse(pcx);
+			} else {
+				ct.getNextToken(pcx);
+				tk = ct.getCurrentToken(pcx);
+				System.out.println(tk.toDetailExplainString());
+				pcx.recoverableError(tk.toExplainString() + "inputの後ろはprimaryです");
+			}
+		} catch (RecoverableErrorException e) {
+			//pcx.warning("input文のエラーをスキップしました");
 		}
 
 		tk = ct.getCurrentToken(pcx);
 		try {
 			if (tk.getType() != CToken.TK_SEMI) {
-				pcx.fatalError(tk.toExplainString() + "文末は;です");
+				pcx.recoverableError(tk.toExplainString() + "文末は;です");
 			}
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {
@@ -45,9 +52,9 @@ public class StatementInput extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (primary != null) {
 			primary.semanticCheck(pcx);
-		}
-		if (primary.isConstant()) {
-			pcx.warning(primaryToken.toExplainString() + "左辺が定数です");
+			if (primary.isConstant()) {
+				pcx.warning(primaryToken.toExplainString() + "左辺が定数です");
+			}
 		}
 	}
 
