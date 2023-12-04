@@ -13,7 +13,7 @@ public class CTokenRule extends HashMap<String, Object> {
 		put("while",  Integer.valueOf(CToken.TK_WHILE));
 		put("input",  Integer.valueOf(CToken.TK_INPUT));
 		put("output",  Integer.valueOf(CToken.TK_OUTPUT));
-		put("int", new Integer(CToken.TK_INT));
-		put("const", new Integer(CToken.TK_CONST));
+		put("int", Integer.valueOf(CToken.TK_INT));
+		put("const", Integer.valueOf(CToken.TK_CONST));
 	}
 }

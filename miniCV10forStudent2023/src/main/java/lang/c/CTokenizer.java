@@ -184,6 +184,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 						startCol = colNo - 1;
 						text.append(ch);
 						state = CTokenizerStateConst.ST_RCUR;
+					} else if (ch == ',') {
+						startCol = colNo - 1;
+						text.append(ch);
+						state = CTokenizerStateConst.ST_COMMA;
 					} else { // ヘンな文字を読んだ
 						startCol = colNo - 1;
 						text.append(ch);
@@ -442,6 +446,10 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 					tk = new CToken(CToken.TK_RCUR, lineNo, startCol, "}");
 					accept = true;
 					break;
+				case ST_COMMA:
+					tk = new CToken(CToken.TK_COMMA, lineNo, startCol, ",");
+					accept = true;
+					break;
 			}
 		}
 		return tk;
@@ -478,5 +486,6 @@ enum CTokenizerStateConst {
 	ST_NOT,                 // !を読んだ
 	ST_LCUR,                // {を読んだ
 	ST_RCUR,                // }を読んだ
-	ST_PIPE                 // |を読んだ
+	ST_PIPE,                // |を読んだ
+	ST_COMMA                // ,
 }
