@@ -36,4 +36,8 @@ public class Number extends CParseRule {
 		}
 		o.println(";;; number completes");
 	}
+
+	public int getValue() {
+		return Integer.parseInt(num.getText());
+	}
 }

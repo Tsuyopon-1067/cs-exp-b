@@ -40,7 +40,12 @@ public class ConstDecl extends CParseRule {
 			ct.skipTo(pcx, CToken.TK_SEMI);
 		}
 		constItems.addLast(new ConstItem(pcx));
-		constItems.getLast().parse(pcx);
+		try {
+			constItems.getLast().parse(pcx);
+			System.out.println("constdecl 46 try parse "+tk.toDetailExplainString());
+		} catch (RecoverableErrorException e) {
+			ct.skipTo(pcx, CToken.TK_COMMA, CToken.TK_SEMI);
+		}
 
 		tk = ct.getCurrentToken(pcx); // ,か;を読む
 
@@ -49,14 +54,11 @@ public class ConstDecl extends CParseRule {
 			if (!ConstItem.isFirst(tk)) {
 				pcx.recoverableError(",の次はconstItemです");
 			}
-			constItems.addLast(new ConstDecl(pcx));
+			constItems.addLast(new ConstItem(pcx));
 			try {
-				if (ConstItem.isFirst(tk)) {
-					constItems.getLast().parse(pcx);
-				}
+				constItems.getLast().parse(pcx);
 			} catch (RecoverableErrorException e) {
-				ct.skipTo(pcx, CToken.TK_SEMI);
-				return;
+				ct.skipTo(pcx, CToken.TK_COMMA, CToken.TK_SEMI);
 			}
 
 			tk = ct.getCurrentToken(pcx); // ,か;を読む
@@ -77,6 +79,9 @@ public class ConstDecl extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; constDecl starts");
 		if (constItems != null) {
+			for (CParseRule c : constItems) {
+				c.codeGen(pcx);
+			}
 		}
 		o.println(";;; constDecl completes");
 	}

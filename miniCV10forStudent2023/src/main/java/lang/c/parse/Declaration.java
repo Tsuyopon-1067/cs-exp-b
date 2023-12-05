@@ -45,6 +45,7 @@ public class Declaration extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; declaration starts");
 		if (nextParseRule != null) {
+			nextParseRule.codeGen(pcx);
 		}
 		o.println(";;; declaration completes");
 	}

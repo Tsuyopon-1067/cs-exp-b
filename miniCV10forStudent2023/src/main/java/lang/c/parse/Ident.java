@@ -8,6 +8,8 @@ import lang.c.*;
 public class Ident extends CParseRule {
 	// ident ::= IDENT
 	CToken ident;
+	private String identName;
+	CSymbolTableEntry entry;
 
 	public Ident(CParseContext pcx) {
 	}
@@ -19,11 +21,19 @@ public class Ident extends CParseRule {
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
+		identName = tk.getText();
 		ident = tk;
+
+		if (pcx.getSymbolTable().searchGlobal(identName) == null) {
+			pcx.warning("変数" + identName + "は宣言されていません");
+		} else {
+			entry = pcx.getSymbolTable().searchGlobal(identName);
+		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (ident != null) {
+			/*
 			String identText = ident.getText();
 			int setType = CType.T_int;
 			boolean isConstant = false;
@@ -41,7 +51,14 @@ public class Ident extends CParseRule {
 			} else {
 				pcx.warning("変数はi_，ip_，ia_，ipa_，c_のどれかから始まる必要があります");
 			}
-
+			*/
+			if (entry == null) {
+				setCType(CType.getCType(CType.T_err));
+				pcx.warning("変数" + ident.getText() + "は宣言されていません");
+				return;
+			}
+			int setType = entry.GetCType().getType();
+			boolean isConstant = entry.isConstant();
 			this.setCType(CType.getCType(setType));
 			this.setConstant(isConstant);
 		}

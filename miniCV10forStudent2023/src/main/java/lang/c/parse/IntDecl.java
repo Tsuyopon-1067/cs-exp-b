@@ -42,9 +42,7 @@ public class IntDecl extends CParseRule {
 			}
 			declItems.addLast(new DeclItem(pcx));
 			try {
-				if (!DeclItem.isFirst(tk)) {
-					declItems.getLast().parse(pcx);
-				}
+				declItems.getLast().parse(pcx);
 			} catch (RecoverableErrorException e) {
 				pcx.warning(";までスキップしました");
 				ct.skipTo(pcx, CToken.TK_SEMI);
@@ -68,6 +66,9 @@ public class IntDecl extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; intDecl starts");
 		if (declItems != null) {
+			for (CParseRule d : declItems) {
+				d.codeGen(pcx);
+			}
 		}
 		o.println(";;; intDecl completes");
 	}

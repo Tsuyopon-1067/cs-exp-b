@@ -7,9 +7,11 @@ import lang.c.*;
 
 public class ConstItem extends CParseRule {
 	// constItem   ::= [ MULT ] IDENT ASSIGN [ AMP ] NUM
-	CParseRule ident, num;
+	CParseRule num;
+	String identName;
 	boolean isExistMult = false;
 	boolean isExistAmp = false;
+	int size;
 
 	public ConstItem(CParseContext pcx) {
 	}
@@ -27,13 +29,10 @@ public class ConstItem extends CParseRule {
 			isExistMult = true;
 		}
 
-		try {
-			if (tk.getType() == CToken.TK_IDENT) {
-				ident = new Ident(pcx);
-			} else {
-				pcx.recoverableError("左辺に変数が必要です");
-			}
-		} catch (RecoverableErrorException e) {
+		if (tk.getType() == CToken.TK_IDENT) {
+			identName = tk.getText();
+		} else {
+			pcx.recoverableError("intの後ろは宣言する定数名です");
 		}
 		tk = ct.getNextToken(pcx);
 
@@ -50,26 +49,37 @@ public class ConstItem extends CParseRule {
 			isExistAmp = true;
 		}
 
-		try {
-			if (tk.getType() == CToken.TK_NUM) {
-				num = new Number(pcx);
-			} else {
-				pcx.recoverableError("右辺に数値が必要です");
-			}
-		} catch (RecoverableErrorException e) {
+		if (tk.getType() == CToken.TK_NUM) {
+			num = new Number(pcx);
+		} else {
+			pcx.recoverableError("右辺に数値が必要です");
 		}
-		tk = ct.getNextToken(pcx); // declItemに合わせて次の字句まで読む
+		num.parse(pcx);
+		tk = ct.getCurrentToken(pcx); // declItemに合わせて次の字句まで読む
+
+		// 変数登録
+		CSymbolTableEntry entry;
+		final boolean isConst = true;
+		final boolean isGlobal = true;
+		size = 1;
+		if (isExistMult) {
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isGlobal, 0);
+		} else {
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isGlobal, 0);
+		}
+		if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
+			pcx.recoverableError("すでに宣言されている変数です");
+		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (ident != null) {
-		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; constItem starts");
-		if (ident != null) {
+		if (num != null) {
+			o.println(identName + ":\t.WORD " + ((Number)num).getValue() + "\t\t\t; ConstItem:");
 		}
 		o.println(";;; constItem completes");
 	}

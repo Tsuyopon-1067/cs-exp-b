@@ -26,8 +26,6 @@ array           ::= LBRA expression RBRA
 ident           ::= IDENT
 addressToValue  ::= primary
 
-program ::= { statement } EOF
-
 condition   ::= TRUE | FALSE | expression ( conditionLT | conditionLE | conditionGT | conditionGE | conditionEQ | conditionNE )
 conditionLT ::= LT expression
 conditionLE ::= LE expression
@@ -52,3 +50,10 @@ bitTerm         ::= bitFactor { bitAnd }
 bitTermAnd      ::= AND bitFactor
 bitFactor       ::= condition | LT bitExpression GT | bitNotFactor // 不等号で囲む (LPAR expression RPAR と区別したい)
 bitNotFactor    ::= NOT bitFactor
+
+program     ::= { declaration } { statement } EOF
+declaration ::= intDecl | constDecl
+intDecl     ::= INT declItem { COMMA declItem } SEMI
+constDecl   ::= CONST INT constItem { COMMA constItem } SEMI
+constItem   ::= [ MULT ] IDENT ASSIGN [ AMP ] NUM
+declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
