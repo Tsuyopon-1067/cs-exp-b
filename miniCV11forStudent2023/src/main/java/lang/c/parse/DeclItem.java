@@ -12,6 +12,7 @@ public class DeclItem extends CParseRule {
 	String identName;
 	boolean isExistMult = false;
 	boolean isArray = false;
+	boolean isGlobal;
 
 	public DeclItem(CParseContext pcx) {
 	}
@@ -81,11 +82,16 @@ public class DeclItem extends CParseRule {
 				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
 			}
 		}
-		try {
+
+		isGlobal = pcx.getSymbolTable().isGlobalMode();
+		if (isGlobal) {
 			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
 				pcx.recoverableError("すでに宣言されている変数です");
 			}
-		} catch (RecoverableErrorException e) {
+		} else {
+			if ( !pcx.getSymbolTable().registerLocal(identName, entry) ) {
+				pcx.recoverableError("すでに宣言されている変数です");
+			}
 		}
 	}
 
@@ -94,8 +100,15 @@ public class DeclItem extends CParseRule {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		o.println(";;; constItem starts");
-		o.println(identName + ":\t.BLKW " + size + "\t\t\t; ConstItem:");
-		o.println(";;; constItem completes");
+		o.println(";;; declItem starts");
+		if (num != null) {
+			if (isGlobal) {
+				o.println(identName + ":\t.BLKW " + size + "\t\t\t; DeclItem:");
+			} else {
+				o.println("\tADD\t#" + size + ", R6\t; DeclItem:");
+			}
+		}
+		o.println(";;; declItem completes");
+
 	}
 }

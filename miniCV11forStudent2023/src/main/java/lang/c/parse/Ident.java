@@ -24,10 +24,12 @@ public class Ident extends CParseRule {
 		identName = tk.getText();
 		ident = tk;
 
-		if (pcx.getSymbolTable().searchGlobal(identName) == null) {
-			pcx.warning("変数" + identName + "は宣言されていません");
-		} else {
+		if (pcx.getSymbolTable().searchLocal(identName) != null) {
+			entry = pcx.getSymbolTable().searchLocal(identName);
+		} else if (pcx.getSymbolTable().searchGlobal(identName) != null) {
 			entry = pcx.getSymbolTable().searchGlobal(identName);
+		} else {
+			pcx.warning("変数" + identName + "は宣言されていません");
 		}
 	}
 
@@ -67,8 +69,14 @@ public class Ident extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; ident starts");
-		if (ident != null) {
-			o.println("\tMOV\t#" + ident.getText() + ", (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+		if (ident != null && entry != null) {
+			if (entry.isGlobal()) {
+				o.println("\tMOV\t#" + ident.getText() + ", (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+			} else {
+				o.println("\tMOV\t#" + entry.getAddress() + ", R0\t; Ident: フレームポインタと変数アドレスの変異を取得<" + ident.toExplainString() + ">");
+				o.println("\tADD\tR5, R0\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
+				o.println("\tMOV\tR0, (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+			}
 		}
 		o.println(";;; ident completes");
 	}

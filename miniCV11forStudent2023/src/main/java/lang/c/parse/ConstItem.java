@@ -12,6 +12,7 @@ public class ConstItem extends CParseRule {
 	boolean isExistMult = false;
 	boolean isExistAmp = false;
 	int size;
+	boolean isGlobal;
 
 	public ConstItem(CParseContext pcx) {
 	}
@@ -66,8 +67,16 @@ public class ConstItem extends CParseRule {
 		} else {
 			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
 		}
-		if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
-			pcx.recoverableError("すでに宣言されている変数です");
+
+		isGlobal = pcx.getSymbolTable().isGlobalMode();
+		if (isGlobal) {
+			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
+				pcx.recoverableError("すでに宣言されている変数です");
+			}
+		} else {
+			if ( !pcx.getSymbolTable().registerLocal(identName, entry) ) {
+				pcx.recoverableError("すでに宣言されている変数です");
+			}
 		}
 	}
 
@@ -78,7 +87,11 @@ public class ConstItem extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; constItem starts");
 		if (num != null) {
-			o.println(identName + ":\t.WORD " + ((Number)num).getValue() + "\t\t\t; ConstItem:");
+			if (isGlobal) {
+				o.println(identName + ":\t.WORD " + ((Number)num).getValue() + "\t\t\t; ConstItem:");
+			} else {
+				o.println("\tADD\t#" + size + ", R6\t; ConstItem:");
+			}
 		}
 		o.println(";;; constItem completes");
 	}

@@ -19,6 +19,8 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public CType GetCType() { return type; }
 	public int getSize() { return size; }
 	public boolean isConstant() { return constp; }
+	public boolean isGlobal() { return isGlobal; }
 	public void setAddress(int addr) { address = addr; }
 	public void setIsGlobal(boolean isGlobal) { this.isGlobal = isGlobal; }
+	public int getAddress() { return address; }
 }

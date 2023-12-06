@@ -10,7 +10,7 @@ import lang.c.*;
 
 public class DeclBlock extends CParseRule {
     // declblock ::= LCUR { declaration } { statement } RCUR
-	ArrayDeque<CParseRule> declareList = new ArrayDeque()<CParseRule>();
+	ArrayDeque<CParseRule> declareList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> statmentList = new ArrayDeque<CParseRule>();
 
 	public DeclBlock(CParseContext pcx) {
@@ -28,25 +28,28 @@ public class DeclBlock extends CParseRule {
 
 		while (Declaration.isFirst(tk)) {
 			declareList.add(new Declaration(pcx));
-			declareList.getFirst().parse(pcx);
+			declareList.getLast().parse(pcx);
 			ct = pcx.getTokenizer();
-			tk = ct.getCurrentToken(pcx);
+			tk = ct.getNextToken(pcx);
 		}
 
 		while (Statement.isFirst(tk)) {
 			statmentList.add(new Statement(pcx));
-			statmentList.getFirst().parse(pcx);
+			statmentList.getLast().parse(pcx);
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
 		}
 
+		System.err.println("DeclBlock: " + tk.toExplainString());
 		try {
 			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "declblockの後ろは}です");
+				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
 			}
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {
 		}
+		pcx.getSymbolTable().showGlobal();
+		pcx.getSymbolTable().showLocal();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
 
@@ -61,11 +64,17 @@ public class DeclBlock extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; DeclBlock starts");
+		if (declareList != null) {
+			for (CParseRule declaration : declareList) {
+				declaration.codeGen(pcx);
+			}
+		}
 		if (statmentList != null) {
 			for (CParseRule statment : statmentList) {
 				statment.codeGen(pcx);
 			}
 		}
+		o.println("\tSUB\t#" + pcx.getSymbolTable().getAddressOffset() + ", R6\t; DeclItem: 局所変数の分だけスタックポインタを戻す");
 		o.println(";;; DeclBlock completes");
 	}
 }
