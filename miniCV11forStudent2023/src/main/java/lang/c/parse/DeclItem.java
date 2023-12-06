@@ -104,8 +104,6 @@ public class DeclItem extends CParseRule {
 		if (num != null) {
 			if (isGlobal) {
 				o.println(identName + ":\t.BLKW " + size + "\t\t\t; DeclItem:");
-			} else {
-				o.println("\tADD\t#" + size + ", R6\t; DeclItem:");
 			}
 		}
 		o.println(";;; declItem completes");

@@ -12,6 +12,7 @@ public class DeclBlock extends CParseRule {
     // declblock ::= LCUR { declaration } { statement } RCUR
 	ArrayDeque<CParseRule> declareList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> statmentList = new ArrayDeque<CParseRule>();
+	int variableSize = 0;
 
 	public DeclBlock(CParseContext pcx) {
 	}
@@ -50,6 +51,7 @@ public class DeclBlock extends CParseRule {
 		}
 		pcx.getSymbolTable().showGlobal();
 		pcx.getSymbolTable().showLocal();
+		variableSize = pcx.getSymbolTable().getAddressOffset();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
 
@@ -69,12 +71,15 @@ public class DeclBlock extends CParseRule {
 				declaration.codeGen(pcx);
 			}
 		}
+
+		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
+
 		if (statmentList != null) {
 			for (CParseRule statment : statmentList) {
 				statment.codeGen(pcx);
 			}
 		}
-		o.println("\tSUB\t#" + pcx.getSymbolTable().getAddressOffset() + ", R6\t; DeclItem: 局所変数の分だけスタックポインタを戻す");
+		o.println("\tSUB\t#" + variableSize + ", R6\t; DeclItem: 局所変数の分だけスタックポインタを戻す");
 		o.println(";;; DeclBlock completes");
 	}
 }

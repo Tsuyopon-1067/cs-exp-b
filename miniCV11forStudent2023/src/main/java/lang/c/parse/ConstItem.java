@@ -89,8 +89,6 @@ public class ConstItem extends CParseRule {
 		if (num != null) {
 			if (isGlobal) {
 				o.println(identName + ":\t.WORD " + ((Number)num).getValue() + "\t\t\t; ConstItem:");
-			} else {
-				o.println("\tADD\t#" + size + ", R6\t; ConstItem:");
 			}
 		}
 		o.println(";;; constItem completes");
