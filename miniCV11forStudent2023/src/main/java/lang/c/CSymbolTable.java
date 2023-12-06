@@ -45,4 +45,13 @@ public class CSymbolTable {
 	public void showGlobal() {
 		global.show();
 	}
+
+	public void setupLocalSymbolTable() {
+		local = new OneSymbolTable();
+		addressOffset = 0;
+	}
+
+	public void deleteLocalSymbolTable() {
+		setupLocalSymbolTable();
+	}
 }
