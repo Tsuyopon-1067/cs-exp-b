@@ -41,7 +41,6 @@ public class DeclBlock extends CParseRule {
 			tk = ct.getCurrentToken(pcx);
 		}
 
-		System.err.println("DeclBlock: " + tk.toExplainString());
 		try {
 			if (tk.getType() != CToken.TK_RCUR) {
 				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
@@ -49,8 +48,6 @@ public class DeclBlock extends CParseRule {
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {
 		}
-		pcx.getSymbolTable().showGlobal();
-		pcx.getSymbolTable().showLocal();
 		variableSize = pcx.getSymbolTable().getAddressOffset();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}

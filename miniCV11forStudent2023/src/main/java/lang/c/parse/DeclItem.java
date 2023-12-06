@@ -101,10 +101,8 @@ public class DeclItem extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; declItem starts");
-		if (num != null) {
-			if (isGlobal) {
-				o.println(identName + ":\t.BLKW " + size + "\t\t\t; DeclItem:");
-			}
+		if (isGlobal) {
+			o.println(identName + ":\t.BLKW " + size + "\t\t\t; DeclItem:");
 		}
 		o.println(";;; declItem completes");
 
