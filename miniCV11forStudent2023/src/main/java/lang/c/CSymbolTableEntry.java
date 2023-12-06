@@ -8,12 +8,10 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean constp; // 定数宣言か？
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
-	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isGlobal, int addr) {
+	public CSymbolTableEntry(CType type, int size, boolean constp) {
 		this.type = type;
 		this.size = size;
 		this.constp = constp;
-		this.isGlobal = isGlobal;
-		this.address = addr;
 	}
 	public String toExplainString() { // このエントリに関する情報を作り出す。記号表全体を出力するときに使う。
 		return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
@@ -21,4 +19,6 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public CType GetCType() { return type; }
 	public int getSize() { return size; }
 	public boolean isConstant() { return constp; }
+	public void setAddress(int addr) { address = addr; }
+	public void setIsGlobal(boolean isGlobal) { this.isGlobal = isGlobal; }
 }

@@ -66,20 +66,19 @@ public class DeclItem extends CParseRule {
 		// 変数登録
 		CSymbolTableEntry entry;
 		final boolean isConst = false;
-		final boolean isGlobal = true;
 		if (isArray) {
 			size = ((Number)num).getValue();
 			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst, isGlobal, 0);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst);
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst, isGlobal, 0);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst);
 			}
 		} else {
 			size = 1;
 			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isGlobal, 0);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isGlobal, 0);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
 			}
 		}
 		try {

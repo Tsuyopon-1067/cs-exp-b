@@ -60,12 +60,11 @@ public class ConstItem extends CParseRule {
 		// 変数登録
 		CSymbolTableEntry entry;
 		final boolean isConst = true;
-		final boolean isGlobal = true;
 		size = 1;
 		if (isExistMult) {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isGlobal, 0);
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
 		} else {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isGlobal, 0);
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
 		}
 		if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
 			pcx.recoverableError("すでに宣言されている変数です");
