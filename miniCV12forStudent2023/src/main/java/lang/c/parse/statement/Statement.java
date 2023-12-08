@@ -18,7 +18,8 @@ public class Statement extends CParseRule {
 			|| StatementOutput.isFirst(tk)
 			|| StatementIf.isFirst(tk)
 			|| StatementWhile.isFirst(tk)
-			|| StatementBlock.isFirst(tk);
+			|| StatementBlock.isFirst(tk)
+			|| StatementCall.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -37,6 +38,8 @@ public class Statement extends CParseRule {
 			nextCParseRule = new StatementWhile(pcx);
 		} else if (StatementBlock.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementBlock(pcx);
+		} else if (StatementCall.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementCall(pcx);
 		}
 		try {
 			nextCParseRule.parse(pcx);

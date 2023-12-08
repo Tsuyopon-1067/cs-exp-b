@@ -7,15 +7,14 @@ import lang.*;
 import lang.c.*;
 
 public class Declaration extends CParseRule {
-	// declaration ::= intDecl | constDecl
-	boolean isIntDecl;
+	// declaration     ::= intDecl | constDecl | voidDecl
 	CParseRule nextParseRule;
 
 	public Declaration(CParseContext pcx) {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return IntDecl.isFirst(tk) || ConstDecl.isFirst(tk);
+		return IntDecl.isFirst(tk) || ConstDecl.isFirst(tk) || VoidDecl.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -23,11 +22,12 @@ public class Declaration extends CParseRule {
 		CToken tk = ct.getCurrentToken(pcx);
 
 		if (IntDecl.isFirst(tk)) {
-			isIntDecl = true;
 			nextParseRule = new IntDecl(pcx);
-		} else {
-			isIntDecl = false;
+		} else if (ConstDecl.isFirst(tk)) {
 			nextParseRule = new ConstDecl(pcx);
+		} else {
+			System.err.println("declaration " + tk.toDetailExplainString());
+			nextParseRule = new VoidDecl(pcx);
 		}
 		try {
 			nextParseRule.parse(pcx);
