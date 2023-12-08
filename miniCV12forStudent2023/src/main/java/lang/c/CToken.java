@@ -48,6 +48,11 @@ public class CToken extends SimpleToken {
 	public static final int TK_INT      = 32;	// int
 	public static final int TK_CONST    = 33;	// const
 	public static final int TK_COMMA    = 34;	// ,
+	// add chapter12
+	public static final int TK_VOID     = 35;	// void
+	public static final int TK_FUNC     = 36;	// func
+	public static final int TK_CALL     = 37;	// call
+	public static final int TK_RETURN   = 38;	// return
 
 
 
@@ -107,6 +112,11 @@ public class CToken extends SimpleToken {
 				put(TK_INT,"TK_INT");
 				put(TK_CONST,"TK_CONST");
 				put(TK_COMMA,"TK_COMMA");
+
+				put(TK_VOID,"TK_VOID");
+				put(TK_FUNC,"TK_FUNC");
+				put(TK_RETURN,"TK_RETURN");
+				put(TK_CALL,"TK_CALL");
 			}
 		};
 

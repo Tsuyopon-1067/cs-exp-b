@@ -21,7 +21,6 @@ unsignedFactor  ::= factorAmp | number | LPAR expression RPAR | addressToValue
 factorAmp       ::= AMP ( number | primary )
 primary         ::= primaryMult | variable
 primaryMult     ::= MULT variable
-variable        ::= ident [ array ]
 array           ::= LBRA expression RBRA
 ident           ::= IDENT
 addressToValue  ::= primary
@@ -34,7 +33,6 @@ conditionGE ::= GE expression
 conditionEQ ::= EQ expression
 conditionNE ::= NE expression
 
-statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock
 statementAssign ::= primary ASSIGN expression SEMI
 statementIf     ::= IF conditionBlock statement [ ELSE statement ]
 statementWhile  ::= WHILE conditionBlock statement
@@ -51,11 +49,19 @@ bitTermAnd      ::= AND bitFactor
 bitFactor       ::= condition | LT bitExpression GT | bitNotFactor // 不等号で囲む (LPAR expression RPAR と区別したい)
 bitNotFactor    ::= NOT bitFactor
 
-declaration ::= intDecl | constDecl
 intDecl     ::= INT declItem { COMMA declItem } SEMI
 constDecl   ::= CONST INT constItem { COMMA constItem } SEMI
 constItem   ::= [ MULT ] IDENT ASSIGN [ AMP ] NUM
-declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
 
-program     ::= { declaraion } { declblock } EOF
 declblock ::= LCUR { declaration } { statement } RCUR
+
+program         ::= { declaraion } { function } EOF
+declaration     ::= intDecl | constDecl | voidDecl
+voidDecl        ::= VOID IDENT LPAR RPAR { COMMA IDENT LPAR RPAR } SEMI
+declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR RPAR ]
+function        ::= FUNC ( INT [ MULT ] | VOID ) IDENT LPAR RPAR declblock
+statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
+statementCall   ::= CALL ident LPAR RPAR SEMI
+statementReturn ::= RETURN [ expression ] SEMI
+variable        ::= ident [ array | call ]
+call            ::= LPAR RPAR
