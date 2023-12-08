@@ -6,7 +6,7 @@ import lang.*;
 import lang.c.*;
 
 public class Variable extends CParseRule {
-    //variable ::= ident [array]
+    // variable        ::= ident [ array | call ]
 	CParseRule ident;
 	CParseRule array;
 
@@ -23,10 +23,14 @@ public class Variable extends CParseRule {
 		ident.parse(pcx);
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
-		if (tk.getType() == CToken.TK_LBRA) {
+		if (Array.isFirst(tk)) {
 			array = new Array(pcx);
 			array.parse(pcx);
-			ct.getNextToken(pcx); // ]を読み飛ばす
+			ct.getNextToken(pcx);
+		} else if (Call.isFirst(tk)) {
+			Call call = new Call(pcx);
+			call.parse(pcx);
+			ct.getNextToken(pcx);
 		}
 	}
 

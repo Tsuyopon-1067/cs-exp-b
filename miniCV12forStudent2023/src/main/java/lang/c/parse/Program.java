@@ -9,11 +9,11 @@ import lang.c.*;
 public class Program extends CParseRule {
 	// program     ::= { declaraion } { declblock } EOF
 	ArrayDeque<CParseRule> declarationList = new ArrayDeque<CParseRule>();
-	ArrayDeque<CParseRule> declBlockList = new ArrayDeque<CParseRule>();
+	ArrayDeque<CParseRule> functionList = new ArrayDeque<CParseRule>();
 
 	public Program(CParseContext pcx) {
 	}
-public static boolean isFirst(CToken tk) {
+	public static boolean isFirst(CToken tk) {
 		return Declaration.isFirst(tk) || DeclBlock.isFirst(tk);
 	}
 
@@ -31,9 +31,10 @@ public static boolean isFirst(CToken tk) {
 		}
 
 		pcx.getSymbolTable().setIsGlobalMode(false);
-		while (DeclBlock.isFirst(tk)) {
-			declBlockList.addLast(new DeclBlock(pcx));
-			declBlockList.getLast().parse(pcx);
+		System.err.println("program " + tk.toDetailExplainString());
+		while (Function.isFirst(tk)) {
+			functionList.addLast(new Function(pcx));
+			functionList.getLast().parse(pcx);
 			tk = ct.getCurrentToken(pcx); // statementが次の字句を読んでしまうので次の字句は読まない
 		}
 		if (tk.getType() == CToken.TK_RCUR) {
@@ -48,7 +49,7 @@ public static boolean isFirst(CToken tk) {
 		for (CParseRule d : declarationList) {
 			d.semanticCheck(pcx);
 		}
-		for (CParseRule d : declBlockList) {
+		for (CParseRule d : functionList) {
 			d.semanticCheck(pcx);
 		}
 	}
@@ -66,8 +67,8 @@ public static boolean isFirst(CToken tk) {
 		}
 		o.println("__START:");
 		o.println("\tMOV\t#0x1000, R6\t; ProgramNode: 計算用スタック初期化");
-		for (CParseRule declBlock : declBlockList) {
-			declBlock.codeGen(pcx);
+		for (CParseRule function : functionList) {
+			function.codeGen(pcx);
 		}
 		//o.println("\tMOV\t-(R6), R0\t; ProgramNode: 計算結果確認用");
 		o.println("\tHLT\t\t\t; ProgramNode:");

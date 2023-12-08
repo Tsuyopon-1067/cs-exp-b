@@ -34,7 +34,7 @@ public class DeclItem extends CParseRule {
 			if (tk.getType() == CToken.TK_IDENT) {
 				identName = tk.getText();
 			} else {
-				pcx.recoverableError("左辺に変数が必要です");
+				pcx.recoverableError(tk.toDetailExplainString() + "変数名が必要です");
 			}
 		} catch (RecoverableErrorException e) {
 		}
@@ -45,23 +45,27 @@ public class DeclItem extends CParseRule {
 			isArray = true;
 			tk = ct.getNextToken(pcx); // [を読み飛ばす
 
-			try {
-				if (tk.getType() == CToken.TK_NUM) {
-					num = new Number(pcx);
-				} else {
-					pcx.recoverableError("[]内は数値です");
-				}
-				num.parse(pcx);
-			} catch (RecoverableErrorException e) {
+			if (tk.getType() == CToken.TK_NUM) {
+				num = new Number(pcx);
+			} else {
+				pcx.recoverableError(tk.toDetailExplainString() + "[]内は数値です");
 			}
+			num.parse(pcx);
 			tk = ct.getCurrentToken(pcx); // numは次の字句まで呼んでしまう
-			try {
-				if (tk.getType() != CToken.TK_RBRA) {
-					pcx.recoverableError("[]が閉じていません");
-				}
-			} catch (RecoverableErrorException e) {
+			if (tk.getType() != CToken.TK_RBRA) {
+				pcx.recoverableError(tk.toDetailExplainString() + "[]が閉じていません");
 			}
-			tk = ct.getNextToken(pcx); // 配列じゃ無いときに合わせて次の字句まで読む
+			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
+		} else if (tk.getType() == CToken.TK_LPAR) {
+			tk = ct.getNextToken(pcx); // (を読み飛ばす
+			if (tk.getType() != CToken.TK_RPAR) {
+				pcx.recoverableError(tk.toDetailExplainString() + "()が閉じていません");
+			}
+			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
+		}
+
+		if (tk.getType() != CToken.TK_SEMI) {
+			pcx.recoverableError(tk.toDetailExplainString() + ";が必要です");
 		}
 
 		// 変数登録
