@@ -86,7 +86,7 @@ public class SemanticCheckInput {
     @Test
     public void semanticCheckInputFalse() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("input c_a;", "左辺が定数です"),
+            new HelperTestStrMsg("input c_a;", "定数には代入できません"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
