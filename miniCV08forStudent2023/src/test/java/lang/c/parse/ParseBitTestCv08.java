@@ -94,6 +94,8 @@ public class ParseBitTestCv08 {
             new HelperTestStrMsg("<true", ">が閉じていません"),
             new HelperTestStrMsg("true|", "不正な字句です"),
             new HelperTestStrMsg("true&", "演算子は&ではなく&&です"),
+            new HelperTestStrMsg("true&&", "&&の後ろはbitFactorです"),
+            new HelperTestStrMsg("true||", "||の後ろはbitTermです"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
@@ -109,6 +111,20 @@ public class ParseBitTestCv08 {
             } catch ( FatalErrorException e ) {
                 assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
+        }
+    }
+
+    @Test
+    public void parseIsFirstError() throws FatalErrorException {
+        HelperTestStrMsg[] testDataArr = {
+            new HelperTestStrMsg("||", ""),
+            new HelperTestStrMsg("&&", ""),
+        };
+        for ( HelperTestStrMsg testData: testDataArr ) {
+            resetEnvironment();
+            inputStream.setInputString(testData.getTestStr());
+            CToken firstToken = tokenizer.getNextToken(cpContext);
+            assertThat(testData.getTestStr(), BitExpression.isFirst(firstToken), is(false));
         }
     }
 }
