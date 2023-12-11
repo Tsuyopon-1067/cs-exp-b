@@ -122,6 +122,10 @@ public class CTokenizerConditionTest {
 
     // Please copy and paste the above code and add the specified test case to the following
     // 追加するテストケース："<<=>>=!===", "!<="
+<<<<<<< HEAD
+=======
+    @Test
+>>>>>>> 4b1b56c (:white_check_mark: add: missing test case)
     public void condition6Token() {
         String testString = "<<=>>=!===";
         inputStream.setInputString(testString);
