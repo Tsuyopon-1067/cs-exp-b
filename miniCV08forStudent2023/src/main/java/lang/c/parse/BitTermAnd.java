@@ -27,7 +27,7 @@ public class BitTermAnd extends CParseRule {
 			right = new BitFactor(pcx);
 			right.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "*の後ろはbitFactorです");
+			pcx.fatalError(tk.toExplainString() + "&&の後ろはbitFactorです");
 		}
 	}
 

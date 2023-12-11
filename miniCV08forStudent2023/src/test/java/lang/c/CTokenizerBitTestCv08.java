@@ -42,6 +42,20 @@ public class CTokenizerBitTestCv08 {
 
     @Test
     public void bit() {
+        String testString = "||&&!|";
+        inputStream.setInputString(testString);
+        CToken token1 = tokenizer.getNextToken(cpContext);
+        helper.checkToken("token 1", token1, CToken.TK_OR, "||", 1, 1);
+        CToken token2 = tokenizer.getNextToken(cpContext);
+        helper.checkToken("token 2", token2, CToken.TK_AND, "&&", 1, 3);
+        CToken token3 = tokenizer.getNextToken(cpContext);
+        helper.checkToken("token 3", token3, CToken.TK_NOT, "!", 1, 5);
+        CToken token4 = tokenizer.getNextToken(cpContext);
+        helper.checkToken("token 4", token4, CToken.TK_ILL, "|", 1, 6);
+    }
+
+    @Test
+    public void bitAll() {
         String testString = "!(true && false || true && false)";
         inputStream.setInputString(testString);
         CToken token1 = tokenizer.getNextToken(cpContext);
