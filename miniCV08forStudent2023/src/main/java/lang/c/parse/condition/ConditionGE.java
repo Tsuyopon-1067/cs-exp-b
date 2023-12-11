@@ -24,9 +24,9 @@ public class ConditionGE extends AbstractConditionOperator {
 			o.println("\tMOV\t-(R6), R0\t; ConditionGE: 2数を取り出して、比べる");
 			o.println("\tMOV\t-(R6), R1\t; ConditionGE:");
 			o.println("\tMOV\t#0x0001, R2\t; ConditionGE: set true");
-			o.println("\tADD\t#1, R0\t; ConditionGE: R0に1を加える");
-			o.println("\tCMP\tR1, R0\t; ConditionGE: R1>=R0 = (R1+1)>R0 = R0-(R1+1)<0");
+			o.println("\tCMP\tR1, R0\t; ConditionGE: R1>=R0 =  R0-R1<=0");
 			o.println("\tBRN\tGE" + seq + "\t; ConditionGE: N=1のときGE[seq]へジャンプ");
+			o.println("\tBRZ\tGE" + seq + "\t; ConditionGE: Z=1のときGE[seq]へジャンプ");
 			o.println("\tCLR\tR2\t\t; ConditionGE: set false");
 			o.println("GE" + seq + ":\tMOV\tR2, (R6)+\t; ConditionGE:");
 		}
