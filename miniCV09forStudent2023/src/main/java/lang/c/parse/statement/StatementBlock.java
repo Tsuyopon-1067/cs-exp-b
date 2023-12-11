@@ -32,7 +32,7 @@ public class StatementBlock extends CParseRule {
 
 		try {
 			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "statmentの後ろは}です");
+				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
 			}
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {
