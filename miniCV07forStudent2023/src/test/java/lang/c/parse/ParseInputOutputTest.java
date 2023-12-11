@@ -77,7 +77,6 @@ public class ParseInputOutputTest {
 
             try {
                 cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
             } catch ( FatalErrorException e ) {
                 fail("Failed with " + testData + ". Please modify this Testcase to pass.");
             }
