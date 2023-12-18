@@ -1,26 +1,17 @@
 # エラー仕様書
 
-## condition
-
--   expression の次が不正
-    -   recoverableError: expression の後ろは条件演算子です
-
-### Condition
-
 ## statement
 
 ### StatementAssign
 
 -   ;がないとき
 
-    -   warning ;がありません
+    -   recoverableError ;がありません
 
 -   型の不一致
     -   warning: 左辺の型[" + primary.getCType().toString()"]と右辺の型[" + expression.getCType().toString() + "]が異なります"
 -   代入先が定数
     -   warning: 左辺が定数です
--   Expressin のエラーが起きた
-    -   文末または;までスキップしました
 
 ### StatementBlock
 
@@ -42,9 +33,6 @@
 
 ### StatementInput
 
--   input の後ろが primary ではない
-    -   warning: input の後ろは primary です
-    -   warning: primary をスキップしました
 -   ;が抜けている
     -   recoverableError: 文末は;です
 -   引数が定数のとき
@@ -57,12 +45,10 @@
 
 ### StatementWhile
 
--   while の後ろに conditionBlock がない
-    -   while の後ろは conditionBlock です
--   conditionBlock の後ろに statement がない
-    -   while ブロックの中は statement です
 -   ;が抜けている
     -   recoverableError: while の後ろは conditionBlock です
+
+## /
 
 ### AbstractConditionOperator
 
@@ -93,33 +79,20 @@
 -   &&の左辺と右辺が bool でない
     -   warning: &&の左辺と右辺は T_bool である必要があります
 
-### Expression
-
--   ExpressionAdd か ExpressionSub で recoverableError
-    -   warning: ExpressionAdd または ExpressionSub をスキップしました
-
 ### ExpressionAdd
-
--   +の後ろが Term ではない
-
-    -   recoverableError: +の後ろは term です
 
 -   型が不正
     -   "左辺の型[" + left.getCType().toString() + "]と右辺の型[" + right.getCType().toString() + "]は足せません
 
 ### ExpressionSub
 
--   +の後ろが Term ではない
-
-    -   +の後ろは term です
-
 -   型が不正
     -   "左辺の型[" + left.getCType().toString() + "]と右辺の型[" + right.getCType().toString() + "]は引けません
 
 ### FactorAmp
 
--   &の後ろが Number か Primary でない
-    -   &の後は Number か Primary です
+-   &の後ろが Number でない
+    -   recoverableError: &の後は Number か Primary です
 
 ### Ident
 
@@ -137,25 +110,12 @@
 
     -   ポインタではない数値でアドレスを参照することはできません
 
-### Term
-
--   TermMult か TermDiv で recoverableError
-    -   warning: ExpressionAdd または ExpressionSub をスキップしました
-
 ### TermDiv
-
--   \*の後ろが Factor ではない
-
-    -   recoverableError: \*の後ろは factor です
 
 -   型が不正
     -   warning:左辺の型[" + left.getCType().toString() + "]と右辺の型[" + right.getCType().toString() + "]は割れません
 
 ### TermMult
-
--   \/の後ろが Factor ではない
-
-    -   recoverableError: \/の後ろは factor です
 
 -   型が不正
 
