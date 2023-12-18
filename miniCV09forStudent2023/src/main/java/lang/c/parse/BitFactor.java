@@ -26,7 +26,7 @@ public class BitFactor extends CParseRule {
 			try {
 				nexParseRule.parse(pcx);
 			} catch (Exception e) {
-				// 何もしない
+				pcx.recoverableError("Conditionのparse中に例外が発生しました");
 			}
 		} else if (tk.getType() == CToken.TK_LT) {
 			tk = ct.getNextToken(pcx); // '<'の次の字句を読む
