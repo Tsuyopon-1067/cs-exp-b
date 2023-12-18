@@ -1,5 +1,12 @@
 # エラー仕様書
 
+## condition
+
+-   expression の次が不正
+    -   recoverableError: expression の後ろは条件演算子です
+
+### Condition
+
 ## statement
 
 ### StatementAssign
