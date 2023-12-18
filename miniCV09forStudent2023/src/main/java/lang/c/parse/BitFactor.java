@@ -23,7 +23,11 @@ public class BitFactor extends CParseRule {
 		CToken tk = ct.getCurrentToken(pcx);
 		if (Condition.isFirst(tk)) {
 			nexParseRule = new Condition(pcx);
-			nexParseRule.parse(pcx);
+			try {
+				nexParseRule.parse(pcx);
+			} catch (Exception e) {
+				// 何もしない
+			}
 		} else if (tk.getType() == CToken.TK_LT) {
 			tk = ct.getNextToken(pcx); // '<'の次の字句を読む
 			if (!BitExpression.isFirst(tk)) {
