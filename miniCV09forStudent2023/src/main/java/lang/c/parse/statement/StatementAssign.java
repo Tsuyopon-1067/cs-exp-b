@@ -41,17 +41,16 @@ public class StatementAssign extends CParseRule {
 			expression = new Expression(pcx);
 			expression.parse(pcx);
 		} catch (RecoverableErrorException e) {
-			ct.skipTo(pcx, CToken.TK_SEMI);
+			ct.skipToLineEndSemi(pcx);
+			pcx.warning("行末または;までスキップしました");
+			tk = ct.getCurrentToken(pcx);
 		}
 
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
-		try {
-			if (tk.getType() != CToken.TK_SEMI) {
-				pcx.recoverableError(tk.toExplainString() + ";がありません");
-			}
+		if (tk.getType() != CToken.TK_SEMI) {
+			pcx.recoverableError(tk.toExplainString() + ";がありません");
+		} else {
 			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
-		} catch (RecoverableErrorException e) {
-			//pcx.warning(";をスキップしました");
 		}
 	}
 

@@ -28,14 +28,23 @@ public class Term extends CParseRule {
 				list = new TermMult(pcx, factor);
 			} else if (TermDiv.isFirst(tk)) {
 				list = new TermDiv(pcx, factor);
-			} else {
-				pcx.fatalError(tk.toExplainString() + "*または/が必要です");
 			}
-			if (list != null) {
+
+			try {
 				list.parse(pcx);
-				factor = list;
-				tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
+			} catch (RecoverableErrorException e) {
+				int lineNo = tk.getLineNo();
+				while (!TermMult.isFirst(tk) || TermDiv.isFirst(tk) || tk.getType() != CToken.TK_SEMI) {
+					tk = ct.getNextToken(pcx);
+					if (tk.getType() != CToken.TK_SEMI || tk.getLineNo() != lineNo) {
+						break;
+					}
+				}
+				pcx.warning("TermMultまたはTermDivをスキップしました");
+				continue;
 			}
+			factor = list;
+			tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
 		}
 		// この時点でtermの次の字句まで読んでいる
 		term = factor;

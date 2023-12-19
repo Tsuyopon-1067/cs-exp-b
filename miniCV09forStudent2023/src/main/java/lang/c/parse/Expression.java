@@ -29,7 +29,20 @@ public class Expression extends CParseRule {
 			} else {
 				list = new ExpressionSub(pcx, term);
 			}
-			list.parse(pcx);
+
+			try {
+				list.parse(pcx);
+			} catch (RecoverableErrorException e) {
+				int lineNo = tk.getLineNo();
+				while (!ExpressionAdd.isFirst(tk) || ExpressionSub.isFirst(tk) || tk.getType() != CToken.TK_SEMI) {
+					tk = ct.getNextToken(pcx);
+					if (tk.getType() != CToken.TK_SEMI || tk.getLineNo() != lineNo) {
+						break;
+					}
+				}
+				pcx.warning("ExpressionAddまたはExpressionSubをスキップしました");
+				continue;
+			}
 			term = list;
 			tk = ct.getCurrentToken(pcx);
 		}
