@@ -25,7 +25,11 @@ public class StatementBlock extends CParseRule {
 		while (Statement.isFirst(tk)) {
 			Statement statement = new Statement(pcx);
 			statmentList.add(statement);
-			statement.parse(pcx);
+			try {
+				statement.parse(pcx);
+			} catch (Exception e) {
+				pcx.warning("StatementBlock: statementのエラーをスキップしました");
+			}
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
 		}
