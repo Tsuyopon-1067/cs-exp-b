@@ -41,7 +41,8 @@ public class Statement extends CParseRule {
 		try {
 			nextCParseRule.parse(pcx);
 		} catch (Exception e) {
-			pcx.warning("statementのエラーをスキップしました");
+			pcx.warning("Statement: statementのエラーをスキップしました");
+			CToken tk = ct.getCurrentToken(pcx);
 		}
 		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}
