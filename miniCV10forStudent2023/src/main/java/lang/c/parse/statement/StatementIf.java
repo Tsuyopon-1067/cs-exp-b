@@ -38,7 +38,7 @@ public class StatementIf extends CParseRule {
 			statement1 = new Statement(pcx);
 			statement1.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "ifブロックの中はstatementです");
+			pcx.recoverableError(tk.toExplainString() + "ifブロックの中はstatementです");
 		}
 		tk = ct.getCurrentToken(pcx); // statementは次の字句まで読んでしまう
 
@@ -49,7 +49,7 @@ public class StatementIf extends CParseRule {
 				statement2.parse(pcx);
 				tk = ct.getCurrentToken(pcx); // statementは次の字句まで読んでしまう
 			} else {
-				pcx.fatalError(tk.toExplainString() + "elseブロックの中はstatementです");
+				pcx.recoverableError(tk.toExplainString() + "elseブロックの中はstatementです");
 			}
 		}
 	}
