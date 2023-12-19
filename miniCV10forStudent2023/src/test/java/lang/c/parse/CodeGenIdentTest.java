@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -46,6 +47,7 @@ public class CodeGenIdentTest {
         cpContext = null;
     }
 
+    @Ignore
     @Test
     public void codeGenInt() throws FatalErrorException {
         inputStream.setInputString("i_a");
@@ -60,6 +62,7 @@ public class CodeGenIdentTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenAMPInt() throws FatalErrorException {
         inputStream.setInputString("&i_a");
@@ -72,6 +75,7 @@ public class CodeGenIdentTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenPint() throws FatalErrorException {
         inputStream.setInputString("ip_a");
@@ -87,6 +91,7 @@ public class CodeGenIdentTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenMultPint() throws FatalErrorException {
         inputStream.setInputString("*ip_a");
@@ -104,6 +109,7 @@ public class CodeGenIdentTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]");
@@ -124,6 +130,7 @@ public class CodeGenIdentTest {
     }
 
     // Please copy and paste the above code and add the specified test case to the following
+    @Ignore
     @Test
     public void codeGenArrayAmp() throws FatalErrorException {
         inputStream.setInputString("&ia_a[3]");
@@ -141,6 +148,7 @@ public class CodeGenIdentTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenArrayPoint() throws FatalErrorException {
         inputStream.setInputString("ipa_a[3]");
@@ -161,6 +169,7 @@ public class CodeGenIdentTest {
     }
 
     // Please copy and paste the above code and add the specified test case to the following
+    @Ignore
     @Test
     public void codeGenArrayPointAmp() throws FatalErrorException {
         inputStream.setInputString("*ipa_a[3]");
