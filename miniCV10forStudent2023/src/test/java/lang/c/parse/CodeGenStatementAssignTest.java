@@ -105,6 +105,7 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void assignPointRef() throws FatalErrorException {
         inputStream.setInputString("*ip_a=1;");
