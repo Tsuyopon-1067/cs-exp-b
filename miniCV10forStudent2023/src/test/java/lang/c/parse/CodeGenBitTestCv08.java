@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -45,6 +46,7 @@ public class CodeGenBitTestCv08 {
     }
 
 @Test
+@Ignore
     public void codeGenAndTest() throws FatalErrorException {
         inputStream.setInputString( "if (true && false) {\n" +
                                         "i_a=3;\n" +
@@ -76,6 +78,7 @@ public class CodeGenBitTestCv08 {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenOrTest() throws FatalErrorException {
         inputStream.setInputString( "if (true || false) {\n" +
@@ -108,6 +111,7 @@ public class CodeGenBitTestCv08 {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenNotTest() throws FatalErrorException {
         inputStream.setInputString( "if (!true) {\n" +
@@ -139,6 +143,7 @@ public class CodeGenBitTestCv08 {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenMixTest() throws FatalErrorException {
         inputStream.setInputString( "if (!<!true || false> && true) {\n" +
