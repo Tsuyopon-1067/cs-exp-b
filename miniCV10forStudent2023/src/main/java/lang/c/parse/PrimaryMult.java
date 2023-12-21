@@ -24,13 +24,14 @@ public class PrimaryMult extends CParseRule {
 		// *の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
 		if (!Variable.isFirst(tk)) {
-			pcx.fatalError("*の後ろはidentです");
+			pcx.fatalError(tk.toDetailExplainString() + "*の後ろはidentです");
 		}
 		variable = new Variable(pcx);
 		variable.parse(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		setCType(CType.getCType(CType.T_err)); // 初期値としてエラーを入れておく
 		if (variable != null) {
 			variable.semanticCheck(pcx);
 			if (variable.getCType().getType() == CType.T_pint) {
