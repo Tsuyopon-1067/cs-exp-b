@@ -38,7 +38,9 @@ public class IntDecl extends CParseRule {
 		while (tk.getType() == CToken.TK_COMMA) {
 			tk = ct.getNextToken(pcx); // ,を読み飛ばす
 			if (!DeclItem.isFirst(tk)) {
-				pcx.recoverableError(",の次はdeclItemです");
+				pcx.warning(",の次はdeclItemです");
+				ct.skipToLineEndSemi(pcx);
+				break;
 			}
 			declItems.addLast(new DeclItem(pcx));
 			try {
@@ -52,8 +54,8 @@ public class IntDecl extends CParseRule {
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			ct.skipTo(pcx, CToken.TK_SEMI);
-			pcx.recoverableError(";が必要です");
+			pcx.warning(";が必要です");
+			ct.skipToLineEndSemi(pcx);
 		}
 	}
 

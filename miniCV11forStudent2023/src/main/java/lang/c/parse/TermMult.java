@@ -28,7 +28,7 @@ public class TermMult extends CParseRule {
 			right = new Factor(pcx);
 			right.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "*の後ろはfactorです");
+			pcx.recoverableError(tk.toExplainString() + "*の後ろはfactorです");
 		}
 	}
 

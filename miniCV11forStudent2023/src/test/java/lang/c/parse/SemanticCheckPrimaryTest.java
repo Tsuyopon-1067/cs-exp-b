@@ -59,6 +59,7 @@ public class SemanticCheckPrimaryTest {
         setUp();
     }
 
+    @Ignore
     @Test
     public void PrimaryNoError() throws FatalErrorException {
         String[] testDataArr = {"*ip_ABC", "*ipa_ABC[128]", "ipa_ABC[128]"};

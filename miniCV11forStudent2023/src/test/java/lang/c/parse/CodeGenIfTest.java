@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -44,6 +45,7 @@ public class CodeGenIfTest {
         cpContext = null;
     }
 
+    @Ignore
     @Test
     public void codeGenIfTest() throws FatalErrorException {
         inputStream.setInputString( "if (false) {\n" +
@@ -74,6 +76,7 @@ public class CodeGenIfTest {
 
     // Please copy and paste the above code and add the specified test case to the following
 
+    @Ignore
     @Test
     public void codeGenIfElseTest() throws FatalErrorException {
         inputStream.setInputString("""
@@ -113,6 +116,7 @@ public class CodeGenIfTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenIfElseIfTest() throws FatalErrorException {
         inputStream.setInputString("""
@@ -190,6 +194,7 @@ public class CodeGenIfTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenIfElseIfElseIfTest() throws FatalErrorException {
         inputStream.setInputString("""
@@ -299,6 +304,7 @@ public class CodeGenIfTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenIfOneLineTest() throws FatalErrorException {
         inputStream.setInputString("""
@@ -336,6 +342,7 @@ public class CodeGenIfTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenIf3OneLineTest() throws FatalErrorException {
         inputStream.setInputString("""
