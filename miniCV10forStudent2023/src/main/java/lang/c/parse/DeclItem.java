@@ -84,7 +84,7 @@ public class DeclItem extends CParseRule {
 		}
 		try {
 			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
-				pcx.recoverableError("すでに宣言されている変数です");
+				pcx.recoverableError(identName + ": すでに宣言されている変数です");
 			}
 		} catch (RecoverableErrorException e) {
 		}
