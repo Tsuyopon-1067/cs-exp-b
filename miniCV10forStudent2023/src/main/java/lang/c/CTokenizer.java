@@ -98,7 +98,6 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 			currentToken = getNextToken(pcxt);
 		}
 		CToken tk = getCurrentToken(pcxt);
-		System.out.printf("method %s, %s\n", tk.toDetailExplainString(), tk.getText());
 	}
 
 	private CToken readToken() {
