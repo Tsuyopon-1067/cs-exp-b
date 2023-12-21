@@ -23,19 +23,18 @@ public class StatementInput extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		try {
-			if (Primary.isFirst(tk)) {
-				primaryToken = tk;
-				primary = new Primary(pcx);
-				primary.parse(pcx);
-			} else {
-				ct.getNextToken(pcx);
-				tk = ct.getCurrentToken(pcx);
-				System.out.println(tk.toDetailExplainString());
-				pcx.recoverableError(tk.toExplainString() + "inputの後ろはprimaryです");
+		if (Primary.isFirst(tk)) {
+			primaryToken = tk;
+			primary = new Primary(pcx);
+			primary.parse(pcx);
+		} else {
+			ct.getNextToken(pcx);
+			tk = ct.getCurrentToken(pcx);
+			pcx.warning(tk.toExplainString() + "inputの後ろはprimaryです");
+			if (tk.getType() != CToken.TK_SEMI) {
+				tk = ct.getNextToken(pcx);
+				pcx.warning("primaryをスキップしました");
 			}
-		} catch (RecoverableErrorException e) {
-			//pcx.warning("input文のエラーをスキップしました");
 		}
 
 		tk = ct.getCurrentToken(pcx);

@@ -15,6 +15,7 @@ import lang.FatalErrorException;
 import lang.IOContext;
 import lang.InputStreamForTest;
 import lang.PrintStreamForTest;
+import lang.RecoverableErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
@@ -23,7 +24,7 @@ import lang.c.CTokenizer;
 import lang.c.parse.statement.StatementInput;
 import lang.c.parse.statement.StatementOutput;
 
-public class ParseInputOutputTest {
+public class ParseVariableTestCv10 {
 
     InputStreamForTest inputStream;
     PrintStreamForTest outputStream;
@@ -58,15 +59,10 @@ public class ParseInputOutputTest {
     }
 
     @Test
-    public void parseInputTestCrrect() throws FatalErrorException {
+    public void parseVariableCorrect() throws FatalErrorException {
         String[] testDataArr = {
-            "input i_a;",
-            "input ip_a;",
-            "input *ip_a;",
-            "input ia_a[3];",
-            "input ipa_a[3];",
-            "input *ipa_a[3];",
-            "input c_a;",
+            "int a, *b, c[10], *d[10];",
+            "const int e=10, *f=&30;"
         };
 
         for ( String testData: testDataArr ) {
@@ -86,26 +82,22 @@ public class ParseInputOutputTest {
 
     @Ignore
     @Test
-    public void parseInputTestError() throws FatalErrorException {
+    public void parseVariableError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("input 3;", "inputの後ろはprimaryです"),
-            new HelperTestStrMsg("input i_a+2;", "文末は;です"),
-            new HelperTestStrMsg("input 3", "inputの後ろはprimaryです"),
-            new HelperTestStrMsg("input ;", "inputの後ろはprimaryです"),
-            new HelperTestStrMsg("input &i_a", "inputの後ろはprimaryです"),
+            new HelperTestStrMsg("int a, *b, c[10] *d[10];", ";が必要です"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, StatementInput.isFirst(firstToken), is(true));
-            CParseRule cp = new StatementInput(cpContext);
+            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
+            CParseRule cp = new Declaration(cpContext);
 
             try {
                 cp.parse(cpContext);
                 cp.semanticCheck(cpContext);
                 fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
-            } catch ( FatalErrorException e ) {
+            } catch ( RecoverableErrorException e ) {
                 assertThat(e.getMessage(), containsString(testData.getMsg()));
             }
         }

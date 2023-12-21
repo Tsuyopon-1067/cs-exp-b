@@ -1,6 +1,7 @@
 package lang.c.parse;
 
 import lang.FatalErrorException;
+import lang.RecoverableErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
@@ -31,7 +32,7 @@ abstract class AbstractExpressionAddSub extends CParseRule {
 		}
 	}
 
-	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws FatalErrorException { }
+	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws RecoverableErrorException { }
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 計算規則
