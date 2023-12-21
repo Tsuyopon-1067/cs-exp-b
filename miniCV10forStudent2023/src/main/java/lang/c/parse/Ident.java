@@ -54,7 +54,7 @@ public class Ident extends CParseRule {
 			*/
 			if (entry == null) {
 				setCType(CType.getCType(CType.T_err));
-				pcx.warning("変数" + ident.getText() + "は宣言されていません");
+				// pcx.warning("変数" + ident.getText() + "は宣言されていません");
 				return;
 			}
 			int setType = entry.GetCType().getType();
