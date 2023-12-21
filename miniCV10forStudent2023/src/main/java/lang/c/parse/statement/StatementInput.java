@@ -30,7 +30,6 @@ public class StatementInput extends CParseRule {
 		} else {
 			ct.getNextToken(pcx);
 			tk = ct.getCurrentToken(pcx);
-			System.out.println(tk.toDetailExplainString());
 			pcx.warning(tk.toExplainString() + "inputの後ろはprimaryです");
 			if (tk.getType() != CToken.TK_SEMI) {
 				tk = ct.getNextToken(pcx);
