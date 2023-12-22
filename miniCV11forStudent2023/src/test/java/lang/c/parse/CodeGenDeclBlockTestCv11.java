@@ -68,63 +68,63 @@ public class CodeGenDeclBlockTestCv11 {
             }
                 """);
         String expected = """
-                    . = 0x100
-                    JMP     __START
-            a:      .BLKW 1
-            __START:
-                    MOV     #0x1000, R6
-                    ADD     #8, R6 // 領域確保
-                    MOV     #0, R0 // a=1
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #1, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    MOV     #1, R0 // b=1
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #2, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    MOV     #2, R0 // c[2]=3
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #2, (R6)+
-                    MOV     -(R6), R0
-                    ADD     -(R6), R0
-                    MOV     R0, (R6)+
-                    MOV     #3, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    MOV     #7, R0 // d=4
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #4, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    SUB     #8, R6 // 領域開放
-                    ADD     #2, R6 // 領域確保
-                    MOV     #0, R0 // c=5
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #5, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    MOV     #1, R0 // d=6
-                    ADD     R5, R0
-                    MOV     R0, (R6)+
-                    MOV     #6, (R6)+
-                    MOV     -(R6), R1
-                    MOV     -(R6), R0
-                    MOV     R1, (R0)
-                    SUB     #2, R6 // 領域開放
-                    HLT
-                    .END
+            . = 0x100
+            JMP     __START
+    a:      .BLKW 1
+    __START:
+            MOV     #0x1000, R6
+            ADD     #8, R6 // 領域確保
+            MOV     #0, R0 // a=1
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #1, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            MOV     #1, R0 // b=1
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #2, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            MOV     #2, R0 // c[2]=3
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #2, (R6)+
+            MOV     -(R6), R0
+            ADD     -(R6), R0
+            MOV     R0, (R6)+
+            MOV     #3, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            MOV     #7, R0 // d=4
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #4, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            SUB     #8, R6 // 領域開放
+            ADD     #2, R6 // 領域確保
+            MOV     #0, R0 // c=5
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #5, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            MOV     #1, R0 // d=6
+            ADD     R5, R0
+            MOV     R0, (R6)+
+            MOV     #6, (R6)+
+            MOV     -(R6), R1
+            MOV     -(R6), R0
+            MOV     R1, (R0)
+            SUB     #2, R6 // 領域開放
+            HLT
+            .END
                 """;
         // Check only code portion, not validate comments
         CParseRule rule = new Program(cpContext);
