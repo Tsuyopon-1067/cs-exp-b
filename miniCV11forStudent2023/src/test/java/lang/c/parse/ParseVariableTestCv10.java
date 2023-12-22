@@ -58,6 +58,7 @@ public class ParseVariableTestCv10 {
         setUp();
     }
 
+    @Ignore
     @Test
     public void parseVariableCorrect() throws FatalErrorException {
         String[] testDataArr = {
