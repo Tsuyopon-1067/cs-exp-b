@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.is;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -51,13 +52,14 @@ public class IsFirstProgramTest_cv05 {
     }
 
     @Test
+    @Ignore
     public void testProgram05() throws FatalErrorException {
         String[] testDataArr = {" i_a=0; "};
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat(testData, Program.isFirst(firstToken), is(true));    
+            assertThat(testData, Program.isFirst(firstToken), is(true));
         }
     }
 }

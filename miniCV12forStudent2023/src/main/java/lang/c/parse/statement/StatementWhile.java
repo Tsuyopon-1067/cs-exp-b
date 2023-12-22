@@ -22,14 +22,11 @@ public class StatementWhile extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx);
 
-		try {
-			if (ConditionBlock.isFirst(tk)) {
-				condition = new ConditionBlock(pcx);
-				condition.parse(pcx);
-			} else {
-				pcx.recoverableError(tk.toExplainString() + "whileの後ろはconditionBlockです");
-			}
-		} catch (RecoverableErrorException e) {
+		if (ConditionBlock.isFirst(tk)) {
+			condition = new ConditionBlock(pcx);
+			condition.parse(pcx);
+		} else {
+			pcx.recoverableError(tk.toExplainString() + "whileの後ろはconditionBlockです");
 			ct.skipTo(pcx, CToken.TK_RPAR); // ConditionBlockの終わりまで飛ばす
 		}
 		tk = ct.getNextToken(pcx);
@@ -38,7 +35,7 @@ public class StatementWhile extends CParseRule {
 			statement = new Statement(pcx);
 			statement.parse(pcx); // statememtは次の字句まで読んでしまう
 		} else {
-			pcx.fatalError(tk.toExplainString() + "whileブロックの中はstatementです");
+			pcx.recoverableError(tk.toExplainString() + "whileブロックの中はstatementです");
 		}
 	}
 

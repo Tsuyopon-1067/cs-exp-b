@@ -41,7 +41,7 @@ public class Condition extends CParseRule {
 				case CToken.TK_EQ -> new ConditionEQ(pcx, expression, tk);
 				case CToken.TK_NE -> new ConditionNE(pcx, expression, tk);
 				default -> {
-					pcx.fatalError("expressionの後ろは条件演算子です");
+					pcx.recoverableError("expressionの後ろは条件演算子です");
 					yield null;
 				}
 			};

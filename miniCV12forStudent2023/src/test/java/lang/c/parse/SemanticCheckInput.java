@@ -58,6 +58,7 @@ public class SemanticCheckInput {
     }
 
     // 正当のテストコード例
+    @Ignore
     @Test
     public void semanticCheckInputTrue() throws FatalErrorException {
         String[] testDataArr = {

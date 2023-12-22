@@ -42,7 +42,6 @@ public class ConstDecl extends CParseRule {
 		constItems.addLast(new ConstItem(pcx));
 		try {
 			constItems.getLast().parse(pcx);
-			System.out.println("constdecl 46 try parse "+tk.toDetailExplainString());
 		} catch (RecoverableErrorException e) {
 			ct.skipTo(pcx, CToken.TK_COMMA, CToken.TK_SEMI);
 		}

@@ -25,14 +25,18 @@ public class StatementBlock extends CParseRule {
 		while (Statement.isFirst(tk)) {
 			Statement statement = new Statement(pcx);
 			statmentList.add(statement);
-			statement.parse(pcx);
+			try {
+				statement.parse(pcx);
+			} catch (Exception e) {
+				pcx.warning("StatementBlock: statementのエラーをスキップしました");
+			}
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
 		}
 
 		try {
 			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "statmentの後ろは}です");
+				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
 			}
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {

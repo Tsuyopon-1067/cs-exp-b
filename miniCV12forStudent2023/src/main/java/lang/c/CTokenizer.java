@@ -88,6 +88,18 @@ public class CTokenizer extends Tokenizer<CToken, CParseContext> {
 		}
 	}
 
+	public void skipToLineEndSemi(CParseContext pcxt) {
+		CToken currentToken = getCurrentToken(pcxt);
+		int lineNo = currentToken.getLineNo();
+		while (true) {
+			if (currentToken.getType() == CToken.TK_SEMI || lineNo != currentToken.getLineNo()) {
+				break;
+			}
+			currentToken = getNextToken(pcxt);
+		}
+		CToken tk = getCurrentToken(pcxt);
+	}
+
 	private CToken readToken() {
 		CToken tk = null;
 		char ch;
