@@ -49,6 +49,9 @@ public class CToken extends SimpleToken {
 	public static final int TK_CONST    = 33;	// const
 	public static final int TK_COMMA    = 34;	// ,
 
+	// add chapter 12
+	public static final int TK_FUNC    = 35;	// function
+
 
 
 
@@ -107,6 +110,8 @@ public class CToken extends SimpleToken {
 				put(TK_INT,"TK_INT");
 				put(TK_CONST,"TK_CONST");
 				put(TK_COMMA,"TK_COMMA");
+
+				put(TK_FUNC,"TK_FUNC");
 			}
 		};
 
