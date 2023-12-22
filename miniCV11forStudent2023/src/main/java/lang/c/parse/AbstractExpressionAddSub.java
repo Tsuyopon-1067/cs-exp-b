@@ -57,10 +57,9 @@ abstract class AbstractExpressionAddSub extends CParseRule {
 		}
 	}
 
-	protected int[][] getOperationRule() {
-		return null;
-	}
-	protected void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException { }
+	protected abstract int[][] getOperationRule();
+
+	protected abstract void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException;
 
 	public abstract void codeGen(CParseContext pcx) throws FatalErrorException;
 }
