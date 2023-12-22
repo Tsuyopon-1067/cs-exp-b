@@ -1,20 +1,15 @@
 package lang.c.parse;
 
-import lang.FatalErrorException;
-import lang.RecoverableErrorException;
-import lang.c.CParseContext;
-import lang.c.CParseRule;
-import lang.c.CToken;
-import lang.c.CTokenizer;
-import lang.c.CType;
+import lang.*;
+import lang.c.*;
 
-abstract class AbstractExpressionAddSub extends CParseRule {
-	// expressionAdd ::= '+' term
-	// expressionSub ::= '-' term
+public abstract class AbstractTermMultDiv extends CParseRule {
+	// termMul ::= MUL factor
+	// termDiv ::= DIV factor
 	CToken op;
 	CParseRule left, right;
 
-	public AbstractExpressionAddSub(CParseContext pcx, CParseRule left) {
+	public AbstractTermMultDiv(CParseContext pcx, CParseRule left) {
 		this.left = left;
 	}
 
@@ -22,17 +17,17 @@ abstract class AbstractExpressionAddSub extends CParseRule {
 		// ここにやってくるときは、必ずisFirst()が満たされている
 		CTokenizer ct = pcx.getTokenizer();
 		op = ct.getCurrentToken(pcx);
-		// +-の次の字句を読む
+		// /の次の字句を読む
 		CToken tk = ct.getNextToken(pcx);
-		if (Term.isFirst(tk)) {
-			right = new Term(pcx);
+		if (Factor.isFirst(tk)) {
+			right = new Factor(pcx);
 			right.parse(pcx);
 		} else {
-			parseNextTokenError(pcx, tk); // 演算子の後ろはtermであるというエラーを出す
+			parseNextTokenError(pcx, tk);
 		}
 	}
 
-	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws RecoverableErrorException { }
+	protected abstract void parseNextTokenError(CParseContext pcx, CToken tk) throws RecoverableErrorException;
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		// 計算規則
@@ -53,11 +48,11 @@ abstract class AbstractExpressionAddSub extends CParseRule {
 				semanticCheckTypeError(pcx);
 			}
 			this.setCType(CType.getCType(nt));
-			this.setConstant(left.isConstant() && right.isConstant()); // 演算子の左右両方が定数のときだけ定数
+			this.setConstant(left.isConstant() && right.isConstant()); // /の左右両方が定数のときだけ定数
 		}
 	}
 
-	protected abstract int[][] getOperationRule();
+	abstract protected int[][] getOperationRule();
 
 	protected abstract void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException;
 

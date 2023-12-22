@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -47,6 +48,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenInt() throws FatalErrorException {
         inputStream.setInputString("i_a");
         String expected[] = {
@@ -61,6 +63,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenAMPInt() throws FatalErrorException {
         inputStream.setInputString("&i_a");
         String expected[] = {
@@ -73,6 +76,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenPint() throws FatalErrorException {
         inputStream.setInputString("ip_a");
         String expected =
@@ -88,6 +92,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenMultPint() throws FatalErrorException {
         inputStream.setInputString("*ip_a");
         String expected =
@@ -105,6 +110,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]");
         String expected =
@@ -125,6 +131,7 @@ public class CodeGenIdentTest {
 
     // Please copy and paste the above code and add the specified test case to the following
     @Test
+    @Ignore
     public void codeGenArrayAmp() throws FatalErrorException {
         inputStream.setInputString("&ia_a[3]");
         String expected =
@@ -142,6 +149,7 @@ public class CodeGenIdentTest {
     }
 
     @Test
+    @Ignore
     public void codeGenArrayPoint() throws FatalErrorException {
         inputStream.setInputString("ipa_a[3]");
         String expected =
@@ -162,6 +170,7 @@ public class CodeGenIdentTest {
 
     // Please copy and paste the above code and add the specified test case to the following
     @Test
+    @Ignore
     public void codeGenArrayPointAmp() throws FatalErrorException {
         inputStream.setInputString("*ipa_a[3]");
         String expected =

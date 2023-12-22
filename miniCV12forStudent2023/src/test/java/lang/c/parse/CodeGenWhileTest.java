@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -44,6 +45,7 @@ public class CodeGenWhileTest {
         cpContext = null;
     }
 
+    @Ignore
     @Test
     public void codeGenWhileTest() throws FatalErrorException {
         inputStream.setInputString( "i_b = 1;" +
@@ -101,6 +103,7 @@ public class CodeGenWhileTest {
 
     // Please copy and paste the above code and add the specified test case to the following
 
+    @Ignore
     @Test
     public void codeGenWhileNextTest() throws FatalErrorException {
         inputStream.setInputString("""

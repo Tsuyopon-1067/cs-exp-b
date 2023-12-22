@@ -3,6 +3,7 @@ package lang.c.parse;
 import java.io.PrintStream;
 
 import lang.FatalErrorException;
+import lang.RecoverableErrorException;
 import lang.c.CParseContext;
 import lang.c.CParseRule;
 import lang.c.CToken;
@@ -20,8 +21,8 @@ class ExpressionAdd extends AbstractExpressionAddSub {
 	}
 
 	@Override
-	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws FatalErrorException {
-		pcx.fatalError(tk.toExplainString() + "+の後ろはtermです");
+	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws RecoverableErrorException {
+		pcx.recoverableError(tk.toExplainString() + "+の後ろはtermです");
 	}
 
 	@Override

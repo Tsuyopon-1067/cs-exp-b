@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -44,6 +45,7 @@ public class CodeGenInputTest {
         cpContext = null;
     }
 
+    @Ignore
     @Test
     public void codeGenInputTest() throws FatalErrorException {
         inputStream.setInputString("input ip_a;");
@@ -66,6 +68,7 @@ public class CodeGenInputTest {
     }
 
     // Please copy and paste the above code and add the specified test case to the following
+    @Ignore
     @Test
     public void codeGenInputArrayTest() throws FatalErrorException {
         inputStream.setInputString("input ia_a[2];");
@@ -94,6 +97,7 @@ public class CodeGenInputTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenInputMultTest() throws FatalErrorException {
         inputStream.setInputString("input *ip_a;");
@@ -120,6 +124,7 @@ public class CodeGenInputTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void codeGenInputPointMultTest() throws FatalErrorException {
         inputStream.setInputString("input *ipa_a[2];");

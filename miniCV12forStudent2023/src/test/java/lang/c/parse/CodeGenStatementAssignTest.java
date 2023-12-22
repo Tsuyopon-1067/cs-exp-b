@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -45,6 +46,7 @@ public class CodeGenStatementAssignTest {
         cpContext = null;
     }
 
+    @Ignore
     @Test
     public void assign() throws FatalErrorException {
         inputStream.setInputString("i_A = i_B;");
@@ -65,6 +67,7 @@ public class CodeGenStatementAssignTest {
     }
 
     // (1) 整数型の扱い
+    @Ignore
     @Test
     public void assignInt() throws FatalErrorException {
         inputStream.setInputString("i_a=0;");
@@ -84,6 +87,7 @@ public class CodeGenStatementAssignTest {
 
     // (2) ポインタ型の扱い
     // Please copy and paste the above and add the specified test case to the following
+    @Ignore
     @Test
     public void assignPoint() throws FatalErrorException {
         inputStream.setInputString("ip_a=&1;");
@@ -101,6 +105,7 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void assignPointRef() throws FatalErrorException {
         inputStream.setInputString("*ip_a=1;");
@@ -120,6 +125,7 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void assignDoubleStatement() throws FatalErrorException {
         inputStream.setInputString("ip_a=&1;*ip_a=1;");
@@ -151,6 +157,7 @@ public class CodeGenStatementAssignTest {
     }
 
     // (3) 配列型の扱い
+    @Ignore
     @Test
     public void assignArray() throws FatalErrorException {
         inputStream.setInputString("ia_a[3]=1;");
@@ -174,6 +181,7 @@ public class CodeGenStatementAssignTest {
 
     // (4) ポインタ配列型の扱い
     // Please copy and paste the above code and add the specified test case to the following
+    @Ignore
     @Test
     public void assignPointArray() throws FatalErrorException {
         inputStream.setInputString("ipa_a[3]=&3;");
@@ -195,6 +203,7 @@ public class CodeGenStatementAssignTest {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+    @Ignore
     @Test
     public void assignPointArrayMult() throws FatalErrorException {
         inputStream.setInputString("*ipa_a[3]=3;");

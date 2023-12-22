@@ -5,13 +5,11 @@ import java.io.PrintStream;
 import lang.*;
 import lang.c.*;
 
-public class TermMult extends CParseRule {
+public class TermMult extends AbstractTermMultDiv {
 	// termMul ::= MUL factor
-	CToken op;
-	CParseRule left, right;
 
 	public TermMult(CParseContext pcx, CParseRule left) {
-		this.left = left;
+		super(pcx, left);
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -28,43 +26,38 @@ public class TermMult extends CParseRule {
 			right = new Factor(pcx);
 			right.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "*の後ろはfactorです");
+			parseNextTokenError(pcx, tk);
 		}
 	}
 
-	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+	@Override
+	protected void parseNextTokenError(CParseContext pcx, CToken tk) throws RecoverableErrorException {
+		pcx.recoverableError(tk.toExplainString() + "*の後ろはfactorです");
+	}
+
+	@Override
+	protected int[][] getOperationRule() {
 		// 掛け算の型計算規則
 		final int s[][] = {
-				// T_err       T_int         T_pint        T_int_array  T_pint_array
-				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_err
-				{ CType.T_err, CType.T_int,  CType.T_err,  CType.T_err, CType.T_err }, // T_int
-				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint
-				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_int_array
-				{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint_array
+			// T_err       T_int         T_pint        T_int_array  T_pint_array
+			{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_err
+			{ CType.T_err, CType.T_int,  CType.T_err,  CType.T_err, CType.T_err }, // T_int
+			{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint
+			{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_int_array
+			{ CType.T_err, CType.T_err,  CType.T_err,  CType.T_err, CType.T_err }, // T_pint_array
 		};
-		if (left != null && right != null) {
-			left.semanticCheck(pcx);
-			right.semanticCheck(pcx);
-			int lt = 0;
-			int rt = 0;
-			if (left.getCType() != null) {
-				lt = left.getCType().getType(); // 左辺の型
-			}
-			if (right.getCType() != null) {
-				rt = right.getCType().getType(); // 右辺の型
-			}
-			int nt = s[lt][rt]; // 規則による型計算
-			if (nt == CType.T_err) {
-				if (left.getCType() != null && right.getCType() != null) {
-					pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
-							+ right.getCType().toString() + "]は掛けられません");
-				}
-			}
-			this.setCType(CType.getCType(nt));
-			this.setConstant(left.isConstant() && right.isConstant()); // *の左右両方が定数のときだけ定数
+		return s;
+	}
+
+	@Override
+	protected void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException {
+		if (left.getCType() != null && right.getCType() != null) {
+			pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
+					+ right.getCType().toString() + "]は掛けられません");
 		}
 	}
 
+	@Override
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; termMult starts");
