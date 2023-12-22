@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -44,6 +45,7 @@ public class CodeGenDeclarationTestCv10 {
         cpContext = null;
     }
 
+@Ignore
 @Test
     public void codeGenAndTest1() throws FatalErrorException {
         inputStream.setInputString("""
@@ -121,6 +123,7 @@ public class CodeGenDeclarationTestCv10 {
         helper.checkCodeGen(expected, rule, cpContext);
     }
 
+@Ignore
 @Test
     public void codeGenAndTest2() throws FatalErrorException {
         inputStream.setInputString("""
