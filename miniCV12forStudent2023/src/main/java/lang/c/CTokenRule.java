@@ -16,7 +16,7 @@ public class CTokenRule extends HashMap<String, Object> {
 		put("int", Integer.valueOf(CToken.TK_INT));
 		put("const", Integer.valueOf(CToken.TK_CONST));
 		put("void", Integer.valueOf(CToken.TK_VOID));
-		put("func", Integer.valueOf(CToken.TK_FUNC));
+		put("function", Integer.valueOf(CToken.TK_FUNC));
 		put("return", Integer.valueOf(CToken.TK_RETURN));
 		put("call", Integer.valueOf(CToken.TK_CALL));
 	}

@@ -1,7 +1,6 @@
 package lang.c.parse.statement;
 
 import java.io.PrintStream;
-import java.util.ArrayDeque;
 import lang.c.parse.*;
 
 import lang.*;
@@ -9,7 +8,7 @@ import lang.c.*;
 
 public class StatementReturn extends CParseRule {
     // statementReturn ::= RETURN [ expression ] SEMI
-	ArrayDeque<CParseRule> expressionList = new ArrayDeque()<CParseRule>();
+	CParseRule expression;
 
 	public StatementReturn(CParseContext pcx) {
 	}
@@ -23,33 +22,33 @@ public class StatementReturn extends CParseRule {
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // returnを読み飛ばす
 
-		while (Expression.isFirst(tk)) {
-			expressionList.add(new Expression(pcx));
-			expressionList.getLast().parse(pcx);
-			ct = pcx.getTokenizer();
-			tk = ct.getCurrentToken(pcx);
+		if (Expression.isFirst(tk)) {
+			expression = new Expression(pcx);
+			expression.parse(pcx);
+			tk = ct.getNextToken(pcx);
+		} else {
+			pcx.recoverableError(tk.toExplainString() + "returnの後ろはexpressionです");
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError(tk.toExplainString() + "文末は;です");
+			pcx.warning(tk.toExplainString() + "文末は;です");
+		} else {
+			ct.skipToLineEndSemi(pcx);
+			return;
 		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (expressionList != null) {
-			for (CParseRule expression : expressionList) {
-				expression.semanticCheck(pcx);
-			}
+		if (expression != null) {
+			expression.semanticCheck(pcx);
 		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementReturn starts");
-		if (expressionList != null) {
-			for (CParseRule expression : expressionList) {
-				expression.codeGen(pcx);
-			}
+		if (expression != null) {
+			expression.codeGen(pcx);
 		}
 		o.println(";;; StatementReturn completes");
 	}

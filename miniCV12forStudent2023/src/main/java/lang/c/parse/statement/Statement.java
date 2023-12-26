@@ -6,7 +6,7 @@ import lang.*;
 import lang.c.*;
 
 public class Statement extends CParseRule {
-    // statement ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock
+    // statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
     CParseRule nextCParseRule;
 
 	public Statement(CParseContext pcx) {
@@ -19,7 +19,8 @@ public class Statement extends CParseRule {
 			|| StatementIf.isFirst(tk)
 			|| StatementWhile.isFirst(tk)
 			|| StatementBlock.isFirst(tk)
-			|| StatementCall.isFirst(tk);
+			|| StatementCall.isFirst(tk)
+			|| StatementReturn.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -40,6 +41,10 @@ public class Statement extends CParseRule {
 			nextCParseRule = new StatementBlock(pcx);
 		} else if (StatementCall.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementCall(pcx);
+		} else if (StatementReturn.isFirst(ct.getCurrentToken(pcx))) {
+			nextCParseRule = new StatementReturn(pcx);
+		} else {
+			pcx.fatalError(ct.getCurrentToken(pcx).toExplainString() + "statementの文がありません");
 		}
 		try {
 			nextCParseRule.parse(pcx);

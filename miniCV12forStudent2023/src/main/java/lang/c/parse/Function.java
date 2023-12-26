@@ -1,5 +1,4 @@
 package lang.c.parse;
-
 import java.io.PrintStream;
 
 import lang.*;
@@ -18,8 +17,7 @@ public class Function extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getNextToken(pcx); // funcを読み飛ばす
-System.err.println("fun " + tk.toDetailExplainString());
+		CToken tk = ct.getNextToken(pcx); // functionを読み飛ばす
 
 		if (tk.getType() == CToken.TK_INT) {
 			tk = ct.getNextToken(pcx);
@@ -39,12 +37,15 @@ System.err.println("fun " + tk.toDetailExplainString());
 			pcx.recoverableError(tk.toExplainString() + "関数名が必要です");
 		}
 
-		if (Call.isFirst(tk)) {
-			Call call = new Call(pcx);
-			call.parse(pcx);
+		if (tk.getType() == CToken.TK_LPAR) {
 			tk = ct.getNextToken(pcx);
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "関数名の後ろは()です");
+		}
+		if (tk.getType() == CToken.TK_RPAR) {
+			tk = ct.getNextToken(pcx);
+		} else {
+			pcx.recoverableError(tk.toExplainString() + "()が閉じていません");
 		}
 
 		if (DeclBlock.isFirst(tk)) {
@@ -56,8 +57,15 @@ System.err.println("fun " + tk.toDetailExplainString());
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		declBlock.semanticCheck(pcx);
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+		PrintStream o = pcx.getIOContext().getOutStream();
+		o.println(";;; Function starts");
+		if (declBlock != null) {
+			declBlock.codeGen(pcx);
+		}
+		o.println(";;; Function completes");
 	}
 }
