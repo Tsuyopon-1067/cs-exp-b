@@ -14,7 +14,7 @@ public class Program extends CParseRule {
 	public Program(CParseContext pcx) {
 	}
 	public static boolean isFirst(CToken tk) {
-		return Declaration.isFirst(tk) || DeclBlock.isFirst(tk);
+		return Function.isFirst(tk) || DeclBlock.isFirst(tk);
 	}
 
 
@@ -31,7 +31,6 @@ public class Program extends CParseRule {
 		}
 
 		pcx.getSymbolTable().setIsGlobalMode(false);
-		System.err.println("program " + tk.toDetailExplainString());
 		while (Function.isFirst(tk)) {
 			functionList.addLast(new Function(pcx));
 			functionList.getLast().parse(pcx);
