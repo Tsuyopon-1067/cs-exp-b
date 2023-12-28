@@ -48,7 +48,7 @@ public class StatementAssign extends CParseRule {
 
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError(tk.toExplainString() + ";がありません");
+			pcx.recoverableError("StatementAssign" + tk.toExplainString() + ";がありません");
 		} else {
 			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		}

@@ -65,7 +65,7 @@ public class ConstDecl extends CParseRule {
 
 		if (tk.getType() != CToken.TK_SEMI) {
 			ct.skipTo(pcx, CToken.TK_SEMI);
-			pcx.recoverableError(";が必要です");
+			pcx.recoverableError("ConstDecl" + tk.toDetailExplainString() + ";が必要です");
 		}
 	}
 
