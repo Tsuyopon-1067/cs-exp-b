@@ -7,6 +7,7 @@ public class CType {
 	public static final int T_int_array	= 3;		// int[]
 	public static final int T_pint_array= 4; 		// int*[]
 	public static final int T_bool		= 5;		// bool
+	public static final int T_void		= 6;		// void
 
 	private static CType[] typeArray = {
 		new CType(T_err,	"error"),
@@ -15,6 +16,7 @@ public class CType {
 		new CType(T_int_array, "int[]"),
 		new CType(T_pint_array, "int*[]"),
 		new CType(T_bool,	"bool"),
+		new CType(T_void,	"void"),
 	};
 
 	private int type;
@@ -24,7 +26,7 @@ public class CType {
 		this.type = type;
 		this.string = s;
 	}
-	
+
 	public static CType getCType(int type) {
 		return typeArray[type];
 	}
@@ -32,7 +34,7 @@ public class CType {
 	public boolean isCType(int t) {
 		return t == type;
 	}
-	
+
 	public int getType() {
 		return type;
 	}
