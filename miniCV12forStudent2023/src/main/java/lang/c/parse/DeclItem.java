@@ -64,10 +64,6 @@ public class DeclItem extends CParseRule {
 			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
 		}
 
-		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError(tk.toDetailExplainString() + ";が必要です");
-		}
-
 		// 変数登録
 		CSymbolTableEntry entry;
 		final boolean isConst = false;

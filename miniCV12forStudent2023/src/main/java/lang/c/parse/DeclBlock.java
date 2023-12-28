@@ -2,7 +2,6 @@ package lang.c.parse;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import lang.c.parse.statement.Statement;
 
 import lang.*;
@@ -13,8 +12,10 @@ public class DeclBlock extends CParseRule {
 	ArrayDeque<CParseRule> declareList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> statmentList = new ArrayDeque<CParseRule>();
 	int variableSize = 0;
+	String returnLabel;
 
-	public DeclBlock(CParseContext pcx) {
+	public DeclBlock(CParseContext pcx, String returnLabel) {
+		this.returnLabel = returnLabel;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -35,7 +36,7 @@ public class DeclBlock extends CParseRule {
 		}
 
 		while (Statement.isFirst(tk)) {
-			statmentList.add(new Statement(pcx));
+			statmentList.add(new Statement(pcx, returnLabel));
 			statmentList.getLast().parse(pcx);
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
@@ -63,6 +64,7 @@ public class DeclBlock extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; DeclBlock starts");
+
 		if (declareList != null) {
 			for (CParseRule declaration : declareList) {
 				declaration.codeGen(pcx);
@@ -76,7 +78,6 @@ public class DeclBlock extends CParseRule {
 				statment.codeGen(pcx);
 			}
 		}
-		o.println("\tSUB\t#" + variableSize + ", R6\t; DeclItem: 局所変数の分だけスタックポインタを戻す");
 		o.println(";;; DeclBlock completes");
 	}
 }

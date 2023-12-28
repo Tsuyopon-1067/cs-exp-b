@@ -9,8 +9,10 @@ import lang.c.*;
 public class StatementReturn extends CParseRule {
     // statementReturn ::= RETURN [ expression ] SEMI
 	CParseRule expression;
+	String returnLabel;
 
-	public StatementReturn(CParseContext pcx) {
+	public StatementReturn(CParseContext pcx, String returnLabel) {
+		this.returnLabel = returnLabel;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -25,17 +27,17 @@ public class StatementReturn extends CParseRule {
 		if (Expression.isFirst(tk)) {
 			expression = new Expression(pcx);
 			expression.parse(pcx);
-			tk = ct.getNextToken(pcx);
+			tk = ct.getCurrentToken(pcx);
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "returnの後ろはexpressionです");
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.warning(tk.toExplainString() + "文末は;です");
-		} else {
+			pcx.warning("StatementReturn" + tk.toExplainString() + "文末は;です");
 			ct.skipToLineEndSemi(pcx);
 			return;
 		}
+		tk = ct.getNextToken(pcx);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -49,7 +51,9 @@ public class StatementReturn extends CParseRule {
 		o.println(";;; StatementReturn starts");
 		if (expression != null) {
 			expression.codeGen(pcx);
+			o.println("\tMOV\t-(R6), (R0)\t; StatementReturn: スタックに積まれた値を戻り値用レジスタR0に移す");
 		}
+		o.println(String.format("\tJUMP\t%s\t; StatementReturn: 関数のRET命令にジャンプする", returnLabel));
 		o.println(";;; StatementReturn completes");
 	}
 }

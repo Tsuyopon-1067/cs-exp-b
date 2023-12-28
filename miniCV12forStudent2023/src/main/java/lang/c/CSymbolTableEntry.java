@@ -8,6 +8,13 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean constp; // 定数宣言か？
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
+	private boolean isFunction; // 関数か？
+	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction) {
+		this.type = type;
+		this.size = size;
+		this.constp = constp;
+		this.isFunction = isFunction;
+	}
 	public CSymbolTableEntry(CType type, int size, boolean constp) {
 		this.type = type;
 		this.size = size;
@@ -23,4 +30,13 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public void setAddress(int addr) { address = addr; }
 	public void setIsGlobal(boolean isGlobal) { this.isGlobal = isGlobal; }
 	public int getAddress() { return address; }
+	public boolean isFunction() { return isFunction; }
+	public boolean verificateFunction(CSymbolTableEntry e) {
+		// todo すでに登録された関数と同じかどうかを確認する
+		if (e.isFunction() && e.GetCType().equals(e.GetCType())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
