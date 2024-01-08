@@ -10,8 +10,10 @@ import lang.c.*;
 public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
 	CParseRule call, ident;
+	ArrayDeque<CParseRule> expressions;
 
 	public StatementCall(CParseContext pcx) {
+		expressions = new ArrayDeque<CParseRule>();
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -35,8 +37,27 @@ public class StatementCall extends CParseRule {
 			pcx.recoverableError("identの後ろは(です");
 		}
 		tk = ct.getNextToken(pcx); // (を読み飛ばす
+		if (Expression.isFirst(tk)) {
+			expressions.addLast(new Expression(pcx));
+			expressions.getLast().parse(pcx);
+			tk = ct.getCurrentToken(pcx);
+			while (tk.getType() == CToken.TK_COMMA) {
+				tk = ct.getNextToken(pcx); // ,を読み飛ばす
+				if (!Expression.isFirst(tk)) {
+					pcx.recoverableError(tk.toExplainString() + ",の後ろには引数が必要です");
+					continue;
+				}
+				expressions.addLast(new Expression(pcx));
+				expressions.getLast().parse(pcx);
+				tk = ct.getCurrentToken(pcx);
+			}
+		}
 		if (tk.getType() != CToken.TK_RPAR) {
 			pcx.recoverableError("()が閉じていません");
+		}
+		tk = ct.getNextToken(pcx); // )を読み飛ばす
+		if (tk.getType() != CToken.TK_SEMI) {
+			pcx.recoverableError("callの後ろは;です");
 		}
 	}
 

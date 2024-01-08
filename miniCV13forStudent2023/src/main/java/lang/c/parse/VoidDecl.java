@@ -7,7 +7,8 @@ import lang.*;
 import lang.c.*;
 
 public class VoidDecl extends CParseRule {
-	// voidDecl ::= VOID IDENT LPAR RPAR { COMMA IDENT LPAR RPAR } SEMI
+	// voidDecl        ::= VOID IDENT LPAR [ typelist ] RPAR { COMMA IDENT LPAR [ typeList ] RPAR } SEMI
+	CParseRule typeList;
 
 	public VoidDecl(CParseContext pcx) {
 	}
@@ -21,7 +22,7 @@ public class VoidDecl extends CParseRule {
 		CToken tk = ct.getNextToken(pcx); // voidを読み飛ばす
 
 		if (!Ident.isFirst(tk)) {
-			pcx.recoverableError("intの次はidentです");
+			pcx.recoverableError("voidの次はidentです");
 		}
 		try {
 			registerName(pcx, tk);
@@ -31,6 +32,10 @@ public class VoidDecl extends CParseRule {
 		tk = ct.getNextToken(pcx); // LPARを読む
 		if (tk.getType() != CToken.TK_LPAR) {
 			pcx.recoverableError("(が必要です");
+		}
+		if (TypeList.isFirst(tk)) {
+			typeList = new TypeList(pcx);
+			typeList.parse(pcx);
 		}
 		tk = ct.getNextToken(pcx); // RPARを読む
 		if (tk.getType() != CToken.TK_RPAR) {
@@ -53,6 +58,10 @@ public class VoidDecl extends CParseRule {
 			tk = ct.getNextToken(pcx); // LPARを読む
 			if (tk.getType() != CToken.TK_LPAR) {
 				pcx.recoverableError("(が必要です");
+			}
+			if (TypeList.isFirst(tk)) {
+				typeList = new TypeList(pcx);
+				typeList.parse(pcx);
 			}
 			tk = ct.getNextToken(pcx); // RPARを読む
 			if (tk.getType() != CToken.TK_RPAR) {

@@ -7,7 +7,7 @@ import lang.c.*;
 
 public class DeclItem extends CParseRule {
 	// declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
-	CParseRule num;
+	CParseRule num, typeList;
 	int size;
 	String identName;
 	boolean isExistMult = false;
@@ -58,6 +58,10 @@ public class DeclItem extends CParseRule {
 			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
 		} else if (tk.getType() == CToken.TK_LPAR) {
 			tk = ct.getNextToken(pcx); // (を読み飛ばす
+			if (TypeList.isFirst(tk)) {
+				typeList = new TypeList(pcx);
+				typeList.parse(pcx);
+			}
 			if (tk.getType() != CToken.TK_RPAR) {
 				pcx.recoverableError(tk.toDetailExplainString() + "()が閉じていません");
 			}

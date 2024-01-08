@@ -6,7 +6,7 @@ import lang.c.*;
 
 public class Function extends CParseRule {
 	// function        ::= FUNC ( INT [ MULT ] | VOID ) IDENT LPAR RPAR declblock
-	CParseRule ident, declBlock;
+	CParseRule ident, argList, declBlock;
 	String functionName;
 	boolean isExistMult = false;
 	boolean isVoid = false;
@@ -52,6 +52,10 @@ public class Function extends CParseRule {
 			tk = ct.getNextToken(pcx);
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "関数名の後ろは()です");
+		}
+		if (ArgList.isFirst(tk)) {
+			argList = new ArgList(pcx);
+			argList.parse(pcx);
 		}
 		if (tk.getType() == CToken.TK_RPAR) {
 			tk = ct.getNextToken(pcx);
