@@ -57,11 +57,16 @@ declblock ::= LCUR { declaration } { statement } RCUR
 
 program         ::= { declaraion } { function } EOF
 declaration     ::= intDecl | constDecl | voidDecl
-voidDecl        ::= VOID IDENT LPAR RPAR { COMMA IDENT LPAR RPAR } SEMI
-declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR RPAR ]
-function        ::= FUNC ( INT [ MULT ] | VOID ) IDENT LPAR RPAR declblock
 statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
-statementCall   ::= CALL ident LPAR RPAR SEMI
 statementReturn ::= RETURN [ expression ] SEMI
 variable        ::= ident [ array | call ]
-call            ::= LPAR RPAR
+
+function        ::= FUNC ( INT [ MULT ] | VOID ) IDENT LPAR [ argList ] RPAR declblock
+arglist         ::= argItem { COMMA argItem }
+argItem         ::= INT [ MULT ] IDENT [ LBRA RBRA ]
+statementCall   ::= CALL ident LPAR [ expression { COMMA expression } ] RPAR SEMI
+call            ::= LPAR [ expressoin { COMMA expression } ] RPAR
+voidDecl        ::= VOID IDENT LPAR [ typelist ] RPAR { COMMA IDENT LPAR [ typeList ] RPAR } SEMI
+declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR [ typeList ] RPAR ]
+typeList        ::= typeItem { COMMA typeItem }
+typeItem        ::= INT[MULT][LBRARBRA]
