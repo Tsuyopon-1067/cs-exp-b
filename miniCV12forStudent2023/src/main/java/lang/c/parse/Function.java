@@ -83,7 +83,7 @@ public class Function extends CParseRule {
 
 		if (
 			!pcx.getSymbolTable().registerGlobal(functionName, entry)
-			|| !pcx.getSymbolTable().searchGlobal(functionName).verificateFunction(entry)
+			&& !pcx.getSymbolTable().searchGlobal(functionName).verificateFunction(entry)
 		) {
 			pcx.recoverableError("Function: " + tk.toDetailExplainString() + " すでに使用されている名前です");
 		}

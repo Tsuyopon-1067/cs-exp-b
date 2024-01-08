@@ -14,7 +14,7 @@ public class Program extends CParseRule {
 	public Program(CParseContext pcx) {
 	}
 	public static boolean isFirst(CToken tk) {
-		return Function.isFirst(tk) || DeclBlock.isFirst(tk);
+		return Function.isFirst(tk) || Declaration.isFirst(tk);
 	}
 
 
