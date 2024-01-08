@@ -65,7 +65,7 @@ public class Ident extends CParseRule {
 			if (isFunction) {
 				o.println("\tJSR\t#" + identName + "\t; Ident: サブルーチンにジャンプする<" + ident.toExplainString() + ">");
 				o.println("\tMOV\t#" + entry.getAddress() + ", R1\t; Ident: フレームポインタと変数アドレスの変異を取得<" + ident.toExplainString() + ">");
-				o.println("\tADD\tR0, R0\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
+				o.println("\tADD\tR4, R1\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
 				o.println("\tMOV\tR1, (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
 				o.println("\tMOV\tR0, (R1)\t; Ident: 変数アドレスに戻り値を代入する<" + ident.toExplainString() + ">");
 			} else if (entry.isGlobal()) {
