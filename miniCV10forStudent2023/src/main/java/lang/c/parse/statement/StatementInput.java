@@ -30,10 +30,21 @@ public class StatementInput extends CParseRule {
 		} else {
 			ct.getNextToken(pcx);
 			tk = ct.getCurrentToken(pcx);
+			System.out.println(tk.toDetailExplainString());
 			pcx.warning(tk.toExplainString() + "inputの後ろはprimaryです");
 			if (tk.getType() != CToken.TK_SEMI) {
-				tk = ct.getNextToken(pcx);
 				pcx.warning("primaryをスキップしました");
+				int lineNo = tk.getLineNo();
+				while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+					tk = ct.getNextToken(pcx);
+					if (tk.getLineNo() != lineNo) {
+						break; // 改行したら抜ける
+					}
+				}
+				if (tk.getType() == CToken.TK_SEMI) {
+					ct.getNextToken(pcx);
+				}
+				return;
 			}
 		}
 

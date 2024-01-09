@@ -1,7 +1,6 @@
 package lang.c.parse;
 
 import java.io.PrintStream;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 import lang.*;
@@ -9,15 +8,14 @@ import lang.c.*;
 import lang.c.parse.statement.Statement;
 
 public class Program extends CParseRule {
-	// program     ::= { declaration } { statement } EOF
-	ArrayDeque<CParseRule> declaration = new ArrayDeque<CParseRule>();
-	ArrayDeque<CParseRule> statment = new ArrayDeque<CParseRule>();
+	// program         ::= { statement } EOFprogram ::= expression EOF
+	ArrayList<CParseRule> statment = new ArrayList<CParseRule>();
 
 	public Program(CParseContext pcx) {
 	}
 
 	public static boolean isFirst(CToken tk) {
-		return Declaration.isFirst(tk) || Statement.isFirst(tk);
+		return Statement.isFirst(tk);
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
@@ -25,14 +23,10 @@ public class Program extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 
-		while (Declaration.isFirst(tk)) {
-			declaration.addLast(new Declaration(pcx));
-			declaration.getLast().parse(pcx);
-			tk = ct.getNextToken(pcx);
-		}
 		while (Statement.isFirst(tk)) {
-			statment.addLast(new Statement(pcx));
-			statment.getLast().parse(pcx);
+			statment.add(new Statement(pcx));
+			statment.get(statment.size() - 1).parse(pcx);
+			tk = ct.getCurrentToken(pcx);
 			tk = ct.getCurrentToken(pcx); // statementが次の字句を読んでしまうので次の字句は読まない
 		}
 		if (tk.getType() == CToken.TK_RCUR) {
@@ -55,11 +49,6 @@ public class Program extends CParseRule {
 		o.println("\t. = 0x100");
 		o.println("\tJMP\t__START\t; ProgramNode: 最初の実行文へ");
 		// ここには将来、宣言に対するコード生成が必要
-		if (declaration != null) {
-			for (CParseRule d : declaration) {
-				d.codeGen(pcx);
-			}
-		}
 		o.println("__START:");
 		o.println("\tMOV\t#0x1000, R6\t; ProgramNode: 計算用スタック初期化");
 		for (CParseRule s : statment) {
