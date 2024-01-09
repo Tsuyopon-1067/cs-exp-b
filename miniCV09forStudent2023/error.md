@@ -9,6 +9,11 @@
 
 ## statement
 
+### Statement
+
+-   各 Statement の中でエラー
+    -   Statement の isFirst を満たすか EOF または改行を見つけるまで字句を読み進める
+
 ### StatementAssign
 
 -   ;がないとき
@@ -19,13 +24,12 @@
     -   warning: 左辺の型[" + primary.getCType().toString()"]と右辺の型[" + expression.getCType().toString() + "]が異なります"
 -   代入先が定数
     -   warning: 左辺が定数です
--   Expressin のエラーが起きた
-    -   文末または;までスキップしました
+-   Expressin のエラーが起きた - Statement の isFirst を満たすか ; または EOF または改行を見つけるまで字句を読み進める
 
 ### StatementBlock
 
 -   }が閉じていないとき
-    -   recoverableError: }が閉じていません
+    -   warning: }が閉じていません
 
 ### StatementIf
 

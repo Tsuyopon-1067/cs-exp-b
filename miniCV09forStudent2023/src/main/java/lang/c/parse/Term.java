@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.statement.Statement;
 
 public class Term extends CParseRule {
 	// term ::= factor {termMult | termDiv}
@@ -34,14 +35,14 @@ public class Term extends CParseRule {
 				list.parse(pcx);
 			} catch (RecoverableErrorException e) {
 				int lineNo = tk.getLineNo();
-				while (!TermMult.isFirst(tk) || TermDiv.isFirst(tk) || tk.getType() != CToken.TK_SEMI) {
+				while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
 					tk = ct.getNextToken(pcx);
-					if (tk.getType() != CToken.TK_SEMI || tk.getLineNo() != lineNo) {
-						break;
+					if (tk.getLineNo() != lineNo) {
+						break; // 改行したら抜ける
 					}
 				}
 				pcx.warning("TermMultまたはTermDivをスキップしました");
-				continue;
+				return;
 			}
 			factor = list;
 			tk = ct.getCurrentToken(pcx); // この命令がないと次の字句を読めない
