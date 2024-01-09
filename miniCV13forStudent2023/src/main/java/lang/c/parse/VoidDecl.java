@@ -8,7 +8,6 @@ import lang.c.*;
 
 public class VoidDecl extends CParseRule {
 	// voidDecl        ::= VOID IDENT LPAR [ typelist ] RPAR { COMMA IDENT LPAR [ typeList ] RPAR } SEMI
-	CParseRule typeList;
 
 	public VoidDecl(CParseContext pcx) {
 	}
@@ -24,23 +23,8 @@ public class VoidDecl extends CParseRule {
 		if (!Ident.isFirst(tk)) {
 			pcx.recoverableError("voidの次はidentです");
 		}
-		try {
-			registerName(pcx, tk);
-		} catch (RecoverableErrorException e) {
-		}
 
-		tk = ct.getNextToken(pcx); // LPARを読む
-		if (tk.getType() != CToken.TK_LPAR) {
-			pcx.recoverableError("(が必要です");
-		}
-		if (TypeList.isFirst(tk)) {
-			typeList = new TypeList(pcx);
-			typeList.parse(pcx);
-		}
-		tk = ct.getNextToken(pcx); // RPARを読む
-		if (tk.getType() != CToken.TK_RPAR) {
-			pcx.recoverableError("()が閉じていません");
-		}
+		parseIdnetDeclaration(pcx, ct, tk);
 
 		tk = ct.getNextToken(pcx); // ,または;を読む
 		while (tk.getType() == CToken.TK_COMMA) {
@@ -50,25 +34,8 @@ public class VoidDecl extends CParseRule {
 				ct.skipTo(pcx, CToken.TK_SEMI);
 				return;
 			}
-			try {
-				registerName(pcx, tk);
-			} catch (RecoverableErrorException e) {
-			}
-
-			tk = ct.getNextToken(pcx); // LPARを読む
-			if (tk.getType() != CToken.TK_LPAR) {
-				pcx.recoverableError("(が必要です");
-			}
-			if (TypeList.isFirst(tk)) {
-				typeList = new TypeList(pcx);
-				typeList.parse(pcx);
-			}
-			tk = ct.getNextToken(pcx); // RPARを読む
-			if (tk.getType() != CToken.TK_RPAR) {
-				pcx.recoverableError("()が閉じていません");
-			}
-
-			tk = ct.getNextToken(pcx); // ,を読む
+			parseIdnetDeclaration(pcx, ct, tk);
+			tk = ct.getCurrentToken(pcx);
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
@@ -92,5 +59,30 @@ public class VoidDecl extends CParseRule {
 		if ( !pcx.getSymbolTable().registerGlobal(name, entry) ) {
 			pcx.recoverableError("すでに宣言されている変数です");
 		}
+	}
+
+	private void parseIdnetDeclaration(CParseContext pcx, CTokenizer ct, CToken tk) throws FatalErrorException {
+		CToken identToken = tk;
+		boolean isExistTypeList = false;
+
+		tk = ct.getNextToken(pcx); // LPARを読む
+		if (tk.getType() != CToken.TK_LPAR) {
+			pcx.recoverableError("(が必要です");
+		}
+		if (TypeList.isFirst(tk)) {
+			CParseRule typeList = new TypeList(pcx);
+			typeList.parse(pcx);
+			isExistTypeList = true;
+		}
+		tk = ct.getNextToken(pcx); // RPARを読む
+		if (tk.getType() != CToken.TK_RPAR) {
+			pcx.recoverableError("()が閉じていません");
+		}
+		try {
+			registerName(pcx, identToken);
+		} catch (RecoverableErrorException e) {
+		}
+
+		tk = ct.getNextToken(pcx); // ,または;を読む
 	}
 }

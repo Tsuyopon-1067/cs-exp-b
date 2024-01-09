@@ -1,5 +1,7 @@
 package lang.c;
 
+import java.util.ArrayList;
+
 import lang.SymbolTableEntry;
 
 public class CSymbolTableEntry extends SymbolTableEntry {
@@ -9,6 +11,17 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
 	private boolean isFunction; // 関数か？
+	private ArrayList<CType> argTypes; // 関数の引数の型のリスト
+
+	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction, ArrayList<CType> argTypes) {
+		this.type = type;
+		this.size = size;
+		this.constp = constp;
+		this.isFunction = isFunction;
+		for (CType t : argTypes) {
+			this.argTypes.add(t);
+		}
+	}
 	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction) {
 		this.type = type;
 		this.size = size;

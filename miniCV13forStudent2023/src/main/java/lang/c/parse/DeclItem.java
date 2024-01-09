@@ -7,12 +7,14 @@ import lang.c.*;
 
 public class DeclItem extends CParseRule {
 	// declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
-	CParseRule num, typeList;
+	CParseRule num;
+	TypeList typeList;
 	int size;
 	String identName;
 	boolean isExistMult = false;
 	boolean isArray = false;
 	boolean isGlobal;
+	boolean isFunction = false;
 
 	public DeclItem(CParseContext pcx) {
 	}
@@ -57,6 +59,7 @@ public class DeclItem extends CParseRule {
 			}
 			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
 		} else if (tk.getType() == CToken.TK_LPAR) {
+			isFunction = true;
 			tk = ct.getNextToken(pcx); // (を読み飛ばす
 			if (TypeList.isFirst(tk)) {
 				typeList = new TypeList(pcx);
@@ -74,21 +77,38 @@ public class DeclItem extends CParseRule {
 		if (isArray) {
 			size = ((Number)num).getValue();
 			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst, isFunction);
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst, isFunction);
 			}
 		} else {
 			size = 1;
-			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
+			if (typeList != null) {
+				if (isExistMult) {
+					entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isFunction, typeList.getCTypeList());
+				} else {
+					entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction, typeList.getCTypeList());
+				}
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
+				if (isExistMult) {
+					entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isFunction);
+				} else {
+					entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction);
+				}
 			}
 		}
 
 		isGlobal = pcx.getSymbolTable().isGlobalMode();
 		if (isGlobal) {
+			if (typeList != null) {
+				if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
+					pcx.recoverableError("すでに宣言されている変数です");
+				}
+			} else {
+				if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
+					pcx.recoverableError("すでに宣言されている変数です");
+				}
+			}
 			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
 				pcx.recoverableError("すでに宣言されている変数です");
 			}

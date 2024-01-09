@@ -1,7 +1,7 @@
 package lang.c.parse;
 
 import java.io.PrintStream;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
@@ -9,10 +9,10 @@ import lang.c.*;
 public class TypeList extends CParseRule {
 	// call            ::= LPAR RPAR
 	CToken num;
-	ArrayDeque<CParseRule> typeItems;
+	ArrayList<CType> cTypeList;
 
 	public TypeList(CParseContext pcx) {
-		typeItems = new ArrayDeque<CParseRule>();
+		cTypeList = new ArrayList<CType>();
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -23,8 +23,9 @@ public class TypeList extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getCurrentToken(pcx);
 
-		typeItems.addLast(new TypeItem(pcx));
-		typeItems.getLast().parse(pcx);
+		TypeItem typeItem = new TypeItem(pcx);
+		typeItem.parse(pcx);
+		cTypeList.add(typeItem.getItemCType());
 
 		while (tk.getType() == CToken.TK_COMMA) {
 			tk = ct.getNextToken(pcx); // ,を読み飛ばす
@@ -32,8 +33,9 @@ public class TypeList extends CParseRule {
 				pcx.recoverableError(tk.toExplainString() + ",の後ろには引数が必要です");
 				continue;
 			}
-			typeItems.addLast(new TypeItem(pcx));
-			typeItems.getLast().parse(pcx);
+			typeItem = new TypeItem(pcx);
+			typeItem.parse(pcx);
+			cTypeList.add(typeItem.getItemCType());
 			tk = ct.getCurrentToken(pcx);
 		}
 	}
@@ -42,5 +44,9 @@ public class TypeList extends CParseRule {
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+	}
+
+	public ArrayList<CType> getCTypeList() {
+		return cTypeList;
 	}
 }
