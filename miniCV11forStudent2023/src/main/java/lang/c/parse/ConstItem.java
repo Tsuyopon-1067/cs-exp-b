@@ -65,7 +65,7 @@ public class ConstItem extends CParseRule {
 			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isGlobal, 0);
 		}
 		if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
-			pcx.recoverableError("ConstItem: すでに宣言されている変数です");
+			pcx.recoverableError("ConstItem: " + identName + "はすでに宣言されている変数です");
 		}
 	}
 

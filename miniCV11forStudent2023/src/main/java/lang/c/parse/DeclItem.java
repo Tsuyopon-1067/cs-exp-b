@@ -86,11 +86,11 @@ public class DeclItem extends CParseRule {
 		isGlobal = pcx.getSymbolTable().isGlobalMode();
 		if (isGlobal) {
 			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
-				pcx.recoverableError("すでに宣言されている変数です");
+				pcx.recoverableError("DeclItem: " + identName + "はすでに宣言されている変数です");
 			}
 		} else {
 			if ( !pcx.getSymbolTable().registerLocal(identName, entry) ) {
-				pcx.recoverableError("すでに宣言されている変数です");
+				pcx.recoverableError("DeclItem: " + identName + "はすでに宣言されている変数です");
 			}
 		}
 	}
