@@ -12,6 +12,15 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 		this.type = type;
 		this.size = size;
 		this.constp = constp;
+		this.isGlobal = true;
+	}
+
+	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isGlobal, int address) {
+		this.type = type;
+		this.size = size;
+		this.constp = constp;
+		this.isGlobal = isGlobal;
+		this.address = address;
 	}
 	public String toExplainString() { // このエントリに関する情報を作り出す。記号表全体を出力するときに使う。
 		return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
