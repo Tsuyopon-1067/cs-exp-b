@@ -70,7 +70,7 @@ public class ConstItem extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		if (isExistMult == isExistAmp) {
+		if (isExistMult != isExistAmp) {
 			if (isExistMult) {
 				pcx.warning("ConstItem: 右辺はpint型である必要があります");
 			} else {
