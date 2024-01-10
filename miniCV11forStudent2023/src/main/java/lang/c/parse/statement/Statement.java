@@ -43,11 +43,17 @@ public class Statement extends CParseRule {
 		} catch (Exception e) {
 			CToken tk = ct.getCurrentToken(pcx);
 			int lineNo = tk.getLineNo();
-			while (!Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+			while (tk.getType() != CToken.TK_SEMI
+			&& tk.getType() != CToken.TK_RCUR
+			&& !Statement.isFirst(tk)
+			&& tk.getType() != CToken.TK_EOF) {
 				tk = ct.getNextToken(pcx);
 				if (tk.getLineNo() != lineNo) {
 					break; // 改行したら抜ける
 				}
+			}
+			if (tk.getType() == CToken.TK_SEMI) {
+				ct.getNextToken(pcx);
 			}
 			pcx.warning("Statement: statementのエラーをスキップしました");
 		}

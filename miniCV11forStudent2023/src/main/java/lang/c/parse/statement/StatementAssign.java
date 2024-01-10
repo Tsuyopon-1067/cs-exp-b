@@ -61,15 +61,6 @@ public class StatementAssign extends CParseRule {
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 		if (tk.getType() != CToken.TK_SEMI) {
 			pcx.recoverableError("StatementAssign : " + tk.toExplainString() + ";がありません");
-			int lineNo = tk.getLineNo();
-			while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
-				tk = ct.getNextToken(pcx);
-				if (tk.getLineNo() != lineNo) {
-					break; // 改行したら抜ける
-				}
-			}
-			pcx.warning("ExpressionAddまたはExpressionSubをスキップしました");
-			return;
 		} else {
 			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		}
