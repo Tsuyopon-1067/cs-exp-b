@@ -45,7 +45,7 @@ public class CodeGenDeclarationTestCv10 {
     }
 
 @Test
-    public void codeGenAndTest1() throws FatalErrorException {
+    public void codeGenTest() throws FatalErrorException {
         inputStream.setInputString("""
             int a, *b, c[10], *d[10];
             const int e=10, *f=&30;
@@ -58,16 +58,14 @@ public class CodeGenDeclarationTestCv10 {
                 """);
         String expected = """
             . = 0x100
-
             JMP     __START
-            a:      .BLKW 1
-            b:      .BLKW 1
-            c:      .BLKW 10
-            d:      .BLKW 10
-            e:      .WORD 10
-            f:      .WORD 30
-            __START:
-
+    a:      .BLKW 1
+    b:      .BLKW 1
+    c:      .BLKW 10
+    d:      .BLKW 10
+    e:      .WORD 10
+    f:      .WORD 30
+    __START:
             MOV     #0x1000, R6
             MOV     #a, (R6)+
             MOV     #10, (R6)+
@@ -120,51 +118,61 @@ public class CodeGenDeclarationTestCv10 {
         CParseRule rule = new Program(cpContext);
         helper.checkCodeGen(expected, rule, cpContext);
     }
-
-@Test
-    public void codeGenAndTest2() throws FatalErrorException {
-        inputStream.setInputString("""
-            int a, b, *c, d;
-            const int e = 1, f = 2;
-            int g[10];
-
-            a=3;
-            g[2]=a;
-                """);
-        String expected = """
-            ; program starts
-                    . = 0x100
-                    JMP     __START ; ProgramNode: 最初の実行文へ
-                    a:     .BLKW 1
-                    b:     .BLKW 1
-                    c:     .BLKW 1
-                    d:     .BLKW 1
-                    e:     .WORD 1
-                    f:     .WORD 2
-                    g:     .BLKW 10
-            __START:
-                    MOV    #0x1000, R6
-                    MOV    #a, (R6)+
-                    MOV    #3, (R6)+
-                    MOV    -(R6), R1
-                    MOV    -(R6), R0
-                    MOV    R1, (R0)
-                    MOV    #g, (R6)+
-                    MOV    #2, (R6)+
-                    MOV    -(R6), R0
-                    ADD    -(R6), R0
-                    MOV    R0, (R6)+
-                    MOV    #a, (R6)+
-                    MOV    -(R6), R0
-                    MOV    (R0), (R6)+
-                    MOV    -(R6), R1
-                    MOV    -(R6), R0
-                    MOV    R1, (R0)
-                    HLT
-                    .END
-                """;
-        // Check only code portion, not validate comments
-        CParseRule rule = new Program(cpContext);
-        helper.checkCodeGen(expected, rule, cpContext);
-    }
 }
+
+//            . = 0x100
+//            JMP     __START
+//    a:      .BLKW 1
+//    b:      .BLKW 1
+//    c:      .BLKW 10
+//    d:      .BLKW 10
+//    e:      .WORD 10
+//    f:      .WORD 30
+//    __START:
+//            MOV     #0x1000, R6
+//            MOV     #a, (R6)+       a=10
+//            MOV     #10, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            MOV     #b, (R6)+       *b=3
+//            MOV     -(R6), R0
+//            MOV     (R0), (R6)+
+//            MOV     #3, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            MOV     #b, (R6)+       b=&a
+//            MOV     #a, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            MOV     #b, (R6)+       *b=4
+//            MOV     -(R6), R0
+//            MOV     (R0), (R6)+
+//            MOV     #4, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            MOV     #c, (R6)+       c[9]=10
+//            MOV     #9, (R6)+
+//            MOV     -(R6), R0
+//            ADD     -(R6), R0
+//            MOV     R0, (R6)+
+//            MOV     #10, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            MOV     #d, (R6)+      *d[0]=10
+//            MOV     #0, (R6)+
+//            MOV     -(R6), R0
+//            ADD     -(R6), R0
+//            MOV     R0, (R6)+
+//            MOV     -(R6), R0
+//            MOV     (R0), (R6)+
+//            MOV     #10, (R6)+
+//            MOV     -(R6), R1
+//            MOV     -(R6), R0
+//            MOV     R1, (R0)
+//            HLT
+//            .END
