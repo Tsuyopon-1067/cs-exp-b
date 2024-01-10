@@ -8,10 +8,10 @@ import lang.c.*;
 
 public class ConstDecl extends CParseRule {
 	// constDecl   ::= CONST INT constItem { COMMA constItem } SEMI
-	ArrayDeque<CParseRule> constItems;
+	ArrayDeque<ConstItem> constItems;
 
 	public ConstDecl(CParseContext pcx) {
-		constItems = new ArrayDeque<>();
+		constItems = new ArrayDeque<ConstItem>();
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -64,13 +64,15 @@ public class ConstDecl extends CParseRule {
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			ct.skipTo(pcx, CToken.TK_SEMI);
-			pcx.recoverableError(";が必要です");
+			pcx.fatalError(";が必要です");
 		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (constItems != null) {
+			for (ConstItem c: constItems) {
+				c.semanticCheck(pcx);
+			}
 		}
 	}
 

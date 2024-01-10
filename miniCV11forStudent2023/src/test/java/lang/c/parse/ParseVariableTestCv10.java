@@ -58,7 +58,6 @@ public class ParseVariableTestCv10 {
         setUp();
     }
 
-    @Ignore
     @Test
     public void parseVariableCorrect() throws FatalErrorException {
         String[] testDataArr = {
@@ -104,35 +103,19 @@ public class ParseVariableTestCv10 {
         }
     }
 
-    @Ignore
     @Test
     public void parseOutputTestCrrect() throws FatalErrorException {
         String[] testDataArr = {
-            "output i_a;",
-            "output ip_a;",
-            "output *ip_a;",
-            "output ia_a[3];",
-            "output ipa_a[3];",
-            "output *ipa_a[3];",
-
-            "output &i_a;",
-            "output &ia_a[3];",
-
-            "output 3;",
-            "output &3;",
-
-            "output i_a+3;",
-            "output i_a+3*2;",
-
-            "output c_a;",
+            "int a, *b, c[10], *d[10];",
+            "const int e=10, *f=&30;"
         };
 
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, StatementOutput.isFirst(firstToken), is(true));
-            CParseRule cp = new StatementOutput(cpContext);
+            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
+            CParseRule cp = new Declaration(cpContext);
 
             try {
                 cp.parse(cpContext);
@@ -143,20 +126,24 @@ public class ParseVariableTestCv10 {
         }
     }
 
-    @Ignore
     @Test
     public void parseOutputTestError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("output 3", "文末は;です"),
-            new HelperTestStrMsg("output ;", "outputの後ろはexpressionです"),
-            new HelperTestStrMsg("output &i_a", "文末は;です"),
+            new HelperTestStrMsg("int a, *b, c[10] *d[10];", ";が必要です"),
+            new HelperTestStrMsg("int *d[10]", ";が必要です"),
+            new HelperTestStrMsg("int 10;", "intの次はdeclItemです"),
+            new HelperTestStrMsg("int c[10;", "[]が閉じていません"),
+            new HelperTestStrMsg("const int e;", "=が必要です"),
+            new HelperTestStrMsg("const int e=3", ";が必要です"),
+            new HelperTestStrMsg("const int e 3;", "=が必要です"),
+            new HelperTestStrMsg("int e=3;", ";が必要です"),
         };
         for ( HelperTestStrMsg testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData.getTestStr());
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, StatementOutput.isFirst(firstToken), is(true));
-            CParseRule cp = new StatementOutput(cpContext);
+            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
+            CParseRule cp = new Declaration(cpContext);
 
             try {
                 cp.parse(cpContext);

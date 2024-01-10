@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.condition.Condition;
 
 public class BitNotFactor extends CParseRule {
 	// bitNotFactor    ::= NOT bitFactor

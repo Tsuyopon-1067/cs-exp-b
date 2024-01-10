@@ -34,13 +34,17 @@ public class StatementBlock extends CParseRule {
 			tk = ct.getCurrentToken(pcx);
 		}
 
-		try {
-			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
+		if (tk.getType() != CToken.TK_RCUR) {
+			pcx.warning("StatementBlock: " + tk.toExplainString() + "}が閉じていません");
+			while (tk.getType() != CToken.TK_RCUR && tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
 			}
-			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
-		} catch (RecoverableErrorException e) {
+			if (tk.getType() == CToken.TK_RCUR) {
+				tk = ct.getNextToken(pcx);
+			}
+			return;
 		}
+		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
