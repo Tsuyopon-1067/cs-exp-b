@@ -41,13 +41,16 @@ public class DeclBlock extends CParseRule {
 			tk = ct.getCurrentToken(pcx);
 		}
 
-		try {
-			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
+		if (tk.getType() != CToken.TK_RCUR) {
+			while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
 			}
-			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
-		} catch (RecoverableErrorException e) {
+			if (tk.getType() == CToken.TK_SEMI) {
+				tk = ct.getNextToken(pcx);
+			}
+			pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
 		}
+		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		variableSize = pcx.getSymbolTable().getAddressOffset();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
