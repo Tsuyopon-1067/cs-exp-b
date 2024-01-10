@@ -2,7 +2,6 @@ package lang.c.parse;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
@@ -44,6 +43,9 @@ public class Program extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		for (CParseRule d : declaration) {
+			d.semanticCheck(pcx);
+		}
 		for (CParseRule s : statment) {
 			s.semanticCheck(pcx);
 		}

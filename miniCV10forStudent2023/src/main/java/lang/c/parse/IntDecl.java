@@ -22,13 +22,8 @@ public class IntDecl extends CParseRule {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // intを読み飛ばす
 
-		try {
-			if (!DeclItem.isFirst(tk)) {
-				pcx.recoverableError("intの次はdeclItemです");
-			}
-		} catch (RecoverableErrorException e) {
-			ct.skipTo(pcx, CToken.TK_SEMI);
-			return;
+		if (!DeclItem.isFirst(tk)) {
+			pcx.fatalError("intの次はdeclItemです");
 		}
 		declItems.addLast(new DeclItem(pcx));
 		declItems.getLast().parse(pcx);
@@ -54,8 +49,7 @@ public class IntDecl extends CParseRule {
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.warning(";が必要です");
-			ct.skipToLineEndSemi(pcx);
+			pcx.fatalError(";が必要です");
 		}
 	}
 

@@ -38,6 +38,7 @@ public class Declaration extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (nextParseRule != null) {
+			nextParseRule.semanticCheck(pcx);
 		}
 	}
 
