@@ -73,22 +73,22 @@ public class CodeGenDeclBlockTestCv11 {
     a:      .BLKW 1
     __START:
             MOV     #0x1000, R6
-            ADD     #8, R6 // 領域確保
-            MOV     #0, R0 // a=1
+            ADD     #8, R6 ; 領域確保
+            MOV     #0, R0 ; a=1
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #1, (R6)+
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            MOV     #1, R0 // b=1
+            MOV     #1, R0 ; b=1
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #2, (R6)+
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            MOV     #2, R0 // c[2]=3
+            MOV     #2, R0 ; c[2]=3
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #2, (R6)+
@@ -99,30 +99,30 @@ public class CodeGenDeclBlockTestCv11 {
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            MOV     #7, R0 // d=4
+            MOV     #7, R0 ; d=4
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #4, (R6)+
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            SUB     #8, R6 // 領域開放
-            ADD     #2, R6 // 領域確保
-            MOV     #0, R0 // c=5
+            SUB     #8, R6
+            ADD     #2, R6 ; 領域確保
+            MOV     #0, R0 ; c=5
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #5, (R6)+
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            MOV     #1, R0 // d=6
+            MOV     #1, R0 ; d=6
             ADD     R5, R0
             MOV     R0, (R6)+
             MOV     #6, (R6)+
             MOV     -(R6), R1
             MOV     -(R6), R0
             MOV     R1, (R0)
-            SUB     #2, R6 // 領域開放
+            SUB     #2, R6 ; 領域開放
             HLT
             .END
                 """;
