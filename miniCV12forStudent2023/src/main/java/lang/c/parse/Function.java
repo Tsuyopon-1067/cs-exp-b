@@ -92,6 +92,7 @@ public class Function extends CParseRule {
 			case TYPE_VOID -> CType.getCType(CType.T_void);
 			default -> CType.getCType(CType.T_err);
 		};
+		returnLabel = "RET_" + functionName + pcx.getSeqId();
 		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel);
 		entry.setFunctionInfo(functionInfo);
 
@@ -101,7 +102,6 @@ public class Function extends CParseRule {
 		) {
 			pcx.recoverableError("Function: " + tk.toDetailExplainString() + " すでに使用されている名前です");
 		}
-		returnLabel = "RET_" + functionName + pcx.getSeqId();
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
