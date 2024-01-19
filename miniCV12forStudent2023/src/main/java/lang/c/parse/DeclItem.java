@@ -6,12 +6,13 @@ import lang.*;
 import lang.c.*;
 
 public class DeclItem extends CParseRule {
-	// declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
+	// declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR RPAR ]
 	CParseRule num;
 	int size;
 	String identName;
 	boolean isExistMult = false;
 	boolean isArray = false;
+	boolean isFunction = false;
 	boolean isGlobal;
 
 	public DeclItem(CParseContext pcx) {
@@ -57,6 +58,7 @@ public class DeclItem extends CParseRule {
 			}
 			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
 		} else if (tk.getType() == CToken.TK_LPAR) {
+			isFunction = true;
 			tk = ct.getNextToken(pcx); // (を読み飛ばす
 			if (tk.getType() != CToken.TK_RPAR) {
 				pcx.recoverableError(tk.toDetailExplainString() + "()が閉じていません");
@@ -77,9 +79,9 @@ public class DeclItem extends CParseRule {
 		} else {
 			size = 1;
 			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isFunction);
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction);
 			}
 		}
 
