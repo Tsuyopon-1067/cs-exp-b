@@ -6,11 +6,12 @@ import lang.*;
 import lang.c.*;
 
 public class Variable extends CParseRule {
-    //variable ::= ident [array]
+    // variable        ::= ident [ array | call ]
 	CParseRule ident;
 	CParseRule array;
 	CParseRule call;
 	CToken identToken;
+	private boolean isExistCall = false;
 
 	public Variable(CParseContext pcx) {
 	}
@@ -33,6 +34,7 @@ public class Variable extends CParseRule {
 			array.parse(pcx);
 			ct.getNextToken(pcx); // ]を読み飛ばす
 		} else if (Call.isFirst(tk)) {
+			isExistCall = true;
 			call = new Call(pcx);
 			call.parse(pcx);
 			ct.getNextToken(pcx); // )を読み飛ばす
@@ -67,11 +69,25 @@ public class Variable extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; variable starts");
-		if (ident != null) {
-			ident.codeGen(pcx);
-		}
-		if (array != null) {
-			array.codeGen(pcx);
+		if (isExistCall) {
+			// callがついているということはidentが関数
+			if (ident != null) {
+				ident.codeGen(pcx); // 関数の場合はJSRが呼び出されるだけ
+			}
+			CSymbolTableEntry entry = ((Ident)ident).getEntry();
+			if (entry != null) {
+				o.println("\tMOV\t#" + entry.getAddress() + ", R1\t; Variable: 関数戻り値取得のためにフレームポインタと変数アドレスの変異を取得<" + identToken.toExplainString() + ">");
+			}
+			o.println("\tADD\tR4, R1\t; Variable: 変数アドレスを計算する<" + identToken.toExplainString() + ">");
+			o.println("\tMOV\tR1, (R6)+\t; Variable: 変数アドレスを積む<" + identToken.toExplainString() + ">");
+			o.println("\tMOV\tR0, (R1)\t; Variable: 戻り値を変数に代入する");
+		} else {
+			if (ident != null) {
+				ident.codeGen(pcx);
+			}
+			if (array != null) {
+				array.codeGen(pcx);
+			}
 		}
 		o.println(";;; variable completes");
 	}

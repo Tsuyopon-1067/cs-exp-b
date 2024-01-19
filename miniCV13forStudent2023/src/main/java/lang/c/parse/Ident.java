@@ -31,16 +31,19 @@ public class Ident extends CParseRule {
 		} else if (pcx.getSymbolTable().searchGlobal(identName) != null) {
 			entry = pcx.getSymbolTable().searchGlobal(identName);
 		} else {
-			pcx.warning(identName + "は宣言されていない名前です");
+			pcx.warning("Ident: 変数" + identName + "は宣言されていません");
 		}
 
-		if (entry != null) {
-			isFunction = entry.isFunction();
-		}
-		if (isFunction) {
-			seqId = pcx.getSeqId();
-			functionLabel = identName+seqId;
-			pcx.getSymbolTable().registerLocal(functionLabel, entry); // 関数を局所変数として登録
+		// 関数の場合は隠れた局所変数を作って登録する
+		if (!pcx.getSymbolTable().isGlobalMode() && entry != null) {
+			if (entry.isFunction()) {
+				String identNameForEntry = identName + pcx.getSeqId();
+				CSymbolTableEntry functionEntry = pcx.getSymbolTable().searchGlobal(identName);
+				FunctionInfo functionInfo = functionEntry.getFunctionInfo();
+				CType returnType = functionInfo.getReturnType();
+				CSymbolTableEntry entry = new CSymbolTableEntry(returnType, 1, true, false);
+				pcx.getSymbolTable().registerLocal(identNameForEntry, entry);
+			}
 		}
 	}
 
@@ -50,7 +53,6 @@ public class Ident extends CParseRule {
 				setCType(CType.getCType(CType.T_err));
 				return;
 			}
-
 			int setType = entry.GetCType().getType();
 			boolean isConstant = entry.isConstant();
 			this.setCType(CType.getCType(setType));
@@ -62,20 +64,22 @@ public class Ident extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; ident starts");
 		if (ident != null && entry != null) {
-			if (isFunction) {
-				o.println("\tJSR\t#" + identName + "\t; Ident: サブルーチンにジャンプする<" + ident.toExplainString() + ">");
-				o.println("\tMOV\t#" + entry.getAddress() + ", R1\t; Ident: フレームポインタと変数アドレスの変異を取得<" + ident.toExplainString() + ">");
-				o.println("\tADD\tR4, R1\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
-				o.println("\tMOV\tR1, (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
-				o.println("\tMOV\tR0, (R1)\t; Ident: 変数アドレスに戻り値を代入する<" + ident.toExplainString() + ">");
-			} else if (entry.isGlobal()) {
-				o.println("\tMOV\t#" + identName + ", (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+			if (!entry.isFunction()) {
+				if (entry.isGlobal()) {
+					o.println("\tMOV\t#" + ident.getText() + ", (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+				} else {
+					o.println("\tMOV\t#" + entry.getAddress() + ", R0\t; Ident: フレームポインタと変数アドレスの変異を取得<" + ident.toExplainString() + ">");
+					o.println("\tADD\tR4, R0\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
+					o.println("\tMOV\tR0, (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+				}
 			} else {
-				o.println("\tMOV\t#" + entry.getAddress() + ", R0\t; Ident: フレームポインタと変数アドレスの変異を取得<" + ident.toExplainString() + ">");
-				o.println("\tADD\tR4, R0\t; Ident: 変数アドレスを計算する<" + ident.toExplainString() + ">");
-				o.println("\tMOV\tR0, (R6)+\t; Ident: 変数アドレスを積む<" + ident.toExplainString() + ">");
+				o.println("\tJSR\t#" + ident.getText() + "\t; Ident: 関数へジャンプ<" + ident.toExplainString() + ">");
 			}
 		}
 		o.println(";;; ident completes");
+	}
+
+	public CSymbolTableEntry getEntry() {
+		return entry;
 	}
 }

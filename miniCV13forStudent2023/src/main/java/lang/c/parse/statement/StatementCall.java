@@ -10,6 +10,8 @@ import lang.c.*;
 public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
 	CParseRule call, ident;
+	private String functionName;
+	CToken idnetToken;
 	ArrayDeque<CParseRule> expressions;
 
 	public StatementCall(CParseContext pcx) {
@@ -26,8 +28,10 @@ public class StatementCall extends CParseRule {
 		CToken tk = ct.getNextToken(pcx); // callを読み飛ばす
 
 		if (Ident.isFirst(tk)) {
+			idnetToken = tk;
 			ident = new Ident(pcx);
 			ident.parse(pcx);
+			functionName = tk.getText();
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "callの後ろはidentです");
 		}
@@ -55,18 +59,29 @@ public class StatementCall extends CParseRule {
 		if (tk.getType() != CToken.TK_RPAR) {
 			pcx.recoverableError("()が閉じていません");
 		}
-		tk = ct.getNextToken(pcx); // )を読み飛ばす
+
+		tk = ct.getNextToken(pcx);
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError("callの後ろは;です");
+			pcx.recoverableError("StatementCall : " + tk.toExplainString() + ";がありません");
+		} else {
+			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		CSymbolTableEntry entry = pcx.getSymbolTable().searchGlobal(functionName);
+		if (entry == null) {
+			pcx.warning("StatementCall: 関数" + functionName + "は宣言されていません" + idnetToken.toDetailExplainString());
+		} else if (!entry.isFunction()) {
+			pcx.warning("StatementCall: 関数" + functionName + "は変数です" + idnetToken.toDetailExplainString());
+		}
+		ident.semanticCheck(pcx);
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementCall starts");
+		o.println("\tJSR\t#" + functionName + "\t; Ident: 関数へジャンプ");
 		o.println(";;; StatementCall completes");
 	}
 }

@@ -41,14 +41,26 @@ public class StatementAssign extends CParseRule {
 			expression = new Expression(pcx);
 			expression.parse(pcx);
 		} catch (RecoverableErrorException e) {
-			ct.skipToLineEndSemi(pcx);
-			pcx.warning("行末または;までスキップしました");
+			//ct.skipToLineEndSemi(pcx);
+			//pcx.warning("StatementAssign: 行末または;までスキップしました");
+			//tk = ct.getCurrentToken(pcx);
 			tk = ct.getCurrentToken(pcx);
+			int lineNo = tk.getLineNo();
+			while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
+				if (tk.getLineNo() != lineNo) {
+					break; // 改行したら抜ける
+				}
+			}
+			pcx.warning("StatementAssign: 文をスキップしました");
+			tk = ct.getCurrentToken(pcx);
+			System.out.printf("%s, %s\n", tk.toDetailExplainString(), tk.getText());
+			return;
 		}
 
 		tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError("StatementAssign" + tk.toExplainString() + ";がありません");
+			pcx.recoverableError("StatementAssign : " + tk.toExplainString() + ";がありません");
 		} else {
 			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		}
@@ -58,6 +70,14 @@ public class StatementAssign extends CParseRule {
 		if (primary != null && expression != null) {
 			primary.semanticCheck(pcx);
 			expression.semanticCheck(pcx);
+
+			if (primary.getCType() == null) {
+				primary.setCType(CType.getCType(CType.T_err));
+			}
+			if (expression.getCType() == null) {
+				expression.setCType(CType.getCType(CType.T_err));
+			}
+
 			if (primary.getCType() != expression.getCType()) {
 				pcx.warning(op.toExplainString() + "左辺の型[" + primary.getCType().toString()
 					+ "]と右辺の型[" + expression.getCType().toString() + "]が異なります");

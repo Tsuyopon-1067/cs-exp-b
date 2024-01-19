@@ -6,15 +6,15 @@ import lang.*;
 import lang.c.*;
 
 public class DeclItem extends CParseRule {
-	// declItem    ::= [ MULT ] IDENT [ LBRA NUM RBRA ]
+	// declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR RPAR ]
 	CParseRule num;
 	TypeList typeList;
 	int size;
 	String identName;
 	boolean isExistMult = false;
 	boolean isArray = false;
-	boolean isGlobal;
 	boolean isFunction = false;
+	boolean isGlobal;
 
 	public DeclItem(CParseContext pcx) {
 	}
@@ -77,9 +77,9 @@ public class DeclItem extends CParseRule {
 		if (isArray) {
 			size = ((Number)num).getValue();
 			if (isExistMult) {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst, isFunction);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_pint_array), size, isConst);
 			} else {
-				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst, isFunction);
+				entry = new CSymbolTableEntry(CType.getCType(CType.T_int_array), size, isConst);
 			}
 		} else {
 			size = 1;
@@ -90,6 +90,7 @@ public class DeclItem extends CParseRule {
 					entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction, typeList.getCTypeList());
 				}
 			} else {
+
 				if (isExistMult) {
 					entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isFunction);
 				} else {
@@ -108,9 +109,6 @@ public class DeclItem extends CParseRule {
 				if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
 					pcx.recoverableError("すでに宣言されている変数です");
 				}
-			}
-			if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
-				pcx.recoverableError("すでに宣言されている変数です");
 			}
 		} else {
 			if ( !pcx.getSymbolTable().registerLocal(identName, entry) ) {

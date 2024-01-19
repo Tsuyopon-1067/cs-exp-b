@@ -4,16 +4,17 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.FunctionInfo;
 
 public class Statement extends CParseRule {
     // statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
     CParseRule nextCParseRule;
-	String returnLabel;
+	FunctionInfo functionInfo;
 
 	public Statement(CParseContext pcx) {
 	}
-	public Statement(CParseContext pcx, String returnLabel) {
-		this.returnLabel = returnLabel;
+	public Statement(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -46,14 +47,28 @@ public class Statement extends CParseRule {
 		} else if (StatementCall.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementCall(pcx);
 		} else if (StatementReturn.isFirst(ct.getCurrentToken(pcx))) {
-			nextCParseRule = new StatementReturn(pcx, returnLabel);
+			nextCParseRule = new StatementReturn(pcx, functionInfo);
 		} else {
 			pcx.fatalError(ct.getCurrentToken(pcx).toExplainString() + "statementの文がありません");
 		}
 		try {
 			nextCParseRule.parse(pcx);
 		} catch (Exception e) {
-			pcx.warning("statementのエラーをスキップしました");
+			CToken tk = ct.getCurrentToken(pcx);
+			int lineNo = tk.getLineNo();
+			while (tk.getType() != CToken.TK_SEMI
+			&& tk.getType() != CToken.TK_RCUR
+			&& !Statement.isFirst(tk)
+			&& tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
+				if (tk.getLineNo() != lineNo) {
+					break; // 改行したら抜ける
+				}
+			}
+			if (tk.getType() == CToken.TK_SEMI) {
+				ct.getNextToken(pcx);
+			}
+			pcx.warning("Statement: statementのエラーをスキップしました");
 		}
 		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}

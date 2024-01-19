@@ -54,7 +54,7 @@ public class IntDecl extends CParseRule {
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
-			pcx.recoverableError("IntDecl" + tk.toDetailExplainString() + ";が必要です");
+			pcx.warning("inteDecl: ;が必要です");
 			ct.skipToLineEndSemi(pcx);
 		}
 	}

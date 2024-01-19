@@ -26,13 +26,36 @@ public class StatementOutput extends CParseRule {
 			expression = new Expression(pcx);
 			expression.parse(pcx);
 		} else {
-			pcx.fatalError(tk.toExplainString() + "outputの後ろはexpressionです");
+			pcx.warning("primaryをスキップしました");
+			int lineNo = tk.getLineNo();
+			while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
+				if (tk.getLineNo() != lineNo) {
+					break; // 改行したら抜ける
+				}
+			}
+			if (tk.getType() == CToken.TK_SEMI) {
+				ct.getNextToken(pcx);
+			}
+			pcx.recoverableError(tk.toExplainString() + "outputの後ろはexpressionです");
 		}
 
 		try {
 			tk = ct.getCurrentToken(pcx); // Expressionは次の字句まで読んでしまう
 			if (tk.getType() != CToken.TK_SEMI) {
 				pcx.recoverableError(tk.toExplainString() + "文末は;です");
+				pcx.warning("primaryをスキップしました");
+				int lineNo = tk.getLineNo();
+				while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+					tk = ct.getNextToken(pcx);
+					if (tk.getLineNo() != lineNo) {
+						break; // 改行したら抜ける
+					}
+				}
+				if (tk.getType() == CToken.TK_SEMI) {
+					ct.getNextToken(pcx);
+				}
+				return;
 			}
 			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		} catch (RecoverableErrorException e) {

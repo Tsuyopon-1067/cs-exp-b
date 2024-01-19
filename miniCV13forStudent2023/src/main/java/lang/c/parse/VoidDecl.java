@@ -40,7 +40,7 @@ public class VoidDecl extends CParseRule {
 
 		if (tk.getType() != CToken.TK_SEMI) {
 			ct.skipTo(pcx, CToken.TK_SEMI);
-			pcx.recoverableError(";が必要です");
+			pcx.recoverableError("VoidDecl: ;が必要です");
 		}
 	}
 

@@ -26,7 +26,6 @@ public class Declaration extends CParseRule {
 		} else if (ConstDecl.isFirst(tk)) {
 			nextParseRule = new ConstDecl(pcx);
 		} else {
-			System.err.println("declaration " + tk.toDetailExplainString());
 			nextParseRule = new VoidDecl(pcx);
 		}
 		try {
@@ -38,6 +37,7 @@ public class Declaration extends CParseRule {
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (nextParseRule != null) {
+			nextParseRule.semanticCheck(pcx);
 		}
 	}
 
