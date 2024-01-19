@@ -45,6 +45,13 @@ public class Program extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		CSymbolTableEntry mainFunction = pcx.getSymbolTable().searchGlobal("main");
+		if (mainFunction == null) {
+			pcx.warning("main関数がありません");
+		} else if (!mainFunction.isFunction()) {
+			pcx.warning("main関数がありません");
+		}
+
 		for (CParseRule d : declarationList) {
 			d.semanticCheck(pcx);
 		}
@@ -66,6 +73,7 @@ public class Program extends CParseRule {
 		}
 		o.println("__START:");
 		o.println("\tMOV\t#0x1000, R6\t; ProgramNode: 計算用スタック初期化");
+		o.println("\tJMP\tmain\t; ProgramNode: main関数にジャンプする");
 		for (CParseRule function : functionList) {
 			function.codeGen(pcx);
 		}
