@@ -112,11 +112,16 @@ public class Function extends CParseRule {
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+		int variableSize = -1;
+		if (declBlock != null) {
+			variableSize = ((DeclBlock) declBlock).getVariableSize();
+		}
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Function starts");
 		o.println(String.format("%s:", functionName));
 		o.println("\tMOV\tR4, (R6)+\t; DeclItem: 旧フレームポインタをスタックに退避する");
 		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
+		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 		if (declBlock != null) {
 			declBlock.codeGen(pcx);
 		}

@@ -11,6 +11,7 @@ public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
 	CParseRule call, ident;
 	private String functionName;
+	CToken idnetToken;
 
 	public StatementCall(CParseContext pcx) {
 	}
@@ -25,6 +26,7 @@ public class StatementCall extends CParseRule {
 		CToken tk = ct.getNextToken(pcx); // callを読み飛ばす
 
 		if (Ident.isFirst(tk)) {
+			idnetToken = tk;
 			ident = new Ident(pcx);
 			ident.parse(pcx);
 			functionName = tk.getText();
@@ -50,6 +52,12 @@ public class StatementCall extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		CSymbolTableEntry entry = pcx.getSymbolTable().searchGlobal(functionName);
+		if (entry == null) {
+			pcx.warning("StatementCall: 関数" + functionName + "は宣言されていません" + idnetToken.toDetailExplainString());
+		} else if (!entry.isFunction()) {
+			pcx.warning("StatementCall: 関数" + functionName + "は変数です" + idnetToken.toDetailExplainString());
+		}
 		ident.semanticCheck(pcx);
 	}
 

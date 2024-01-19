@@ -29,7 +29,19 @@ public class Ident extends CParseRule {
 		} else if (pcx.getSymbolTable().searchGlobal(identName) != null) {
 			entry = pcx.getSymbolTable().searchGlobal(identName);
 		} else {
-			pcx.warning("変数" + identName + "は宣言されていません");
+			pcx.warning("Ident: 変数" + identName + "は宣言されていません");
+		}
+
+		// 関数の場合は隠れた局所変数を作って登録する
+		if (!pcx.getSymbolTable().isGlobalMode() && entry != null) {
+			if (entry.isFunction()) {
+				String identNameForEntry = identName + pcx.getSeqId();
+				CSymbolTableEntry functionEntry = pcx.getSymbolTable().searchGlobal(identName);
+				FunctionInfo functionInfo = functionEntry.getFunctionInfo();
+				CType returnType = functionInfo.getReturnType();
+				CSymbolTableEntry entry = new CSymbolTableEntry(returnType, 1, true, false);
+				pcx.getSymbolTable().registerLocal(identNameForEntry, entry);
+			}
 		}
 	}
 
@@ -56,7 +68,7 @@ public class Ident extends CParseRule {
 			*/
 			if (entry == null) {
 				setCType(CType.getCType(CType.T_err));
-				pcx.warning("変数" + ident.getText() + "は宣言されていません");
+				// pcx.warning("変数" + ident.getText() + "は宣言されていません");
 				return;
 			}
 			int setType = entry.GetCType().getType();
@@ -83,5 +95,9 @@ public class Ident extends CParseRule {
 			}
 		}
 		o.println(";;; ident completes");
+	}
+
+	public CSymbolTableEntry getEntry() {
+		return entry;
 	}
 }

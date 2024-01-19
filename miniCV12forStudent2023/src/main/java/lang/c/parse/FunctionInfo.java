@@ -20,5 +20,4 @@ public class FunctionInfo {
     public void setTrueToIsExistReturn() { this.isExistReturn = true; }
     public boolean getIsExistReturn() { return isExistReturn; }
     public String getReturnLabel() { return returnLabel; }
-    public int getCount() { return count; }
 }

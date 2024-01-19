@@ -71,9 +71,9 @@ public class DeclBlock extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; DeclBlock starts");
-		o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
-		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
-		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
+		//o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
+		//o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
+		//o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 
 		if (declareList != null) {
 			for (CParseRule declaration : declareList) {
@@ -86,8 +86,12 @@ public class DeclBlock extends CParseRule {
 				statment.codeGen(pcx);
 			}
 		}
-		o.println("\tMOV\tR4, R6\t; DeclItem: 局所変数の領域を開放する");
-		o.println("\tMOV\t-(R6), R4\t; DeclItem: 旧フレームポインタを復帰する");
+		//o.println("\tMOV\tR4, R6\t; DeclItem: 局所変数の領域を開放する");
+		//o.println("\tMOV\t-(R6), R4\t; DeclItem: 旧フレームポインタを復帰する");
 		o.println(";;; DeclBlock completes");
+	}
+
+	public int getVariableSize() {
+		return variableSize;
 	}
 }
