@@ -11,6 +11,7 @@ public class Variable extends CParseRule {
 	CParseRule array;
 	CParseRule call;
 	CToken identToken;
+	private boolean isExistCall = false;
 
 	public Variable(CParseContext pcx) {
 	}
@@ -33,6 +34,7 @@ public class Variable extends CParseRule {
 			array.parse(pcx);
 			ct.getNextToken(pcx); // ]を読み飛ばす
 		} else if (Call.isFirst(tk)) {
+			isExistCall = true;
 			call = new Call(pcx);
 			call.parse(pcx);
 			ct.getNextToken(pcx); // )を読み飛ばす
@@ -67,11 +69,17 @@ public class Variable extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; variable starts");
-		if (ident != null) {
-			ident.codeGen(pcx);
-		}
-		if (array != null) {
-			array.codeGen(pcx);
+		if (isExistCall) {
+			if (ident != null) {
+				ident.codeGen(pcx);
+			}
+		} else {
+			if (ident != null) {
+				ident.codeGen(pcx);
+			}
+			if (array != null) {
+				array.codeGen(pcx);
+			}
 		}
 		o.println(";;; variable completes");
 	}

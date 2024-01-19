@@ -10,6 +10,7 @@ import lang.c.*;
 public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
 	CParseRule call, ident;
+	private String functionName;
 
 	public StatementCall(CParseContext pcx) {
 	}
@@ -26,6 +27,7 @@ public class StatementCall extends CParseRule {
 		if (Ident.isFirst(tk)) {
 			ident = new Ident(pcx);
 			ident.parse(pcx);
+			functionName = tk.getText();
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "callの後ろはidentです");
 		}
@@ -41,11 +43,13 @@ public class StatementCall extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		ident.semanticCheck(pcx);
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementCall starts");
+		o.println("\tJSR\t#" + functionName + "\t; Ident: 関数へジャンプ");
 		o.println(";;; StatementCall completes");
 	}
 }
