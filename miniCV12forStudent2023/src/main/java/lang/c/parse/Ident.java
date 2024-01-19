@@ -36,6 +36,11 @@ public class Ident extends CParseRule {
 
 		if (entry != null) {
 			isFunction = entry.isFunction();
+			if (isFunction) {
+				System.out.printf("ident hoge true %s %s\n", identName, functionLabel);
+			} else {
+				System.out.printf("ident hoge false %s %s\n", identName, functionLabel);
+			}
 		}
 		if (isFunction) {
 			seqId = pcx.getSeqId();

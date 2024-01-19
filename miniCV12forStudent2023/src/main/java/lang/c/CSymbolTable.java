@@ -11,7 +11,7 @@ public class CSymbolTable {
 	}
 	private SymbolTable<CSymbolTableEntry> global; // 大域変数用
 	private SymbolTable<CSymbolTableEntry> local; // 局所変数用
-	private int addressOffset = 0; // 局所変数変数とフレームポインタの差
+	private int addressOffset = 1; // 局所変数変数とフレームポインタの差
 	private boolean isGlobalMode = true;
 
 	public CSymbolTable() {
@@ -57,7 +57,7 @@ public class CSymbolTable {
 
 	public void setupLocalSymbolTable() {
 		local = new OneSymbolTable();
-		addressOffset = 0;
+		addressOffset = 1;
 	}
 
 	public void deleteLocalSymbolTable() {

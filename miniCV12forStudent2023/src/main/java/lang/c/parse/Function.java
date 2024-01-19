@@ -22,7 +22,7 @@ public class Function extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getNextToken(pcx); // functionを読み飛ばす
+		CToken tk = ct.getNextToken(pcx); // funcを読み飛ばす
 
 		if (tk.getType() == CToken.TK_INT) {
 			tk = ct.getNextToken(pcx);
@@ -97,22 +97,13 @@ public class Function extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Function starts");
 		o.println(String.format("%s:", functionName));
-		o.println("\tMOV\tR0, (R6)+\t; Function: レジスタを退避する");
-		o.println("\tMOV\tR1, (R6)+\t; Function: レジスタを退避する");
-		o.println("\tMOV\tR2, (R6)+\t; Function: レジスタを退避する");
-		o.println("\tMOV\tR3, (R6)+\t; Function: レジスタを退避する");
-		o.println("\tMOV\tR4, (R6)+\t; Function: レジスタを退避する");
-		o.println("\tMOV\tR6, R4\t; Function: フレームポインタを用意する");
+		o.println("\tMOV\tR4, (R6)+\t; DeclItem: 旧フレームポインタをスタックに退避する");
+		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
 		if (declBlock != null) {
 			declBlock.codeGen(pcx);
 		}
 		o.println(String.format("%s:", returnLabel));
 		o.println("\tMOV\tR4, R6\t; Function: 局所変数の領域を開放する");
-		o.println("\tMOV\t-(R6), R4\t; Function: レジスタを復帰する");
-		o.println("\tMOV\t-(R6), R3\t; Function: レジスタを復帰する");
-		o.println("\tMOV\t-(R6), R2\t; Function: レジスタを復帰する");
-		o.println("\tMOV\t-(R6), R1\t; Function: レジスタを復帰する");
-		o.println("\tSUB\t#1, R6\t; Function: R0は戻り値用なので書き換えない");
 		o.println("\tRET\t; Function: サブルーチンから復帰する");
 		o.println(";;; Function completes");
 	}

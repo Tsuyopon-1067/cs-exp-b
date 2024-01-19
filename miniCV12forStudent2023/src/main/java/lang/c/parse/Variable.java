@@ -9,6 +9,7 @@ public class Variable extends CParseRule {
     // variable        ::= ident [ array | call ]
 	CParseRule ident;
 	CParseRule array;
+	CParseRule call;
 	CToken identToken;
 
 	public Variable(CParseContext pcx) {
@@ -31,6 +32,10 @@ public class Variable extends CParseRule {
 			array = new Array(pcx);
 			array.parse(pcx);
 			ct.getNextToken(pcx); // ]を読み飛ばす
+		} else if (Call.isFirst(tk)) {
+			call = new Call(pcx);
+			call.parse(pcx);
+			ct.getNextToken(pcx); // )を読み飛ばす
 		}
 	}
 
@@ -49,7 +54,7 @@ public class Variable extends CParseRule {
 					pcx.warning("identの型が配列型ではありません");
 					setCType(CType.getCType(CType.T_err));
 				}
-			} else { // identのみの場合
+			} else if (ident != null) { // identのみの場合
 				if (isIntArray || isPintArray) {
 					pcx.warning(identToken.toDetailExplainString() + "配列のインデックスが指定されていません");
 				}
