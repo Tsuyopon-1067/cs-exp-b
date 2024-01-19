@@ -14,6 +14,7 @@ public class ArgItem extends CParseRule {
 
 
 	public ArgItem(CParseContext pcx) {
+		setCType(CType.getCType(CType.T_int));
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -26,6 +27,7 @@ public class ArgItem extends CParseRule {
 		if (tk.getType() == CToken.TK_MULT) {
 			tk = ct.getNextToken(pcx);
 			isPint = true;
+			setCType(CType.getCType(CType.T_pint));
 		}
 		if (tk.getType() == CToken.TK_IDENT) {
 			// todo identの処理
@@ -35,11 +37,18 @@ public class ArgItem extends CParseRule {
 		}
 
 		if (tk.getType() == CToken.TK_LBRA) {
+			isArray = true;
 			tk = ct.getNextToken(pcx); // [を読み飛ばす
 			if (tk.getType() == CToken.TK_RBRA) {
 				pcx.warning(tk.toDetailExplainString() + "[]が閉じていません");
 			}
 			tk = ct.getNextToken(pcx);
+
+			if (this.getCType().getType() == CType.T_int) {
+				setCType(CType.getCType(CType.T_int_array));
+			} else if (this.getCType().getType() == CType.T_pint) {
+				setCType(CType.getCType(CType.T_pint_array));
+			}
 		}
 	}
 

@@ -1,6 +1,7 @@
 package lang.c.parse;
 import java.io.PrintStream;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
@@ -17,6 +18,7 @@ public class Function extends CParseRule {
 	final int TYPE_PINT = 1;
 	final int TYPE_VOID = 2;
 	private FunctionInfo functionInfo;
+	private CToken identToken;
 
 	public Function(CParseContext pcx) {
 	}
@@ -48,7 +50,7 @@ public class Function extends CParseRule {
 		if (tk.getType() == CToken.TK_IDENT) {
 			ident = new Ident(pcx);
 			functionName = tk.getText();
-			registerFunction(pcx, tk);
+			identToken = tk;
 			returnLabel = "RET_" + functionName + pcx.getSeqId();
 			tk = ct.getNextToken(pcx);
 		} else {
@@ -72,6 +74,8 @@ public class Function extends CParseRule {
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "Function: ()が閉じていません");
 		}
+
+		registerFunction(pcx, identToken);
 
 		if (DeclBlock.isFirst(tk)) {
 			declBlock = new DeclBlock(pcx, functionInfo);
@@ -101,11 +105,17 @@ public class Function extends CParseRule {
 			default -> CType.getCType(CType.T_err);
 		};
 		returnLabel = "RET_" + functionName + pcx.getSeqId();
-		ArrayDeque<CType> argItems = new ArrayDeque<>();
+
+		ArrayDeque<CParseRule> argItems = new ArrayDeque<>();
 		if (argList != null) {
 			argItems = ((ArgList)argList).getArgItems();
 		}
-		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel);
+		ArrayList<CType> argTypes = new ArrayList<>();
+		for (CParseRule argItem : argItems) {
+			argTypes.add(argItem.getCType()); // argItemは例外的にparseでCTypeをセットしている
+		}
+
+		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel, argTypes);
 		entry.setFunctionInfo(functionInfo);
 
 		if (
