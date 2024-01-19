@@ -76,4 +76,8 @@ public abstract class ParseContext {
         error(s);
         throw new RecoverableErrorException(s);
     }
+
+	public IOContext getIOCtx() {
+		return ioCtx;
+	}
 }

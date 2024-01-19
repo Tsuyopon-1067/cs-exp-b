@@ -5,6 +5,11 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.fail;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -93,78 +98,53 @@ public class ParseLocalVariableTestCv11 {
         }
     }
 
-    @Ignore
     @Test
-    public void parseVariableError() throws FatalErrorException {
-        HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("int a, *b, c[10] *d[10];", ";が必要です"),
-        };
-        for ( HelperTestStrMsg testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData.getTestStr());
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
-            CParseRule cp = new Declaration(cpContext);
-
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-                fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
-            } catch ( RecoverableErrorException e ) {
-                assertThat(e.getMessage(), containsString(testData.getMsg()));
-            }
-        }
-    }
-
-    @Test
-    public void parseOutputTestCrrect() throws FatalErrorException {
+    public void parseLocalVariableError() throws FatalErrorException {
         String[] testDataArr = {
-            "int a, *b, c[10], *d[10];",
-            "const int e=10, *f=&30;"
+            """
+            int a, b[10];
+            const int c=10;
+            {
+                int e;
+                int *f;
+                const int g=10;
+
+                z = 0;
+            }
+            {
+                const int y=0;
+                a = y;
+            }
+                    """
         };
 
         for ( String testData: testDataArr ) {
             resetEnvironment();
             inputStream.setInputString(testData);
             CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
-            CParseRule cp = new Declaration(cpContext);
-
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-            } catch ( FatalErrorException e ) {
-                fail("Failed with " + testData + ". Please modify this Testcase to pass.");
-            }
+            assertThat("Failed with " + testData, Program.isFirst(firstToken), is(true));
+            CParseRule cp = new Program(cpContext);
+            cp.parse(cpContext);
+            String msg = cpContext.getIOContext().getErrStream().toString();
+            writeTextFile(msg);
+            assertThat("Failed with " + testData, msg.equals("変数zは宣言されていません"), is(true));
         }
     }
 
-    @Test
-    public void parseOutputTestError() throws FatalErrorException {
-        HelperTestStrMsg[] testDataArr = {
-            new HelperTestStrMsg("int a, *b, c[10] *d[10];", ";が必要です"),
-            new HelperTestStrMsg("int *d[10]", ";が必要です"),
-            new HelperTestStrMsg("int 10;", "intの次はdeclItemです"),
-            new HelperTestStrMsg("int c[10;", "[]が閉じていません"),
-            new HelperTestStrMsg("const int e;", "=が必要です"),
-            new HelperTestStrMsg("const int e=3", ";が必要です"),
-            new HelperTestStrMsg("const int e 3;", "=が必要です"),
-            new HelperTestStrMsg("int e=3;", ";が必要です"),
-        };
-        for ( HelperTestStrMsg testData: testDataArr ) {
-            resetEnvironment();
-            inputStream.setInputString(testData.getTestStr());
-            CToken firstToken = tokenizer.getNextToken(cpContext);
-            assertThat("Failed with " + testData, Declaration.isFirst(firstToken), is(true));
-            CParseRule cp = new Declaration(cpContext);
+    private void writeTextFile(String str) {
+        try {
+            // FileWriterクラスのオブジェクトを生成する
+            FileWriter file = new FileWriter("/Users/tsuyopon/Desktop/test.txt");
+            // PrintWriterクラスのオブジェクトを生成する
+            PrintWriter pw = new PrintWriter(new BufferedWriter(file));
 
-            try {
-                cp.parse(cpContext);
-                cp.semanticCheck(cpContext);
-                fail("Failed with " + testData.getTestStr() + ". FatalErrorException should be invoked");
-            } catch ( FatalErrorException e ) {
-                assertThat(e.getMessage(), containsString(testData.getMsg()));
-            }
+            //ファイルに書き込む
+            pw.println(str);
+
+            //ファイルを閉じる
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
