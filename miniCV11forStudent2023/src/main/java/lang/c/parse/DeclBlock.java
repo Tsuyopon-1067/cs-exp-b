@@ -66,15 +66,15 @@ public class DeclBlock extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; DeclBlock starts");
+		o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
+		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
+		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
+
 		if (declareList != null) {
 			for (CParseRule declaration : declareList) {
 				declaration.codeGen(pcx);
 			}
 		}
-
-		o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
-		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
-		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 
 		if (statmentList != null) {
 			for (CParseRule statment : statmentList) {
