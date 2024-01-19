@@ -40,6 +40,13 @@ public class StatementCall extends CParseRule {
 		if (tk.getType() != CToken.TK_RPAR) {
 			pcx.recoverableError("()が閉じていません");
 		}
+
+		tk = ct.getNextToken(pcx);
+		if (tk.getType() != CToken.TK_SEMI) {
+			pcx.recoverableError("StatementCall : " + tk.toExplainString() + ";がありません");
+		} else {
+			tk = ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
+		}
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
