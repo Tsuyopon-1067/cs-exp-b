@@ -9,10 +9,10 @@ import lang.c.*;
 public class StatementReturn extends CParseRule {
     // statementReturn ::= RETURN [ expression ] SEMI
 	CParseRule expression;
-	String returnLabel;
+	FunctionInfo functionInfo;
 
-	public StatementReturn(CParseContext pcx, String returnLabel) {
-		this.returnLabel = returnLabel;
+	public StatementReturn(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -20,6 +20,7 @@ public class StatementReturn extends CParseRule {
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
+		functionInfo.setTrueToIsExistReturn();
 		// ここにやってくるときは、必ずisFirst()が満たされている
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // returnを読み飛ばす
@@ -43,6 +44,10 @@ public class StatementReturn extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (expression != null) {
 			expression.semanticCheck(pcx);
+			if (expression.getCType() != functionInfo.getReturnType()) {
+				String warningMessage = String.format("StatementReturn: 戻り値の型が関数%sの型と一致しません", functionInfo.getName());
+				pcx.warning(warningMessage);
+			}
 		}
 	}
 
@@ -53,7 +58,7 @@ public class StatementReturn extends CParseRule {
 			expression.codeGen(pcx);
 			o.println("\tMOV\t-(R6), R0\t; StatementReturn: スタックに積まれた値を戻り値用レジスタR0に移す");
 		}
-		o.println(String.format("\tJUMP\t%s\t; StatementReturn: 関数のRET命令にジャンプする", returnLabel));
+		o.println(String.format("\tJUMP\t%s\t; StatementReturn: 関数のRET命令にジャンプする", functionInfo.getReturnLabel()));
 		o.println(";;; StatementReturn completes");
 	}
 }

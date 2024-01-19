@@ -4,16 +4,17 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.FunctionInfo;
 
 public class Statement extends CParseRule {
     // statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
     CParseRule nextCParseRule;
-	String returnLabel;
+	FunctionInfo functionInfo;
 
 	public Statement(CParseContext pcx) {
 	}
-	public Statement(CParseContext pcx, String returnLabel) {
-		this.returnLabel = returnLabel;
+	public Statement(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -46,7 +47,7 @@ public class Statement extends CParseRule {
 		} else if (StatementCall.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementCall(pcx);
 		} else if (StatementReturn.isFirst(ct.getCurrentToken(pcx))) {
-			nextCParseRule = new StatementReturn(pcx, returnLabel);
+			nextCParseRule = new StatementReturn(pcx, functionInfo);
 		} else {
 			pcx.fatalError(ct.getCurrentToken(pcx).toExplainString() + "statementの文がありません");
 		}
