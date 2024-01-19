@@ -26,7 +26,6 @@ public class Declaration extends CParseRule {
 		} else if (ConstDecl.isFirst(tk)) {
 			nextParseRule = new ConstDecl(pcx);
 		} else {
-			System.err.println("declaration " + tk.toDetailExplainString());
 			nextParseRule = new VoidDecl(pcx);
 		}
 		try {
