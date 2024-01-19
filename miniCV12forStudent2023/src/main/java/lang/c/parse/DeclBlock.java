@@ -13,8 +13,14 @@ public class DeclBlock extends CParseRule {
 	ArrayDeque<CParseRule> declareList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> statmentList = new ArrayDeque<CParseRule>();
 	int variableSize = 0;
+	private String returnLabel;
 
 	public DeclBlock(CParseContext pcx) {
+		this.returnLabel = "";
+	}
+
+	public DeclBlock(CParseContext pcx, String returnLabel) {
+		this.returnLabel = returnLabel;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -35,7 +41,7 @@ public class DeclBlock extends CParseRule {
 		}
 
 		while (Statement.isFirst(tk)) {
-			statmentList.add(new Statement(pcx));
+			statmentList.add(new Statement(pcx, returnLabel));
 			statmentList.getLast().parse(pcx);
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
