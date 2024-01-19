@@ -126,7 +126,6 @@ public class Function extends CParseRule {
 			declBlock.codeGen(pcx);
 		}
 		o.println(String.format("%s:", returnLabel));
-		o.println("\tMOV\t-(R6), R0\t; Function: 戻り値をR0に入れる（returnなしでも次にR6を復帰するので問題なし）");
 		o.println("\tMOV\tR4, R6\t; Function: 局所変数の領域を開放する");
 		o.println("\tRET\t; Function: サブルーチンから復帰する");
 		o.println(";;; Function completes");

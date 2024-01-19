@@ -56,7 +56,7 @@ public class StatementReturn extends CParseRule {
 		o.println(";;; StatementReturn starts");
 		if (expression != null) {
 			expression.codeGen(pcx);
-			o.println("\tMOV\t-(R6), R0\t; StatementReturn: スタックに積まれた値を戻り値用レジスタR0に移す");
+			o.println("\tMOV\t-(R6), R0\t; StatementReturn: スタックに積まれた値を戻り値用レジスタR0に移す（returnなしでも次にR6を復帰するので問題なし）");
 		}
 		o.println(String.format("\tJMP\t%s\t; StatementReturn: 関数のRET命令にジャンプする", functionInfo.getReturnLabel()));
 		o.println(";;; StatementReturn completes");
