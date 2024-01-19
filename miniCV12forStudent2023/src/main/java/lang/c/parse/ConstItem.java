@@ -99,7 +99,7 @@ public class ConstItem extends CParseRule {
 			} else {
 				o.println("\tMOV\t#" + entry.getAddress() + ", R0\t; ConstItem: フレームポインタと変数アドレスの変異を取得<" + constIdentToken.toExplainString() + ">");
 				o.println("\tADD\tR4, R0\t; ConstItem: 変数アドレスを計算する<" + constIdentToken.toExplainString() + ">");
-				o.println("\tMOV\t"+ ((Number)num).getValue() +", (R0)\t; ConstItem: 定数を代入する<" + constIdentToken.toExplainString() + ">");
+				o.println("\tMOV\t#"+ ((Number)num).getValue() +", (R0)\t; ConstItem: 定数を代入する<" + constIdentToken.toExplainString() + ">");
 			}
 		}
 		o.println(";;; constItem completes");

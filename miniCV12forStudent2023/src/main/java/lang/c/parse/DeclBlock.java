@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import lang.c.parse.statement.Statement;
 
 import lang.*;
@@ -12,10 +13,8 @@ public class DeclBlock extends CParseRule {
 	ArrayDeque<CParseRule> declareList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> statmentList = new ArrayDeque<CParseRule>();
 	int variableSize = 0;
-	String returnLabel;
 
-	public DeclBlock(CParseContext pcx, String returnLabel) {
-		this.returnLabel = returnLabel;
+	public DeclBlock(CParseContext pcx) {
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -36,7 +35,7 @@ public class DeclBlock extends CParseRule {
 		}
 
 		while (Statement.isFirst(tk)) {
-			statmentList.add(new Statement(pcx, returnLabel));
+			statmentList.add(new Statement(pcx));
 			statmentList.getLast().parse(pcx);
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);
@@ -67,14 +66,15 @@ public class DeclBlock extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; DeclBlock starts");
+		o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
+		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
+		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 
 		if (declareList != null) {
 			for (CParseRule declaration : declareList) {
 				declaration.codeGen(pcx);
 			}
 		}
-
-		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 
 		if (statmentList != null) {
 			for (CParseRule statment : statmentList) {
