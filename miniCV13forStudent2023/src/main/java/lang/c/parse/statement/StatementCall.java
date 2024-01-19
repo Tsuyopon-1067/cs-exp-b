@@ -57,7 +57,7 @@ public class StatementCall extends CParseRule {
 			}
 		}
 		if (tk.getType() != CToken.TK_RPAR) {
-			pcx.recoverableError("()が閉じていません");
+			pcx.recoverableError("StatementCall: ()が閉じていません");
 		}
 
 		tk = ct.getNextToken(pcx);

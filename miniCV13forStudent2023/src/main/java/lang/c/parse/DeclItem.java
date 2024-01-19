@@ -66,7 +66,7 @@ public class DeclItem extends CParseRule {
 				typeList.parse(pcx);
 			}
 			if (tk.getType() != CToken.TK_RPAR) {
-				pcx.recoverableError(tk.toDetailExplainString() + "()が閉じていません");
+				pcx.recoverableError(tk.toDetailExplainString() + "DeclItem: ()が閉じていません");
 			}
 			tk = ct.getNextToken(pcx); // 後ろに()[]が無いときに合わせて次の字句まで読む
 		}
