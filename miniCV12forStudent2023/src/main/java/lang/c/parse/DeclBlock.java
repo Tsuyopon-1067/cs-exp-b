@@ -42,13 +42,16 @@ public class DeclBlock extends CParseRule {
 			tk = ct.getCurrentToken(pcx);
 		}
 
-		try {
-			if (tk.getType() != CToken.TK_RCUR) {
-				pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
+		if (tk.getType() != CToken.TK_RCUR) {
+			while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
 			}
-			ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
-		} catch (RecoverableErrorException e) {
+			if (tk.getType() == CToken.TK_SEMI) {
+				tk = ct.getNextToken(pcx);
+			}
+			pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
 		}
+		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		variableSize = pcx.getSymbolTable().getAddressOffset();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
@@ -71,6 +74,8 @@ public class DeclBlock extends CParseRule {
 			}
 		}
 
+		o.println("\tMOV\tR4, (R6)+\t; DeclItem: フレームポインタをスタックに退避する");
+		o.println("\tMOV\tR6, R4\t; DeclItem: 現在のスタックの値をフレームポインタにする");
 		o.println("\tADD\t#" + variableSize + ", R6\t; DeclItem: 局所変数の領域を確保する");
 
 		if (statmentList != null) {
@@ -78,6 +83,8 @@ public class DeclBlock extends CParseRule {
 				statment.codeGen(pcx);
 			}
 		}
+		o.println("\tMOV\tR4, R6\t; DeclItem: 局所変数の領域を開放する");
+		o.println("\tMOV\t-(R6), R4\t; DeclItem: 旧フレームポインタを復帰する");
 		o.println(";;; DeclBlock completes");
 	}
 }

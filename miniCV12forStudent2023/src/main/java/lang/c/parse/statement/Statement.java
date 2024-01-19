@@ -53,7 +53,21 @@ public class Statement extends CParseRule {
 		try {
 			nextCParseRule.parse(pcx);
 		} catch (Exception e) {
-			pcx.warning("statementのエラーをスキップしました");
+			CToken tk = ct.getCurrentToken(pcx);
+			int lineNo = tk.getLineNo();
+			while (tk.getType() != CToken.TK_SEMI
+			&& tk.getType() != CToken.TK_RCUR
+			&& !Statement.isFirst(tk)
+			&& tk.getType() != CToken.TK_EOF) {
+				tk = ct.getNextToken(pcx);
+				if (tk.getLineNo() != lineNo) {
+					break; // 改行したら抜ける
+				}
+			}
+			if (tk.getType() == CToken.TK_SEMI) {
+				ct.getNextToken(pcx);
+			}
+			pcx.warning("Statement: statementのエラーをスキップしました");
 		}
 		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}

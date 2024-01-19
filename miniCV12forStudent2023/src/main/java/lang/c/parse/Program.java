@@ -7,7 +7,7 @@ import lang.*;
 import lang.c.*;
 
 public class Program extends CParseRule {
-	// program     ::= { declaraion } { declblock } EOF
+	// program         ::= { declaraion } { function } EOF
 	ArrayDeque<CParseRule> declarationList = new ArrayDeque<CParseRule>();
 	ArrayDeque<CParseRule> functionList = new ArrayDeque<CParseRule>();
 

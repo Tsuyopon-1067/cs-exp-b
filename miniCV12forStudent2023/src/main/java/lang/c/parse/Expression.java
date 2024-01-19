@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.statement.Statement;
 
 public class Expression extends CParseRule {
 	// expression ::= term { expressionAdd | expressionSub }
@@ -34,14 +35,14 @@ public class Expression extends CParseRule {
 				list.parse(pcx);
 			} catch (RecoverableErrorException e) {
 				int lineNo = tk.getLineNo();
-				while (!ExpressionAdd.isFirst(tk) || ExpressionSub.isFirst(tk) || tk.getType() != CToken.TK_SEMI) {
+				while (tk.getType() != CToken.TK_SEMI && !Statement.isFirst(tk) && tk.getType() != CToken.TK_EOF) {
 					tk = ct.getNextToken(pcx);
-					if (tk.getType() != CToken.TK_SEMI || tk.getLineNo() != lineNo) {
-						break;
+					if (tk.getLineNo() != lineNo) {
+						break; // 改行したら抜ける
 					}
 				}
 				pcx.warning("ExpressionAddまたはExpressionSubをスキップしました");
-				continue;
+				return;
 			}
 			term = list;
 			tk = ct.getCurrentToken(pcx);

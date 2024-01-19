@@ -37,11 +37,8 @@ public class ConstItem extends CParseRule {
 		}
 		tk = ct.getNextToken(pcx);
 
-		try {
-			if (tk.getType() != CToken.TK_ASSIGN) {
-				pcx.recoverableError("=が必要です");
-			}
-		} catch (RecoverableErrorException e) {
+		if (tk.getType() != CToken.TK_ASSIGN) {
+			pcx.fatalError("=が必要です");
 		}
 		tk = ct.getNextToken(pcx); // =を読み飛ばす
 
@@ -81,6 +78,13 @@ public class ConstItem extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		if (isExistMult != isExistAmp) {
+			if (isExistMult) {
+				pcx.warning("ConstItem: 右辺はpint型である必要があります");
+			} else {
+				pcx.warning("ConstItem: 右辺はint型である必要があります");
+			}
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
