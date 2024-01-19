@@ -54,7 +54,7 @@ public class DeclBlock extends CParseRule {
 			if (tk.getType() == CToken.TK_SEMI) {
 				tk = ct.getNextToken(pcx);
 			}
-			pcx.recoverableError(tk.toExplainString() + "}が閉じていません");
+			pcx.recoverableError("DeclBlock" + tk.toExplainString() + "}が閉じていません");
 		}
 		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		variableSize = pcx.getSymbolTable().getAddressOffset();
