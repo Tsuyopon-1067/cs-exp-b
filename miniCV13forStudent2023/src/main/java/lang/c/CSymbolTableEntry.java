@@ -3,6 +3,7 @@ package lang.c;
 import java.util.ArrayList;
 
 import lang.SymbolTableEntry;
+import lang.c.parse.FunctionInfo;
 
 public class CSymbolTableEntry extends SymbolTableEntry {
 	private CType type; // この識別子に対して宣言された型
@@ -11,6 +12,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
 	private boolean isFunction; // 関数か？
+	private FunctionInfo functionInfo; // 関数の型とか
 	private ArrayList<CType> argTypes; // 関数の引数の型のリスト
 
 	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction, ArrayList<CType> argTypes) {
@@ -44,6 +46,8 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public void setIsGlobal(boolean isGlobal) { this.isGlobal = isGlobal; }
 	public int getAddress() { return address; }
 	public boolean isFunction() { return isFunction; }
+	public void setFunctionInfo(FunctionInfo functionInfo) { this.functionInfo = functionInfo; }
+	public FunctionInfo getFunctionInfo() { return functionInfo; }
 	public boolean verificateFunction(CSymbolTableEntry e) {
 		// todo すでに登録された関数と同じかどうかを確認する
 		if (e.isFunction() && e.GetCType().equals(e.GetCType())) {

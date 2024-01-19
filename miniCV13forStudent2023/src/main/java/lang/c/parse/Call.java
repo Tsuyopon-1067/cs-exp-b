@@ -40,7 +40,7 @@ public class Call extends CParseRule {
 		}
 
 		if (tk.getType() != CToken.TK_RPAR) {
-			pcx.recoverableError(tk.toDetailExplainString() + "()が閉じていません");
+			pcx.recoverableError(tk.toDetailExplainString() + "Call: ()が閉じていません");
 		}
 	}
 

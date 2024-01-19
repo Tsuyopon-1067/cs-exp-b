@@ -26,7 +26,7 @@ public class VoidDecl extends CParseRule {
 
 		parseIdnetDeclaration(pcx, ct, tk);
 
-		tk = ct.getNextToken(pcx); // ,または;を読む
+		tk = ct.getCurrentToken(pcx); // ,または;を読む
 		while (tk.getType() == CToken.TK_COMMA) {
 			tk = ct.getNextToken(pcx); // ,を読み飛ばす
 			if (!Ident.isFirst(tk)) {
@@ -74,9 +74,9 @@ public class VoidDecl extends CParseRule {
 			typeList.parse(pcx);
 			isExistTypeList = true;
 		}
-		tk = ct.getNextToken(pcx); // RPARを読む
+		tk = ct.getCurrentToken(pcx); // RPARを読む
 		if (tk.getType() != CToken.TK_RPAR) {
-			pcx.recoverableError("()が閉じていません");
+			pcx.recoverableError("VoidDecl: ()が閉じていません");
 		}
 		try {
 			registerName(pcx, identToken);

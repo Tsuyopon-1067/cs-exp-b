@@ -8,7 +8,7 @@ import lang.c.*;
 
 public class ArgList extends CParseRule {
 	// arglist         ::= argItem { COMMA argItem }
-	ArrayDeque<CParseRule> argItems;
+	private ArrayDeque<CParseRule> argItems;
 
 	public ArgList(CParseContext pcx) {
 		argItems = new ArrayDeque<CParseRule>();
@@ -23,14 +23,15 @@ public class ArgList extends CParseRule {
 		CToken tk = ct.getCurrentToken(pcx);
 		argItems.addLast(new ArgItem(pcx));
 		argItems.getLast().parse(pcx);
+		tk = ct.getCurrentToken(pcx);
 		while (tk.getType() == CToken.TK_COMMA) {
 			tk = ct.getNextToken(pcx);
 			if (!ArgItem.isFirst(tk)) {
 				pcx.recoverableError(tk.toExplainString() + ",の後ろには引数が必要です");
-				continue;
 			}
 			argItems.addLast(new ArgItem(pcx));
 			argItems.getLast().parse(pcx);
+			tk = ct.getCurrentToken(pcx);
 		}
 	}
 
@@ -38,5 +39,9 @@ public class ArgList extends CParseRule {
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
+	}
+
+	public ArrayDeque<CParseRule> getArgItems() {
+		return argItems;
 	}
 }

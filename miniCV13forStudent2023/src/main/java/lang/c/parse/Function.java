@@ -1,5 +1,6 @@
 package lang.c.parse;
 import java.io.PrintStream;
+import java.util.ArrayDeque;
 
 import lang.*;
 import lang.c.*;
@@ -64,10 +65,12 @@ public class Function extends CParseRule {
 			argList = new ArgList(pcx);
 			argList.parse(pcx);
 		}
+		tk = ct.getCurrentToken(pcx);
+		System.out.printf("%s, %s\n", tk.toDetailExplainString(), tk.getText());
 		if (tk.getType() == CToken.TK_RPAR) {
 			tk = ct.getNextToken(pcx);
 		} else {
-			pcx.recoverableError(tk.toExplainString() + "()が閉じていません");
+			pcx.recoverableError(tk.toExplainString() + "Function: ()が閉じていません");
 		}
 
 		if (DeclBlock.isFirst(tk)) {
@@ -98,6 +101,10 @@ public class Function extends CParseRule {
 			default -> CType.getCType(CType.T_err);
 		};
 		returnLabel = "RET_" + functionName + pcx.getSeqId();
+		ArrayDeque<CType> argItems = new ArrayDeque<>();
+		if (argList != null) {
+			argItems = ((ArgList)argList).getArgItems();
+		}
 		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel);
 		entry.setFunctionInfo(functionInfo);
 
