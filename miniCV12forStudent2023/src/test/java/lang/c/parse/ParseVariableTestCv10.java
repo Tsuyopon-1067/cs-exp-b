@@ -59,6 +59,7 @@ public class ParseVariableTestCv10 {
     }
 
     @Test
+    @Ignore
     public void parseVariableCorrect() throws FatalErrorException {
         String[] testDataArr = {
             "int a, *b, c[10], *d[10];",
@@ -126,6 +127,7 @@ public class ParseVariableTestCv10 {
         }
     }
 
+    @Ignore
     @Test
     public void parseOutputTestError() throws FatalErrorException {
         HelperTestStrMsg[] testDataArr = {

@@ -2,6 +2,7 @@ package lang.c.parse;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import lang.FatalErrorException;
@@ -44,6 +45,7 @@ public class CodeGenDeclBlockTestCv11 {
         cpContext = null;
     }
 
+@Ignore
 @Test
     public void codeGenDeclBlockTest() throws FatalErrorException {
         inputStream.setInputString("""

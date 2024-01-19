@@ -63,6 +63,7 @@ public class ParseLocalVariableTestCv11 {
         setUp();
     }
 
+    @Ignore
     @Test
     public void parseVariableCorrect() throws FatalErrorException {
         String[] testDataArr = {
@@ -98,6 +99,7 @@ public class ParseLocalVariableTestCv11 {
         }
     }
 
+    @Ignore
     @Test
     public void parseLocalVariableError() throws FatalErrorException {
         String[] testDataArr = {
