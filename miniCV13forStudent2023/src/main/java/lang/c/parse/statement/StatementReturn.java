@@ -29,8 +29,6 @@ public class StatementReturn extends CParseRule {
 			expression = new Expression(pcx);
 			expression.parse(pcx);
 			tk = ct.getCurrentToken(pcx);
-		} else {
-			pcx.recoverableError(tk.toExplainString() + "returnの後ろはexpressionです");
 		}
 
 		if (tk.getType() != CToken.TK_SEMI) {
