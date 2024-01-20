@@ -1,0 +1,72 @@
+次の字句まで読んでしまう構文規則
+term
+expression -> condition系 -> condition
+if -> statement系 -> statement
+bit系
+
+-------------
+
+expression    ::= term { expressionAdd | expressionSub }
+expressionAdd ::= PLUS term
+expressionSub ::= MINUS term
+
+term        ::= factor { termMult | termDiv }
+termMult    ::= MULT factor
+termDiv     ::= DIV factor
+factor      ::= plusFactor | minusFactor | unsignedFactor
+plusFactor  ::= PLUS unsignedFactor
+minusFactor ::= MINUS unsignedFactor
+
+unsignedFactor  ::= factorAmp | number | LPAR expression RPAR | addressToValue
+factorAmp       ::= AMP ( number | primary )
+primary         ::= primaryMult | variable
+primaryMult     ::= MULT variable
+array           ::= LBRA expression RBRA
+ident           ::= IDENT
+addressToValue  ::= primary
+
+condition   ::= TRUE | FALSE | expression ( conditionLT | conditionLE | conditionGT | conditionGE | conditionEQ | conditionNE )
+conditionLT ::= LT expression
+conditionLE ::= LE expression
+conditionGT ::= GT expression
+conditionGE ::= GE expression
+conditionEQ ::= EQ expression
+conditionNE ::= NE expression
+
+statementAssign ::= primary ASSIGN expression SEMI
+statementIf     ::= IF conditionBlock statement [ ELSE statement ]
+statementWhile  ::= WHILE conditionBlock statement
+statementInput  ::= INPUT primary SEMI
+statementOutput ::= OUTPUT expression SEMI
+conditionBlock  ::= LPAR bitExpression RPAR
+statementBlock  ::= LCUR { statement } RCUR
+
+
+bitExpression   ::= bitTerm { bitOr }
+bitExpressionOr ::= OR bitTerm
+bitTerm         ::= bitFactor { bitAnd }
+bitTermAnd      ::= AND bitFactor
+bitFactor       ::= condition | LT bitExpression GT | bitNotFactor // 不等号で囲む (LPAR expression RPAR と区別したい)
+bitNotFactor    ::= NOT bitFactor
+
+intDecl     ::= INT declItem { COMMA declItem } SEMI
+constDecl   ::= CONST INT constItem { COMMA constItem } SEMI
+constItem   ::= [ MULT ] IDENT ASSIGN [ AMP ] NUM
+
+declblock ::= LCUR { declaration } { statement } RCUR
+
+program         ::= { declaraion } { function } EOF
+declaration     ::= intDecl | constDecl | voidDecl
+statement       ::= statementAssign | statementInput | statementOutput | statementIf | statementWhile | statementBlock | statementCall | statementReturn
+statementReturn ::= RETURN [ expression ] SEMI
+variable        ::= ident [ array | call ]
+
+function        ::= FUNC ( INT [ MULT ] | VOID ) IDENT LPAR [ argList ] RPAR declblock
+arglist         ::= argItem { COMMA argItem }
+argItem         ::= INT [ MULT ] IDENT [ LBRA RBRA ]
+statementCall   ::= CALL ident LPAR [ expression { COMMA expression } ] RPAR SEMI
+call            ::= LPAR [ expressoin { COMMA expression } ] RPAR
+voidDecl        ::= VOID IDENT LPAR [ typelist ] RPAR { COMMA IDENT LPAR [ typeList ] RPAR } SEMI
+declItem        ::= [ MULT ] IDENT [ LBRA NUMBER RBRA | LPAR [ typeList ] RPAR ]
+typeList        ::= typeItem { COMMA typeItem }
+typeItem        ::= INT[MULT][LBRARBRA]
