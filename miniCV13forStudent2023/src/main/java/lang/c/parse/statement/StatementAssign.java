@@ -54,7 +54,6 @@ public class StatementAssign extends CParseRule {
 			}
 			pcx.warning("StatementAssign: 文をスキップしました");
 			tk = ct.getCurrentToken(pcx);
-			System.out.printf("%s, %s\n", tk.toDetailExplainString(), tk.getText());
 			return;
 		}
 
