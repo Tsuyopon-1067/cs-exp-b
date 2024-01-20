@@ -30,4 +30,10 @@ public class FunctionInfo {
     public String getReturnLabel() { return returnLabel; }
     public int getParamSize() { return paramInfoList.size(); }
     public ArrayList<ParameterInfo> getParamInfoList() { return paramInfoList; }
+
+    @Override
+    public String toString() {
+        return String.format("name: %s, type: %s, label: %s, param: %d",
+            this.name, this.returnType.toString(), this.returnLabel, this.paramInfoList.size());
+    }
 }

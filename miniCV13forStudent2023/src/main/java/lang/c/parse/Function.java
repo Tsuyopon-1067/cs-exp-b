@@ -84,7 +84,6 @@ public class Function extends CParseRule {
 			pcx.recoverableError(tk.toExplainString() + "()の後ろはDeclBlockです");
 		}
 
-		pcx.getSymbolTable().showLocal();
 		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
 
