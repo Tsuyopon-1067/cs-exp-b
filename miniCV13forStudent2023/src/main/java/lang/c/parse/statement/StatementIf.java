@@ -4,13 +4,16 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.FunctionInfo;
 import lang.c.parse.condition.ConditionBlock;
 
 public class StatementIf extends CParseRule {
     // statementIf ::= IF conditionBlock statement [ ELSE statement ]
 	CParseRule condition, statement1, statement2;
+	private FunctionInfo functionInfo;
 
-	public StatementIf(CParseContext pcx) {
+	public StatementIf(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -35,7 +38,7 @@ public class StatementIf extends CParseRule {
 		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
-			statement1 = new Statement(pcx);
+			statement1 = new Statement(pcx, functionInfo);
 			statement1.parse(pcx);
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "ifブロックの中はstatementです");
@@ -45,7 +48,7 @@ public class StatementIf extends CParseRule {
 		if (tk.getType() == CToken.TK_ELSE) {
 			tk = ct.getNextToken(pcx);
 			if (Statement.isFirst(tk)) {
-				statement2 = new Statement(pcx);
+				statement2 = new Statement(pcx, functionInfo);
 				statement2.parse(pcx);
 				tk = ct.getCurrentToken(pcx); // statementは次の字句まで読んでしまう
 			} else {

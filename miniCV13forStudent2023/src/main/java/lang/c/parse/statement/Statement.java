@@ -11,8 +11,6 @@ public class Statement extends CParseRule {
     CParseRule nextCParseRule;
 	FunctionInfo functionInfo;
 
-	public Statement(CParseContext pcx) {
-	}
 	public Statement(CParseContext pcx, FunctionInfo functionInfo) {
 		this.functionInfo = functionInfo;
 	}
@@ -39,11 +37,11 @@ public class Statement extends CParseRule {
 		} else if (StatementOutput.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementOutput(pcx);
 		} else if (StatementIf.isFirst(ct.getCurrentToken(pcx))) {
-			nextCParseRule = new StatementIf(pcx);
+			nextCParseRule = new StatementIf(pcx, functionInfo);
 		} else if (StatementWhile.isFirst(ct.getCurrentToken(pcx))) {
-			nextCParseRule = new StatementWhile(pcx);
+			nextCParseRule = new StatementWhile(pcx, functionInfo);
 		} else if (StatementBlock.isFirst(ct.getCurrentToken(pcx))) {
-			nextCParseRule = new StatementBlock(pcx);
+			nextCParseRule = new StatementBlock(pcx, functionInfo);
 		} else if (StatementCall.isFirst(ct.getCurrentToken(pcx))) {
 			nextCParseRule = new StatementCall(pcx);
 		} else if (StatementReturn.isFirst(ct.getCurrentToken(pcx))) {
@@ -53,7 +51,7 @@ public class Statement extends CParseRule {
 		}
 		try {
 			nextCParseRule.parse(pcx);
-		} catch (Exception e) {
+		} catch (FatalErrorException e) {
 			CToken tk = ct.getCurrentToken(pcx);
 			int lineNo = tk.getLineNo();
 			while (tk.getType() != CToken.TK_SEMI
@@ -69,6 +67,7 @@ public class Statement extends CParseRule {
 				ct.getNextToken(pcx);
 			}
 			pcx.warning("Statement: statementのエラーをスキップしました");
+			return;
 		}
 		// 各statementが次の字句を読んでしまうので次の字句は読まない
 	}

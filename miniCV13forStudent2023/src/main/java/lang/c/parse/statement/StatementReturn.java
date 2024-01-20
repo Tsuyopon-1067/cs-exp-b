@@ -20,7 +20,10 @@ public class StatementReturn extends CParseRule {
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
-		functionInfo.setTrueToIsExistReturn();
+		if (functionInfo != null) {
+			functionInfo.setTrueToIsExistReturn();
+		}
+		System.out.println("method");
 		// ここにやってくるときは、必ずisFirst()が満たされている
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // returnを読み飛ばす

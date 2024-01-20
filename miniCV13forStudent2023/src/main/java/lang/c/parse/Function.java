@@ -21,6 +21,7 @@ public class Function extends CParseRule {
 	private CToken identToken;
 
 	public Function(CParseContext pcx) {
+		this.setCType(CType.getCType(CType.T_err));
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -103,12 +104,6 @@ public class Function extends CParseRule {
 		} else {
 			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction);
 		}
-		CType returnValueCType = switch(returnValueType) {
-			case TYPE_INT -> CType.getCType(CType.T_int);
-			case TYPE_PINT -> CType.getCType(CType.T_pint);
-			case TYPE_VOID -> CType.getCType(CType.T_void);
-			default -> CType.getCType(CType.T_err);
-		};
 		returnLabel = "RET_" + functionName + pcx.getSeqId();
 
 		ArrayDeque<CParseRule> argItems = new ArrayDeque<>();
@@ -120,7 +115,7 @@ public class Function extends CParseRule {
 			paramInfoList.add(new ParameterInfo(argItem.getCType(), ((ArgItem)argItem).getName())); // argItemは例外的にparseでCTypeをセットしている
 		}
 
-		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel, paramInfoList);
+		functionInfo = new FunctionInfo(functionName, this.getCType(), returnLabel, paramInfoList);
 		entry.setFunctionInfo(functionInfo);
 
 		CSymbolTableEntry prototypeEntry = pcx.getSymbolTable().searchGlobal(functionName);

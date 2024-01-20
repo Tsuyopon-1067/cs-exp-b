@@ -5,12 +5,15 @@ import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.FunctionInfo;
 
 public class StatementBlock extends CParseRule {
     // statementBlock ::= LCUR { statement } RCUR
 	ArrayList<CParseRule> statmentList = new ArrayList<CParseRule>();
+	private FunctionInfo functionInfo;
 
-	public StatementBlock(CParseContext pcx) {
+	public StatementBlock(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -23,12 +26,14 @@ public class StatementBlock extends CParseRule {
 		CToken tk = ct.getNextToken(pcx);
 
 		while (Statement.isFirst(tk)) {
-			Statement statement = new Statement(pcx);
+			Statement statement = new Statement(pcx, functionInfo);
 			statmentList.add(statement);
 			try {
 				statement.parse(pcx);
 			} catch (Exception e) {
 				pcx.warning("StatementBlock: statementのエラーをスキップしました");
+				ct.skipTo(pcx, CToken.TK_RCUR);
+				return;
 			}
 			ct = pcx.getTokenizer();
 			tk = ct.getCurrentToken(pcx);

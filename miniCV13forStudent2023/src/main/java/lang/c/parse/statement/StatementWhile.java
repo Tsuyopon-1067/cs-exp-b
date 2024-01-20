@@ -4,13 +4,16 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.FunctionInfo;
 import lang.c.parse.condition.ConditionBlock;
 
 public class StatementWhile extends CParseRule {
     // statementWhile ::= WHILE conditionBlock statement
 	CParseRule condition, statement;
+	private FunctionInfo functionInfo;
 
-	public StatementWhile(CParseContext pcx) {
+	public StatementWhile(CParseContext pcx, FunctionInfo functionInfo) {
+		this.functionInfo = functionInfo;
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -32,7 +35,7 @@ public class StatementWhile extends CParseRule {
 		tk = ct.getNextToken(pcx);
 
 		if (Statement.isFirst(tk)) {
-			statement = new Statement(pcx);
+			statement = new Statement(pcx, functionInfo);
 			statement.parse(pcx); // statememtは次の字句まで読んでしまう
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "whileブロックの中はstatementです");
