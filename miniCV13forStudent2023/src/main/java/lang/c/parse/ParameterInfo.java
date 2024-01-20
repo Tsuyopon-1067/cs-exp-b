@@ -13,4 +13,9 @@ public class ParameterInfo {
 
     public CType getType() { return type; }
     public String getName() { return name; }
+
+    public String toString() {
+        String typeStr = type != null ? type.toString() : "";
+        return String.format("type: %s, name: %s", typeStr, name);
+    }
 }

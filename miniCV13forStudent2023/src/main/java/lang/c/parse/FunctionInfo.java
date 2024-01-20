@@ -10,6 +10,7 @@ public class FunctionInfo {
     private boolean isExistReturn;
     private String returnLabel;
     private ArrayList<ParameterInfo> paramInfoList;
+    private boolean isExistPrototype = false;
 
     public FunctionInfo(String name, CType returnType, String returnLabel) {
         this.name = name;
@@ -30,6 +31,8 @@ public class FunctionInfo {
     public String getReturnLabel() { return returnLabel; }
     public int getParamSize() { return paramInfoList.size(); }
     public ArrayList<ParameterInfo> getParamInfoList() { return paramInfoList; }
+    public void setExistPrototype() { this.isExistPrototype = true; }
+    public boolean getIsExistPrototype() { return isExistPrototype; }
 
     @Override
     public String toString() {

@@ -120,11 +120,19 @@ public class Function extends CParseRule {
 		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel, paramInfoList);
 		entry.setFunctionInfo(functionInfo);
 
-		if (
-			!pcx.getSymbolTable().registerGlobal(functionName, entry)
-			&& !pcx.getSymbolTable().searchGlobal(functionName).verificateFunction(entry)
-		) {
-			pcx.recoverableError("Function: " + tk.toDetailExplainString() + " すでに使用されている名前です");
+		CSymbolTableEntry prototypeEntry = pcx.getSymbolTable().searchGlobal(functionName);
+		if (prototypeEntry == null) {
+			pcx.getSymbolTable().registerGlobal(functionName, entry);
+			return;
+		}
+
+		// プロトタイプ宣言がある場合
+		if (!prototypeEntry.getFunctionInfo().getIsExistPrototype()) {
+			pcx.warning("Function: " + tk.toDetailExplainString() + " この関数名はすでに使用されています");
+		} else if (!entry.verificateFunction(prototypeEntry)) {
+			pcx.warning("Function: " + tk.toDetailExplainString() + " プロトタイプ宣言と定義が異なります");
+		} else {
+			prototypeEntry.setFunctionInfo(functionInfo);
 		}
 	}
 

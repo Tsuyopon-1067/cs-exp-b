@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lang.SymbolTableEntry;
 import lang.c.parse.FunctionInfo;
+import lang.c.parse.ParameterInfo;
 
 public class CSymbolTableEntry extends SymbolTableEntry {
 	private CType type; // この識別子に対して宣言された型
@@ -13,17 +14,17 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private int address; // 割り当て番地
 	private boolean isFunction; // 関数か？
 	private FunctionInfo functionInfo; // 関数の型とか
-	private ArrayList<CType> argTypes; // 関数の引数の型のリスト
+	//private ArrayList<CType> argTypes; // 関数の引数の型のリスト
 
-	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction, ArrayList<CType> argTypes) {
-		this.type = type;
-		this.size = size;
-		this.constp = constp;
-		this.isFunction = isFunction;
-		for (CType t : argTypes) {
-			this.argTypes.add(t);
-		}
-	}
+	//public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction, ArrayList<CType> argTypes) {
+	//	this.type = type;
+	//	this.size = size;
+	//	this.constp = constp;
+	//	this.isFunction = isFunction;
+	//	for (CType t : argTypes) {
+	//		this.argTypes.add(t);
+	//	}
+	//}
 	public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction) {
 		this.type = type;
 		this.size = size;
@@ -50,11 +51,20 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public void setFunctionInfo(FunctionInfo functionInfo) { this.functionInfo = functionInfo; }
 	public FunctionInfo getFunctionInfo() { return functionInfo; }
 	public boolean verificateFunction(CSymbolTableEntry e) {
-		// todo すでに登録された関数と同じかどうかを確認する
-		if (e.isFunction() && e.GetCType().equals(e.GetCType())) {
-			return true;
-		} else {
-			return false;
+		if (this.getFunctionInfo().getIsExistPrototype() || e.getFunctionInfo().getIsExistPrototype()) {
+			ArrayList<ParameterInfo> argInfoList = this.functionInfo.getParamInfoList();
+			ArrayList<ParameterInfo> paramInfoList = e.getFunctionInfo().getParamInfoList(); // proto
+
+			if (paramInfoList.size() != argInfoList.size()) {
+				return false;
+			}
+
+			for (int i = 0; i < paramInfoList.size(); i++) {
+				if (paramInfoList.get(i).getType().getType() != argInfoList.get(i).getType().getType()) {
+					return false;
+				}
+			}
 		}
+		return e.isFunction() && e.GetCType().equals(e.GetCType());
 	}
 }
