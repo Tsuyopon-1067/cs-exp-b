@@ -28,7 +28,6 @@ public class DeclBlock extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
-		pcx.getSymbolTable().setupLocalSymbolTable();
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // {を読み飛ばす
 
@@ -57,7 +56,6 @@ public class DeclBlock extends CParseRule {
 		}
 		ct.getNextToken(pcx); // ifは次の字句を読んでしまうのでそれに合わせる
 		variableSize = pcx.getSymbolTable().getAddressOffset();
-		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {

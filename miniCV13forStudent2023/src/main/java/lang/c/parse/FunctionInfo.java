@@ -9,7 +9,7 @@ public class FunctionInfo {
     private CType returnType;
     private boolean isExistReturn;
     private String returnLabel;
-    private ArrayList<CType> argTypes;
+    private ArrayList<ParameterInfo> paramInfoList;
 
     public FunctionInfo(String name, CType returnType, String returnLabel) {
         this.name = name;
@@ -18,9 +18,9 @@ public class FunctionInfo {
         this.returnLabel = returnLabel;
     }
 
-    public FunctionInfo(String name, CType returnType, String returnLabel, ArrayList<CType> argTypes) {
+    public FunctionInfo(String name, CType returnType, String returnLabel, ArrayList<ParameterInfo> paramInfoList) {
         this(name, returnType, returnLabel);
-        this.argTypes = argTypes;
+        this.paramInfoList = paramInfoList;
     }
 
     public String getName() { return name; }
@@ -28,4 +28,6 @@ public class FunctionInfo {
     public void setTrueToIsExistReturn() { this.isExistReturn = true; }
     public boolean getIsExistReturn() { return isExistReturn; }
     public String getReturnLabel() { return returnLabel; }
+    public int getParamSize() { return paramInfoList.size(); }
+    public ArrayList<ParameterInfo> getParamInfoList() { return paramInfoList; }
 }

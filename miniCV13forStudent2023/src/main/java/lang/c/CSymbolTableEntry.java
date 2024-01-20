@@ -36,7 +36,8 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 		this.constp = constp;
 	}
 	public String toExplainString() { // このエントリに関する情報を作り出す。記号表全体を出力するときに使う。
-		return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
+		// return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
+		return String.format("%s, size=%d, %s, address=%d", type.toString(), size, (constp ? "定数" : "変数"), address);
 	}
 	public CType GetCType() { return type; }
 	public int getSize() { return size; }

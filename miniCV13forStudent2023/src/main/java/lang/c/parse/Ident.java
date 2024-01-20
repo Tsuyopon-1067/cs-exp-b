@@ -8,10 +8,9 @@ import lang.c.*;
 public class Ident extends CParseRule {
 	// ident ::= IDENT
 	CToken ident;
-	private String identName, functionLabel;
+	private String identName;
 	CSymbolTableEntry entry;
 	boolean isFunction = false;
-	private int seqId;
 
 	public Ident(CParseContext pcx) {
 	}
@@ -81,5 +80,8 @@ public class Ident extends CParseRule {
 
 	public CSymbolTableEntry getEntry() {
 		return entry;
+	}
+	public boolean getIsFunction() {
+		return isFunction;
 	}
 }

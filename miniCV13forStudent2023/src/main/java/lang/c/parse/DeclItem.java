@@ -90,7 +90,6 @@ public class DeclItem extends CParseRule {
 					entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, isFunction, typeList.getCTypeList());
 				}
 			} else {
-
 				if (isExistMult) {
 					entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, isFunction);
 				} else {

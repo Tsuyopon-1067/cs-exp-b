@@ -35,7 +35,7 @@ public class Variable extends CParseRule {
 			ct.getNextToken(pcx); // ]を読み飛ばす
 		} else if (Call.isFirst(tk)) {
 			isExistCall = true;
-			call = new Call(pcx);
+			call = new Call(pcx, ((Ident)ident).getEntry().getFunctionInfo());
 			call.parse(pcx);
 			ct.getNextToken(pcx); // )を読み飛ばす
 		}
@@ -63,6 +63,14 @@ public class Variable extends CParseRule {
 				setCType(ident.getCType());
 			}
 			setConstant(ident.isConstant());
+
+			if (call != null) {
+				if (((Ident)ident).getEntry().isFunction()) {
+					call.semanticCheck(pcx);
+				} else {
+					pcx.warning("Variable: " + identToken.toDetailExplainString() + "関数ではありません");
+				}
+			}
 		}
 	}
 
@@ -71,6 +79,9 @@ public class Variable extends CParseRule {
 		o.println(";;; variable starts");
 		if (isExistCall) {
 			// callがついているということはidentが関数
+			if (call != null) {
+				call.codeGen(pcx); // 先に引数を積む
+			}
 			if (ident != null) {
 				ident.codeGen(pcx); // 関数の場合はJSRが呼び出されるだけ
 			}

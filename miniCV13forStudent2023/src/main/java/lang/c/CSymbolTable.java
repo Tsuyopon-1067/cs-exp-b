@@ -14,7 +14,7 @@ public class CSymbolTable {
 	private int addressOffset = 0; // 局所変数変数とフレームポインタの差
 	private int parameterAddressOffset = 0; // 仮引数用に使う
 	private boolean isGlobalMode = true;
-	private final int PARAMETER_OFSET = -2;
+	private final int PARAMETER_OFSET = -3;
 
 	public CSymbolTable() {
 		global = new OneSymbolTable();
@@ -35,7 +35,7 @@ public class CSymbolTable {
 			return false;
 		}
 		if (e != null) {
-			e.setAddress(-parameterAddressOffset-PARAMETER_OFSET);
+			e.setAddress(PARAMETER_OFSET-parameterAddressOffset);
 			parameterAddressOffset += e.getSize();
 		}
 		return local.register(name, e) == null; // putは以前に関連付けられていた値を返す
@@ -62,6 +62,8 @@ public class CSymbolTable {
 	}
 
 	public void showLocal() {
+		System.out.println("local Symbol Table -----------");
+		System.out.println(local.size());
 		local.show();
 	}
 

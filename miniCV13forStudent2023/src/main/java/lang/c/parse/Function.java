@@ -28,6 +28,7 @@ public class Function extends CParseRule {
 	}
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
+		pcx.getSymbolTable().setupLocalSymbolTable();
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // funcを読み飛ばす
 
@@ -68,7 +69,6 @@ public class Function extends CParseRule {
 			argList.parse(pcx);
 		}
 		tk = ct.getCurrentToken(pcx);
-		System.out.printf("%s, %s\n", tk.toDetailExplainString(), tk.getText());
 		if (tk.getType() == CToken.TK_RPAR) {
 			tk = ct.getNextToken(pcx);
 		} else {
@@ -83,6 +83,9 @@ public class Function extends CParseRule {
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "()の後ろはDeclBlockです");
 		}
+
+		pcx.getSymbolTable().showLocal();
+		pcx.getSymbolTable().deleteLocalSymbolTable();
 	}
 
 	private void registerFunction(CParseContext pcx, CToken tk) throws FatalErrorException {
@@ -110,12 +113,12 @@ public class Function extends CParseRule {
 		if (argList != null) {
 			argItems = ((ArgList)argList).getArgItems();
 		}
-		ArrayList<CType> argTypes = new ArrayList<>();
+		ArrayList<ParameterInfo> paramInfoList = new ArrayList<>();
 		for (CParseRule argItem : argItems) {
-			argTypes.add(argItem.getCType()); // argItemは例外的にparseでCTypeをセットしている
+			paramInfoList.add(new ParameterInfo(argItem.getCType(), ((ArgItem)argItem).getName())); // argItemは例外的にparseでCTypeをセットしている
 		}
 
-		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel, argTypes);
+		functionInfo = new FunctionInfo(functionName, returnValueCType, returnLabel, paramInfoList);
 		entry.setFunctionInfo(functionInfo);
 
 		if (
