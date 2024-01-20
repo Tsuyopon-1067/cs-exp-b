@@ -36,7 +36,7 @@ public class AddressToValue extends CParseRule {
 		if (primary != null) {
 			primary.codeGen(pcx);
 		}
-		o.println("\tMOV\t-(R6), R0\t; AddressToValue: アドレスを取り出す");
+		//o.println("\tMOV\t-(R6), R0\t; AddressToValue: アドレスを取り出す");
 		o.println("\tMOV\t(R0), (R6)+\t; AddressToValue: 参照した値を積む");
 		o.println(";;; AddressToValue completes");
 	}

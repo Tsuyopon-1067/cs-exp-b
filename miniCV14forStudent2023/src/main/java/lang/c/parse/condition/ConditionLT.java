@@ -21,10 +21,10 @@ public class ConditionLT extends AbstractConditionOperator {
 			left.codeGen(pcx);
 			right.codeGen(pcx);
 			int seq = pcx.getSeqId();
-			o.println("\tMOV\t-(R6), R0\t; ConditionLT: 2数を取り出して、比べる");
-			o.println("\tMOV\t-(R6), R1\t; ConditionLT:");
+			o.println("\tMOV\t-(R6), R0\t; ConditionLT:  右の数を用意する2数を取り出して、比べる");
+			//o.println("\tMOV\t-(R6), R1\t; ConditionLT:");
 			o.println("\tMOV\t#0x0001, R2\t; ConditionLT: set true");
-			o.println("\tCMP\tR0, R1\t; ConditionLT: R1<R0 = R1-R0<0");
+			o.println("\tCMP\tR0, -(R6)\t; 左の数を取得して比較する ConditionLT: R1<R0 = R1-R0<0");
 			o.println("\tBRN\tLT" + seq + "\t; ConditionLT: N=1のときLT[seq]へジャンプ");
 			o.println("\tCLR\tR2\t\t; ConditionLT: set false");
 			o.println("LT" + seq + ":\tMOV\tR2, (R6)+\t; ConditionLT:");

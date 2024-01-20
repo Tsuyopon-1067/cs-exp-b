@@ -75,9 +75,11 @@ public class Condition extends CParseRule {
 			nextParseRule.codeGen(pcx);
 		} else {
 			if (condition) { // nextParseRuleがnullのときはtrueかfalse直書き
-				o.println("\tMOV\t#0x0001, (R6)+\t; Condition: true");
+				o.println("\tMOV\t#0x0001, R0\t; Condition: trueの値をR0に用意する");
+				o.println("\tMOV\tR0, (R6)+\t; Condition: trueの値をスタックに積む");
 			} else {
-				o.println("\tMOV\t#0x0000, (R6)+\t; Condition: false");
+				o.println("\tMOV\t#0x0000, R0\t; Condition: falseの値をR0に用意する");
+				o.println("\tMOV\tR0, (R6)+\t; Condition: falseの値をスタックに積む");
 			}
 		}
 		o.println(";;; Condition completes");

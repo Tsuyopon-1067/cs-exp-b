@@ -48,12 +48,12 @@ class ExpressionSub extends AbstractExpressionAddSub {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		if (left != null && right != null) {
-			left.codeGen(pcx); // 左部分木のコード生成を頼む
 			right.codeGen(pcx); // 右部分木のコード生成を頼む
-			o.println("\tMOV\t-(R6), R0\t; ExpressionSub: ２数を取り出して、引き、積む<" + op.toExplainString() + ">");
-			o.println("\tMOV\t-(R6), R1\t; ExpressionSub:");
-			o.println("\tSUB\tR0, R1\t; ExpressionSub:");
-			o.println("\tMOV\tR1, (R6)+\t; ExpressionSub:");
+			left.codeGen(pcx); // 左部分木のコード生成を頼む
+			o.println("\tMOV\t-(R6), R0\t; ExpressionSub: 左部分木の値を取り出す<" + op.toExplainString() + ">");
+			//o.println("\tMOV\t-(R6), R1\t; ExpressionSub:");
+			o.println("\tSUB\t-(R6), R0\t; ExpressionSub:右部分木の値を取り出して引く");
+			o.println("\tMOV\tR0, (R6)+\t; ExpressionSub:結果をスタックに保存する");
 		}
 	}
 }
