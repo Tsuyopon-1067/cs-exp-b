@@ -35,15 +35,18 @@ public class Function extends CParseRule {
 		if (tk.getType() == CToken.TK_INT) {
 			tk = ct.getNextToken(pcx);
 			returnValueType = TYPE_INT;
+			this.setCType(CType.getCType(CType.T_int));
 			if (tk.getType() == CToken.TK_MULT) {
 				tk = ct.getNextToken(pcx);
 				isExistMult = true;
 				returnValueType = TYPE_PINT;
+				this.setCType(CType.getCType(CType.T_pint));
 			}
 		} else if (tk.getType() == CToken.TK_VOID) {
 			tk = ct.getNextToken(pcx);
 			isVoid = true;
 			returnValueType = TYPE_VOID;
+			this.setCType(CType.getCType(CType.T_void));
 		} else {
 			pcx.recoverableError(tk.toExplainString() + "funcの後ろはintかvoidです");
 		}

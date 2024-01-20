@@ -1,7 +1,5 @@
 package lang.c.parse;
 
-import static org.hamcrest.Matchers.greaterThan;
-
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -68,8 +66,10 @@ public class DeclItem extends CParseRule {
 			if (TypeList.isFirst(tk)) {
 				typeList = new TypeList(pcx, identName);
 				typeList.parse(pcx);
+				tk = ct.getCurrentToken(pcx);
+			} else {
+				tk = ct.getNextToken(pcx);
 			}
-			tk = ct.getCurrentToken(pcx);
 			if (tk.getType() != CToken.TK_RPAR) {
 				pcx.recoverableError(tk.toDetailExplainString() + "DeclItem: ()が閉じていません");
 			}

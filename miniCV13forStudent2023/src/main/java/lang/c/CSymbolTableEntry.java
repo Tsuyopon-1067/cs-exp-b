@@ -60,6 +60,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 			}
 
 			for (int i = 0; i < paramInfoList.size(); i++) {
+				System.out.println(paramInfoList.get(i).toString());
 				if (paramInfoList.get(i).getType().getType() != argInfoList.get(i).getType().getType()) {
 					return false;
 				}

@@ -1,7 +1,7 @@
 package lang.c.parse;
 
 import java.io.PrintStream;
-import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 import lang.*;
 import lang.c.*;
@@ -19,9 +19,10 @@ public class VoidDecl extends CParseRule {
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // voidを読み飛ばす
+		this.setCType(CType.getCType(CType.T_void));
 
 		if (!Ident.isFirst(tk)) {
-			pcx.recoverableError("voidの次はidentです");
+			pcx.recoverableError("VoidDecl: voidの次はidentです");
 		}
 
 		parseIdnetDeclaration(pcx, ct, tk);
@@ -53,11 +54,27 @@ public class VoidDecl extends CParseRule {
 		o.println(";;; voidDecl completes");
 	}
 
-	private void registerName(CParseContext pcx, CToken tk) throws RecoverableErrorException {
-		String name = tk.getText();
-		CSymbolTableEntry entry = new CSymbolTableEntry(CType.getCType(CType.T_err), 1, true);
-		if ( !pcx.getSymbolTable().registerGlobal(name, entry) ) {
-			pcx.recoverableError("すでに宣言されている変数です");
+	private void registerName(CParseContext pcx, CToken tk, TypeList typeList) throws RecoverableErrorException {
+		String identName = tk.getText();
+		// 変数登録
+		CSymbolTableEntry entry;
+		final boolean isConst = false;
+		final boolean isFunction = true;
+		final int size = 1;
+		entry = new CSymbolTableEntry(this.getCType(), size, isConst, isFunction);
+
+		ArrayList<TypeItem> typeItemList = typeList.getTypeItemList();
+		ArrayList<ParameterInfo> paramInfoList = new ArrayList<>();
+		for (TypeItem typeItem : typeItemList) {
+			paramInfoList.add(new ParameterInfo(typeItem.getCType(), identName));
+		}
+		this.setCType(CType.getCType(CType.T_void));
+		FunctionInfo functionInfo = new FunctionInfo(identName, this.getCType(), identName, paramInfoList);
+		functionInfo.setExistPrototype();
+		entry.setFunctionInfo(functionInfo);
+
+		if ( !pcx.getSymbolTable().registerGlobal(identName, entry) ) {
+			pcx.recoverableError("すでに宣言されている関数です");
 		}
 	}
 
@@ -69,18 +86,18 @@ public class VoidDecl extends CParseRule {
 		if (tk.getType() != CToken.TK_LPAR) {
 			pcx.recoverableError("(が必要です");
 		}
+		tk = ct.getNextToken(pcx); // LPARを読む
 		if (TypeList.isFirst(tk)) {
-			CParseRule typeList = new TypeList(pcx);
+			TypeList typeList = new TypeList(pcx, identToken.getText());
 			typeList.parse(pcx);
 			isExistTypeList = true;
+			registerName(pcx, identToken, typeList);
+			tk = ct.getCurrentToken(pcx); // RPARを読む
+		} else {
+			tk = ct.getNextToken(pcx); // RPARを読む
 		}
-		tk = ct.getCurrentToken(pcx); // RPARを読む
 		if (tk.getType() != CToken.TK_RPAR) {
 			pcx.recoverableError("VoidDecl: ()が閉じていません");
-		}
-		try {
-			registerName(pcx, identToken);
-		} catch (RecoverableErrorException e) {
 		}
 
 		tk = ct.getNextToken(pcx); // ,または;を読む
