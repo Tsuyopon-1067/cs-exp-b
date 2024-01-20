@@ -91,7 +91,7 @@ public class Variable extends CParseRule {
 				if (entry.isFunction()) {
 					paramSize = entry.getFunctionInfo().getParamSize();
 				}
-				o.println("\tSUB\tR6, " + paramSize + "\t; Variable: 引数を降ろす");
+				o.println("\tSUB\tR6, #" + paramSize + "\t; Variable: 引数を降ろす");
 				o.println("\tMOV\t#" + entry.getAddress() + ", R1\t; Variable: 関数戻り値取得のためにフレームポインタと変数アドレスの変位を取得<" + identToken.toExplainString() + ">");
 			}
 			o.println("\tADD\tR4, R1\t; Variable: 変数アドレスを計算する<" + identToken.toExplainString() + ">");
