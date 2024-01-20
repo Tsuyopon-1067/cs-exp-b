@@ -97,7 +97,7 @@ public class StatementCall extends CParseRule {
 			String name = paramList.get(i).getName();
 
 			if (argType.getType() != paramType.getType()) {
-				String msg = String.format("StatementCall: 関数%s: 第%d引数の型が一致しません<定義:%s, 使用:%s>",
+				String msg = String.format("StatementCall: 関数%s: 第%d引数%sの型が一致しません<定義:%s, 使用:%s>",
 					identToken.toExplainString(), i+1, name, paramType.toString(), argType.toString());
 				pcx.warning(msg);
 			}
