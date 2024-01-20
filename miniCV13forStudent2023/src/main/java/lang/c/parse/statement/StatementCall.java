@@ -2,6 +2,8 @@ package lang.c.parse.statement;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+
 import lang.c.parse.*;
 
 import lang.*;
@@ -12,10 +14,10 @@ public class StatementCall extends CParseRule {
 	CParseRule call, ident;
 	private String functionName;
 	CToken idnetToken;
-	ArrayDeque<CParseRule> expressions;
+	ArrayList<CParseRule> expressions;
 
 	public StatementCall(CParseContext pcx) {
-		expressions = new ArrayDeque<CParseRule>();
+		expressions = new ArrayList<CParseRule>();
 	}
 
 	public static boolean isFirst(CToken tk) {
@@ -42,17 +44,16 @@ public class StatementCall extends CParseRule {
 		}
 		tk = ct.getNextToken(pcx); // (を読み飛ばす
 		if (Expression.isFirst(tk)) {
-			expressions.addLast(new Expression(pcx));
-			expressions.getLast().parse(pcx);
+			expressions.add(new Expression(pcx));
+			expressions.get(expressions.size()-1).parse(pcx);
 			tk = ct.getCurrentToken(pcx);
 			while (tk.getType() == CToken.TK_COMMA) {
 				tk = ct.getNextToken(pcx); // ,を読み飛ばす
 				if (!Expression.isFirst(tk)) {
 					pcx.recoverableError(tk.toExplainString() + ",の後ろには引数が必要です");
-					continue;
 				}
-				expressions.addLast(new Expression(pcx));
-				expressions.getLast().parse(pcx);
+			expressions.add(new Expression(pcx));
+			expressions.get(expressions.size()-1).parse(pcx);
 				tk = ct.getCurrentToken(pcx);
 			}
 		}
@@ -76,6 +77,30 @@ public class StatementCall extends CParseRule {
 			pcx.warning("StatementCall: 関数" + functionName + "は変数です" + idnetToken.toDetailExplainString());
 		}
 		ident.semanticCheck(pcx);
+		if (entry == null) {
+			return;
+		}
+
+		int argSize = expressions.size();
+		FunctionInfo functionInfo = entry.getFunctionInfo();
+		if (argSize != functionInfo.getParamSize()) {
+			String msg = String.format("引数の数が一致しません<定義:%d, 使用数:%d>", functionInfo.getParamSize(), argSize);
+			pcx.warning(msg);
+		}
+
+		for (int i = 0; i < argSize; i++) {
+			expressions.get(i).semanticCheck(pcx);
+			CType argType = expressions.get(i).getCType();
+			ArrayList<ParameterInfo> paramList = functionInfo.getParamInfoList();
+			CType paramType = paramList.get(i).getType();
+			String name = paramList.get(i).getName();
+
+			if (argType.getType() != paramType.getType()) {
+				String msg = String.format("Call: 引数%sの型が一致しません<定義:%s, 使用:%s>",
+					name, paramType.toString(), argType.toString());
+				pcx.warning(msg);
+			}
+		}
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
