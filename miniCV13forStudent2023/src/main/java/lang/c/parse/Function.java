@@ -157,7 +157,11 @@ public class Function extends CParseRule {
 		o.println(String.format("%s:", returnLabel));
 		o.println("\tMOV\tR4, R6\t; Function: 局所変数の領域を開放する");
 		o.println("\tMOV\t-(R6), R4\t; DeclItem: 旧フレームポインタを復帰する");
-		o.println("\tRET\t; Function: サブルーチンから復帰する");
+		if (functionName.equals("main")) {
+			o.println("\tJMP\t__end; Function: プログラムを終了する");
+		} else {
+			o.println("\tRET\t; Function: サブルーチンから復帰する");
+		}
 		o.println(";;; Function completes");
 	}
 }

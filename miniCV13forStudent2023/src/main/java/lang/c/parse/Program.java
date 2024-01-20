@@ -78,6 +78,7 @@ public class Program extends CParseRule {
 			function.codeGen(pcx);
 		}
 		//o.println("\tMOV\t-(R6), R0\t; ProgramNode: 計算結果確認用");
+		o.println("__end:\t\t\t\t; ProgramNode:");
 		o.println("\tHLT\t\t\t; ProgramNode:");
 		o.println("\t.END\t\t\t; ProgramNode:");
 		o.println(";;; program completes");
