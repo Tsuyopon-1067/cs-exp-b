@@ -23,7 +23,6 @@ public class StatementReturn extends CParseRule {
 		if (functionInfo != null) {
 			functionInfo.setTrueToIsExistReturn();
 		}
-		System.out.println("method");
 		// ここにやってくるときは、必ずisFirst()が満たされている
         CTokenizer ct = pcx.getTokenizer();
 		CToken tk = ct.getNextToken(pcx); // returnを読み飛ばす
