@@ -53,14 +53,16 @@ public class Variable extends CParseRule {
 				} else if (isPintArray) {
 					setCType(CType.getCType(CType.T_pint));
 				} else {
-					pcx.warning("identの型が配列型ではありません");
+					String msg = String.format("Variable: identの型は%sです", ident.getCType().toString());
+					pcx.warning(msg);
 					setCType(CType.getCType(CType.T_err));
 				}
 			} else if (ident != null) { // identのみの場合
-				if (isIntArray || isPintArray) {
-					pcx.warning(identToken.toDetailExplainString() + "配列のインデックスが指定されていません");
+				if (isPintArray) {
+					pcx.warning("Variable: " + identToken.toDetailExplainString() + "配列のインデックスが指定されていません");
+				} else {
+					setCType(ident.getCType());
 				}
-				setCType(ident.getCType());
 			}
 			setConstant(ident.isConstant());
 

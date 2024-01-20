@@ -7,8 +7,9 @@ import lang.c.*;
 
 public class FactorAmp extends CParseRule {
     // factorAmp      ::= AMP ( number | primary )
-    CToken op;
-    CParseRule numberPrim;
+    private CToken op;
+    private CParseRule numberPrim;
+	private boolean isPrimary = false;
 
 	public FactorAmp(CParseContext pcx) {
 	}
@@ -28,6 +29,7 @@ public class FactorAmp extends CParseRule {
 				numberPrim = new Number(pcx);
 			} else if (Ident.isFirst(tk)) {
 				numberPrim = new Primary(pcx);
+				isPrimary = true;
 			} else {
 				pcx.recoverableError(tk.toExplainString() + "&の後はNumberかPrimaryです");
 			}
@@ -53,7 +55,12 @@ public class FactorAmp extends CParseRule {
 				}
 			}
 			this.setCType(CType.getCType(CType.T_pint));
-			setConstant(numberPrim.isConstant()); // numberPrim は常に定数
+			if (isPrimary) {
+				if (((Primary)numberPrim).getCType() == CType.getCType(CType.T_int_array)) {
+					this.setCType(CType.getCType(CType.T_int_array));
+				}
+			}
+			setConstant(numberPrim.isConstant());
 		}
 	}
 

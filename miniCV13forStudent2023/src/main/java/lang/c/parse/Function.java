@@ -62,7 +62,6 @@ public class Function extends CParseRule {
 			pcx.recoverableError(tk.toExplainString() + "関数名が必要です");
 		}
 
-
 		if (tk.getType() == CToken.TK_LPAR) {
 			tk = ct.getNextToken(pcx);
 		} else {

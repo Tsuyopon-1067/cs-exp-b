@@ -11,10 +11,11 @@ import lang.c.*;
 
 public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
-	CParseRule call, ident;
+	private CParseRule call, ident;
 	private String functionName;
-	CToken identToken;
-	ArrayList<CParseRule> expressions;
+	private CToken identToken;
+	private ArrayList<CParseRule> expressions;
+	private CSymbolTableEntry entry;
 
 	public StatementCall(CParseContext pcx) {
 		expressions = new ArrayList<CParseRule>();
@@ -70,7 +71,7 @@ public class StatementCall extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
-		CSymbolTableEntry entry = pcx.getSymbolTable().searchGlobal(functionName);
+		entry = pcx.getSymbolTable().searchGlobal(functionName);
 		if (entry == null) {
 			pcx.warning("StatementCall: 関数" + functionName + "は宣言されていません" + identToken.toDetailExplainString());
 		} else if (!entry.isFunction()) {
@@ -107,7 +108,15 @@ public class StatementCall extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; StatementCall starts");
-		o.println("\tJSR\t#" + functionName + "\t; Ident: 関数へジャンプ");
+		int paramSize = 0;
+		if (entry.isFunction()) {
+			paramSize = entry.getFunctionInfo().getParamSize();
+		}
+		for (CParseRule expression : expressions) {
+			expression.codeGen(pcx);
+		}
+		o.println("\tJSR\t#" + functionName + "\t; StatementCall: 関数へジャンプ");
+		o.println("\tSUB\tR6, #" + paramSize + "\t; StatementCall: 引数を降ろす");
 		o.println(";;; StatementCall completes");
 	}
 }

@@ -41,8 +41,8 @@ public class ArgItem extends CParseRule {
 		if (tk.getType() == CToken.TK_LBRA) {
 			isArray = true;
 			tk = ct.getNextToken(pcx); // [を読み飛ばす
-			if (tk.getType() == CToken.TK_RBRA) {
-				pcx.warning(tk.toDetailExplainString() + "[]が閉じていません");
+			if (tk.getType() != CToken.TK_RBRA) {
+				pcx.warning("ArgItem: " + tk.toDetailExplainString() + "[]が閉じていません");
 			}
 			tk = ct.getNextToken(pcx);
 
@@ -54,13 +54,9 @@ public class ArgItem extends CParseRule {
 		}
 
 		// 変数登録
-		final boolean isConst = true;
+		final boolean isConst = false;
 		int size = 1;
-		if (isPint) {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
-		} else {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
-		}
+		entry = new CSymbolTableEntry(this.getCType(), size, isConst);
 		if ( !pcx.getSymbolTable().registerLocalAsParameter(identName, entry) ) {
 			pcx.recoverableError("DeclItem: " + identName + "はすでに宣言されている変数です");
 		}
