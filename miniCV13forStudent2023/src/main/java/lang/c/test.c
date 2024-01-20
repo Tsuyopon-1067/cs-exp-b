@@ -1,19 +1,36 @@
-- 100  // 実装してください
-    13 +
-    7 -
-    2    //  readSimpleTokenSub()
-    100  // 数字
-    + -  // plus minus 記号
-      // LINE_COMMENT
-      13 +
-    7 +
-    2
-    /* COMMENT_START AND COMMENT_LINE1
-       COMMENT_LINE2
-       COMMENT_LINE3
-       COMMENT_LINE4 AND COMMENT_END */
-    13 +
-    7 +
-    2
-    /***/ 123 /*/12/*/ 34 /*/56/*/ 78  // 123 34 78 が出てくるはず
-/***         // 閉じていないコメントはEOFが出るはず
+int proto_correct(int, int*);
+int proto_error(int, int*);
+
+func int test(int a, int b) {
+  int c;
+  c = a + b;
+  return c;
+}
+
+func int main() {
+  int a, b;
+  //a = test();
+  //a = test(a, b);
+  //a = test(a, &1);
+  //a = b();
+  call test(a, b);
+  call test(1, 2);
+  call test(a, &b);
+  return 0;
+}
+
+func int proto_correct(int a, int *b) {
+  return 0;
+}
+
+func int proto_error(int a, int b) {
+  return 0;
+}
+
+func int test(int a, int b) {
+  return 0;
+}
+
+func int test(int* a, int b) {
+  return 0;
+}
