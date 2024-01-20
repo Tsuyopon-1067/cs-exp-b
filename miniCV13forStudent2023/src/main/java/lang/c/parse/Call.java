@@ -50,7 +50,8 @@ public class Call extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		int argSize = expressions.size();
 		if (argSize != functionInfo.getParamSize()) {
-			String msg = String.format("引数の数が一致しません<定義:%d, 使用数:%d>", functionInfo.getParamSize(), argSize);
+			String msg = String.format("Call: 関数%s: 引数の数が一致しません<定義:%d, 使用数:%d>",
+				functionInfo.getName(), functionInfo.getParamSize(), argSize);
 			pcx.warning(msg);
 		}
 
@@ -62,8 +63,8 @@ public class Call extends CParseRule {
 			String name = paramList.get(i).getName();
 
 			if (argType.getType() != paramType.getType()) {
-				String msg = String.format("Call: 引数%sの型が一致しません<定義:%s, 使用:%s>",
-					name, paramType.toString(), argType.toString());
+				String msg = String.format("Call: 関数%s: 第%d引数の型が一致しません<定義:%s, 使用:%s>",
+					functionInfo.getName(), i+1, name, paramType.toString(), argType.toString());
 				pcx.warning(msg);
 			}
 		}

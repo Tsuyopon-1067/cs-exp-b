@@ -13,7 +13,7 @@ public class StatementCall extends CParseRule {
     // statementCall   ::= CALL ident LPAR RPAR SEMI
 	CParseRule call, ident;
 	private String functionName;
-	CToken idnetToken;
+	CToken identToken;
 	ArrayList<CParseRule> expressions;
 
 	public StatementCall(CParseContext pcx) {
@@ -30,7 +30,7 @@ public class StatementCall extends CParseRule {
 		CToken tk = ct.getNextToken(pcx); // callを読み飛ばす
 
 		if (Ident.isFirst(tk)) {
-			idnetToken = tk;
+			identToken = tk;
 			ident = new Ident(pcx);
 			ident.parse(pcx);
 			functionName = tk.getText();
@@ -72,9 +72,9 @@ public class StatementCall extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		CSymbolTableEntry entry = pcx.getSymbolTable().searchGlobal(functionName);
 		if (entry == null) {
-			pcx.warning("StatementCall: 関数" + functionName + "は宣言されていません" + idnetToken.toDetailExplainString());
+			pcx.warning("StatementCall: 関数" + functionName + "は宣言されていません" + identToken.toDetailExplainString());
 		} else if (!entry.isFunction()) {
-			pcx.warning("StatementCall: 関数" + functionName + "は変数です" + idnetToken.toDetailExplainString());
+			pcx.warning("StatementCall: 関数" + functionName + "は変数です" + identToken.toDetailExplainString());
 		}
 		ident.semanticCheck(pcx);
 		if (entry == null) {
@@ -84,7 +84,8 @@ public class StatementCall extends CParseRule {
 		int argSize = expressions.size();
 		FunctionInfo functionInfo = entry.getFunctionInfo();
 		if (argSize != functionInfo.getParamSize()) {
-			String msg = String.format("引数の数が一致しません<定義:%d, 使用数:%d>", functionInfo.getParamSize(), argSize);
+			String msg = String.format("StatementCall: 関数%s: 引数の数が一致しません<定義:%d, 使用数:%d>",
+				identToken.toExplainString(), functionInfo.getParamSize(), argSize);
 			pcx.warning(msg);
 		}
 
@@ -96,8 +97,8 @@ public class StatementCall extends CParseRule {
 			String name = paramList.get(i).getName();
 
 			if (argType.getType() != paramType.getType()) {
-				String msg = String.format("Call: 引数%sの型が一致しません<定義:%s, 使用:%s>",
-					name, paramType.toString(), argType.toString());
+				String msg = String.format("StatementCall: 関数%s: 第%d引数の型が一致しません<定義:%s, 使用:%s>",
+					identToken.toExplainString(), i+1, name, paramType.toString(), argType.toString());
 				pcx.warning(msg);
 			}
 		}
