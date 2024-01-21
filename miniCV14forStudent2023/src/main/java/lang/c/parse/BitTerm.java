@@ -60,6 +60,8 @@ public class BitTerm extends CParseRule {
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; bitTerm starts");
+		System.out.println(term.isConstant());
+		System.out.println(term.getValue());
 		if (term != null) {
 			term.codeGen(pcx);
 		}

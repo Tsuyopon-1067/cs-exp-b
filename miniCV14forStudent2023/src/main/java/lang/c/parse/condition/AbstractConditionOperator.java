@@ -2,6 +2,8 @@ package lang.c.parse.condition;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.BitExpression;
+import lang.c.parse.BitTerm;
 import lang.c.parse.Expression;
 
 public abstract class AbstractConditionOperator extends CParseRule {
@@ -40,10 +42,29 @@ public abstract class AbstractConditionOperator extends CParseRule {
 				pcx.warning(op.toExplainString() + "左辺の型[" + left.getCType().toString() + "]と右辺の型["
 						+ right.getCType().toString() + "]は比較できません");
 			}
+
+			setConstant(left.isConstant() && right.isConstant());
 		}
 		setCType(CType.getCType(CType.T_bool));
-		setConstant(true);
 	}
+
+	// AddSubとほぼ共通 上の階層から呼び出される
+	public CParseRule getCalculatedConstValue(CParseContext pcx) {
+		System.out.println("getCalculatedConstValue");
+		if (!(left.isConstant() && right.isConstant())) {
+			return this;
+		}
+		int leftValue = left.getValue();
+		int rightValue = right.getValue();
+		int newValue = newValue(leftValue, rightValue);
+		BitTerm newTerm = new BitTerm(pcx);
+		newTerm.setValue(newValue);
+		newTerm.setConstant(true);
+		newTerm.setCType(CType.getCType(CType.T_bool));
+		return newTerm;
+	}
+	public abstract int newValue(int left, int right);
+
 
 	public abstract void codeGen(CParseContext pcx) throws FatalErrorException;
 }

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.BitExpression;
 import lang.c.parse.Expression;
 
 public class Condition extends CParseRule {
@@ -62,6 +63,13 @@ public class Condition extends CParseRule {
 			nextParseRule.semanticCheck(pcx);
 			this.setCType(CType.getCType(CType.T_bool));
 			this.setConstant(nextParseRule.isConstant());
+
+			if (this.isConstant()) {
+				if (nextParseRule instanceof AbstractConditionOperator) {
+					nextParseRule = ((AbstractConditionOperator)nextParseRule).getCalculatedConstValue(pcx);
+					this.setValue(nextParseRule.getValue());
+				}
+			}
 		} else if (nextParseRule == null && !isExpression) {
 			this.setCType(CType.getCType(CType.T_bool));
 			this.setConstant(true);
@@ -77,7 +85,13 @@ public class Condition extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; Condition starts");
 		if (nextParseRule != null) {
-			nextParseRule.codeGen(pcx);
+			if (nextParseRule.isConstant()) {
+				System.out.println(nextParseRule.getValue());
+				boolean condition = (nextParseRule.getValue() == 1);
+				Condition.conditionCodeGen(pcx, condition);
+			} else {
+				nextParseRule.codeGen(pcx);
+			}
 		} else {
 			if (condition) { // nextParseRuleがnullのときはtrueかfalse直書き
 				o.println("\tMOV\t#0x0001, R0\t; Condition: trueの値をR0に用意する");

@@ -13,6 +13,11 @@ public class ConditionGE extends AbstractConditionOperator {
 	}
 
 	@Override
+	public int newValue(int left, int right) {
+		return (left >= right) ? 1 : 0;
+	}
+
+	@Override
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; condition >= (compare) starts");
