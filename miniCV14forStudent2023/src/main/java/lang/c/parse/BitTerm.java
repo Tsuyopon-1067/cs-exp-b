@@ -45,6 +45,15 @@ public class BitTerm extends CParseRule {
 			term.semanticCheck(pcx);
 			this.setCType(term.getCType()); // term の型をそのままコピー
 			this.setConstant(term.isConstant());
+			this.setValue(term.getValue());
+
+			if (term.isConstant()) {
+				if (term instanceof BitTermAnd) {
+					BitTermAnd bitTermAnd = (BitTermAnd)term;
+					term = bitTermAnd.getCalculatedConstValue(pcx);
+					this.setValue(term.getValue());
+				}
+			}
 		}
 	}
 

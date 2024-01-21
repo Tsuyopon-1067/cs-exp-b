@@ -1,7 +1,8 @@
-package lang.c.parse;
+package lang.c.parse.condition;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.Expression;
 
 public abstract class AbstractConditionOperator extends CParseRule {
 	protected CParseRule left, right; // right = expression

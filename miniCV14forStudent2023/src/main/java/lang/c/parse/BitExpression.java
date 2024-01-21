@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
+import lang.c.parse.condition.Condition;
 
 public class BitExpression extends CParseRule {
 	// bitExpression  ::= bitTerm { OR bitTerm }
@@ -42,6 +43,14 @@ public class BitExpression extends CParseRule {
 			bitTerm.semanticCheck(pcx);
 			this.setCType(bitTerm.getCType()); // bitTerm の型をそのままコピー
 			this.setConstant(bitTerm.isConstant());
+			this.setValue(bitTerm.getValue());
+		}
+
+		if (bitTerm.isConstant()) {
+			if (bitTerm instanceof BitExpressionOr) {
+				BitExpressionOr bitExpressionOr = (BitExpressionOr)bitTerm;
+				bitTerm = bitExpressionOr.getCalculatedConstValue(pcx);
+			}
 		}
 	}
 
@@ -49,7 +58,12 @@ public class BitExpression extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; bitExpression starts");
 		if (bitTerm != null) {
-			bitTerm.codeGen(pcx);
+			if (bitTerm.isConstant()) {
+				boolean condition = (bitTerm.getValue() == 1);
+				Condition.conditionCodeGen(pcx, condition);
+			} else {
+				bitTerm.codeGen(pcx);
+			}
 		}
 		o.println(";;; bitExpression completes");
 	}

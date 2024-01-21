@@ -60,11 +60,16 @@ public class Condition extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (nextParseRule != null && isExpression) {
 			nextParseRule.semanticCheck(pcx);
-			setCType(CType.getCType(CType.T_bool));
-			setConstant(nextParseRule.isConstant());
+			this.setCType(CType.getCType(CType.T_bool));
+			this.setConstant(nextParseRule.isConstant());
 		} else if (nextParseRule == null && !isExpression) {
-			setCType(CType.getCType(CType.T_bool));
-			setConstant(true);
+			this.setCType(CType.getCType(CType.T_bool));
+			this.setConstant(true);
+			if (condition) {
+				this.setValue(1);
+			} else {
+				this.setValue(0);
+			}
 		}
 	}
 
@@ -81,6 +86,19 @@ public class Condition extends CParseRule {
 				o.println("\tMOV\t#0x0000, R0\t; Condition: falseの値をR0に用意する");
 				o.println("\tMOV\tR0, (R6)+\t; Condition: falseの値をスタックに積む");
 			}
+		}
+		o.println(";;; Condition completes");
+	}
+
+	public static void conditionCodeGen(CParseContext pcx, boolean condition) throws FatalErrorException {
+		PrintStream o = pcx.getIOContext().getOutStream();
+		o.println(";;; Condition starts");
+		if (condition) {
+			o.println("\tMOV\t#0x0001, R0\t; Condition: trueの値をR0に用意する");
+			o.println("\tMOV\tR0, (R6)+\t; Condition: trueの値をスタックに積む");
+		} else {
+			o.println("\tMOV\t#0x0000, R0\t; Condition: falseの値をR0に用意する");
+			o.println("\tMOV\tR0, (R6)+\t; Condition: falseの値をスタックに積む");
 		}
 		o.println(";;; Condition completes");
 	}

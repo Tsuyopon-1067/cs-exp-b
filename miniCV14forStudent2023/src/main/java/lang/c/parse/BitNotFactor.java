@@ -39,6 +39,9 @@ public class BitNotFactor extends CParseRule {
 			}
 			setCType(nextParseRule.getCType()); // 型をそのままコピー
 			setConstant(nextParseRule.isConstant());
+			if (this.isConstant()) {
+				this.setValue(1 - nextParseRule.getValue());
+			}
 		}
 	}
 

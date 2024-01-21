@@ -36,12 +36,39 @@ public class BitTermAnd extends CParseRule {
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
 			right.semanticCheck(pcx);
+			left = calculateValue(pcx, left);
+			right = calculateValue(pcx, right);
+
 			if ( !(left.getCType().getType() == CType.T_bool && right.getCType().getType() == CType.T_bool) ) {
 				pcx.warning(op.toExplainString() + "&&の左辺と右辺はT_boolである必要があります");
 			}
 			this.setCType(CType.getCType(CType.T_bool));
 			this.setConstant(left.isConstant() && right.isConstant()); // 演算子の左右両方が定数のときだけ定数
 		}
+	}
+
+	// AddSubとほぼ共通
+	protected CParseRule calculateValue(CParseContext pcx, CParseRule rule) {
+		if (rule.isConstant() && rule instanceof BitTermAnd) {
+			CParseRule newRule = ((BitTermAnd)rule).getCalculatedConstValue(pcx);
+			return newRule;
+		}
+		return rule;
+	}
+
+	// AddSubとほぼ共通 上の階層から呼び出される
+	public CParseRule getCalculatedConstValue(CParseContext pcx) {
+		if ( !(left.isConstant() && right.isConstant()) ) {
+			return this;
+		}
+		int leftValue = left.getValue();
+		int rightValue = right.getValue();
+		int newValue = leftValue * rightValue;
+		BitFactor bitFactor = new BitFactor(pcx);
+		bitFactor.setValue(newValue);
+		bitFactor.setConstant(true);
+		bitFactor.setCType(this.getCType());
+		return bitFactor;
 	}
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {

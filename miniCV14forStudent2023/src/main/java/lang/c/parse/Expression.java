@@ -72,8 +72,9 @@ public class Expression extends CParseRule {
 					newTerm.setCType(this.getCType());
 					expression = newTerm;
 				} else if (expression instanceof AbstractExpressionAddSub) {
-					AbstractExpressionAddSub newexpression = (AbstractExpressionAddSub)expression;
-					expression = newexpression.getCalculatedConstValue(pcx);
+					AbstractExpressionAddSub newExpression = (AbstractExpressionAddSub)expression;
+					expression = newExpression.getCalculatedConstValue(pcx);
+					this.setValue(newExpression.getValue());
 				}
 			}
 		}

@@ -51,6 +51,7 @@ public class BitFactor extends CParseRule {
 			nexParseRule.semanticCheck(pcx);
 			setCType(nexParseRule.getCType()); // 型をそのままコピー
 			setConstant(nexParseRule.isConstant());
+			this.setValue(nexParseRule.getValue());
 		}
 	}
 
@@ -59,6 +60,9 @@ public class BitFactor extends CParseRule {
 		o.println(";;; bitFactor starts");
 		if (nexParseRule != null) {
 			nexParseRule.codeGen(pcx);
+		} else if (this.isConstant()) {
+			boolean condition = (nexParseRule.getValue() == 1);
+			Condition.conditionCodeGen(pcx, condition);
 		}
 		o.println(";;; bitFactor completes");
 	}

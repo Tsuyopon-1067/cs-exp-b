@@ -4,7 +4,6 @@ import java.io.PrintStream;
 
 import lang.*;
 import lang.c.*;
-import lang.c.parse.AbstractConditionOperator;
 
 public class ConditionLT extends AbstractConditionOperator {
 	//conditionLT ::= LT expression
