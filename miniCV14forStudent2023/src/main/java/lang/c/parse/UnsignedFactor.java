@@ -62,6 +62,10 @@ public class UnsignedFactor extends CParseRule {
 			factor.semanticCheck(pcx);
 			setCType(factor.getCType()); // factor の型をそのままコピー
 			setConstant(factor.isConstant()); // factor は常に定数
+
+			if (factor.isConstant() && factor instanceof Number) {
+				this.setValue(factor.getValue());
+			}
 		}
 	}
 

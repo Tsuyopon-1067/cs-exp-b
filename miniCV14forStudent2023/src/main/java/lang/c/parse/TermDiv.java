@@ -58,6 +58,11 @@ public class TermDiv extends AbstractTermMultDiv {
 	}
 
 	@Override
+	protected int getNewValue(int leftValue, int rightValue) {
+		return leftValue / rightValue;
+	}
+
+	@Override
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; termDiv starts");

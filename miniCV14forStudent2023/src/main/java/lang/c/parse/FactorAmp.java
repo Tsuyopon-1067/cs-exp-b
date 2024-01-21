@@ -61,6 +61,9 @@ public class FactorAmp extends CParseRule {
 				}
 			}
 			setConstant(numberPrim.isConstant());
+			if (numberPrim.isConstant() && numberPrim instanceof Number) {
+				this.setValue(numberPrim.getValue());
+			}
 		}
 	}
 

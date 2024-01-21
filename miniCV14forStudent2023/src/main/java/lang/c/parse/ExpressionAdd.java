@@ -47,6 +47,13 @@ class ExpressionAdd extends AbstractExpressionAddSub {
 		}
 	}
 
+	@Override
+	protected int getNewValue(int leftValue, int rightValue) {
+		return leftValue + rightValue;
+	}
+
+
+
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		if (left != null && right != null) {

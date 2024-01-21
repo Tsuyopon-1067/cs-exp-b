@@ -21,6 +21,9 @@ public class Number extends CParseRule {
 		CToken tk = ct.getCurrentToken(pcx);
 		num = tk;
 		tk = ct.getNextToken(pcx);
+
+		int numValue = Integer.parseInt(num.getText());
+		this.setValue(numValue);
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
@@ -32,13 +35,15 @@ public class Number extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; number starts");
 		if (num != null) {
-			o.println("\tMOV\t#" + num.getText() + ", R0\t; Number: 即値をR0に用意する<" + num.toExplainString() + ">");
-			o.println("\tMOV\tR0, (R6)+\t; Number: 即値を積む<" + num.toExplainString() + ">");
+			Number.numberCodeGen(pcx, this.getValue());
 		}
 		o.println(";;; number completes");
 	}
 
-	public int getValue() {
-		return Integer.parseInt(num.getText());
+	public static void numberCodeGen(CParseContext pcx, int value) throws FatalErrorException {
+		PrintStream o = pcx.getIOContext().getOutStream();
+		String valueStr = Integer.toString(value);
+		o.println("\tMOV\t#" + valueStr + ", R0\t; Number: 即値をR0に用意する");
+		o.println("\tMOV\tR0, (R6)+\t; Number: 即値を積む");
 	}
 }

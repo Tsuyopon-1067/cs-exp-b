@@ -18,11 +18,22 @@ public abstract class CParseRule extends ParseRule<CParseContext> implements lan
 	// この節点は定数を表しているか？
 	private boolean isConstant;
 
+	// 定数の値
+	private int value = 0;
+
 	public void setConstant(boolean isConstant) {
 		this.isConstant = isConstant;
 	}
 
 	public boolean isConstant() {
 		return isConstant;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public int getValue() {
+		return this.value;
 	}
 }

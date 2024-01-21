@@ -32,7 +32,11 @@ public class PlusFactor extends CParseRule {
 		if (factor != null) {
 			factor.semanticCheck(pcx);
 			setCType(factor.getCType()); // factor の型をそのままコピー
-			setConstant(factor.isConstant()); // factor は常に定数
+			setConstant(factor.isConstant());
+
+			if (factor.isConstant()) {
+				this.setValue(factor.getValue());
+			}
 		}
 	}
 

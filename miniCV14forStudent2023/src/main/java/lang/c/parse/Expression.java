@@ -9,6 +9,7 @@ import lang.c.parse.statement.Statement;
 public class Expression extends CParseRule {
 	// expression ::= term { expressionAdd | expressionSub }
 	CParseRule expression;
+	CToken expressionToken;
 
 	public Expression(CParseContext pcx) {
 	}
@@ -19,11 +20,14 @@ public class Expression extends CParseRule {
 
 	public void parse(CParseContext pcx) throws FatalErrorException {
 		// ここにやってくるときは、必ずisFirst()が満たされている
+		CTokenizer ct = pcx.getTokenizer();
+		CToken tk = ct.getCurrentToken(pcx);
+		expressionToken = tk;
+
 		CParseRule term = null, list = null;
 		term = new Term(pcx);
 		term.parse(pcx);
-		CTokenizer ct = pcx.getTokenizer();
-		CToken tk = ct.getCurrentToken(pcx); // termでは次の字句まで読んでしまう
+		tk = ct.getCurrentToken(pcx); // termでは次の字句まで読んでしまう
 		while (ExpressionAdd.isFirst(tk) || ExpressionSub.isFirst(tk)) {
 			if (ExpressionAdd.isFirst(tk)) {
 				list = new ExpressionAdd(pcx, term);
@@ -57,6 +61,21 @@ public class Expression extends CParseRule {
 			expression.semanticCheck(pcx);
 			this.setCType(expression.getCType()); // expression の型をそのままコピー
 			this.setConstant(expression.isConstant());
+			this.setValue(expression.getValue());
+
+			if (expression.isConstant()) {
+				if (expression instanceof Term) {
+					Term newTerm = new Term(pcx);
+					int newValue = ((Term)expression).getValue();
+					newTerm.setValue(newValue);
+					newTerm.setConstant(true);
+					newTerm.setCType(this.getCType());
+					expression = newTerm;
+				} else if (expression instanceof AbstractExpressionAddSub) {
+					AbstractExpressionAddSub newexpression = (AbstractExpressionAddSub)expression;
+					expression = newexpression.getCalculatedConstValue(pcx);
+				}
+			}
 		}
 	}
 
@@ -64,7 +83,11 @@ public class Expression extends CParseRule {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; expression starts");
 		if (expression != null) {
-			expression.codeGen(pcx);
+			if (expression.isConstant()) {
+				Number.numberCodeGen(pcx, expression.getValue());
+			} else {
+				expression.codeGen(pcx);
+			}
 		}
 		o.println(";;; expression completes");
 	}

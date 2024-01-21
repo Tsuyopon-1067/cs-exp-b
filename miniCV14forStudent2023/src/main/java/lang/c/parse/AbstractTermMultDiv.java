@@ -35,6 +35,9 @@ public abstract class AbstractTermMultDiv extends CParseRule {
 		if (left != null && right != null) {
 			left.semanticCheck(pcx);
 			right.semanticCheck(pcx);
+			left = calculateValue(pcx, left);
+			right = calculateValue(pcx, right);
+
 			int lt = 0;
 			int rt = 0;
 			if (left.getCType() != null) {
@@ -55,6 +58,32 @@ public abstract class AbstractTermMultDiv extends CParseRule {
 	abstract protected int[][] getOperationRule();
 
 	protected abstract void semanticCheckTypeError(CParseContext pcx) throws FatalErrorException;
+
+	// AddSubとほぼ共通
+	protected CParseRule calculateValue(CParseContext pcx, CParseRule rule) {
+		if (rule.isConstant() && rule instanceof AbstractTermMultDiv) {
+			CParseRule newRule = ((AbstractTermMultDiv)rule).getCalculatedConstValue(pcx);
+			return newRule;
+		}
+		return rule;
+	}
+
+	// AddSubとほぼ共通 上の階層から呼び出される
+	public CParseRule getCalculatedConstValue(CParseContext pcx) {
+		if ( !(left.isConstant() && right.isConstant()) ) {
+			return this;
+		}
+		int leftValue = left.getValue();
+		int rightValue = right.getValue();
+		int newValue = getNewValue(leftValue, rightValue);
+		Term term = new Term(pcx);
+		term.setValue(newValue);
+		term.setConstant(true);
+		term.setCType(this.getCType());
+		return term;
+	}
+
+	abstract protected int getNewValue(int leftValue, int rightValue);
 
 	public abstract void codeGen(CParseContext pcx) throws FatalErrorException;
 }
