@@ -112,8 +112,11 @@ public class StatementCall extends CParseRule {
 		if (entry.isFunction()) {
 			paramSize = entry.getFunctionInfo().getParamSize();
 		}
-		for (CParseRule expression : expressions) {
-			expression.codeGen(pcx);
+		//for (CParseRule expression : expressions) {
+		//	expression.codeGen(pcx);
+		//}
+		for (int i = expressions.size()-1; i >= 0; i--) {
+			expressions.get(i).codeGen(pcx);
 		}
 		o.println("\tJSR\t#" + functionName + "\t; StatementCall: 関数へジャンプ");
 		o.println("\tSUB\tR6, #" + paramSize + "\t; StatementCall: 引数を降ろす");
