@@ -12,7 +12,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean constp; // 定数宣言か？
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
-	private boolean isFunction; // 関数か？
+	private boolean isFunction = false; // 関数か？
 	private FunctionInfo functionInfo; // 関数の型とか
 	//private ArrayList<CType> argTypes; // 関数の引数の型のリスト
 
@@ -38,7 +38,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	}
 	public String toExplainString() { // このエントリに関する情報を作り出す。記号表全体を出力するときに使う。
 		// return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
-		return String.format("%s, size=%d, %s, address=%d", type.toString(), size, (constp ? "定数" : "変数"), address);
+		return String.format("%s, size=%d, %s, address=%d, function:%s ", type.toString(), size, (constp ? "定数" : "変数"), address, (isFunction ? "関数" : "変数"));
 	}
 	public CType GetCType() { return type; }
 	public int getSize() { return size; }

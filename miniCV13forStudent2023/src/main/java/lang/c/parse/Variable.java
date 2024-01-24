@@ -35,6 +35,13 @@ public class Variable extends CParseRule {
 			ct.getNextToken(pcx); // ]を読み飛ばす
 		} else if (Call.isFirst(tk)) {
 			isExistCall = true;
+			if (((Ident)ident).getEntry() == null) {
+				pcx.recoverableError("Variable: " + identToken.toDetailExplainString() + "は宣言されていません");
+			}
+
+			if (((Ident)ident).getEntry().getFunctionInfo() == null) {
+				pcx.warning("Variable: " + identToken.toDetailExplainString() + "は関数ではありません");
+			}
 			call = new Call(pcx, ((Ident)ident).getEntry().getFunctionInfo());
 			call.parse(pcx);
 			ct.getNextToken(pcx); // )を読み飛ばす
@@ -90,10 +97,10 @@ public class Variable extends CParseRule {
 			CSymbolTableEntry entry = ((Ident)ident).getEntry();
 			if (entry != null) {
 				int paramSize = 0;
-				if (entry.isFunction()) {
+				if (entry.isFunction() && entry.getFunctionInfo() != null) {
 					paramSize = entry.getFunctionInfo().getParamSize();
 				}
-				o.println("\tSUB\tR6, #" + paramSize + "\t; Variable: 引数を降ろす");
+				o.println("\tSUB\t#" + paramSize + ", R6\t; Variable: 引数を降ろす");
 				o.println("\tMOV\t#" + entry.getAddress() + ", R1\t; Variable: 関数戻り値取得のためにフレームポインタと変数アドレスの変位を取得<" + identToken.toExplainString() + ">");
 			}
 			o.println("\tADD\tR4, R1\t; Variable: 変数アドレスを計算する<" + identToken.toExplainString() + ">");

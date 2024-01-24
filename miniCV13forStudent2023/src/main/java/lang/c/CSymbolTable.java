@@ -68,6 +68,8 @@ public class CSymbolTable {
 	}
 
 	public void showGlobal() {
+		System.out.println("global Symbol Table -----------");
+		System.out.println(global.size());
 		global.show();
 	}
 
