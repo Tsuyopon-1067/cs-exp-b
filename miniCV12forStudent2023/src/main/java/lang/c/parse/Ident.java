@@ -39,7 +39,7 @@ public class Ident extends CParseRule {
 				CSymbolTableEntry functionEntry = pcx.getSymbolTable().searchGlobal(identName);
 				FunctionInfo functionInfo = functionEntry.getFunctionInfo();
 				CType returnType = functionInfo.getReturnType();
-				CSymbolTableEntry entry = new CSymbolTableEntry(returnType, 1, true, false);
+				entry = new CSymbolTableEntry(returnType, 1, true, true);
 				pcx.getSymbolTable().registerLocal(identNameForEntry, entry);
 			}
 		}

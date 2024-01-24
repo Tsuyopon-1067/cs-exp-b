@@ -38,6 +38,14 @@ public class Variable extends CParseRule {
 			call = new Call(pcx);
 			call.parse(pcx);
 			ct.getNextToken(pcx); // )を読み飛ばす
+
+			String functionName = identToken.getText();
+			CSymbolTableEntry entry = pcx.getSymbolTable().searchGlobal(functionName);
+			if (entry == null) {
+				pcx.recoverableError("Variable: " + functionName + "は関数ではありません");
+			} if (!entry.isFunction()) {
+				pcx.recoverableError("Variable: " + functionName + "は関数ではありません");
+			}
 		}
 	}
 
