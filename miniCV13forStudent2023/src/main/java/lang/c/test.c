@@ -1,36 +1,29 @@
-int proto_correct(int, int*);
-int proto_error(int, int*);
-
-func int test(int a, int b) {
+/*
+func int plus(int a, int b) {
   int c;
   c = a + b;
   return c;
 }
 
+func void main() {
+  int b;
+  b = plus(1, 3);
+}
+}*/
+func void show3(int n, int* array, int* array2) {
+  output array[0];
+  output array[1];
+  output array[2];
+
+  output array2[2];
+}
+
 func int main() {
-  int a, b;
-  //a = test();
-  //a = test(a, b);
-  //a = test(a, &1);
-  //a = b();
-  call test(a, b);
-  call test(1, 2);
-  call test(a, &b);
-  return 0;
-}
-
-func int proto_correct(int a, int *b) {
-  return 0;
-}
-
-func int proto_error(int a, int b) {
-  return 0;
-}
-
-func int test(int a, int b) {
-  return 0;
-}
-
-func int test(int* a, int b) {
+  int n, array[3], array2[5];
+  input n;
+  array[0] = 0;
+  array[1] = 1;
+  array[2] = 2;
+  call show3(n, &array, &array2);
   return 0;
 }

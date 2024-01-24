@@ -1,5 +1,6 @@
 func void fibo(int n, int* array) {
-  int i = 0;
+  int i, count;
+  i = 0;
   while (i <= n) {
     if (i < 2) {
       array[i] = 1;
@@ -15,7 +16,7 @@ func int main() {
   input n;
   array[0] = 1;
   array[1] = 1;
-  fibo(n, &array);
+  call fibo(n, &array);
   output array[n];
   return 0;
 }
