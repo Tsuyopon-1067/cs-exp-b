@@ -51,16 +51,20 @@ public class Variable extends CParseRule {
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
 		if (ident != null) {
 			ident.semanticCheck(pcx);
+			this.setCType(ident.getCType());
 			boolean isIntArray = ident.getCType().isCType(CType.T_int_array);
 			boolean isPintArray = ident.getCType().isCType(CType.T_pint_array);
+			boolean isPint = ident.getCType().isCType(CType.T_pint);
 			if (array != null) { // ident arrayの場合
 				array.semanticCheck(pcx);
 				if (isIntArray) {
 					setCType(CType.getCType(CType.T_int));
 				} else if (isPintArray) {
 					setCType(CType.getCType(CType.T_pint));
+				} else if (isPint) {
+					setCType(CType.getCType(CType.T_int));
 				} else {
-					String msg = String.format("Variable: identの型は%sです", ident.getCType().toString());
+					String msg = String.format("Variable: identの型は%sです %s", ident.getCType().toString(), identToken.toExplainString());
 					pcx.warning(msg);
 					setCType(CType.getCType(CType.T_err));
 				}
