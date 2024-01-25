@@ -9,6 +9,7 @@ public class UnsignedFactor extends CParseRule {
     // unsignedFactor ::= factorAmp | number | LPAR expression RPAR | addressToValue
 
     private CParseRule factor;
+	String sss = "unsignedFactor";
 
 	public UnsignedFactor(CParseContext pcx) {
 	}
@@ -26,6 +27,7 @@ public class UnsignedFactor extends CParseRule {
 		CToken tk = ct.getCurrentToken(pcx);
 		switch (tk.getType()) {
 			case CToken.TK_LPAR:
+			sss = "(unsignedFactor)";
 				tk = ct.getNextToken(pcx);// (は読み飛ばす
 				if (Expression.isFirst(tk)) {
 					factor = new Expression(pcx);
@@ -61,7 +63,7 @@ public class UnsignedFactor extends CParseRule {
 		if (factor != null) {
 			factor.semanticCheck(pcx);
 			setCType(factor.getCType()); // factor の型をそのままコピー
-			setConstant(factor.isConstant()); // factor は常に定数
+			setConstant(factor.isConstant());
 
 			if (factor.isConstant()) {
 				this.setValue(factor.getValue());
