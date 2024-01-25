@@ -36,4 +36,8 @@ public abstract class CParseRule extends ParseRule<CParseContext> implements lan
 	public int getValue() {
 		return this.value;
 	}
+
+	public String toString() {
+		return String.format("%s, value=%d, isConstant=%s", this.getClass().getName(), getValue(), isConstant());
+	}
 }
