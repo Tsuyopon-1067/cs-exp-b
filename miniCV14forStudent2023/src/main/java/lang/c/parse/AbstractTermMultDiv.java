@@ -52,6 +52,8 @@ public abstract class AbstractTermMultDiv extends CParseRule {
 			}
 			this.setCType(CType.getCType(nt));
 			this.setConstant(left.isConstant() && right.isConstant()); // /の左右両方が定数のときだけ定数
+			int newValue = getNewValue(left.getValue(), right.getValue());
+			this.setValue(newValue);
 		}
 	}
 
