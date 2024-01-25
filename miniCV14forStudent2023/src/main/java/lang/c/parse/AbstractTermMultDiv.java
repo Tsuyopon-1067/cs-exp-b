@@ -88,4 +88,13 @@ public abstract class AbstractTermMultDiv extends CParseRule {
 	abstract protected int getNewValue(int leftValue, int rightValue);
 
 	public abstract void codeGen(CParseContext pcx) throws FatalErrorException;
+
+	protected boolean isShiftedBinValue(int n) {
+		for (int i = 1; i <= 32768; i *= 2) {
+			if (n == i) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

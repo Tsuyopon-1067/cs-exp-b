@@ -67,15 +67,18 @@ public class TermMult extends AbstractTermMultDiv {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; termMult starts");
 		if (left != null && right != null) {
-			o.println(";;; termMult left starts");
 			left.codeGen(pcx); // 左部分木のコード生成を頼む
-			o.println(";;; termMult left complete");
-			o.println(";;; termMult right starts");
 			right.codeGen(pcx); // 右部分木のコード生成を頼む
-			o.println(";;; termMult right complete");
-			o.println("\tJSR\tMUL\t; MULサブルーチンを呼ぶ");
-			o.println("\tSUB\t#2, R6\t; スタックから計算した値を消す");
-			o.println("\tMOV\tR0, (R6)+\t; 結果をスタックにPushする");
+			if (right.isConstant() && this.isShiftedBinValue(right.getValue())) {
+				o.println("\tMOV\t-(R6), R0\t; TermMult: <*" + right.getValue() + ">");
+				for (int i = right.getValue(); i > 1; i /= 2) {
+					o.println("\tASL\tR0, R0\t; TermMult: シフト演算して2倍する （FオペランドはD:なら何でも良い）");
+				}
+			} else {
+				o.println("\tJSR\tMUL\t; TermMult: MULサブルーチンを呼ぶ");
+				o.println("\tSUB\t#2, R6\t; TermMult: スタックから計算した値を消す");
+			}
+			o.println("\tMOV\tR0, (R6)+\t; TermMult; 結果をスタックにPushする");
 		}
 		o.println(";;; termMult completes");
 	}

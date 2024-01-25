@@ -67,15 +67,20 @@ public class TermDiv extends AbstractTermMultDiv {
 		PrintStream o = pcx.getIOContext().getOutStream();
 		o.println(";;; termDiv starts");
 		if (left != null && right != null) {
-			o.println(";;; termDiv left starts");
 			left.codeGen(pcx); // 左部分木のコード生成を頼む
-			o.println(";;; termDiv left complete");
-			o.println(";;; termDiv right starts");
 			right.codeGen(pcx); // 右部分木のコード生成を頼む
-			o.println(";;; termDiv right complete");
-            o.println("\tJSR\tDIV\t; DIVサブルーチンを呼ぶ");
-            o.println("\tSUB\t#2, R6\t; スタックから計算した値を消す");
-            o.println("\tMOV\tR0, (R6)+\t; 結果をスタックにPushする");
+            o.println("\tJSR\tDIV\t; TermDiv: DIVサブルーチンを呼ぶ");
+            o.println("\tSUB\t#2, R6\t; TermDiv: スタックから計算した値を消す");
+			if (right.isConstant() && this.isShiftedBinValue(right.getValue())) {
+				o.println("\tMOV\t-(R6), R0\t; TermDiv: <*" + right.getValue() + ">");
+				for (int i = right.getValue(); i > 1; i /= 2) {
+					o.println("\tASR\tR0, R0\t; TermDiv: シフト演算して2で割る （FオペランドはD:なら何でも良い）");
+				}
+			} else {
+				o.println("\tJSR\tMUL\t; TermDiv: DIVサブルーチンを呼ぶ");
+				o.println("\tSUB\t#2, R6\t; TermDiv: スタックから計算した値を消す");
+			}
+            o.println("\tMOV\tR0, (R6)+\t; TermDiv: 結果をスタックにPushする");
 		}
 		o.println(";;; termDiv completes");
 	}
