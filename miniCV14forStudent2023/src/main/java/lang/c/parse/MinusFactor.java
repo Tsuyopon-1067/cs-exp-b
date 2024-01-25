@@ -38,7 +38,7 @@ public class MinusFactor extends CParseRule {
             }
 
 			if (factor.isConstant()) {
-				this.setValue(factor.getValue());
+				this.setValue(-factor.getValue());
 			}
 		}
 	}
