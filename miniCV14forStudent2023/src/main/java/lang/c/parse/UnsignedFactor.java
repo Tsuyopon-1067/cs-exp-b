@@ -63,7 +63,7 @@ public class UnsignedFactor extends CParseRule {
 			setCType(factor.getCType()); // factor の型をそのままコピー
 			setConstant(factor.isConstant()); // factor は常に定数
 
-			if (factor.isConstant() && factor instanceof Number) {
+			if (factor.isConstant()) {
 				this.setValue(factor.getValue());
 			}
 		}

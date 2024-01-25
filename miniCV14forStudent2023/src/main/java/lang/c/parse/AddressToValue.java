@@ -27,6 +27,9 @@ public class AddressToValue extends CParseRule {
 			primary.semanticCheck(pcx);
 			setCType(primary.getCType());
 			setConstant(primary.isConstant());
+			if (this.isConstant()) {
+				this.setValue(primary.getValue());
+			}
 		}
 	}
 

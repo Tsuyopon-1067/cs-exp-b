@@ -52,6 +52,10 @@ public class Ident extends CParseRule {
 				setCType(CType.getCType(CType.T_err));
 				return;
 			}
+			if (entry.isConstant()) {
+				this.setConstant(true);
+				this.setValue(entry.getValue());
+			}
 			int setType = entry.GetCType().getType();
 			boolean isConstant = entry.isConstant();
 			this.setCType(CType.getCType(setType));

@@ -14,6 +14,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private int address; // 割り当て番地
 	private boolean isFunction; // 関数か？
 	private FunctionInfo functionInfo; // 関数の型とか
+	private int value; // 定数の値
 	//private ArrayList<CType> argTypes; // 関数の引数の型のリスト
 
 	//public CSymbolTableEntry(CType type, int size, boolean constp, boolean isFunction, ArrayList<CType> argTypes) {
@@ -31,10 +32,11 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 		this.constp = constp;
 		this.isFunction = isFunction;
 	}
-	public CSymbolTableEntry(CType type, int size, boolean constp) {
+	public CSymbolTableEntry(CType type, int size, boolean constp, int value) {
 		this.type = type;
 		this.size = size;
 		this.constp = constp;
+		this.value = value;
 	}
 	public String toExplainString() { // このエントリに関する情報を作り出す。記号表全体を出力するときに使う。
 		// return type.toString() + ", " + size + ", " + (constp ? "定数" : "変数");
@@ -50,6 +52,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	public boolean isFunction() { return isFunction; }
 	public void setFunctionInfo(FunctionInfo functionInfo) { this.functionInfo = functionInfo; }
 	public FunctionInfo getFunctionInfo() { return functionInfo; }
+	public int getValue() { return value; }
 	public boolean verificateFunction(CSymbolTableEntry e) {
 		if (this.getFunctionInfo().getIsExistPrototype() || e.getFunctionInfo().getIsExistPrototype()) {
 			ArrayList<ParameterInfo> argInfoList = this.functionInfo.getParamInfoList();

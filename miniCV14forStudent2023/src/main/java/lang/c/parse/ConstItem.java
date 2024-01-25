@@ -58,15 +58,16 @@ public class ConstItem extends CParseRule {
 			pcx.recoverableError("右辺に数値が必要です");
 		}
 		num.parse(pcx);
+		this.setValue(num.getValue());
 		tk = ct.getCurrentToken(pcx); // declItemに合わせて次の字句まで読む
 
 		// 変数登録
 		final boolean isConst = true;
 		size = 1;
 		if (isExistMult) {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst);
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_pint), size, isConst, this.getValue());
 		} else {
-			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst);
+			entry = new CSymbolTableEntry(CType.getCType(CType.T_int), size, isConst, this.getValue());
 		}
 		isGlobal = pcx.getSymbolTable().isGlobalMode();
 		if (isGlobal) {
