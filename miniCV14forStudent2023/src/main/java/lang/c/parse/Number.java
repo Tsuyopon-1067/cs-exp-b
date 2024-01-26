@@ -42,8 +42,12 @@ public class Number extends CParseRule {
 
 	public static void numberCodeGen(CParseContext pcx, int value) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
-		String valueStr = Integer.toString(value);
-		o.println("\tMOV\t#" + valueStr + ", R0\t; Number: 即値をR0に用意する");
+		if (value == 0) {
+			o.println("\tCLR\tR0\t; Number: 即値0をR0に用意する");
+		} else {
+			String valueStr = Integer.toString(value);
+			o.println("\tMOV\t#" + valueStr + ", R0\t; Number: 即値をR0に用意する");
+		}
 		o.println("\tMOV\tR0, (R6)+\t; Number: 即値を積む");
 	}
 }
