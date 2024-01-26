@@ -32,6 +32,11 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 		this.constp = constp;
 		this.isFunction = isFunction;
 	}
+	public CSymbolTableEntry(CType type, int size, boolean constp) {
+		this.type = type;
+		this.size = size;
+		this.constp = constp;
+	}
 	public CSymbolTableEntry(CType type, int size, boolean constp, int value) {
 		this.type = type;
 		this.size = size;
