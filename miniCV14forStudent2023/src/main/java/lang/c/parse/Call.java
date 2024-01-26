@@ -48,6 +48,10 @@ public class Call extends CParseRule {
 	}
 
 	public void semanticCheck(CParseContext pcx) throws FatalErrorException {
+		if (functionInfo == null) {
+			pcx.warning("Call: 関数が宣言されていません");
+			return;
+		}
 		int argSize = expressions.size();
 		if (argSize != functionInfo.getParamSize()) {
 			String msg = String.format("Call: 関数%s: 引数の数が一致しません<定義:%d, 使用数:%d>",

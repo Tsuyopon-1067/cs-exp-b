@@ -56,11 +56,11 @@ public class FactorAmp extends CParseRule {
 			}
 			this.setCType(CType.getCType(CType.T_pint));
 			if (isPrimary) {
-				if (((Primary)numberPrim).getCType() == CType.getCType(CType.T_int_array)) {
+				if ((numberPrim).getCType() == CType.getCType(CType.T_int_array)) {
 					this.setCType(CType.getCType(CType.T_int_array));
 				}
 			}
-			setConstant(numberPrim.isConstant());
+			this.setConstant(numberPrim.isConstant());
 			if (numberPrim.isConstant() && numberPrim instanceof Number) {
 				this.setValue(numberPrim.getValue());
 			}

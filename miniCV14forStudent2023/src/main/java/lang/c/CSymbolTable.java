@@ -63,11 +63,13 @@ public class CSymbolTable {
 
 	public void showLocal() {
 		System.out.println("local Symbol Table -----------");
-		System.out.println(local.size());
+		System.out.println("size = " + local.size());
 		local.show();
 	}
 
 	public void showGlobal() {
+		System.out.println("global Symbol Table -----------");
+		System.out.println("size = " + global.size());
 		global.show();
 	}
 

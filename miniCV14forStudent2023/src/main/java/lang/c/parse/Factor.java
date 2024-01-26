@@ -38,10 +38,13 @@ public class Factor extends CParseRule {
 		if (factor != null) {
 			factor.semanticCheck(pcx);
 			this.setCType(factor.getCType()); // factor の型をそのままコピー
-			this.setConstant(factor.isConstant());
+			this.setConstant(factor.isConstant()); // factor は常に定数
 
 			if (factor.isConstant()) {
 				this.setValue(factor.getValue());
+			}
+			if (factor.getCType() == CType.getCType(CType.T_int_array)) {
+				setCType(CType.getCType(CType.T_pint)); // factor の型をそのままコピー
 			}
 		}
 	}

@@ -37,10 +37,15 @@ public class Ident extends CParseRule {
 		if (!pcx.getSymbolTable().isGlobalMode() && entry != null) {
 			if (entry.isFunction()) {
 				String identNameForEntry = identName + pcx.getSeqId();
-				CSymbolTableEntry functionEntry = pcx.getSymbolTable().searchGlobal(identName);
+				CSymbolTableEntry functionEntry = pcx.getSymbolTable().searchGlobal(identName); // グローバルで登録されている本物の定義
 				FunctionInfo functionInfo = functionEntry.getFunctionInfo();
 				CType returnType = functionInfo.getReturnType();
-				CSymbolTableEntry entry = new CSymbolTableEntry(returnType, 1, true, false);
+
+				final boolean IS_CONST = true;
+				final boolean IS_FUNCTION = true;
+				entry = new CSymbolTableEntry(returnType, 1, IS_CONST, IS_FUNCTION);
+				entry.setFunctionInfo(functionInfo);
+
 				pcx.getSymbolTable().registerLocal(identNameForEntry, entry);
 			}
 		}
@@ -83,10 +88,16 @@ public class Ident extends CParseRule {
 		o.println(";;; ident completes");
 	}
 
+	public void setEntry(CSymbolTableEntry entry) {
+		this.entry = entry;
+	}
 	public CSymbolTableEntry getEntry() {
 		return entry;
 	}
 	public boolean getIsFunction() {
 		return isFunction;
+	}
+	public String getIdentName() {
+		return identName;
 	}
 }

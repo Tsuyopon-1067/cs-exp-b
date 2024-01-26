@@ -17,6 +17,7 @@ public class FunctionInfo {
         this.returnType = returnType;
         this.isExistReturn = false;
         this.returnLabel = returnLabel;
+        this.paramInfoList = new ArrayList<ParameterInfo>();
     }
 
     public FunctionInfo(String name, CType returnType, String returnLabel, ArrayList<ParameterInfo> paramInfoList) {

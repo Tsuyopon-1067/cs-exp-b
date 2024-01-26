@@ -12,7 +12,7 @@ public class CSymbolTableEntry extends SymbolTableEntry {
 	private boolean constp; // 定数宣言か？
 	private boolean isGlobal; // 大域変数か？
 	private int address; // 割り当て番地
-	private boolean isFunction; // 関数か？
+	private boolean isFunction = false; // 関数か？
 	private FunctionInfo functionInfo; // 関数の型とか
 	private int value; // 定数の値
 	//private ArrayList<CType> argTypes; // 関数の引数の型のリスト
