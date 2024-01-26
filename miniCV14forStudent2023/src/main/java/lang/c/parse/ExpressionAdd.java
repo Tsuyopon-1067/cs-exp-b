@@ -56,6 +56,7 @@ class ExpressionAdd extends AbstractExpressionAddSub {
 
 	public void codeGen(CParseContext pcx) throws FatalErrorException {
 		PrintStream o = pcx.getIOContext().getOutStream();
+		o.println(";;; ExpressionAdd starts");
 		if (left != null && right != null) {
 			right.codeGen(pcx); // 右部分木のコード生成を頼む
 			left.codeGen(pcx); // 左部分木のコード生成を頼む
@@ -64,5 +65,6 @@ class ExpressionAdd extends AbstractExpressionAddSub {
 			o.println("\tADD\t-(R6), R0\t; ExpressionAdd:右部分技の値を取り出して足す");
 			o.println("\tMOV\tR0, (R6)+\t; ExpressionAdd:結果をスタックに保存する");
 		}
+		o.println(";;; ExpressionAdd completes");
 	}
 }

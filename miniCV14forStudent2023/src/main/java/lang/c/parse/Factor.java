@@ -51,6 +51,8 @@ public class Factor extends CParseRule {
 		o.println(";;; factor starts");
 		if (factor != null) {
 			factor.codeGen(pcx);
+		} else if (this.isConstant()) {
+			Number.numberCodeGen(pcx, this.getValue());
 		}
 		o.println(";;; factor completes");
 	}
