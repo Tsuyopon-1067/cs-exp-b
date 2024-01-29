@@ -76,6 +76,9 @@ public class Variable extends CParseRule {
 				}
 			}
 			setConstant(ident.isConstant());
+			if (this.isConstant()) {
+				this.setValue(ident.getValue());
+			}
 
 			if (call != null) {
 				if (((Ident)ident).getEntry().isFunction()) {

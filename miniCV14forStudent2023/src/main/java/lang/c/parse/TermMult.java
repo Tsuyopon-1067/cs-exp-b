@@ -68,13 +68,13 @@ public class TermMult extends AbstractTermMultDiv {
 		o.println(";;; termMult starts");
 		if (left != null && right != null) {
 			left.codeGen(pcx); // 左部分木のコード生成を頼む
-			right.codeGen(pcx); // 右部分木のコード生成を頼む
 			if (right.isConstant() && this.isShiftedBinValue(right.getValue())) {
 				o.println("\tMOV\t-(R6), R0\t; TermMult: <*" + right.getValue() + ">");
 				for (int i = right.getValue(); i > 1; i /= 2) {
 					o.println("\tASL\tR0, R0\t; TermMult: シフト演算して2倍する （FオペランドはD:なら何でも良い）");
 				}
 			} else {
+				right.codeGen(pcx); // 右部分木のコード生成を頼む
 				o.println("\tJSR\tMUL\t; TermMult: MULサブルーチンを呼ぶ");
 				o.println("\tSUB\t#2, R6\t; TermMult: スタックから計算した値を消す");
 			}
